@@ -1,0 +1,24 @@
+body {
+  background-color: rgb(246, 217, 121);
+  box-sizing: border-box;
+}
+
+footer {
+  position: absolute;
+  font-size: xx-small;
+  font-style: italic;
+  color: rgb(234, 54, 54);
+  width: 100%;
+  font-weight: 800;
+  margin-top: 25px;
+  top: calc(300px + 15vh);
+  bottom: 0;
+  left: 0;
+}
+
+#footer {
+  position: absolute;
+  bottom: 10px;
+  width: 99vw;
+  text-align: center;
+}/*# sourceMappingURL=styles.css.map */
