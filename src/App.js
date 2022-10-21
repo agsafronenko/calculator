@@ -34,13 +34,13 @@ export default class Calculator extends React.Component {
       this.setState(
         (state) => ({
           displayOps: state.displayOps.concat(e.target.value),
-          result: state.lastOperator === "-" ? state.result.concat(-Number(state.displayCur)).concat("+") : state.result.concat(Number(state.displayCur)).concat("+"), // fix this formula and the one in "handleEquals" to apply multiply and divide
+          result: state.lastOperator === "-" ? state.result.concat(-Number(state.displayCur)).concat(e.target.value === "-" ? "+" : e.target.value) : state.result.concat(Number(state.displayCur)).concat(e.target.value === "-" ? "+" : e.target.value),
           displayCur: "",
           lastInput: e.target.value,
           lastOperator: e.target.value,
         }),
         () => {
-          console.log("inside handleAdd", this.state.result);
+          console.log("res", this.state.result, "curOper", e.target.value);
         }
       );
     }
