@@ -5,7 +5,10 @@ import $ from "jquery";
 export default class Calculator extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      displayRes: "",
+      displayOps: "",
+    };
   }
 
   render() {
