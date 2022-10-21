@@ -14,9 +14,29 @@ export default class Calculator extends React.Component {
   render() {
     return (
       <>
+        <Display />
+        <Buttons />
         <Footer />
       </>
     );
+  }
+}
+
+class Display extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return <></>;
+  }
+}
+
+class Buttons extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return <></>;
   }
 }
 
