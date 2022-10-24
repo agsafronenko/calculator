@@ -9,23 +9,26 @@ export default class Calculator extends React.Component {
     this.state = {
       displayOps: "",
       result: [],
-      displayCur: "",
+      displayCur: "0",
       lastInput: "",
       lastOperator: "",
+      decimalAlreadyUsed: false,
     };
     this.handleClear = this.handleClear.bind(this);
     this.handleOperator = this.handleOperator.bind(this);
     this.handleDigit = this.handleDigit.bind(this);
     this.handleEquals = this.handleEquals.bind(this);
+    this.handleDecimal = this.handleDecimal.bind(this);
   }
 
   handleClear() {
     this.setState({
       displayOps: "",
       result: [],
-      displayCur: 0,
+      displayCur: "0",
       lastInput: "",
       lastOperator: "",
+      decimalAlreadyUsed: false,
     });
   }
 
@@ -35,30 +38,43 @@ export default class Calculator extends React.Component {
         (state) => ({
           displayOps: state.displayOps.concat(e.target.value),
           result: state.lastOperator === "-" ? state.result.concat(-Number(state.displayCur)).concat(e.target.value === "-" ? "+" : e.target.value) : state.result.concat(Number(state.displayCur)).concat(e.target.value === "-" ? "+" : e.target.value),
-          displayCur: "",
+          displayCur: e.target.value,
           lastInput: e.target.value,
           lastOperator: e.target.value,
+          decimalAlreadyUsed: false,
         }),
         () => {
-          console.log("res", this.state.result, "curOper", e.target.value);
+          console.log("Inside handleOperator: this.state.result", this.state.result);
         }
       );
     }
   }
 
   handleDigit(e) {
-    // console.log("e.target.value", e.target.value);
+    // console.log("handleDigit", Number(this.state.displayCur), this.state.displayCur.length);
     this.setState((state) => ({
-      displayOps: state.displayOps.concat(e.target.value),
-      displayCur: state.displayCur === 0 ? e.target.value : state.displayCur.concat(e.target.value),
+      displayOps: Number(state.displayOps.slice(-1)) === 0 && state.displayCur.length === 1 ? state.displayOps.slice(0, state.displayOps.length - 1).concat(e.target.value) : state.displayOps.concat(e.target.value),
+      displayCur: (Number(state.displayCur) === 0 && state.displayCur.length === 1) || (!isFinite(state.lastInput) && state.lastInput !== ".") ? e.target.value : state.displayCur.concat(e.target.value),
       lastInput: e.target.value,
     }));
+  }
+
+  handleDecimal() {
+    if (this.state.decimalAlreadyUsed === false) {
+      this.setState((state) => ({
+        displayOps: isFinite(state.lastInput) ? state.displayOps.concat(".") : state.displayOps.concat("0."),
+        displayCur: isFinite(state.lastInput) ? state.displayCur.concat(".") : state.displayCur.concat("0."),
+        lastInput: ".",
+        decimalAlreadyUsed: true,
+      }));
+    }
   }
 
   handleEquals() {
     this.setState(
       (state) => ({
         result: state.lastOperator === "-" ? state.result.concat(-Number(state.displayCur)) : state.result.concat(Number(state.displayCur)),
+        decimalAlreadyUsed: false,
       }),
       () => {
         let result = calculate(this.state.result);
@@ -66,7 +82,7 @@ export default class Calculator extends React.Component {
           displayOps: state.displayOps.concat("=").concat(result),
           displayCur: result,
         }));
-        console.log("result inside handleEquals", result);
+        console.log("Inside handleEquals: final result", result);
       }
     );
   }
@@ -75,7 +91,7 @@ export default class Calculator extends React.Component {
     return (
       <>
         <Display ops={this.state.displayOps} cur={this.state.displayCur} />
-        <Buttons clear={this.handleClear} operator={this.handleOperator} digit={this.handleDigit} equals={this.handleEquals} />
+        <Buttons clear={this.handleClear} operator={this.handleOperator} digit={this.handleDigit} equals={this.handleEquals} decimal={this.handleDecimal} />
         <Footer />
       </>
     );
@@ -89,9 +105,9 @@ class Display extends React.Component {
   render() {
     return (
       <>
-        <div id="display">
-          <div id="displayRes">{this.props.ops}</div>
-          <div id="displayOps">{this.props.cur}</div>
+        <div id="displayBox">
+          <div id="displayOps">{this.props.ops}</div>
+          <div id="display">{this.props.cur}</div>
         </div>
       </>
     );
@@ -132,7 +148,7 @@ class Buttons extends React.Component {
         <button id="six" value="6" onClick={this.props.digit}>
           6
         </button>
-        <button id="multiply" value="x" onClick={this.props.operator}>
+        <button id="multiply" value="*" onClick={this.props.operator}>
           x
         </button>
         <button id="one" value="1" onClick={this.props.digit}>
@@ -144,11 +160,15 @@ class Buttons extends React.Component {
         <button id="three" value="3" onClick={this.props.digit}>
           3
         </button>
-        <button id="divide">/</button>
+        <button id="divide" value="/" onClick={this.props.operator}>
+          /
+        </button>
         <button id="zero" value="0" onClick={this.props.digit}>
           0
         </button>
-        <button id="decimal">.</button>
+        <button id="decimal" onClick={this.props.decimal}>
+          .
+        </button>
         <button id="equals" onClick={this.props.equals}>
           =
         </button>

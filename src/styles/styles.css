@@ -3,15 +3,15 @@ body {
   box-sizing: border-box;
 }
 
-#displayRes {
-  background-color: white;
+#displayOps {
+  background-color: gray;
   height: 40px;
   width: 50vw;
   margin: auto;
 }
 
-#displayOps {
-  background-color: gray;
+#display {
+  background-color: white;
   height: 40px;
   width: 50vw;
   margin: auto;
