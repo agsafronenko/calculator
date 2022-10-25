@@ -11,8 +11,11 @@ export default class Calculator extends React.Component {
       result: [],
       displayCur: "0",
       lastInput: "",
+      lastInputType: "",
       lastOperator: "",
       decimalAlreadyUsed: false,
+      twoConsecutiveOperators: false,
+      lastResult: "",
     };
     this.handleClear = this.handleClear.bind(this);
     this.handleOperator = this.handleOperator.bind(this);
@@ -27,45 +30,121 @@ export default class Calculator extends React.Component {
       result: [],
       displayCur: "0",
       lastInput: "",
+      lastInputType: "",
       lastOperator: "",
       decimalAlreadyUsed: false,
+      twoConsecutiveOperators: false,
+      lastResult: "",
     });
   }
 
   handleOperator(e) {
-    if (this.state.lastInput !== e.target.value) {
+    if (this.state.twoConsecutiveOperators === true) {
       this.setState(
         (state) => ({
-          displayOps: state.displayOps.concat(e.target.value),
-          result: state.lastOperator === "-" ? state.result.concat(-Number(state.displayCur)).concat(e.target.value === "-" ? "+" : e.target.value) : state.result.concat(Number(state.displayCur)).concat(e.target.value === "-" ? "+" : e.target.value),
+          displayOps: e.target.value === "-" ? state.displayOps : state.displayOps.slice(0, state.displayOps.length - 2).concat(e.target.value),
+          result: e.target.value === "-" ? state.result : state.result.slice(0, state.result.length - 2).concat(e.target.value),
+          displayCur: e.target.value,
+          lastInput: e.target.value,
+          lastInputType: "operator",
+          lastOperator: e.target.value,
+          twoConsecutiveOperators: e.target.value === "-" ? true : false,
+        }),
+        () => {
+          console.log("1st IF Inside handleOperator: this.state.result", this.state.result);
+        }
+      );
+    } else if (this.state.twoConsecutiveOperators === false && this.state.lastInputType === "operator" && e.target.value !== "-") {
+      this.setState(
+        (state) => ({
+          displayOps: state.displayOps.slice(0, state.displayOps.length - 1).concat(e.target.value),
+          result: state.result.slice(0, state.result.length - 1).concat(e.target.value),
           displayCur: e.target.value,
           lastInput: e.target.value,
           lastOperator: e.target.value,
-          decimalAlreadyUsed: false,
+          twoConsecutiveOperators: false,
         }),
+
         () => {
-          console.log("Inside handleOperator: this.state.result", this.state.result);
+          console.log("2nd IF Inside handleOperator: this.state.result", this.state.result);
         }
       );
+    } else if (this.state.twoConsecutiveOperators === false && this.state.lastInputType === "operator" && e.target.value === "-") {
+      this.setState(
+        (state) => ({
+          displayOps: state.displayOps.concat(e.target.value),
+          result: state.result.concat(e.target.value),
+          displayCur: e.target.value,
+          lastInput: e.target.value,
+          lastOperator: e.target.value,
+          twoConsecutiveOperators: true,
+        }),
+
+        () => {
+          console.log("2.5nd IF Inside handleOperator: this.state.result", this.state.result);
+        }
+      );
+    }
+
+    if (this.state.lastInputType !== "operator") {
+      if (this.state.lastResult === "") {
+        this.setState(
+          (state) => ({
+            displayOps: state.displayOps.concat(e.target.value),
+            result: state.result.concat(Number(state.displayCur)).concat(e.target.value),
+            displayCur: e.target.value,
+            lastInput: e.target.value,
+            lastInputType: "operator",
+            lastOperator: e.target.value,
+            twoConsecutiveOperators: false,
+            decimalAlreadyUsed: false,
+          }),
+          () => {
+            console.log("3rd IF Inside handleOperator: this.state.result", this.state.result);
+          }
+        );
+      } else {
+        this.setState(
+          (state) => ({
+            displayOps: "".concat(state.lastResult).concat(e.target.value),
+            result: [].concat(state.lastResult).concat(e.target.value),
+            displayCur: e.target.value,
+            lastInput: e.target.value,
+            lastInputType: "operator",
+            lastOperator: e.target.value,
+            twoConsecutiveOperators: false,
+            decimalAlreadyUsed: false,
+            lastResult: "",
+          }),
+          () => {
+            console.log("3rd IF Inside handleOperator: this.state.result", this.state.result);
+          }
+        );
+      }
     }
   }
 
   handleDigit(e) {
     // console.log("handleDigit", Number(this.state.displayCur), this.state.displayCur.length);
+    if (this.state.lastResult !== "") this.handleClear();
     this.setState((state) => ({
       displayOps: Number(state.displayOps.slice(-1)) === 0 && state.displayCur.length === 1 ? state.displayOps.slice(0, state.displayOps.length - 1).concat(e.target.value) : state.displayOps.concat(e.target.value),
       displayCur: (Number(state.displayCur) === 0 && state.displayCur.length === 1) || (!isFinite(state.lastInput) && state.lastInput !== ".") ? e.target.value : state.displayCur.concat(e.target.value),
       lastInput: e.target.value,
+      lastInputType: "digit",
+      twoConsecutiveOperators: false,
     }));
   }
 
   handleDecimal() {
     if (this.state.decimalAlreadyUsed === false) {
       this.setState((state) => ({
-        displayOps: isFinite(state.lastInput) ? state.displayOps.concat(".") : state.displayOps.concat("0."),
-        displayCur: isFinite(state.lastInput) ? state.displayCur.concat(".") : state.displayCur.concat("0."),
+        displayOps: isFinite(state.lastInput) && state.displayOps.length !== 0 ? state.displayOps.concat(".") : state.displayOps.concat("0."),
+        displayCur: isFinite(state.lastInput) ? state.displayCur.concat(".") : "0.",
         lastInput: ".",
+        lastInputType: "decimal",
         decimalAlreadyUsed: true,
+        twoConsecutiveOperators: false,
       }));
     }
   }
@@ -73,14 +152,16 @@ export default class Calculator extends React.Component {
   handleEquals() {
     this.setState(
       (state) => ({
-        result: state.lastOperator === "-" ? state.result.concat(-Number(state.displayCur)) : state.result.concat(Number(state.displayCur)),
+        result: state.result.concat(Number(state.displayCur)),
         decimalAlreadyUsed: false,
+        twoConsecutiveOperators: false,
       }),
       () => {
         let result = calculate(this.state.result);
         this.setState((state) => ({
           displayOps: state.displayOps.concat("=").concat(result),
           displayCur: result,
+          lastResult: result,
         }));
         console.log("Inside handleEquals: final result", result);
       }

@@ -1,8 +1,24 @@
 export default function calculate(arr) {
+  arr = findNegativeValues(arr);
   arr = calculateInOrder(arr, "*/");
   arr = calculateInOrder(arr, "+-");
 
   return arr[0];
+}
+
+function findNegativeValues(arr) {
+  // console.log("arr inside calculate", arr);
+  let negativeIndex = arr.findIndex((elem, ind) => elem === "-" && typeof arr[ind - 1] === "string" && typeof arr[ind + 1] === "number");
+  // console.log("negativeIndex", negativeIndex);
+  if (negativeIndex !== -1) {
+    let newArr = arr
+      .slice(0, negativeIndex)
+      .concat(arr[negativeIndex + 1] * -1)
+      .concat(arr.slice(negativeIndex + 2));
+    return findNegativeValues(newArr);
+  }
+  // console.log("arr", arr);
+  return arr;
 }
 
 function calculateInOrder(arr, operators) {
