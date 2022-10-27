@@ -1,5 +1,6 @@
 export default function calculate(arr) {
   arr = findNegativeValues(arr);
+  arr = calculateInOrder(arr, "ln");
   arr = calculateInOrder(arr, "^r");
   arr = calculateInOrder(arr, "*/");
   arr = calculateInOrder(arr, "+-");
@@ -31,7 +32,9 @@ function calculateInOrder(arr, operators) {
     let currentOperation = arr.slice(operatorIndex - 1, operatorIndex + 2);
 
     let currentResult =
-      currentOperator === "r"
+      currentOperator === "l"
+        ? Math.log(currentOperation[0]) / Math.log(currentOperation[2])
+        : currentOperator === "r"
         ? Math.pow(currentOperation[0], 1 / currentOperation[2])
         : currentOperator === "^"
         ? Math.pow(currentOperation[0], currentOperation[2])
@@ -56,6 +59,7 @@ function calculateInOrder(arr, operators) {
 
 export let displayOpsExpression = "";
 export let resultExpression = [];
+
 export function deleteRedundantOperators(state) {
   if (/\d/.test(state.displayCur)) {
     resultExpression = state.result.concat(Number(state.displayCur));
@@ -67,13 +71,48 @@ export function deleteRedundantOperators(state) {
   }
 }
 
-export function saveState(state, stateStorage) {
-  console.log("inside saveState");
-  if (stateStorage.length >= 30) {
-    stateStorage.pop();
-    stateStorage.unshift(state);
+export function deleteRedundantDigits(state) {
+  if (/\./.test(state.displayCur)) {
+    let decimalIndex = state.displayOps
+      .split("")
+      .reverse()
+      .findIndex((elem) => /\./.test(elem));
+    // console.log("decimal", state.displayOps.split("").reverse());
+    displayOpsExpression = state.displayOps.slice(0, state.displayOps.length - decimalIndex - 2);
+    // console.log("decimalIndex", decimalIndex);
+  } else if (/\D/.test(state.displayCur)) {
+    displayOpsExpression = state.displayOps;
+    // console.log("hey last input is not a digit");
   } else {
-    stateStorage.unshift(state);
+    let lastNonDigitIndex = state.displayOps
+      .split("")
+      .reverse()
+      .findIndex((elem) => /\D/.test(elem));
+    // console.log("lastNon", lastNonDigitIndex);
+    displayOpsExpression = lastNonDigitIndex === -1 ? "" : state.displayOps.slice(0, state.displayOps.length - lastNonDigitIndex);
   }
-  return stateStorage;
+}
+
+export let stateStorage = {
+  prevState: [],
+};
+
+export function saveState(state) {
+  if (stateStorage.prevState.length >= 30) {
+    stateStorage.prevState.pop();
+    stateStorage.prevState.unshift(state);
+  } else {
+    stateStorage.prevState.unshift(state);
+  }
+  return stateStorage.prevState;
+}
+
+export function factorial(num) {
+  let result = Number(num);
+  if (Number.isInteger(result)) {
+    for (let i = result - 1; i > 0; i--) {
+      result *= i;
+    }
+  }
+  return Number.isInteger(result) ? result : num;
 }
