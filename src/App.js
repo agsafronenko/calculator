@@ -122,7 +122,26 @@ export default class Calculator extends React.Component {
       );
     }
 
-    if (this.state.lastInputType !== "operator") {
+    if (this.state.lastInputType === "braces") {
+      this.setState(
+        (state) => ({
+          displayOps: state.displayOps.concat(e.target.value),
+          result: state.result.concat(e.target.value),
+          displayCur: e.target.value,
+          lastInput: e.target.value,
+          lastInputType: "operator",
+          twoConsecutiveOperators: false,
+          decimalAlreadyUsed: false,
+          lastResult: "",
+        }),
+        () => {
+          console.log("2.9th braces IF Inside handleOperator: this.state.result", this.state.result);
+          saveState(this.state);
+        }
+      );
+    }
+
+    if (this.state.lastInput !== ")" && this.state.lastInputType !== "operator") {
       this.setState(
         (state) => ({
           displayOps: state.lastResult === "" ? state.displayOps.concat(Number(state.displayCur)).concat(e.target.value) : "".concat(state.lastResult).concat(e.target.value),
@@ -143,6 +162,7 @@ export default class Calculator extends React.Component {
   }
 
   handleDigit(e) {
+    console.log("lastInout", this.state.lastInput, "!isFinite(state.lastInput) && state.lastInput !== ", !isFinite(this.state.lastInput));
     if (this.state.lastResult !== "") this.handleClear();
     this.setState(
       (state) => ({
@@ -379,6 +399,8 @@ export default class Calculator extends React.Component {
         displayOps: state.lastResult === "" ? state.displayOps.concat(e.target.value) : "".concat(e.target.value),
         result: state.lastResult === "" ? state.result.concat(e.target.value) : [].concat(state.lastResult).concat(e.target.value),
         displayCur: e.target.value,
+        lastInput: "(",
+        lastInputType: "braces",
       }),
       () => {
         console.log("inside leftBrace after setState:  displayOps", this.state.displayOps, "Result", this.state.result);
@@ -389,9 +411,11 @@ export default class Calculator extends React.Component {
   handleRightBraces(e) {
     this.setState(
       (state) => ({
-        displayOps: state.lastResult === "" ? state.displayOps.concat(e.target.value) : "".concat(e.target.value),
-        result: state.lastResult === "" ? state.result.concat(e.target.value) : [].concat(state.lastResult).concat(e.target.value),
+        displayOps: state.lastResult === "" ? state.displayOps.concat(Number(state.displayCur)).concat(e.target.value) : "".concat(e.target.value),
+        result: state.lastResult === "" ? state.result.concat(Number(state.displayCur)).concat(e.target.value) : [].concat(state.lastResult).concat(e.target.value),
         displayCur: e.target.value,
+        lastInput: ")",
+        lastInputType: "braces",
       }),
       () => {
         console.log("inside rightBrace after setState:  displayOps", this.state.displayOps, "Result", this.state.result);

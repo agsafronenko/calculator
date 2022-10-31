@@ -20,6 +20,7 @@
 // - check what happens when the digit is put after the closing brace;
 
 export default function calculate(arr) {
+  console.log("result arr in calculate(arr)", arr);
   arr = findNegativeValues(arr);
   arr = calculateInOrder(arr, "lm");
   arr = calculateInOrder(arr, "^r");
@@ -84,7 +85,10 @@ export let displayOpsExpression = "";
 export let resultExpression = [];
 
 export function deleteRedundantOperators(state) {
-  if (/\d/.test(state.displayCur)) {
+  if (/\)/.test(state.displayCur)) {
+    resultExpression = state.result;
+    displayOpsExpression = state.displayOps;
+  } else if (/\d/.test(state.displayCur)) {
     resultExpression = state.result.concat(Number(state.displayCur));
     displayOpsExpression = state.displayOps.concat(Number(state.displayCur));
   } else {
