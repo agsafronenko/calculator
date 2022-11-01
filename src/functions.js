@@ -1,39 +1,35 @@
-// logic for braces:
-// 1) when clicking "=" => create external braces for the whole "result" are via unshift and push (this will be handy in step 4 "recursion");
-// 2) create main (outer) function "calculate(arr)" for calculating final result which will use existing "calculate(arr)" (rename it to "calculateInsideBraces(arr)") for internal calculations inside the braces, make sure main (outer) function is executed when clicking "=" sign in App.js;
-// 3) inside new function:
-// - use findIndex to find the first closing brace ")"
-// - slice arr until this index
-// - reverse sliced arr and find the first opening brace "("
-// - reverse arr and slice it (arr.length - index of "(", index of ")") => this will give us the depeest level inside the braces after THE FIRST OPENING brace;
-// - remove braces of the deepest level (better do this in previous step -> just count properly indeces before the last slice);
-// execute "calculateInsideBraces(arr)" for the expression inside the deepest level,
-// - return result back inside the "result" arr;
-// 4) use recursion for step 3 until all expressions are evaluated
-// 5) return result on calc's display
-
-// apply the following restrictions:
-// - do not allow to input opening brace "(" after the digit;
-// - allow to input closing brace ")" only after the digit;
-// - if number of opening braces is more that the number of closing -> add closing braces automatically in the end of the expression (both in "result" and in "displayOps")
-// - check what happens when the operator is put after the opening brace;
-// - check what happens when the digit is put after the closing brace;
-
 export default function calculate(expr) {
-  console.log("diplayOps in calculate(arr)", expr);
+  // console.log("diplayOps in calculate(arr)", expr);
   expr = convertDisplayOpsIntoArray(expr);
-
-  return calculateInsideBraces(expr);
+  return findParenthesis(expr);
 }
 
 function convertDisplayOpsIntoArray(string) {
   let parseRegex = new RegExp(/\d+\.\d+| yroot | log base | mod | \+ | - | \* | \^ | \/ |\d+|\D/, "g");
   let displayOpsArray = string.match(parseRegex).map((elem) => (isFinite(elem) ? Number(elem) : elem));
+  displayOpsArray.unshift("(");
+  displayOpsArray.push(")");
   console.log("match", displayOpsArray);
   return displayOpsArray;
 }
 
-function calculateInsideBraces(expr) {
+function findParenthesis(expr) {
+  let firstClosingIndex = expr.findIndex((parentesis) => parentesis === ")");
+  if (firstClosingIndex !== -1) {
+    let exprInsideParantethes = expr.slice(0, firstClosingIndex);
+    let firstOpeningIndex = exprInsideParantethes.reverse().findIndex((parentesis) => parentesis === "(");
+    exprInsideParantethes = exprInsideParantethes.slice(0, firstOpeningIndex).reverse();
+    let resultInsideParentheses = calculateInsideParentheses(exprInsideParantethes);
+    expr = expr
+      .slice(0, firstClosingIndex - firstOpeningIndex - 1)
+      .concat(resultInsideParentheses)
+      .concat(expr.slice(firstClosingIndex + 1));
+    return findParenthesis(expr);
+  }
+  return expr[0];
+}
+
+function calculateInsideParentheses(expr) {
   expr = findNegativeValues(expr);
   expr = calculateInOrder(expr, [" log base ", " mod "]);
   expr = calculateInOrder(expr, [" ^ ", " yroot "]);
@@ -44,9 +40,7 @@ function calculateInsideBraces(expr) {
 }
 
 function findNegativeValues(arr) {
-  // console.log("arr inside calculate", arr);
   let negativeIndex = arr.findIndex((elem, ind) => elem === " - " && typeof arr[ind - 1] === "string" && typeof arr[ind + 1] === "number");
-  // console.log("negativeIndex", negativeIndex);
   if (negativeIndex !== -1) {
     let newArr = arr
       .slice(0, negativeIndex)
@@ -54,12 +48,10 @@ function findNegativeValues(arr) {
       .concat(arr.slice(negativeIndex + 2));
     return findNegativeValues(newArr);
   }
-  // console.log("arr", arr);
   return arr;
 }
 
 function calculateInOrder(arr, operators) {
-  // console.log("inside SameOperations", arr, operators);
   let operatorIndex = arr.findIndex((elem) => elem === operators[0] || elem === operators[1]);
   let currentOperator = arr[operatorIndex];
 
@@ -90,7 +82,6 @@ function calculateInOrder(arr, operators) {
 
     return calculateInOrder(result, operators);
   }
-  // console.log("inside SameOperations before return", arr, operator);
   return arr;
 }
 
@@ -102,9 +93,13 @@ export function deleteRedundantOperators(state) {
   } else if (/\d/.test(state.displayCur)) {
     displayOpsExpression = state.displayOps.concat(Number(state.displayCur));
   } else {
-    let lastDigitIndex = state.result.reverse().findIndex((elem) => /\d/.test(elem));
+    let lastDigitIndex = state.displayOps
+      .split("")
+      .reverse()
+      .findIndex((elem) => /\d/.test(elem));
     displayOpsExpression = state.displayOps.slice(0, state.displayOps.length - lastDigitIndex);
   }
+  addMissingParenthesis(state.displayOps);
 }
 
 // export function deleteRedundantDigits(state) {
@@ -124,6 +119,26 @@ export function deleteRedundantOperators(state) {
 //     displayOpsExpression = lastNonDigitIndex === -1 ? "" : state.displayOps.slice(0, state.displayOps.length - lastNonDigitIndex);
 //   }
 // }
+
+export function addMissingParenthesis(displayOps) {
+  if (/\(/.test(displayOps)) {
+    let regexOpening = new RegExp(/\(/, "g");
+    let regexClosing = new RegExp(/\)/, "g");
+    let countOpeningParenthesis = displayOps.match(regexOpening).length;
+    let countClosingParenthesis = displayOps.match(regexClosing).length;
+    let missingClosingParenthesis = countOpeningParenthesis - countClosingParenthesis;
+
+    addClosingParenthesis(missingClosingParenthesis);
+  }
+}
+
+function addClosingParenthesis(missingClosingParenthesis) {
+  if (missingClosingParenthesis > 0) {
+    document.getElementById("rightParenthesis").click();
+    missingClosingParenthesis -= 1;
+    addClosingParenthesis(missingClosingParenthesis);
+  }
+}
 
 export let stateStorage = {
   prevState: [],
