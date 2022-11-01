@@ -1,3 +1,10 @@
+// next steps:
+// - force all click() inputs to be inside the displayOps and outside of displayCur (like %, S, R, etc), so displayCur will be clean before next operation (not obligatory)
+// - consider recoding actions that change only displayCur, so they could also change the last number or last parenthesis in displayOps
+// - consider using paste into displayCur (restrictions to what should be pasted) -> otherwise change "copy" to "copy result"
+// - consider adding multiple displays for results with possibility to insert them into displayCur later on
+// - check every input mixing with others
+
 export default function calculate(expr) {
   // console.log("diplayOps in calculate(arr)", expr);
   expr = convertDisplayOpsIntoArray(expr);
@@ -5,7 +12,7 @@ export default function calculate(expr) {
 }
 
 function convertDisplayOpsIntoArray(string) {
-  let parseRegex = new RegExp(/\d+\.\d+| yroot | log base | mod | \+ | - | \* | \^ | \/ |\d+|\D/, "g");
+  let parseRegex = new RegExp(/-\d+\.\d+|\d+\.\d+| yroot | log base | mod | \+ | - | \* | \^ | \/ |-\d+|\d+|\D/, "g");
   let displayOpsArray = string.match(parseRegex).map((elem) => (isFinite(elem) ? Number(elem) : elem));
   displayOpsArray.unshift("(");
   displayOpsArray.push(")");
@@ -99,7 +106,7 @@ export function deleteRedundantOperators(state) {
       .findIndex((elem) => /\d/.test(elem));
     displayOpsExpression = state.displayOps.slice(0, state.displayOps.length - lastDigitIndex);
   }
-  addMissingParenthesis(state.displayOps);
+  addMissingParenthesis(state.parenthesesDelta);
 }
 
 // export function deleteRedundantDigits(state) {
@@ -120,23 +127,11 @@ export function deleteRedundantOperators(state) {
 //   }
 // }
 
-export function addMissingParenthesis(displayOps) {
-  if (/\(/.test(displayOps)) {
-    let regexOpening = new RegExp(/\(/, "g");
-    let regexClosing = new RegExp(/\)/, "g");
-    let countOpeningParenthesis = displayOps.match(regexOpening).length;
-    let countClosingParenthesis = displayOps.match(regexClosing).length;
-    let missingClosingParenthesis = countOpeningParenthesis - countClosingParenthesis;
-
-    addClosingParenthesis(missingClosingParenthesis);
-  }
-}
-
-function addClosingParenthesis(missingClosingParenthesis) {
-  if (missingClosingParenthesis > 0) {
-    document.getElementById("rightParenthesis").click();
-    missingClosingParenthesis -= 1;
-    addClosingParenthesis(missingClosingParenthesis);
+export function addMissingParenthesis(delta) {
+  if (delta > 0) {
+    displayOpsExpression += ")";
+    delta -= 1;
+    addMissingParenthesis(delta);
   }
 }
 

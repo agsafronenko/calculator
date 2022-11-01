@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles/styles.css";
 import $ from "jquery";
-import calculate, { deleteRedundantOperators, displayOpsExpression, addMissingParenthesis, saveState, stateStorage, factorial, trigonometryInDegrees } from "./functions";
+import calculate, { deleteRedundantOperators, displayOpsExpression, saveState, stateStorage, factorial, trigonometryInDegrees } from "./functions";
 
 export default class Calculator extends React.Component {
   constructor(props) {
@@ -14,6 +14,7 @@ export default class Calculator extends React.Component {
       decimalAlreadyUsed: false,
       twoConsecutiveOperators: false,
       lastResult: "",
+      parenthesesDelta: 0,
     };
     this.handleClear = this.handleClear.bind(this);
     this.handleOperator = this.handleOperator.bind(this);
@@ -51,11 +52,14 @@ export default class Calculator extends React.Component {
       decimalAlreadyUsed: false,
       twoConsecutiveOperators: false,
       lastResult: "",
+      parenthesesDelta: 0,
     });
   }
 
   handlePreviousState() {
-    if (stateStorage.prevState.length !== 1) {
+    if (stateStorage.prevState.length <= 1) {
+      this.handleClear();
+    } else {
       stateStorage.prevState.shift();
       this.setState({
         displayOps: stateStorage.prevState[0].displayOps,
@@ -71,6 +75,10 @@ export default class Calculator extends React.Component {
 
   handleOperator(e) {
     if (this.state.twoConsecutiveOperators === true) {
+      // let lastLegitSymbol = this.state.displayOps
+      //   .split("")
+      //   .reverse()
+      //   .findIndex((elem) => /\d|\(/.test(elem));
       this.setState(
         (state) => ({
           displayOps: state.displayOps.slice(0, state.displayOps.length - 6).concat(e.target.value),
@@ -80,7 +88,7 @@ export default class Calculator extends React.Component {
           twoConsecutiveOperators: false,
         }),
         () => {
-          console.log("1st IF Inside handleOperator: this.state.displayOps", this.state.displayOps);
+          console.log("handleOperator stage 1 : this.state.displayOps", this.state.displayOps);
           if (e.target.value !== " - ") saveState(this.state);
         }
       );
@@ -94,7 +102,7 @@ export default class Calculator extends React.Component {
         }),
 
         () => {
-          console.log("2nd IF Inside handleOperator: this.state.displayOps", this.state.displayOps);
+          console.log("handleOperator stage 2 : this.state.displayOps", this.state.displayOps);
           saveState(this.state);
         }
       );
@@ -108,28 +116,16 @@ export default class Calculator extends React.Component {
         }),
 
         () => {
-          console.log("2.5nd IF Inside handleOperator: this.state.displayOps", this.state.displayOps);
+          console.log("handleOperator stage 3: this.state.displayOps", this.state.displayOps);
           saveState(this.state);
         }
       );
     }
 
     if (this.state.lastInput === "(") {
-      this.setState(
-        (state) => ({
-          // displayOps: state.displayOps,
-          // displayCur: e.target.value,
-          // lastInput: e.target.value,
-          // lastInputType: "operator",
-          // twoConsecutiveOperators: false,
-          // decimalAlreadyUsed: false,
-          // lastResult: "",
-        }),
-        () => {
-          console.log("2.7th Parenthesis IF Inside handleOperator: this.state.displayOps", this.state.displayOps);
-          saveState(this.state); // no need to save the same state -> check the same logic inside other functions
-        }
-      );
+      this.setState({}, () => {
+        console.log("handleOperator stage 4: this.state.displayOps", this.state.displayOps);
+      });
     } else if (this.state.lastInput === ")") {
       this.setState(
         (state) => ({
@@ -142,13 +138,13 @@ export default class Calculator extends React.Component {
           lastResult: "",
         }),
         () => {
-          console.log("2.9th Parenthesis IF Inside handleOperator: this.state.displayOps", this.state.displayOps);
+          console.log("handleOperator stage 5: this.state.displayOps", this.state.displayOps);
           saveState(this.state);
         }
       );
     }
 
-    if (this.state.lastInputType !== "Parenthesis" && this.state.lastInputType !== "operator") {
+    if (this.state.lastInputType !== "parenthesis" && this.state.lastInputType !== "operator") {
       this.setState(
         (state) => ({
           displayOps: state.lastResult === "" ? state.displayOps.concat(Number(state.displayCur)).concat(e.target.value) : "".concat(state.lastResult).concat(e.target.value),
@@ -160,7 +156,7 @@ export default class Calculator extends React.Component {
           lastResult: "",
         }),
         () => {
-          console.log("3rd IF Inside handleOperator: this.state.displayOps", this.state.displayOps);
+          console.log("handleOperator stage 6: this.state.displayOps", this.state.displayOps);
           saveState(this.state);
         }
       );
@@ -412,7 +408,9 @@ export default class Calculator extends React.Component {
           displayOps: state.lastResult === "" ? state.displayOps.concat(e.target.value) : "".concat(e.target.value),
           displayCur: e.target.value,
           lastInput: "(",
-          lastInputType: "Parenthesis",
+          lastInputType: "parenthesis",
+          parenthesesDelta: state.parenthesesDelta + 1,
+          twoConsecutiveOperators: false,
         }),
         () => {
           console.log("inside leftParenthesis after setState:  displayOps", this.state.displayOps);
@@ -422,19 +420,23 @@ export default class Calculator extends React.Component {
     }
   }
   handleRightParenthesis(e) {
-    if (this.state.lastInputType === "digit") {
-      this.setState(
-        (state) => ({
-          displayOps: state.lastInput === ")" ? state.displayOps.concat(e.target.value) : state.lastResult === "" ? state.displayOps.concat(Number(state.displayCur)).concat(e.target.value) : "".concat(e.target.value),
-          displayCur: e.target.value,
-          lastInput: ")",
-          lastInputType: "Parenthesis",
-        }),
-        () => {
-          console.log("inside rightParenthesis after setState:  displayOps", this.state.displayOps);
-          saveState(this.state);
-        }
-      );
+    if (this.state.parenthesesDelta > 0) {
+      if (this.state.lastInputType === "digit") {
+        this.setState(
+          (state) => ({
+            displayOps: state.lastInput === ")" ? state.displayOps.concat(e.target.value) : state.lastResult === "" ? state.displayOps.concat(Number(state.displayCur)).concat(e.target.value) : "".concat(e.target.value),
+            displayCur: e.target.value,
+            lastInput: ")",
+            lastInputType: "parenthesis",
+            parenthesesDelta: state.parenthesesDelta - 1,
+            twoConsecutiveOperators: false,
+          }),
+          () => {
+            console.log("inside rightParenthesis after setState:  displayOps", this.state.displayOps);
+            saveState(this.state);
+          }
+        );
+      }
     }
   }
 
@@ -443,9 +445,8 @@ export default class Calculator extends React.Component {
       console.log("check parenthesis after adding missing", this.state.displayOps);
 
       deleteRedundantOperators(this.state);
-      let result = calculate(this.state.displayOps.concat(this.state.displayCur));
+      let result = calculate(displayOpsExpression);
       // let result = calculate("3 * (25 - 21) + 8");
-
       this.setState(
         {
           displayOps: displayOpsExpression.concat(" = ").concat(result),
@@ -455,6 +456,7 @@ export default class Calculator extends React.Component {
           twoConsecutiveOperators: false,
           decimalAlreadyUsed: false,
           lastResult: result,
+          parenthesesDelta: 0,
         },
         () => {
           saveState(this.state);
