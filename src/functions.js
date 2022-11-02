@@ -1,8 +1,12 @@
 // next steps:
+// - continue testing factorials (especially -5!) and then come back to handler for special digits
+// - check "( - "
 // - force all click() inputs to be inside the displayOps and outside of displayCur (like %, S, R, etc), so displayCur will be clean before next operation (not obligatory)
 // - consider recoding actions that change only displayCur, so they could also change the last number or last parenthesis in displayOps
 // - consider using paste into displayCur (restrictions to what should be pasted) -> otherwise change "copy" to "copy result"
 // - consider adding multiple displays for results with possibility to insert them into displayCur later on
+// consider adding math.round (2-0.56) will provide with non accurate result --> round to the number of digits --> consider adding rounding button
+// sonsider adding event listeners
 // - check every input mixing with others
 
 export default function calculate(expr) {
@@ -38,6 +42,7 @@ function findParenthesis(expr) {
 
 function calculateInsideParentheses(expr) {
   expr = findNegativeValues(expr);
+  expr = calculateInOrder(expr, ["!", "%"]);
   expr = calculateInOrder(expr, [" log base ", " mod "]);
   expr = calculateInOrder(expr, [" ^ ", " yroot "]);
   expr = calculateInOrder(expr, [" * ", " / "]);
@@ -47,7 +52,7 @@ function calculateInsideParentheses(expr) {
 }
 
 function findNegativeValues(arr) {
-  let negativeIndex = arr.findIndex((elem, ind) => elem === " - " && typeof arr[ind - 1] === "string" && typeof arr[ind + 1] === "number");
+  let negativeIndex = arr.findIndex((elem, ind) => (elem === " - " && ind === 0) || (elem === " - " && typeof arr[ind - 1] === "string" && typeof arr[ind + 1] === "number"));
   if (negativeIndex !== -1) {
     let newArr = arr
       .slice(0, negativeIndex)
@@ -66,7 +71,11 @@ function calculateInOrder(arr, operators) {
     let currentOperation = arr.slice(operatorIndex - 1, operatorIndex + 2);
 
     let currentResult =
-      currentOperator === " log base "
+      currentOperator === "!"
+        ? factorial(currentOperation[0])
+        : currentOperator === "%"
+        ? currentOperation[0] / 100
+        : currentOperator === " log base "
         ? Math.log(currentOperation[0]) / Math.log(currentOperation[2])
         : currentOperator === " mod "
         ? currentOperation[0] % currentOperation[2]
@@ -81,11 +90,18 @@ function calculateInOrder(arr, operators) {
         : currentOperator === " + "
         ? currentOperation[0] + currentOperation[2]
         : currentOperation[0] - currentOperation[2];
+    console.log("im here", arr);
 
-    let result = arr
-      .slice(0, operatorIndex - 1)
-      .concat(currentResult)
-      .concat(arr.slice(operatorIndex + 2));
+    let result =
+      currentOperator === "!" || currentOperator === "%"
+        ? arr
+            .slice(0, operatorIndex - 1)
+            .concat(currentResult)
+            .concat(arr.slice(operatorIndex + 1))
+        : arr
+            .slice(0, operatorIndex - 1)
+            .concat(currentResult)
+            .concat(arr.slice(operatorIndex + 2));
 
     return calculateInOrder(result, operators);
   }
@@ -94,11 +110,20 @@ function calculateInOrder(arr, operators) {
 
 export let displayOpsExpression = "";
 
+export function lastLegitSymbol(displayOps) {
+  console.log("you actually here", displayOps);
+  let lastLegitSymbol = displayOps
+    .split("")
+    .reverse()
+    .findIndex((elem) => /\d|\(|!/.test(elem));
+  return (lastLegitSymbol = lastLegitSymbol !== -1 ? lastLegitSymbol : displayOps.length);
+}
+
 export function deleteRedundantOperators(state) {
   if (/\)/.test(state.displayCur)) {
     displayOpsExpression = state.displayOps;
   } else if (/\d/.test(state.displayCur)) {
-    displayOpsExpression = state.displayOps.concat(Number(state.displayCur));
+    displayOpsExpression = state.displayOps;
   } else {
     let lastDigitIndex = state.displayOps
       .split("")
@@ -150,13 +175,20 @@ export function saveState(state) {
 }
 
 export function factorial(num) {
+  if (num < 0) {
+    alert("invalid input: factorials are only defined for positive numbers");
+  } else if (num % 1 !== 0) {
+    alert(`factorials for nonintegers are defined based on simplified Gamma function:
+    ~~ level of precision: medium ~~`);
+    return Math.pow(2 * num * Math.PI, 1 / 2) * Math.pow(num / Math.E, num);
+  }
   let result = Number(num);
   if (Number.isInteger(result)) {
     for (let i = result - 1; i > 0; i--) {
       result *= i;
     }
+    return result;
   }
-  return Number.isInteger(result) ? result : num;
 }
 
 export function trigonometryInDegrees(curDegree, trigFunc) {
