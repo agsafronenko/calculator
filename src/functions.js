@@ -1,13 +1,14 @@
 // next steps:
-// - continue testing factorials (especially -5!) and then come back to handler for special digits
-// - check "( - "
+// continue revison from handleLog(e)
+// check the error appered when you click "=" without any input at all
 // - force all click() inputs to be inside the displayOps and outside of displayCur (like %, S, R, etc), so displayCur will be clean before next operation (not obligatory)
-// - consider recoding actions that change only displayCur, so they could also change the last number or last parenthesis in displayOps
 // - consider using paste into displayCur (restrictions to what should be pasted) -> otherwise change "copy" to "copy result"
 // - consider adding multiple displays for results with possibility to insert them into displayCur later on
 // consider adding math.round (2-0.56) will provide with non accurate result --> round to the number of digits --> consider adding rounding button
 // sonsider adding event listeners
 // - check every input mixing with others
+
+// - when invalid input appers or any other error, block all keys except for AC and del
 
 export default function calculate(expr) {
   // console.log("diplayOps in calculate(arr)", expr);
@@ -16,11 +17,12 @@ export default function calculate(expr) {
 }
 
 function convertDisplayOpsIntoArray(string) {
+  console.log("string inside convertDisplayIntoArr", string);
   let parseRegex = new RegExp(/-\d+\.\d+|\d+\.\d+| yroot | log base | mod | \+ | - | \* | \^ | \/ |-\d+|\d+|\D/, "g");
   let displayOpsArray = string.match(parseRegex).map((elem) => (isFinite(elem) ? Number(elem) : elem));
   displayOpsArray.unshift("(");
   displayOpsArray.push(")");
-  console.log("match", displayOpsArray);
+  console.log("convertDisplayIntoArr", displayOpsArray);
   return displayOpsArray;
 }
 
@@ -120,10 +122,11 @@ export function lastLegitSymbol(displayOps) {
 }
 
 export function deleteRedundantOperators(state) {
-  if (/\)/.test(state.displayCur)) {
+  console.log("deleteRedundant", state.displayCur);
+  if (/\)|!|%|\d/.test(state.displayCur)) {
     displayOpsExpression = state.displayOps;
-  } else if (/\d/.test(state.displayCur)) {
-    displayOpsExpression = state.displayOps;
+    // } else if (/\d/.test(state.displayCur)) {
+    //   displayOpsExpression = state.displayOps;
   } else {
     let lastDigitIndex = state.displayOps
       .split("")
@@ -177,17 +180,21 @@ export function saveState(state) {
 export function factorial(num) {
   if (num < 0) {
     alert("invalid input: factorials are only defined for positive numbers");
-  } else if (num % 1 !== 0) {
+    return "invalid input";
+  } else if (num % 1 !== 0 && num !== ")") {
     alert(`factorials for nonintegers are defined based on simplified Gamma function:
-    ~~ level of precision: medium ~~`);
+    ~~ level of accuracy: low ~~`);
     return Math.pow(2 * num * Math.PI, 1 / 2) * Math.pow(num / Math.E, num);
-  }
-  let result = Number(num);
-  if (Number.isInteger(result)) {
-    for (let i = result - 1; i > 0; i--) {
-      result *= i;
+  } else if (num === ")") {
+    return "!";
+  } else {
+    let result = Number(num);
+    if (Number.isInteger(result)) {
+      for (let i = result - 1; i > 0; i--) {
+        result *= i;
+      }
+      return result;
     }
-    return result;
   }
 }
 
