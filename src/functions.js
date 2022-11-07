@@ -1,5 +1,5 @@
 // next steps:
-// continue revison from trigonometry(e) + check trigonometry for lastResult
+// continue revison from trigonometry(e) + check how trigonometry works with minus and whether any adjustments needed (maybe not?) -> check trigonometry for lastResult +
 // check the error appered when you click "=" without any input at all
 // - force all click() inputs to be inside the displayOps and outside of displayCur (like %, S, R, etc), so displayCur will be clean before next operation (not obligatory)
 // - consider using paste into displayCur (restrictions to what should be pasted) -> otherwise change "copy" to "copy result"
@@ -144,7 +144,8 @@ export function lastLegitSymbol(displayOps) {
 
 export function deleteRedundantOperators(state) {
   console.log("deleteRedundant", state.displayOps);
-  if (/\)|!|%|\d/.test(state.displayCur)) {
+  console.log("state.displayCur", state.displayCur);
+  if (state.displayCur === "" || /\)|!|%|\d/.test(state.displayCur)) {
     displayOpsExpression = state.displayOps;
     // } else if (/\d/.test(state.displayCur)) {
     //   displayOpsExpression = state.displayOps;
@@ -222,17 +223,49 @@ export function factorial(num) {
 
 export function trigonometryInDegrees(curDegree, trigFunc, state) {
   console.log("inside trigonom, args:", curDegree, trigFunc);
-  if (state.lastInput === ")") {
+  if (state.lastOperator === "trigonometry") {
+    let matchTrigonometry = state.displayOps.match(/sin|cos|tan|cot|sec|csc/gi);
+    let lastTrigonometryIndex = state.displayOps.lastIndexOf(matchTrigonometry[matchTrigonometry.length - 1]);
+    console.log("lastTrigonometryIndex", lastTrigonometryIndex);
+    displayOpsExpression = state.displayOps.slice(0, lastTrigonometryIndex).concat(`${trigFunc}(${state.displayOps.slice(lastTrigonometryIndex)})`);
+    console.log("you are here in sin sin sin --> displayOpsExpression", displayOpsExpression);
+    return "";
+  } else if (state.lastInput === ")") {
+    let displayOpsLength = state.displayOps.length;
+    let closingNum = 1;
+    let openingNum = 0;
+    let firstOpeningIndex = 0;
+    for (let i = displayOpsLength - 2; i >= 0; i--) {
+      if (state.displayOps[i] === ")") closingNum++;
+      if (state.displayOps[i] === "(") openingNum++;
+      if (closingNum === openingNum) {
+        firstOpeningIndex = i;
+        console.log("you are here", closingNum, openingNum, firstOpeningIndex);
+        break;
+      }
+    }
+    displayOpsExpression = state.displayOps.slice(0, firstOpeningIndex).concat(`${trigFunc}${state.displayOps.slice(firstOpeningIndex)}`);
+    console.log("you are here --> displayOpsExpression", displayOpsExpression);
+    return "";
   } else if (state.lastInputType === "digit") {
     let regexNum = new RegExp(`${state.displayCur}$`);
     let lastNumIndex = state.displayOps.match(regexNum).index;
     console.log("lastNumIndex", lastNumIndex);
     displayOpsExpression = state.displayOps.slice(0, lastNumIndex).concat(`${trigFunc}(${state.displayCur})`);
     console.log("displayOpsExpression", displayOpsExpression);
+    let calculateResult = trigonometryCalculate(curDegree, trigFunc, state);
+    return calculateResult;
+  } else if (state.lastInput === "!" || state.lastInputType === "%") {
+    // -\d+\.\d+|\d+\.\d+|sin|cos|tan|cot| yroot | log base | mod | \+ | - | \* | \^ | \/ |-\d+|\d+|\D
+    let regexNum = new RegExp(/-\d+\.\d+!$|\d+\.\d+!$|-\d+!$|\d+!$|-\d+\.\d+%$|\d+\.\d+%$|-\d+%$|\d+%$/);
+    let lastNumIndex = state.displayOps.match(regexNum).index;
+    console.log("bam lastNumIndex", lastNumIndex);
+    displayOpsExpression = state.displayOps.slice(0, lastNumIndex).concat(`${trigFunc}(${state.displayOps.match(regexNum)})`);
+    console.log("bam displayOpsExpression", displayOpsExpression);
+    return "";
   }
-
-  let calculateResult = trigonometryCalculate(curDegree, trigFunc, state);
-  return calculateResult;
+  // let calculateResult = trigonometryCalculate(curDegree, trigFunc, state);
+  // return calculateResult;
 }
 
 function trigonometryCalculate(curDegree, trigFunc, state) {

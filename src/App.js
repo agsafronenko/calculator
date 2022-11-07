@@ -440,18 +440,19 @@ export default class Calculator extends React.Component {
 
   handleTrigonometry(e) {
     console.log("inside trigonometry", isFinite(this.state.displayCur));
-    if (isFinite(this.state.displayCur) || this.state.lastInput === ")") {
+    if ((this.state.displayOps !== "" && isFinite(this.state.displayCur)) || this.state.lastInput === ")") {
       let result = trigonometryInDegrees(this.state.displayCur, e.target.value, this.state);
       console.log("triginometry", result);
       // deleteRedundantDigits(this.state);
       this.setState(
         (state) => ({
-          // displayOps: state.lastResult === "" ? state.displayOps.concat(` ${e.target.value} `) : "".concat(result),
+          displayOps: state.lastResult === "" ? displayOpsExpression : "".concat(result),
           displayOps: displayOpsExpression,
           displayCur: result,
-          lastInput: result,
-          lastInputType: "trigonometry",
+          lastInput: ")",
+          lastInputType: "parenthesis",
           twoConsecutiveOperators: false,
+          lastOperator: "trigonometry",
           // lastResult: "",
         }),
         () => {
@@ -572,8 +573,9 @@ export default class Calculator extends React.Component {
     }
   }
   handleRightParenthesis(e) {
+    console.log("this.state.parthersesDelta", this.state.parenthesesDelta);
     if (this.state.parenthesesDelta > 0) {
-      if (this.state.lastInputType === "digit" || this.state.lastInput === "!" || this.state.lastInput === "%") {
+      if (this.state.lastInputType === "digit" || this.state.lastInput === "!" || this.state.lastInput === "%" || this.state.lastInput === ")") {
         this.setState(
           (state) => ({
             displayOps: state.lastInput === ")" ? state.displayOps.concat(e.target.value) : state.lastResult === "" ? state.displayOps.concat(e.target.value) : "".concat(e.target.value),
