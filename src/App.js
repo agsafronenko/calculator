@@ -15,6 +15,7 @@ export default class Calculator extends React.Component {
       twoConsecutiveOperators: false,
       lastResult: "",
       parenthesesDelta: 0,
+      lastOperator: "",
     };
     this.handleClear = this.handleClear.bind(this);
     this.handleOperator = this.handleOperator.bind(this);
@@ -53,6 +54,7 @@ export default class Calculator extends React.Component {
       twoConsecutiveOperators: false,
       lastResult: "",
       parenthesesDelta: 0,
+      lastOperator: "",
     });
   }
 
@@ -69,6 +71,7 @@ export default class Calculator extends React.Component {
         decimalAlreadyUsed: stateStorage.prevState[0].decimalAlreadyUsed,
         twoConsecutiveOperators: stateStorage.prevState[0].twoConsecutiveOperators,
         lastResult: stateStorage.prevState[0].lastResult,
+        lastOperator: stateStorage.prevState[0].lastOperator,
       });
     }
   }
@@ -89,6 +92,7 @@ export default class Calculator extends React.Component {
               lastInput: e.target.value,
               lastInputType: "operator",
               twoConsecutiveOperators: false,
+              lastOperator: e.target.value,
             }),
             () => {
               console.log("handleOperator stage 1 : this.state.displayOps", this.state.displayOps);
@@ -104,6 +108,7 @@ export default class Calculator extends React.Component {
                 lastInput: e.target.value,
                 lastInputType: "operator",
                 twoConsecutiveOperators: false,
+                lastOperator: e.target.value,
               }),
 
               () => {
@@ -113,6 +118,22 @@ export default class Calculator extends React.Component {
               }
             );
           }
+        } else if (this.state.twoConsecutiveOperators === false && this.state.lastInput === " log base " && e.target.value === " - ") {
+          this.setState(
+            (state) => ({
+              // displayOps: state.displayOps.slice(0, state.displayOps.length - lastLegitSymbol(state.displayOps)).concat(e.target.value),
+              // displayCur: e.target.value,
+              // lastInput: e.target.value,
+              // lastInputType: "operator",
+              // twoConsecutiveOperators: false,
+            }),
+
+            () => {
+              console.log("handleOperator stage 2.5 : this.state.displayOps", this.state.displayOps);
+              console.log("heyyyyy", e.target.value, this.state.lastInput);
+              // if (e.target.value !== penultimateInput) saveState(this.state);
+            }
+          );
         } else if (this.state.twoConsecutiveOperators === false && this.state.lastInputType === "operator" && e.target.value === " - ") {
           console.log("hola", this.state.displayOps.slice(this.state.displayOps.length - 4));
           if (this.state.displayOps.slice(this.state.displayOps.length - 4) !== "( - ") {
@@ -123,6 +144,7 @@ export default class Calculator extends React.Component {
                 lastInput: e.target.value,
                 lastInputType: "operator",
                 twoConsecutiveOperators: true,
+                lastOperator: e.target.value,
               }),
               () => {
                 console.log("handleOperator stage 3: this.state.displayOps", this.state.displayOps);
@@ -139,6 +161,7 @@ export default class Calculator extends React.Component {
               displayCur: e.target.value === " - " ? e.target.value : state.displayCur,
               lastInput: e.target.value === " - " ? e.target.value : state.lastInput,
               lastInputType: e.target.value === " - " ? "operator" : state.lastInputType,
+              lastOperator: e.target.value === " - " ? e.target.value : state.lastOperator,
             }),
             () => {
               console.log("handleOperator stage 4: this.state.displayOps", this.state.displayOps);
@@ -154,6 +177,7 @@ export default class Calculator extends React.Component {
               twoConsecutiveOperators: false,
               decimalAlreadyUsed: false,
               lastResult: "",
+              lastOperator: e.target.value,
             }),
             () => {
               console.log("handleOperator stage 5: this.state.displayOps", this.state.displayOps);
@@ -172,6 +196,7 @@ export default class Calculator extends React.Component {
               twoConsecutiveOperators: false,
               decimalAlreadyUsed: false,
               lastResult: "",
+              lastOperator: e.target.value,
             }),
             () => {
               console.log("handleOperator stage 6: this.state.displayOps", this.state.displayOps);
@@ -259,6 +284,7 @@ export default class Calculator extends React.Component {
         twoConsecutiveOperators: false,
         decimalAlreadyUsed: false,
         lastResult: "",
+        lastOperator: " ^ ",
       }),
       () => {
         console.log("inside handle ^2 after setState:  displayOps", this.state.displayOps);
@@ -277,6 +303,7 @@ export default class Calculator extends React.Component {
         twoConsecutiveOperators: false,
         decimalAlreadyUsed: false,
         lastResult: "",
+        lastOperator: " yroot ",
       }),
       () => {
         console.log("after displayOps", this.state.displayOps);
@@ -295,6 +322,7 @@ export default class Calculator extends React.Component {
         twoConsecutiveOperators: false,
         decimalAlreadyUsed: false,
         lastResult: "",
+        lastOperator: " ^ ",
       }),
       () => {
         console.log("inside handle ^ after setState:  displayOps", this.state.displayOps);
@@ -313,6 +341,7 @@ export default class Calculator extends React.Component {
         twoConsecutiveOperators: false,
         decimalAlreadyUsed: false,
         lastResult: "",
+        lastOperator: " yroot ",
       }),
       () => {
         console.log("after displayOps", this.state.displayOps);
@@ -322,36 +351,68 @@ export default class Calculator extends React.Component {
   }
 
   handleLog(e) {
-    console.log("inside handle log10: displayOps", this.state.displayOps);
-    this.setState(
-      (state) => ({
-        displayOps: state.lastResult === "" ? state.displayOps.concat(e.target.value) : "".concat(state.lastResult).concat(e.target.value),
-        displayCur: e.target.value,
-        lastInput: e.target.value,
-        lastInputType: "operator",
-        twoConsecutiveOperators: false,
-        decimalAlreadyUsed: false,
-        lastResult: "",
-      }),
-      () => {
-        console.log("inside handle log10 after setState:  displayOps", this.state.displayOps);
-        saveState(this.state);
-      }
-    );
+    if (this.state.lastInputType === "digit" || this.state.lastInput === ")") {
+      console.log("inside handle log: displayOps", this.state.displayOps);
+      this.setState(
+        (state) => ({
+          displayOps: state.lastResult === "" ? state.displayOps.concat(e.target.value) : "".concat(state.lastResult).concat(e.target.value),
+          displayCur: e.target.value,
+          lastInput: e.target.value,
+          lastInputType: "operator",
+          twoConsecutiveOperators: false,
+          decimalAlreadyUsed: false,
+          lastResult: "",
+          lastOperator: " log base ",
+        }),
+        () => {
+          console.log("inside handle log after setState:  displayOps", this.state.displayOps);
+          saveState(this.state);
+        }
+      );
+    }
   }
 
   handleLog10() {
-    if (this.state.lastInput !== "(") {
-      document.getElementById("log").click();
-      setTimeout(() => document.getElementById("one").click(), 50);
-      setTimeout(() => document.getElementById("zero").click(), 70);
+    if (this.state.lastInputType === "digit" || this.state.lastInput === ")") {
+      console.log("inside handle log10: displayOps", this.state.displayOps);
+      this.setState(
+        (state) => ({
+          displayOps: state.lastResult === "" ? state.displayOps.concat(" log base 10") : "".concat(state.lastResult).concat(" log base 10"),
+          displayCur: "",
+          lastInput: "10",
+          lastInputType: "digit",
+          twoConsecutiveOperators: false,
+          decimalAlreadyUsed: false,
+          lastResult: "",
+          lastOperator: " log base ",
+        }),
+        () => {
+          console.log("inside handle log10 after setState:  displayOps", this.state.displayOps);
+          saveState(this.state);
+        }
+      );
     }
   }
 
   handleLogE() {
-    if (this.state.lastInput !== "(") {
-      document.getElementById("log").click();
-      setTimeout(() => document.getElementById("e").click(), 50);
+    if (this.state.lastInputType === "digit" || this.state.lastInput === ")") {
+      console.log("inside handle log10: displayOps", this.state.displayOps);
+      this.setState(
+        (state) => ({
+          displayOps: state.lastResult === "" ? state.displayOps.concat(` log base ${Math.E}`) : "".concat(state.lastResult).concat(` log base ${Math.E}`),
+          displayCur: "",
+          lastInput: `${Math.E}`,
+          lastInputType: "digit",
+          twoConsecutiveOperators: false,
+          decimalAlreadyUsed: false,
+          lastResult: "",
+          lastOperator: " log base ",
+        }),
+        () => {
+          console.log("inside handle log10 after setState:  displayOps", this.state.displayOps);
+          saveState(this.state);
+        }
+      );
     }
   }
 
@@ -367,6 +428,7 @@ export default class Calculator extends React.Component {
           lastInputType: "!",
           twoConsecutiveOperators: false,
           lastResult: "",
+          lastOperator: " ! ",
         }),
         () => {
           console.log("inside handle factorial after setState:  displayOps", this.state.displayOps);
@@ -378,16 +440,17 @@ export default class Calculator extends React.Component {
 
   handleTrigonometry(e) {
     console.log("inside trigonometry", isFinite(this.state.displayCur));
-    if (isFinite(this.state.displayCur)) {
-      let result = trigonometryInDegrees(this.state.displayCur, e.target.value);
+    if (isFinite(this.state.displayCur) || this.state.lastInput === ")") {
+      let result = trigonometryInDegrees(this.state.displayCur, e.target.value, this.state);
       console.log("triginometry", result);
       // deleteRedundantDigits(this.state);
       this.setState(
         (state) => ({
-          // displayOps: state.lastResult === "" ? displayOpsExpression.concat(result) : "".concat(result),
+          // displayOps: state.lastResult === "" ? state.displayOps.concat(` ${e.target.value} `) : "".concat(result),
+          displayOps: displayOpsExpression,
           displayCur: result,
           lastInput: result,
-          lastInputType: "digit",
+          lastInputType: "trigonometry",
           twoConsecutiveOperators: false,
           // lastResult: "",
         }),
@@ -400,15 +463,16 @@ export default class Calculator extends React.Component {
   }
 
   handlePercentage() {
-    if (this.state.lastInput !== "(") {
+    if (this.state.lastInputType === "digit" || this.state.lastInput === ")") {
       this.setState(
         (state) => ({
           displayOps: state.lastResult === "" ? state.displayOps.concat("%") : state.lastResult.concat("%"),
-          displayCur: state.displayCur / 100,
+          displayCur: state.lastInputType === "digit" ? state.displayCur / 100 : "%",
           lastInput: "%",
           lastInputType: "%",
           twoConsecutiveOperators: false,
           // lastResult: "",
+          lastOperator: " % ",
         }),
         () => {
           console.log("inside handle log10 after setState:  displayOps", this.state.displayOps);
@@ -420,7 +484,7 @@ export default class Calculator extends React.Component {
 
   handleChangeSign() {
     if (this.state.lastResult === "") {
-      if (this.state.lastInputType === "digit" && this.state.displayCur !== 0 && this.state.displayCur !== "") {
+      if (this.state.lastInputType === "digit" && this.state.displayCur !== 0 && this.state.displayCur !== "" && this.state.lastOperator !== " log base ") {
         let displayOpsExpression = "";
         let regexArr = [" \\-  - ", " \\+  - ", " \\*  - ", " \\/  - ", "^ - ", "^-", " - ", " \\+ ", ""];
         let signArr = [" - ", " + ", " * ", " / ", "", "", " + ", " - ", " - "];
@@ -478,6 +542,7 @@ export default class Calculator extends React.Component {
           twoConsecutiveOperators: false,
           decimalAlreadyUsed: false,
           lastResult: "",
+          lastOperator: " mod ",
         }),
         () => {
           console.log("inside modulo after setState:  displayOps", this.state.displayOps);
@@ -497,6 +562,7 @@ export default class Calculator extends React.Component {
           lastInputType: "parenthesis",
           parenthesesDelta: state.parenthesesDelta + 1,
           twoConsecutiveOperators: false,
+          lastOperator: "(",
         }),
         () => {
           console.log("inside leftParenthesis after setState:  displayOps", this.state.displayOps);
@@ -507,7 +573,7 @@ export default class Calculator extends React.Component {
   }
   handleRightParenthesis(e) {
     if (this.state.parenthesesDelta > 0) {
-      if (this.state.lastInputType === "digit") {
+      if (this.state.lastInputType === "digit" || this.state.lastInput === "!" || this.state.lastInput === "%") {
         this.setState(
           (state) => ({
             displayOps: state.lastInput === ")" ? state.displayOps.concat(e.target.value) : state.lastResult === "" ? state.displayOps.concat(e.target.value) : "".concat(e.target.value),
@@ -516,6 +582,7 @@ export default class Calculator extends React.Component {
             lastInputType: "parenthesis",
             parenthesesDelta: state.parenthesesDelta - 1,
             twoConsecutiveOperators: false,
+            lastOperator: ")",
           }),
           () => {
             console.log("inside rightParenthesis after setState:  displayOps", this.state.displayOps);
@@ -703,11 +770,11 @@ class Buttons extends React.Component {
         <button id="factorial" onClick={this.props.factorial}>
           !
         </button>
-        <button id="cos" value="cos" onClick={this.props.trigonometry}>
-          cos
-        </button>
         <button id="sin" value="sin" onClick={this.props.trigonometry}>
           sin
+        </button>
+        <button id="cos" value="cos" onClick={this.props.trigonometry}>
+          cos
         </button>
         <button id="tan" value="tan" onClick={this.props.trigonometry}>
           tan

@@ -1,5 +1,5 @@
 // next steps:
-// continue revison from handleLog(e)
+// continue revison from trigonometry(e) + check trigonometry for lastResult
 // check the error appered when you click "=" without any input at all
 // - force all click() inputs to be inside the displayOps and outside of displayCur (like %, S, R, etc), so displayCur will be clean before next operation (not obligatory)
 // - consider using paste into displayCur (restrictions to what should be pasted) -> otherwise change "copy" to "copy result"
@@ -18,7 +18,7 @@ export default function calculate(expr) {
 
 function convertDisplayOpsIntoArray(string) {
   console.log("string inside convertDisplayIntoArr", string);
-  let parseRegex = new RegExp(/-\d+\.\d+|\d+\.\d+| yroot | log base | mod | \+ | - | \* | \^ | \/ |-\d+|\d+|\D/, "g");
+  let parseRegex = new RegExp(/-\d+\.\d+|\d+\.\d+|sin|cos|tan|cot| yroot | log base | mod | \+ | - | \* | \^ | \/ |-\d+|\d+|\D/, "g");
   let displayOpsArray = string.match(parseRegex).map((elem) => (isFinite(elem) ? Number(elem) : elem));
   displayOpsArray.unshift("(");
   displayOpsArray.push(")");
@@ -44,6 +44,9 @@ function findParenthesis(expr) {
 
 function calculateInsideParentheses(expr) {
   expr = findNegativeValues(expr);
+  expr = calculateInOrder(expr, ["sin", "cos"]);
+  expr = calculateInOrder(expr, ["tan", "cot"]);
+  expr = calculateInOrder(expr, ["sec", "csc"]);
   expr = calculateInOrder(expr, ["!", "%"]);
   expr = calculateInOrder(expr, [" log base ", " mod "]);
   expr = calculateInOrder(expr, [" ^ ", " yroot "]);
@@ -71,9 +74,22 @@ function calculateInOrder(arr, operators) {
 
   if (operatorIndex !== -1) {
     let currentOperation = arr.slice(operatorIndex - 1, operatorIndex + 2);
+    console.log("currentOpertation", currentOperation);
 
     let currentResult =
-      currentOperator === "!"
+      currentOperator === "sin"
+        ? Math.sin(currentOperation[currentOperation.length - 1] * (Math.PI / 180))
+        : currentOperator === "cos"
+        ? Math.cos(currentOperation[currentOperation.length - 1] * (Math.PI / 180))
+        : currentOperator === "tan"
+        ? Math.tan(currentOperation[currentOperation.length - 1] * (Math.PI / 180))
+        : currentOperator === "cot"
+        ? 1 / Math.tan(currentOperation[currentOperation.length - 1] * (Math.PI / 180))
+        : currentOperator === "sec"
+        ? 1 / Math.tan(currentOperation[currentOperation.length - 1] * (Math.PI / 180))
+        : currentOperator === "scs"
+        ? 1 / Math.tan(currentOperation[currentOperation.length - 1] * (Math.PI / 180))
+        : currentOperator === "!"
         ? factorial(currentOperation[0])
         : currentOperator === "%"
         ? currentOperation[0] / 100
@@ -95,7 +111,12 @@ function calculateInOrder(arr, operators) {
     console.log("im here", arr);
 
     let result =
-      currentOperator === "!" || currentOperator === "%"
+      currentOperator === "sin" || currentOperator === "cos" || currentOperator === "tan" || currentOperator === "cot" || currentOperator === "sec" || currentOperator === "csc"
+        ? arr
+            .slice(0, operatorIndex)
+            .concat(currentResult)
+            .concat(arr.slice(operatorIndex + 2))
+        : currentOperator === "!" || currentOperator === "%"
         ? arr
             .slice(0, operatorIndex - 1)
             .concat(currentResult)
@@ -104,7 +125,7 @@ function calculateInOrder(arr, operators) {
             .slice(0, operatorIndex - 1)
             .concat(currentResult)
             .concat(arr.slice(operatorIndex + 2));
-
+    console.log("result", result);
     return calculateInOrder(result, operators);
   }
   return arr;
@@ -122,7 +143,7 @@ export function lastLegitSymbol(displayOps) {
 }
 
 export function deleteRedundantOperators(state) {
-  console.log("deleteRedundant", state.displayCur);
+  console.log("deleteRedundant", state.displayOps);
   if (/\)|!|%|\d/.test(state.displayCur)) {
     displayOpsExpression = state.displayOps;
     // } else if (/\d/.test(state.displayCur)) {
@@ -135,6 +156,7 @@ export function deleteRedundantOperators(state) {
     displayOpsExpression = state.displayOps.slice(0, state.displayOps.length - lastDigitIndex);
   }
   addMissingParenthesis(state.parenthesesDelta);
+  console.log("deleteRedundant after", displayOpsExpression);
 }
 
 // export function deleteRedundantDigits(state) {
@@ -198,14 +220,27 @@ export function factorial(num) {
   }
 }
 
-export function trigonometryInDegrees(curDegree, trigFunc) {
+export function trigonometryInDegrees(curDegree, trigFunc, state) {
   console.log("inside trigonom, args:", curDegree, trigFunc);
+  if (state.lastInput === ")") {
+  } else if (state.lastInputType === "digit") {
+    let regexNum = new RegExp(`${state.displayCur}$`);
+    let lastNumIndex = state.displayOps.match(regexNum).index;
+    console.log("lastNumIndex", lastNumIndex);
+    displayOpsExpression = state.displayOps.slice(0, lastNumIndex).concat(`${trigFunc}(${state.displayCur})`);
+    console.log("displayOpsExpression", displayOpsExpression);
+  }
+
+  let calculateResult = trigonometryCalculate(curDegree, trigFunc, state);
+  return calculateResult;
+}
+
+function trigonometryCalculate(curDegree, trigFunc, state) {
   let reciprocal = {
     cot: "tan",
     sec: "cos",
     csc: "sin",
   };
-
   let calculateResult = Function(`return ${trigFunc} === cot || ${trigFunc} === sec || ${trigFunc} === csc ? 1/ Math.${reciprocal[trigFunc]}(${curDegree} * (Math.PI / 180)) : Math.${trigFunc}(${curDegree} * (Math.PI / 180))`);
   return calculateResult().toString();
 }
