@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles/styles.css";
 import $ from "jquery";
-import calculate, { deleteRedundantOperators, displayOpsExpression, lastLegitSymbol, saveState, stateStorage, factorial, trigonometryInDegrees } from "./functions";
+import calculate, { deleteRedundantOperators, displayOpsExpression, lastLegitSymbol, saveState, stateStorage, factorial, trigonometryInDegrees, changeSign } from "./functions";
 
 export default class Calculator extends React.Component {
   constructor(props) {
@@ -417,17 +417,18 @@ export default class Calculator extends React.Component {
   }
 
   handleFactorial() {
-    if (this.state.lastInputType === "digit" || this.state.lastInput === ")") {
+    if (this.state.lastInputType === "digit" || this.state.lastInput === ")" || (this.state.lastInput === "%" && !this.state.displayOps.match(/!%/))) {
       let factor = factorial(this.state.displayCur).toString();
       console.log("factorial", factor);
+
       this.setState(
         (state) => ({
-          displayOps: state.lastResult === "" ? state.displayOps.concat("!") : "".concat(state.lastResult).concat("!"),
+          displayOps: factor === "invalid input" ? "invalid input" : state.lastResult === "" ? state.displayOps.concat("!") : "".concat(state.lastResult).concat("!"),
           displayCur: factor,
           lastInput: "!",
           lastInputType: "!",
           twoConsecutiveOperators: false,
-          lastResult: "",
+          lastResult: factor === "invalid input" ? "invalid input" : "",
           lastOperator: " ! ",
         }),
         () => {
@@ -453,7 +454,7 @@ export default class Calculator extends React.Component {
           lastInputType: "parenthesis",
           twoConsecutiveOperators: false,
           lastOperator: "trigonometry",
-          // lastResult: "",
+          lastResult: "",
         }),
         () => {
           console.log("inside trigonometry after setState:  displayOps", this.state.displayOps);
@@ -464,15 +465,15 @@ export default class Calculator extends React.Component {
   }
 
   handlePercentage() {
-    if (this.state.lastInputType === "digit" || this.state.lastInput === ")") {
+    if (this.state.lastInputType === "digit" || this.state.lastInput === ")" || (this.state.lastInput === "!" && !this.state.displayOps.match(/%!/))) {
       this.setState(
         (state) => ({
-          displayOps: state.lastResult === "" ? state.displayOps.concat("%") : state.lastResult.concat("%"),
+          displayOps: state.lastResult === "" ? state.displayOps.concat("%") : "".concat(state.lastResult).concat("%"),
           displayCur: state.lastInputType === "digit" ? state.displayCur / 100 : "%",
           lastInput: "%",
           lastInputType: "%",
           twoConsecutiveOperators: false,
-          // lastResult: "",
+          lastResult: "",
           lastOperator: " % ",
         }),
         () => {
@@ -508,6 +509,24 @@ export default class Calculator extends React.Component {
           lastInputType: "digit",
           lastResult: "",
         }));
+      } else if (this.state.lastInput === ")" || this.state.lastInput === "!" || this.state.lastInput === "%" || this.state.lastOperator === "trigonometry") {
+        console.log("you are in special case of handleChangeSign");
+        changeSign(this.state);
+        this.setState(
+          (state) => ({
+            displayOps: displayOpsExpression,
+            displayCur: "",
+            lastInput: ")",
+            lastInputType: "parenthesis",
+            twoConsecutiveOperators: false,
+            // lastOperator: "trigonometry",
+            lastResult: "",
+          }),
+          () => {
+            console.log("inside special case of handleChangeSign after setState:  displayOps", this.state.displayOps);
+            saveState(this.state);
+          }
+        );
       }
     } else {
       this.setState(
@@ -612,6 +631,7 @@ export default class Calculator extends React.Component {
           decimalAlreadyUsed: false,
           lastResult: result,
           parenthesesDelta: 0,
+          lastOperator: "equal",
         },
         () => {
           saveState(this.state);

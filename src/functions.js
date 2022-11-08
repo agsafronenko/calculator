@@ -1,5 +1,5 @@
 // next steps:
-// continue revison from trigonometry(e) + check how trigonometry works with minus and whether any adjustments needed (maybe not?) -> check trigonometry for lastResult +
+//  continue from handleAbs()
 // check the error appered when you click "=" without any input at all
 // - force all click() inputs to be inside the displayOps and outside of displayCur (like %, S, R, etc), so displayCur will be clean before next operation (not obligatory)
 // - consider using paste into displayCur (restrictions to what should be pasted) -> otherwise change "copy" to "copy result"
@@ -18,7 +18,7 @@ export default function calculate(expr) {
 
 function convertDisplayOpsIntoArray(string) {
   console.log("string inside convertDisplayIntoArr", string);
-  let parseRegex = new RegExp(/-\d+\.\d+|\d+\.\d+|sin|cos|tan|cot| yroot | log base | mod | \+ | - | \* | \^ | \/ |-\d+|\d+|\D/, "g");
+  let parseRegex = new RegExp(/-\d+\.\d+|\d+\.\d+|sin|cos|tan|cot|sec|csc| yroot | log base | mod |invalid input| \+ | - | \* | \^ | \/ |-\d+|\d+|\D/, "g");
   let displayOpsArray = string.match(parseRegex).map((elem) => (isFinite(elem) ? Number(elem) : elem));
   displayOpsArray.unshift("(");
   displayOpsArray.push(")");
@@ -69,12 +69,16 @@ function findNegativeValues(arr) {
 }
 
 function calculateInOrder(arr, operators) {
+  if (arr.some((elem) => elem === "invalid input")) {
+    arr = ["invalid input"];
+  }
+
   let operatorIndex = arr.findIndex((elem) => elem === operators[0] || elem === operators[1]);
   let currentOperator = arr[operatorIndex];
 
   if (operatorIndex !== -1) {
-    let currentOperation = arr.slice(operatorIndex - 1, operatorIndex + 2);
-    console.log("currentOpertation", currentOperation);
+    let currentOperation = operatorIndex === 0 ? arr.slice(0, operatorIndex + 2) : arr.slice(operatorIndex - 1, operatorIndex + 2);
+    console.log("currentOpertation", currentOperation, "operatorIndex", operatorIndex, "arr", arr);
 
     let currentResult =
       currentOperator === "sin"
@@ -87,7 +91,7 @@ function calculateInOrder(arr, operators) {
         ? 1 / Math.tan(currentOperation[currentOperation.length - 1] * (Math.PI / 180))
         : currentOperator === "sec"
         ? 1 / Math.tan(currentOperation[currentOperation.length - 1] * (Math.PI / 180))
-        : currentOperator === "scs"
+        : currentOperator === "csc"
         ? 1 / Math.tan(currentOperation[currentOperation.length - 1] * (Math.PI / 180))
         : currentOperator === "!"
         ? factorial(currentOperation[0])
@@ -108,7 +112,7 @@ function calculateInOrder(arr, operators) {
         : currentOperator === " + "
         ? currentOperation[0] + currentOperation[2]
         : currentOperation[0] - currentOperation[2];
-    console.log("im here", arr);
+    console.log("im here", arr, "currentOperator", currentOperator, "currentOperation", currentOperation, "currentResult", currentResult);
 
     let result =
       currentOperator === "sin" || currentOperator === "cos" || currentOperator === "tan" || currentOperator === "cot" || currentOperator === "sec" || currentOperator === "csc"
@@ -145,7 +149,7 @@ export function lastLegitSymbol(displayOps) {
 export function deleteRedundantOperators(state) {
   console.log("deleteRedundant", state.displayOps);
   console.log("state.displayCur", state.displayCur);
-  if (state.displayCur === "" || /\)|!|%|\d/.test(state.displayCur)) {
+  if (state.lastOperator === "trigonometry" || state.displayCur === "" || /\)|!|%|\d/.test(state.displayCur)) {
     displayOpsExpression = state.displayOps;
     // } else if (/\d/.test(state.displayCur)) {
     //   displayOpsExpression = state.displayOps;
@@ -201,9 +205,12 @@ export function saveState(state) {
 }
 
 export function factorial(num) {
+  let result = "";
   if (num < 0) {
     alert("invalid input: factorials are only defined for positive numbers");
-    return "invalid input";
+
+    result = "invalid input";
+    return result;
   } else if (num % 1 !== 0 && num !== ")") {
     alert(`factorials for nonintegers are defined based on simplified Gamma function:
     ~~ level of accuracy: low ~~`);
@@ -211,7 +218,7 @@ export function factorial(num) {
   } else if (num === ")") {
     return "!";
   } else {
-    let result = Number(num);
+    result = Number(num);
     if (Number.isInteger(result)) {
       for (let i = result - 1; i > 0; i--) {
         result *= i;
@@ -222,15 +229,28 @@ export function factorial(num) {
 }
 
 export function trigonometryInDegrees(curDegree, trigFunc, state) {
-  console.log("inside trigonom, args:", curDegree, trigFunc);
-  if (state.lastOperator === "trigonometry") {
-    let matchTrigonometry = state.displayOps.match(/sin|cos|tan|cot|sec|csc/gi);
-    let lastTrigonometryIndex = state.displayOps.lastIndexOf(matchTrigonometry[matchTrigonometry.length - 1]);
-    console.log("lastTrigonometryIndex", lastTrigonometryIndex);
-    displayOpsExpression = state.displayOps.slice(0, lastTrigonometryIndex).concat(`${trigFunc}(${state.displayOps.slice(lastTrigonometryIndex)})`);
-    console.log("you are here in sin sin sin --> displayOpsExpression", displayOpsExpression);
+  console.log(state.lastOperator === "trigonometry", "inside trigonom, args:", curDegree, trigFunc);
+  let displayOps = state.displayOps;
+  if (state.lastResult !== "") displayOps = "".concat(state.lastResult);
+  if (state.displayOps.match(/\)\)$/ && state.lastInputType === "trigonometry")) {
+    console.log("trigonometry stage 0.5");
+    let displayOpsLength = state.displayOps.length;
+    let closingNum = 1;
+    let openingNum = 0;
+    let firstOpeningIndex = 0;
+    for (let i = displayOpsLength - 2; i >= 0; i--) {
+      if (state.displayOps[i] === ")") closingNum++;
+      if (state.displayOps[i] === "(") openingNum++;
+      if (closingNum === openingNum) {
+        firstOpeningIndex = i - 3;
+        console.log("clos, open, firstOp", closingNum, openingNum, firstOpeningIndex);
+        break;
+      }
+    }
+    displayOpsExpression = state.displayOps.slice(0, firstOpeningIndex).concat(`${trigFunc}(${state.displayOps.slice(firstOpeningIndex)})`);
     return "";
-  } else if (state.lastInput === ")") {
+  } else if (state.displayOps.match(/\)\)$/ && state.lastInputType !== "trigonometry")) {
+    console.log("trigonometry stage 0.7");
     let displayOpsLength = state.displayOps.length;
     let closingNum = 1;
     let openingNum = 0;
@@ -240,32 +260,73 @@ export function trigonometryInDegrees(curDegree, trigFunc, state) {
       if (state.displayOps[i] === "(") openingNum++;
       if (closingNum === openingNum) {
         firstOpeningIndex = i;
-        console.log("you are here", closingNum, openingNum, firstOpeningIndex);
+        console.log("clos, open, firstOp", closingNum, openingNum, firstOpeningIndex);
+        break;
+      }
+    }
+    displayOpsExpression = state.displayOps.slice(0, firstOpeningIndex).concat(`${trigFunc}(${state.displayOps.slice(firstOpeningIndex)})`);
+    return "";
+  } else if (state.lastOperator === "trigonometry") {
+    console.log("trigonometry stage 1");
+    let matchTrigonometry = state.displayOps.match(/sin|cos|tan|cot|sec|csc/gi);
+    let lastTrigonometryIndex = state.displayOps.lastIndexOf(matchTrigonometry[matchTrigonometry.length - 1]);
+    displayOpsExpression = state.displayOps.slice(0, lastTrigonometryIndex).concat(`${trigFunc}(${state.displayOps.slice(lastTrigonometryIndex)})`);
+    return "";
+  } else if (state.lastInput === ")") {
+    console.log("trigonometry stage 2");
+    let displayOpsLength = state.displayOps.length;
+    let closingNum = 1;
+    let openingNum = 0;
+    let firstOpeningIndex = 0;
+    for (let i = displayOpsLength - 2; i >= 0; i--) {
+      if (state.displayOps[i] === ")") closingNum++;
+      if (state.displayOps[i] === "(") openingNum++;
+      if (closingNum === openingNum) {
+        firstOpeningIndex = i;
         break;
       }
     }
     displayOpsExpression = state.displayOps.slice(0, firstOpeningIndex).concat(`${trigFunc}${state.displayOps.slice(firstOpeningIndex)}`);
-    console.log("you are here --> displayOpsExpression", displayOpsExpression);
     return "";
   } else if (state.lastInputType === "digit") {
-    let regexNum = new RegExp(`${state.displayCur}$`);
-    let lastNumIndex = state.displayOps.match(regexNum).index;
-    console.log("lastNumIndex", lastNumIndex);
-    displayOpsExpression = state.displayOps.slice(0, lastNumIndex).concat(`${trigFunc}(${state.displayCur})`);
-    console.log("displayOpsExpression", displayOpsExpression);
-    let calculateResult = trigonometryCalculate(curDegree, trigFunc, state);
-    return calculateResult;
+    console.log("trigonometry stage 3");
+    if (displayOps.match(/[ \* | \/ | \+ | - ] - \d+\.\d+$|[ \* | \/ | \+ | - ] - \d+$/)) {
+      console.log("trigonometry stage 3.1");
+      let lastNegativeNumIndex = displayOps.match(/ - \d+\.\d+$| - \d+$/).index;
+      let lastPositiveNum = displayOps.match(/\d+\.\d+$|\d+$/);
+      displayOpsExpression = displayOps.slice(0, lastNegativeNumIndex).concat(`${trigFunc}(${lastPositiveNum * -1})`);
+      console.log("lastNegativeNumIndex", lastNegativeNumIndex, "lastPositiveNumIndex", lastPositiveNum, "displayOpsExpression", displayOpsExpression);
+      let calculateResult = trigonometryCalculate(curDegree * -1, trigFunc, state);
+      return calculateResult;
+    } else if (displayOps.match(/- \d+\.\d+$| - \d+$/)) {
+      console.log("trigonometry stage 3.2");
+      let lastNegativeNumIndex = displayOps.match(/ - \d+\.\d+$| - \d+$/).index;
+      let lastPositiveNum = displayOps.match(/\d+\.\d+$|\d+$/);
+      displayOpsExpression =
+        lastNegativeNumIndex !== 0
+          ? displayOps
+              .slice(0, lastNegativeNumIndex)
+              .concat(" + ")
+              .concat(`${trigFunc}(${lastPositiveNum * -1})`)
+          : displayOps.slice(0, lastNegativeNumIndex).concat(`${trigFunc}(${lastPositiveNum * -1})`);
+      console.log("lastNegativeNumIndex", lastNegativeNumIndex, "lastPositiveNumIndex", lastPositiveNum, "displayOpsExpression", displayOpsExpression);
+      let calculateResult = trigonometryCalculate(curDegree * -1, trigFunc, state);
+      return calculateResult;
+    } else {
+      console.log("trigonometry stage 3.3");
+      let regexNum = new RegExp(`${state.displayCur}$`);
+      let lastNumIndex = displayOps.match(regexNum).index;
+      displayOpsExpression = displayOps.slice(0, lastNumIndex).concat(`${trigFunc}(${state.displayCur})`);
+      let calculateResult = trigonometryCalculate(curDegree, trigFunc, state);
+      return calculateResult;
+    }
   } else if (state.lastInput === "!" || state.lastInputType === "%") {
     // -\d+\.\d+|\d+\.\d+|sin|cos|tan|cot| yroot | log base | mod | \+ | - | \* | \^ | \/ |-\d+|\d+|\D
     let regexNum = new RegExp(/-\d+\.\d+!$|\d+\.\d+!$|-\d+!$|\d+!$|-\d+\.\d+%$|\d+\.\d+%$|-\d+%$|\d+%$/);
     let lastNumIndex = state.displayOps.match(regexNum).index;
-    console.log("bam lastNumIndex", lastNumIndex);
     displayOpsExpression = state.displayOps.slice(0, lastNumIndex).concat(`${trigFunc}(${state.displayOps.match(regexNum)})`);
-    console.log("bam displayOpsExpression", displayOpsExpression);
     return "";
   }
-  // let calculateResult = trigonometryCalculate(curDegree, trigFunc, state);
-  // return calculateResult;
 }
 
 function trigonometryCalculate(curDegree, trigFunc, state) {
@@ -276,4 +337,105 @@ function trigonometryCalculate(curDegree, trigFunc, state) {
   };
   let calculateResult = Function(`return ${trigFunc} === cot || ${trigFunc} === sec || ${trigFunc} === csc ? 1/ Math.${reciprocal[trigFunc]}(${curDegree} * (Math.PI / 180)) : Math.${trigFunc}(${curDegree} * (Math.PI / 180))`);
   return calculateResult().toString();
+}
+
+export function changeSign(state) {
+  console.log("you are in changeSign function");
+  let displayOps = state.displayOps;
+  if (state.lastResult !== "") displayOps = "".concat(state.lastResult);
+  if (state.displayOps.match(/\)\)$/ && state.lastInputType === "trigonometry")) {
+    // console.log("trigonometry stage 0.5");
+    // let displayOpsLength = state.displayOps.length;
+    // let closingNum = 1;
+    // let openingNum = 0;
+    // let firstOpeningIndex = 0;
+    // for (let i = displayOpsLength - 2; i >= 0; i--) {
+    //   if (state.displayOps[i] === ")") closingNum++;
+    //   if (state.displayOps[i] === "(") openingNum++;
+    //   if (closingNum === openingNum) {
+    //     firstOpeningIndex = i - 3;
+    //     console.log("clos, open, firstOp", closingNum, openingNum, firstOpeningIndex);
+    //     break;
+    //   }
+    // }
+    // displayOpsExpression = state.displayOps.slice(0, firstOpeningIndex).concat(`${trigFunc}(${state.displayOps.slice(firstOpeningIndex)})`);
+    // return "";
+  } else if (state.displayOps.match(/\)\)$/ && state.lastInputType !== "trigonometry")) {
+    // console.log("trigonometry stage 0.7");
+    // let displayOpsLength = state.displayOps.length;
+    // let closingNum = 1;
+    // let openingNum = 0;
+    // let firstOpeningIndex = 0;
+    // for (let i = displayOpsLength - 2; i >= 0; i--) {
+    //   if (state.displayOps[i] === ")") closingNum++;
+    //   if (state.displayOps[i] === "(") openingNum++;
+    //   if (closingNum === openingNum) {
+    //     firstOpeningIndex = i;
+    //     console.log("clos, open, firstOp", closingNum, openingNum, firstOpeningIndex);
+    //     break;
+    //   }
+    // }
+    // displayOpsExpression = state.displayOps.slice(0, firstOpeningIndex).concat(`${trigFunc}(${state.displayOps.slice(firstOpeningIndex)})`);
+    // return "";
+  } else if (state.lastOperator === "trigonometry") {
+    //   console.log("trigonometry stage 1");
+    //   let matchTrigonometry = state.displayOps.match(/sin|cos|tan|cot|sec|csc/gi);
+    //   let lastTrigonometryIndex = state.displayOps.lastIndexOf(matchTrigonometry[matchTrigonometry.length - 1]);
+    //   displayOpsExpression = state.displayOps.slice(0, lastTrigonometryIndex).concat(`${trigFunc}(${state.displayOps.slice(lastTrigonometryIndex)})`);
+    //   return "";
+    // } else if (state.lastInput === ")") {
+    //   console.log("trigonometry stage 2");
+    //   let displayOpsLength = state.displayOps.length;
+    //   let closingNum = 1;
+    //   let openingNum = 0;
+    //   let firstOpeningIndex = 0;
+    //   for (let i = displayOpsLength - 2; i >= 0; i--) {
+    //     if (state.displayOps[i] === ")") closingNum++;
+    //     if (state.displayOps[i] === "(") openingNum++;
+    //     if (closingNum === openingNum) {
+    //       firstOpeningIndex = i;
+    //       break;
+    //     }
+    //   }
+    //   displayOpsExpression = state.displayOps.slice(0, firstOpeningIndex).concat(`${trigFunc}${state.displayOps.slice(firstOpeningIndex)}`);
+    //   return "";
+  } else if (state.lastInputType === "digit") {
+    // console.log("trigonometry stage 3");
+    // if (displayOps.match(/[ \* | \/ | \+ | - ] - \d+\.\d+$|[ \* | \/ | \+ | - ] - \d+$/)) {
+    //   console.log("trigonometry stage 3.1");
+    //   let lastNegativeNumIndex = displayOps.match(/ - \d+\.\d+$| - \d+$/).index;
+    //   let lastPositiveNum = displayOps.match(/\d+\.\d+$|\d+$/);
+    //   displayOpsExpression = displayOps.slice(0, lastNegativeNumIndex).concat(`${trigFunc}(${lastPositiveNum * -1})`);
+    //   console.log("lastNegativeNumIndex", lastNegativeNumIndex, "lastPositiveNumIndex", lastPositiveNum, "displayOpsExpression", displayOpsExpression);
+    //   let calculateResult = trigonometryCalculate(curDegree * -1, trigFunc, state);
+    //   return calculateResult;
+    // } else if (displayOps.match(/- \d+\.\d+$| - \d+$/)) {
+    //   console.log("trigonometry stage 3.2");
+    //   let lastNegativeNumIndex = displayOps.match(/ - \d+\.\d+$| - \d+$/).index;
+    //   let lastPositiveNum = displayOps.match(/\d+\.\d+$|\d+$/);
+    //   displayOpsExpression =
+    //     lastNegativeNumIndex !== 0
+    //       ? displayOps
+    //           .slice(0, lastNegativeNumIndex)
+    //           .concat(" + ")
+    //           .concat(`${trigFunc}(${lastPositiveNum * -1})`)
+    //       : displayOps.slice(0, lastNegativeNumIndex).concat(`${trigFunc}(${lastPositiveNum * -1})`);
+    //   console.log("lastNegativeNumIndex", lastNegativeNumIndex, "lastPositiveNumIndex", lastPositiveNum, "displayOpsExpression", displayOpsExpression);
+    //   let calculateResult = trigonometryCalculate(curDegree * -1, trigFunc, state);
+    //   return calculateResult;
+    // } else {
+    //   console.log("trigonometry stage 3.3");
+    //   let regexNum = new RegExp(`${state.displayCur}$`);
+    //   let lastNumIndex = displayOps.match(regexNum).index;
+    //   displayOpsExpression = displayOps.slice(0, lastNumIndex).concat(`${trigFunc}(${state.displayCur})`);
+    //   let calculateResult = trigonometryCalculate(curDegree, trigFunc, state);
+    //   return calculateResult;
+    // }
+  } else if (state.lastInput === "!" || state.lastInputType === "%") {
+    // -\d+\.\d+|\d+\.\d+|sin|cos|tan|cot| yroot | log base | mod | \+ | - | \* | \^ | \/ |-\d+|\d+|\D
+    let regexNum = new RegExp(/-\d+\.\d+!$|\d+\.\d+!$|-\d+!$|\d+!$|-\d+\.\d+%$|\d+\.\d+%$|-\d+%$|\d+%$/);
+    let lastNumIndex = state.displayOps.match(regexNum).index;
+    displayOpsExpression = state.displayOps.slice(0, lastNumIndex).concat(`(${state.displayOps.match(regexNum)})`);
+    return "";
+  }
 }
