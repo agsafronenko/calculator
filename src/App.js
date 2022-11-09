@@ -1,7 +1,13 @@
 import React from "react";
 import "./styles/styles.css";
 import $ from "jquery";
-import calculate, { deleteRedundantOperators, displayOpsExpression, lastLegitSymbol, saveState, stateStorage, factorial, trigonometryInDegrees, changeSign } from "./functions";
+import { abs } from "./functions/abs";
+import { saveState, stateStorage } from "./functions/previousState";
+import { factorial } from "./functions/factorial";
+import { trigonometryInDegrees, finalDisplayOps } from "./functions/trigonometry";
+import { changeSign, finalDisplayOpsChangeSign } from "./functions/changeSign";
+import { switchToDenominator } from "./functions/switchToDenominator";
+import calculate, { deleteRedundantOperators, displayOpsExpression, lastLegitSymbol } from "./functions/equals";
 
 export default class Calculator extends React.Component {
   constructor(props) {
@@ -447,8 +453,8 @@ export default class Calculator extends React.Component {
       // deleteRedundantDigits(this.state);
       this.setState(
         (state) => ({
-          displayOps: state.lastResult === "" ? displayOpsExpression : "".concat(result),
-          displayOps: displayOpsExpression,
+          displayOps: state.lastResult === "" ? finalDisplayOps : "".concat(result),
+          displayOps: finalDisplayOps,
           displayCur: result,
           lastInput: ")",
           lastInputType: "parenthesis",
@@ -514,7 +520,7 @@ export default class Calculator extends React.Component {
         changeSign(this.state);
         this.setState(
           (state) => ({
-            displayOps: displayOpsExpression,
+            displayOps: finalDisplayOpsChangeSign,
             displayCur: "",
             lastInput: ")",
             lastInputType: "parenthesis",
@@ -540,19 +546,47 @@ export default class Calculator extends React.Component {
   }
 
   handleAbs() {
-    this.setState((state) => ({
-      displayCur: Math.abs(state.displayCur),
-    }));
+    let result = abs(this.state);
+
+    this.setState(
+      (state) => ({
+        displayOps: result,
+        displayCur: /\d/.test(state.displayCur) ? Math.abs(state.displayCur) : "",
+        lastInput: /\d/.test(state.displayCur) ? state.displayCur[state.displayCur.length - 1] : ")",
+        lastInputType: /\d/.test(state.displayCur) ? "digit" : "parenthesis",
+        twoConsecutiveOperators: false,
+        lastOperator: "abs",
+        lastResult: "",
+      }),
+      () => {
+        console.log("inside abs after setState:  displayOps", this.state.displayOps);
+        saveState(this.state);
+      }
+    );
   }
 
   handleSwitchToDenominator() {
-    this.setState((state) => ({
-      displayCur: 1 / state.displayCur,
-    }));
+    let result = switchToDenominator(this.state);
+
+    this.setState(
+      (state) => ({
+        displayOps: result,
+        displayCur: /\d/.test(state.displayCur) ? 1 / state.displayCur : "",
+        lastInput: /\d/.test(state.displayCur) ? 1 / state.displayCur : ")",
+        lastInputType: /\d/.test(state.displayCur) ? "digit" : "parenthesis",
+        twoConsecutiveOperators: false,
+        lastOperator: "denominator",
+        lastResult: "",
+      }),
+      () => {
+        console.log("inside denominator after setState:  displayOps", this.state.displayOps);
+        saveState(this.state);
+      }
+    );
   }
 
   handleModulo(e) {
-    if (this.state.lastInputType === "digit" || this.state.lastInput === ")") {
+    if (this.state.lastInputType === "digit" || this.state.lastInput === ")" || this.state.lastInput === "!" || this.state.lastInput === "%") {
       this.setState(
         (state) => ({
           displayOps: state.lastResult === "" ? (state.lastInput === ")" ? state.displayOps.concat(e.target.value) : state.displayOps.concat(e.target.value)) : "".concat(state.lastResult).concat(e.target.value),
