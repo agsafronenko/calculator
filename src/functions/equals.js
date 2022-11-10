@@ -1,5 +1,7 @@
 // next steps:
-// re-code change sign
+// continue changeSign with completing an object, then test it
+// install update
+// full back-up, incl saves, scr of acc names incl wind
 // show in displayCur result for current trigonometry, factorial, etc
 // - consider using paste into displayCur (restrictions to what should be pasted) -> otherwise change "copy" to "copy result"
 // - consider adding multiple displays for results with possibility to insert them into displayCur later on

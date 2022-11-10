@@ -449,7 +449,7 @@ export default class Calculator extends React.Component {
     console.log("inside trigonometry", isFinite(this.state.displayCur));
     if ((this.state.displayOps !== "" && isFinite(this.state.displayCur)) || this.state.lastInput === ")") {
       let result = trigonometryInDegrees(this.state.displayCur, e.target.value, this.state);
-      console.log("triginometry", result);
+      console.log("trigonometry", result);
       // deleteRedundantDigits(this.state);
       this.setState(
         (state) => ({
@@ -492,47 +492,14 @@ export default class Calculator extends React.Component {
 
   handleChangeSign() {
     if (this.state.lastResult === "") {
-      if (this.state.lastInputType === "digit" && this.state.displayCur !== 0 && this.state.displayCur !== "" && this.state.lastOperator !== " log base ") {
-        let displayOpsExpression = "";
-        let regexArr = [" \\-  - ", " \\+  - ", " \\*  - ", " \\/  - ", "^ - ", "^-", " - ", " \\+ ", ""];
-        let signArr = [" - ", " + ", " * ", " / ", "", "", " + ", " - ", " - "];
+      if (this.state.lastOperator !== " log base ") {
+        let result = changeSign(this.state);
 
-        let arr = [];
-        for (let i = 0; i < regexArr.length; i++) {
-          console.log("i", i, "displayOps", this.state.displayOps);
-          arr.push(this.state.displayOps.match(`${regexArr[i]}${Math.abs(this.state.displayCur)}$`));
-        }
-
-        for (let i = 0; i < arr.length; i++) {
-          if (arr[i] !== null) {
-            displayOpsExpression = this.state.displayOps.slice(0, arr[i].index).concat(signArr[i]).concat(Math.abs(this.state.displayCur));
-            break;
-          }
-        }
         this.setState((state) => ({
-          displayOps: state.lastResult === "" ? displayOpsExpression : "".concat(state.displayCur * -1),
-          displayCur: state.displayCur * -1,
-          lastInputType: "digit",
+          displayOps: state.lastResult === "" ? result : "".concat(state.displayCur * -1),
+          displayCur: state.displayCur.toString(),
           lastResult: "",
         }));
-      } else if (this.state.lastInput === ")" || this.state.lastInput === "!" || this.state.lastInput === "%" || this.state.lastOperator === "trigonometry") {
-        console.log("you are in special case of handleChangeSign");
-        changeSign(this.state);
-        this.setState(
-          (state) => ({
-            displayOps: finalDisplayOpsChangeSign,
-            displayCur: "",
-            lastInput: ")",
-            lastInputType: "parenthesis",
-            twoConsecutiveOperators: false,
-            // lastOperator: "trigonometry",
-            lastResult: "",
-          }),
-          () => {
-            console.log("inside special case of handleChangeSign after setState:  displayOps", this.state.displayOps);
-            saveState(this.state);
-          }
-        );
       }
     } else {
       this.setState(
