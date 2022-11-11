@@ -1,7 +1,7 @@
 // next steps:
-// continue changeSign with completing an object, then test it
-// install update
-// full back-up, incl saves, scr of acc names incl wind
+// continue changSign from 86 row "displayCurAfterChangeSign", finish FixIncompleteInputs for both handleEqual and changeSign
+// continue filling pivot table for all handlers (consider inserting it as a comment to the project)
+
 // show in displayCur result for current trigonometry, factorial, etc
 // - consider using paste into displayCur (restrictions to what should be pasted) -> otherwise change "copy" to "copy result"
 // - consider adding multiple displays for results with possibility to insert them into displayCur later on
@@ -13,18 +13,20 @@
 import { factorial } from "./factorial";
 
 export default function calculate(expr) {
-  expr = expr === "" ? convertDisplayOpsIntoArray("0") : convertDisplayOpsIntoArray(expr);
+  deleteRedundantOperators(expr);
+  expr = displayAllExpression;
+  expr = expr === "" ? convertDisplayAllIntoArray("0") : convertDisplayAllIntoArray(expr);
   return findParenthesis(expr);
 }
 
-function convertDisplayOpsIntoArray(string) {
+function convertDisplayAllIntoArray(string) {
   console.log("string inside convertDisplayIntoArr", string);
   let parseRegex = new RegExp(/-\d+\.\d+|\d+\.\d+|sin|cos|tan|cot|sec|csc|abs| yroot | log base | mod |invalid input| \+ | - | \* | \^ | \/ |-\d+|\d+|\D/, "g");
-  let displayOpsArray = string.match(parseRegex).map((elem) => (isFinite(elem) ? Number(elem) : elem));
-  displayOpsArray.unshift("(");
-  displayOpsArray.push(")");
-  console.log("convertDisplayIntoArr", displayOpsArray);
-  return displayOpsArray;
+  let displayAllArray = string.match(parseRegex).map((elem) => (isFinite(elem) ? Number(elem) : elem));
+  displayAllArray.unshift("(");
+  displayAllArray.push(")");
+  console.log("convertDisplayIntoArr", displayAllArray);
+  return displayAllArray;
 }
 
 function findParenthesis(expr) {
@@ -139,38 +141,38 @@ function calculateInOrder(arr, operators) {
   return arr;
 }
 
-export let displayOpsExpression = "";
+export let displayAllExpression = "";
 
-export function lastLegitSymbol(displayOps) {
-  console.log("you actually here", displayOps);
-  let lastLegitSymbol = displayOps
+export function lastLegitSymbol(displayAll) {
+  console.log("you actually here", displayAll);
+  let lastLegitSymbol = displayAll
     .split("")
     .reverse()
     .findIndex((elem) => /\d|\(|!/.test(elem));
-  return (lastLegitSymbol = lastLegitSymbol !== -1 ? lastLegitSymbol : displayOps.length);
+  return (lastLegitSymbol = lastLegitSymbol !== -1 ? lastLegitSymbol : displayAll.length);
 }
 
 export function deleteRedundantOperators(state) {
-  console.log("deleteRedundant", state.displayOps);
+  console.log("deleteRedundant", state.displayAll);
   console.log("state.displayCur", state.displayCur);
   if (state.lastOperator === "trigonometry" || state.displayCur === "" || /\)|!|%|\d/.test(state.displayCur)) {
-    displayOpsExpression = state.displayOps;
+    displayAllExpression = state.displayAll;
     // } else if (/\d/.test(state.displayCur)) {
-    //   displayOpsExpression = state.displayOps;
+    //   displayAllExpression = state.displayAll;
   } else {
-    let lastDigitIndex = state.displayOps
+    let lastDigitIndex = state.displayAll
       .split("")
       .reverse()
       .findIndex((elem) => /\d/.test(elem));
-    displayOpsExpression = state.displayOps.slice(0, state.displayOps.length - lastDigitIndex);
+    displayAllExpression = state.displayAll.slice(0, state.displayAll.length - lastDigitIndex);
   }
   addMissingParenthesis(state.parenthesesDelta);
-  console.log("deleteRedundant after", displayOpsExpression);
+  console.log("deleteRedundant after", displayAllExpression);
 }
 
 export function addMissingParenthesis(delta) {
   if (delta > 0) {
-    displayOpsExpression += ")";
+    displayAllExpression += ")";
     delta -= 1;
     addMissingParenthesis(delta);
   }

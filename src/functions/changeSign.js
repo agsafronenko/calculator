@@ -1,24 +1,42 @@
-export let finalDisplayOpsChangeSign = "";
+import calculate from "./equals";
+import { displayAllExpression } from "./FixIncompleteInputs";
+
+export let displayAllAfterChangeSign = "";
 let expression = "";
 let regex = "";
+let displayAll = "";
 
 export function changeSign(state) {
-  console.clear();
-  let displayOps = state.displayOps;
-  if (state.lastResult !== "") displayOps = "".concat(state.lastResult);
+  displayAll = state.lastResult !== "" ? state.lastResult : state.displayAll;
 
   let changeOneIntoAnother = [
+    // the sign will be changed from positive to negative or vice versa for:
+    // 1) the expression not preceded by operators (minus here indicates negative value of the following number rather than an operator sign)
     {
-      before: " \\-  - ",
+      before: "\\(",
+      after: "( - ",
+    },
+    {
+      before: "\\( - ",
+      after: "(",
+    },
+    {
+      before: "^",
+      after: " - ",
+    },
+    {
+      before: "^ - ",
+      after: "",
+    },
+
+    // 2) the expression preceded by two consecutive operators:
+    {
+      before: " -  - ",
       after: " - ",
     },
     {
       before: " \\+  - ",
       after: " + ",
-    },
-    {
-      before: ` \\* `,
-      after: ` *  - `,
     },
     {
       before: " \\*  - ",
@@ -29,13 +47,14 @@ export function changeSign(state) {
       after: " / ",
     },
     {
-      before: " ^ - ",
+      before: " \\^  - ",
       after: " ^ ",
     },
     {
-      before: " yroot - ",
+      before: " yroot  - ",
       after: " yroot ",
     },
+    // 3) the expression preceded by only one operator:
     {
       before: " - ",
       after: " + ",
@@ -45,96 +64,115 @@ export function changeSign(state) {
       after: " - ",
     },
     {
-      before: "",
-      after: " - ",
+      before: " \\* ",
+      after: " *  - ",
+    },
+    {
+      before: " \\/ ",
+      after: " /  - ",
+    },
+    {
+      before: " \\^ ",
+      after: " ^  - ",
+    },
+    {
+      before: " yroot ",
+      after: " yroot  - ",
     },
   ];
 
-  findExpression(state);
+  findExpression(state); // determines the expression for which changeSign(state) function will be applied to
+  console.log("expression", expression);
+  let displayCurAfterChangeSign = calculate(state, expression);
+  // let displayCurAfterChangeSign = 777;
+
+  console.log("displayCur", displayCurAfterChangeSign);
 
   let arr = [];
   for (let i = 0; i < changeOneIntoAnother.length; i++) {
-    arr.push(displayOps.match(new RegExp(`${changeOneIntoAnother[i]["before"]}${regex}$`)));
+    arr.push(displayAll.match(new RegExp(`${changeOneIntoAnother[i]["before"]}${regex}$`)));
   }
-  console.log("displayOps", displayOps);
+  console.log("displayAll", displayAll);
   console.log("expression", expression);
-  console.log("final", RegExp(displayOps.match(`${changeOneIntoAnother[2]["before"]}${expression}$`)));
+  console.log("final", RegExp(displayAll.match(`${changeOneIntoAnother[2]["before"]}${expression}$`)));
   console.log("arr", arr);
 
   for (let i = 0; i < arr.length; i++) {
     if (arr[i] !== null) {
-      finalDisplayOpsChangeSign = displayOps.slice(0, arr[i].index).concat(changeOneIntoAnother[i]["after"]).concat(expression);
+      displayAllAfterChangeSign = displayAll.slice(0, arr[i].index).concat(changeOneIntoAnother[i]["after"]).concat(expression);
       break;
     }
   }
-  return finalDisplayOpsChangeSign;
+  return [displayAllAfterChangeSign, displayCurAfterChangeSign];
+  // return [displayAllAfterChangeSign, calculate(expression)];
 }
 
+// findExpression(state) determines the expression for which the sign will be changed from positive to negative or vice versa:
 function findExpression(state) {
-  let displayOps = state.displayOps;
-  if (displayOps.match(/\)\)$/) && (state.lastOperator === "trigonometry" || state.lastOperator === "abs")) {
+  let displayAll = state.displayAll;
+  if (state.lastResult !== "") displayAll = state.lastResult;
+  if (displayAll.match(/\)\)$/) && (state.lastOperator === "trigonometry" || state.lastOperator === "abs")) {
     console.log("stage 1 start");
-    let displayOpsLength = displayOps.length;
+    let displayAllLength = displayAll.length;
     let closingNum = 1;
     let openingNum = 0;
     let firstOpeningIndex = 0;
-    for (let i = displayOpsLength - 2; i >= 0; i--) {
-      if (displayOps[i] === ")") closingNum++;
-      if (displayOps[i] === "(") openingNum++;
+    for (let i = displayAllLength - 2; i >= 0; i--) {
+      if (displayAll[i] === ")") closingNum++;
+      if (displayAll[i] === "(") openingNum++;
       if (closingNum === openingNum) {
         firstOpeningIndex = i - 3;
         break;
       }
     }
 
-    regex = displayOps.slice(firstOpeningIndex).replace(/[|\\{}()[\]^$+*?.]/g, "\\$&");
-    expression = displayOps.slice(firstOpeningIndex);
-  } else if (displayOps.match(/\)\)$/ && state.lastOperator !== "trigonometry" && state.lastOperator !== "abs")) {
+    regex = displayAll.slice(firstOpeningIndex).replace(/[|\\{}()[\]^$+*?.]/g, "\\$&");
+    expression = displayAll.slice(firstOpeningIndex);
+  } else if (displayAll.match(/\)\)$/ && state.lastOperator !== "trigonometry" && state.lastOperator !== "abs")) {
     console.log("stage 2 start");
-    let displayOpsLength = displayOps.length;
+    let displayAllLength = displayAll.length;
     let closingNum = 1;
     let openingNum = 0;
     let firstOpeningIndex = 0;
-    for (let i = displayOpsLength - 2; i >= 0; i--) {
-      if (displayOps[i] === ")") closingNum++;
-      if (displayOps[i] === "(") openingNum++;
+    for (let i = displayAllLength - 2; i >= 0; i--) {
+      if (displayAll[i] === ")") closingNum++;
+      if (displayAll[i] === "(") openingNum++;
       if (closingNum === openingNum) {
         firstOpeningIndex = i;
         break;
       }
     }
-    regex = displayOps.slice(firstOpeningIndex).replace(/[|\\{}()[\]^$+*?.]/g, "\\$&");
-    expression = displayOps.slice(firstOpeningIndex);
+    regex = displayAll.slice(firstOpeningIndex).replace(/[|\\{}()[\]^$+*?.]/g, "\\$&");
+    expression = displayAll.slice(firstOpeningIndex);
   } else if (state.lastOperator === "trigonometry" || state.lastOperator === "abs") {
     console.log("stage 3 start");
-    let matchTrigOrAbs = displayOps.match(/sin|cos|tan|cot|sec|csc|abs/gi);
-    let lastTrigOrAbsIndex = displayOps.lastIndexOf(matchTrigOrAbs[matchTrigOrAbs.length - 1]);
-    regex = displayOps.slice(lastTrigOrAbsIndex).replace(/[|\\{}()[\]^$+*?.]/g, "\\$&");
-    expression = displayOps.slice(lastTrigOrAbsIndex);
+    let matchTrigOrAbs = displayAll.match(/sin|cos|tan|cot|sec|csc|abs/gi);
+    let lastTrigOrAbsIndex = displayAll.lastIndexOf(matchTrigOrAbs[matchTrigOrAbs.length - 1]);
+    regex = displayAll.slice(lastTrigOrAbsIndex).replace(/[|\\{}()[\]^$+*?.]/g, "\\$&");
+    expression = displayAll.slice(lastTrigOrAbsIndex);
   } else if (state.lastInput === ")") {
     console.log("stage 4 start");
-    let displayOpsLength = state.displayOps.length;
+    let displayAllLength = displayAll.length;
     let closingNum = 1;
     let openingNum = 0;
     let firstOpeningIndex = 0;
-    for (let i = displayOpsLength - 2; i >= 0; i--) {
-      if (displayOps[i] === ")") closingNum++;
-      if (displayOps[i] === "(") openingNum++;
+    for (let i = displayAllLength - 2; i >= 0; i--) {
+      if (displayAll[i] === ")") closingNum++;
+      if (displayAll[i] === "(") openingNum++;
       if (closingNum === openingNum) {
         firstOpeningIndex = i;
         break;
       }
     }
-    regex = displayOps.slice(firstOpeningIndex).replace(/[|\\{}()[\]^$+*?.]/g, "\\$&");
-    expression = displayOps.slice(firstOpeningIndex);
-    // return state.displayOps.slice(firstOpeningIndex).replace(/[|\\{}()[\]^$+*?.]/g, "\\$&");
+    regex = displayAll.slice(firstOpeningIndex).replace(/[|\\{}()[\]^$+*?.]/g, "\\$&");
+    expression = displayAll.slice(firstOpeningIndex);
   } else if (state.lastInputType === "digit" || state.lastInputType === "decimal") {
     console.log("stage 5 start");
-    regex = displayOps.match(/\d+(?:\.\d*)?$/);
+    regex = displayAll.match(/\d+(?:\.\d*)?$/);
     expression = regex;
   } else if (state.lastInputType === "!" || state.lastInputType === "%") {
     console.log("stage 6 start");
-    regex = displayOps.match(/\d+(?:\.\d*)?(!%|%!|!|%)$/)[0];
+    regex = displayAll.match(/\d+(?:\.\d*)?(!%|%!|!|%)$/)[0];
     expression = regex;
   }
 }
