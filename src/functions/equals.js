@@ -11,10 +11,12 @@
 
 // - when invalid input appers or any other error, block all keys except for AC and del
 import { factorial } from "./factorial";
+import { FixIncompleteInputs, displayAllExpression } from "./FixIncompleteInputs";
 
-export default function calculate(expr) {
-  deleteRedundantOperators(expr);
-  expr = displayAllExpression;
+export default function calculate(state, expression) {
+  console.log("you are in equals => calculate");
+  FixIncompleteInputs(state, expression);
+  let expr = displayAllExpression;
   expr = expr === "" ? convertDisplayAllIntoArray("0") : convertDisplayAllIntoArray(expr);
   return findParenthesis(expr);
 }
@@ -141,8 +143,6 @@ function calculateInOrder(arr, operators) {
   return arr;
 }
 
-export let displayAllExpression = "";
-
 export function lastLegitSymbol(displayAll) {
   console.log("you actually here", displayAll);
   let lastLegitSymbol = displayAll
@@ -150,30 +150,4 @@ export function lastLegitSymbol(displayAll) {
     .reverse()
     .findIndex((elem) => /\d|\(|!/.test(elem));
   return (lastLegitSymbol = lastLegitSymbol !== -1 ? lastLegitSymbol : displayAll.length);
-}
-
-export function deleteRedundantOperators(state) {
-  console.log("deleteRedundant", state.displayAll);
-  console.log("state.displayCur", state.displayCur);
-  if (state.lastOperator === "trigonometry" || state.displayCur === "" || /\)|!|%|\d/.test(state.displayCur)) {
-    displayAllExpression = state.displayAll;
-    // } else if (/\d/.test(state.displayCur)) {
-    //   displayAllExpression = state.displayAll;
-  } else {
-    let lastDigitIndex = state.displayAll
-      .split("")
-      .reverse()
-      .findIndex((elem) => /\d/.test(elem));
-    displayAllExpression = state.displayAll.slice(0, state.displayAll.length - lastDigitIndex);
-  }
-  addMissingParenthesis(state.parenthesesDelta);
-  console.log("deleteRedundant after", displayAllExpression);
-}
-
-export function addMissingParenthesis(delta) {
-  if (delta > 0) {
-    displayAllExpression += ")";
-    delta -= 1;
-    addMissingParenthesis(delta);
-  }
 }

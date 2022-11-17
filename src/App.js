@@ -7,7 +7,8 @@ import { factorial } from "./functions/factorial";
 import { trigonometryInDegrees, finalDisplayAll } from "./functions/trigonometry";
 import { changeSign, finalDisplayAllChangeSign } from "./functions/changeSign";
 import { switchToDenominator } from "./functions/switchToDenominator";
-import calculate, { deleteRedundantOperators, displayAllExpression, lastLegitSymbol } from "./functions/equals";
+import calculate, { FixIncompleteInputs, lastLegitSymbol } from "./functions/equals";
+import { displayAllExpression } from "./functions/FixIncompleteInputs";
 
 export default class Calculator extends React.Component {
   constructor(props) {
@@ -439,7 +440,6 @@ export default class Calculator extends React.Component {
     if ((this.state.displayAll !== "" && isFinite(this.state.displayCur)) || this.state.lastInput === ")") {
       let result = trigonometryInDegrees(this.state.displayCur, e.target.value, this.state);
       console.log("trigonometry", result);
-      // deleteRedundantDigits(this.state);
       this.setState(
         (state) => ({
           displayAll: state.lastResult === "" ? finalDisplayAll : "".concat(result),
@@ -598,10 +598,7 @@ export default class Calculator extends React.Component {
     if (this.state.lastResult === "") {
       console.log("check parenthesis after adding missing", this.state.displayAll);
 
-      // deleteRedundantOperators(this.state);
-      // let result = calculate(displayAllExpression);
-
-      let result = calculate(this.state);
+      let result = calculate(this.state, this.state.displayAll); // change it to one arg
       // let result = calculate("3 * (25 - 21) + 8");
       this.setState(
         {
