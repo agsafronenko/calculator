@@ -29,10 +29,8 @@ export default class Calculator extends React.Component {
     this.handleDigit = this.handleDigit.bind(this);
     this.handleEquals = this.handleEquals.bind(this);
     this.handleDecimal = this.handleDecimal.bind(this);
-    this.handleExponentiation = this.handleExponentiation.bind(this);
     this.handleSquareRoot = this.handleSquareRoot.bind(this);
     this.handleSquare = this.handleSquare.bind(this);
-    this.handleRoot = this.handleRoot.bind(this);
     this.handlePreviousState = this.handlePreviousState.bind(this);
     this.handleSpecialDigit = this.handleSpecialDigit.bind(this);
     this.handleLog10 = this.handleLog10.bind(this);
@@ -95,7 +93,7 @@ export default class Calculator extends React.Component {
           this.setState(
             (state) => ({
               displayAll: state.displayAll.slice(0, state.displayAll.length - lastLegitSymbol(state.displayAll)).concat(e.target.value),
-              displayCur: e.target.value,
+              displayCur: calculate(state, state.displayAll),
               lastInput: e.target.value,
               lastInputType: "operator",
               twoConsecutiveOperators: false,
@@ -111,7 +109,7 @@ export default class Calculator extends React.Component {
             this.setState(
               (state) => ({
                 displayAll: state.displayAll.slice(0, state.displayAll.length - lastLegitSymbol(state.displayAll)).concat(e.target.value),
-                displayCur: e.target.value,
+                displayCur: calculate(state, state.displayAll),
                 lastInput: e.target.value,
                 lastInputType: "operator",
                 twoConsecutiveOperators: false,
@@ -140,7 +138,7 @@ export default class Calculator extends React.Component {
             this.setState(
               (state) => ({
                 displayAll: state.displayAll.concat(e.target.value),
-                displayCur: e.target.value,
+                displayCur: calculate(state, state.displayAll),
                 lastInput: e.target.value,
                 lastInputType: "operator",
                 twoConsecutiveOperators: true,
@@ -158,7 +156,7 @@ export default class Calculator extends React.Component {
           this.setState(
             (state) => ({
               displayAll: e.target.value === " - " ? state.displayAll.concat(e.target.value) : state.displayAll,
-              displayCur: e.target.value === " - " ? e.target.value : state.displayCur,
+              // displayCur: state.displayCur,
               lastInput: e.target.value === " - " ? e.target.value : state.lastInput,
               lastInputType: e.target.value === " - " ? "operator" : state.lastInputType,
               lastOperator: e.target.value === " - " ? e.target.value : state.lastOperator,
@@ -171,7 +169,7 @@ export default class Calculator extends React.Component {
           this.setState(
             (state) => ({
               displayAll: state.displayAll.concat(e.target.value),
-              displayCur: e.target.value,
+              // displayCur: calculate(state, state.displayAll),
               lastInput: e.target.value,
               lastInputType: "operator",
               lastOperator: e.target.value,
@@ -187,7 +185,7 @@ export default class Calculator extends React.Component {
           this.setState(
             (state) => ({
               displayAll: state.lastResult === "" ? state.displayAll.concat(e.target.value) : "".concat(state.lastResult).concat(e.target.value),
-              displayCur: e.target.value,
+              displayCur: calculate(state, this.state.displayAll),
               lastInput: e.target.value,
               lastInputType: "operator",
               decimalAlreadyUsed: false,
@@ -252,7 +250,8 @@ export default class Calculator extends React.Component {
   }
 
   handleDecimal() {
-    if (this.state.lastInput !== ")" && this.state.lastInput !== "!" && this.state.lastInput !== "%" && this.state.decimalAlreadyUsed !== true) {
+    // if (this.state.lastInput !== ")" && this.state.lastInput !== "!" && this.state.lastInput !== "%" && this.state.decimalAlreadyUsed !== true) {
+    if ((this.state.lastInputType === "digit" || this.state.lastInputType === "operator" || this.state.lastInput === "" || this.state.lastInput === "(") && this.state.decimalAlreadyUsed === false) {
       this.setState(
         (state) => ({
           displayAll: state.lastResult === "" ? state.displayAll.concat(isFinite(state.lastInput) && this.state.displayAll !== "" ? "." : "0.") : /\./.test(state.lastResult) ? "".concat("0.") : "".state.lastResult.concat("."),
@@ -271,80 +270,74 @@ export default class Calculator extends React.Component {
   }
 
   handleSquare() {
-    this.setState(
-      (state) => ({
-        displayAll: state.lastResult === "" ? state.displayAll.concat(" ^ 2") : "".concat(state.lastResult).concat(" ^ 2"),
-        displayCur: "",
-        lastInput: "2",
-        lastInputType: "digit",
-        twoConsecutiveOperators: false,
-        decimalAlreadyUsed: false,
-        lastResult: "",
-        lastOperator: " ^ ",
-      }),
-      () => {
-        console.log("inside handle ^2 after setState:  displayAll", this.state.displayAll);
-        saveState(this.state);
+    document.getElementById("exponentiation").click();
+    setTimeout(() => {
+      if (this.state.lastInput === " ^ ") {
+        document.getElementById("two").click();
+        setTimeout(
+          () =>
+            this.setState((state) => ({
+              displayCur: calculate(state, state.displayAll),
+            })),
+          0
+        );
       }
-    );
+    }, 0);
   }
 
   handleSquareRoot() {
-    this.setState(
-      (state) => ({
-        displayAll: state.lastResult === "" ? state.displayAll.concat(" yroot 2") : "".concat(state.lastResult).concat(" yroot 2"),
-        displayCur: "",
-        lastInput: "2",
-        lastInputType: "digit",
-        twoConsecutiveOperators: false,
-        decimalAlreadyUsed: false,
-        lastResult: "",
-        lastOperator: " yroot ",
-      }),
-      () => {
-        console.log("after displayAll", this.state.displayAll);
-        saveState(this.state);
+    document.getElementById("anyRoot").click();
+    setTimeout(() => {
+      if (this.state.lastInput === " yroot ") {
+        document.getElementById("two").click();
+        setTimeout(
+          () =>
+            this.setState((state) => ({
+              displayCur: calculate(state, state.displayAll),
+            })),
+          0
+        );
       }
-    );
+    }, 0);
   }
 
-  handleExponentiation(e) {
-    this.setState(
-      (state) => ({
-        displayAll: state.lastResult === "" ? state.displayAll.concat(e.target.value) : "".concat(state.lastResult).concat(e.target.value),
-        displayCur: e.target.value,
-        lastInput: e.target.value,
-        lastInputType: "operator",
-        twoConsecutiveOperators: false,
-        decimalAlreadyUsed: false,
-        lastResult: "",
-        lastOperator: " ^ ",
-      }),
-      () => {
-        console.log("inside handle ^ after setState:  displayAll", this.state.displayAll);
-        saveState(this.state);
-      }
-    );
-  }
+  // handleExponentiation(e) {
+  //   this.setState(
+  //     (state) => ({
+  //       displayAll: state.lastResult === "" ? state.displayAll.concat(e.target.value) : "".concat(state.lastResult).concat(e.target.value),
+  //       displayCur: e.target.value,
+  //       lastInput: e.target.value,
+  //       lastInputType: "operator",
+  //       twoConsecutiveOperators: false,
+  //       decimalAlreadyUsed: false,
+  //       lastResult: "",
+  //       lastOperator: " ^ ",
+  //     }),
+  //     () => {
+  //       console.log("inside handle ^ after setState:  displayAll", this.state.displayAll);
+  //       saveState(this.state);
+  //     }
+  //   );
+  // }
 
-  handleRoot(e) {
-    this.setState(
-      (state) => ({
-        displayAll: state.lastResult === "" ? state.displayAll.concat(e.target.value) : "".concat(state.lastResult).concat(e.target.value),
-        displayCur: e.target.value,
-        lastInput: e.target.value,
-        lastInputType: "operator",
-        twoConsecutiveOperators: false,
-        decimalAlreadyUsed: false,
-        lastResult: "",
-        lastOperator: " yroot ",
-      }),
-      () => {
-        console.log("after displayAll", this.state.displayAll);
-        saveState(this.state);
-      }
-    );
-  }
+  // handleRoot(e) {
+  //   this.setState(
+  //     (state) => ({
+  //       displayAll: state.lastResult === "" ? state.displayAll.concat(e.target.value) : "".concat(state.lastResult).concat(e.target.value),
+  //       displayCur: e.target.value,
+  //       lastInput: e.target.value,
+  //       lastInputType: "operator",
+  //       twoConsecutiveOperators: false,
+  //       decimalAlreadyUsed: false,
+  //       lastResult: "",
+  //       lastOperator: " yroot ",
+  //     }),
+  //     () => {
+  //       console.log("after displayAll", this.state.displayAll);
+  //       saveState(this.state);
+  //     }
+  //   );
+  // }
 
   handleLog(e) {
     if (this.state.lastInputType === "digit" || this.state.lastInput === ")") {
@@ -352,16 +345,16 @@ export default class Calculator extends React.Component {
       this.setState(
         (state) => ({
           displayAll: state.lastResult === "" ? state.displayAll.concat(e.target.value) : "".concat(state.lastResult).concat(e.target.value),
-          displayCur: e.target.value,
+          displayCur: "",
           lastInput: e.target.value,
           lastInputType: "operator",
-          twoConsecutiveOperators: false,
           decimalAlreadyUsed: false,
+          twoConsecutiveOperators: false,
           lastResult: "",
-          lastOperator: " log base ",
+          lastOperator: e.target.value,
         }),
         () => {
-          console.log("inside handle log after setState:  displayAll", this.state.displayAll);
+          console.log("inside handle log after setState: displayAll", this.state.displayAll);
           saveState(this.state);
         }
       );
@@ -374,7 +367,6 @@ export default class Calculator extends React.Component {
       this.setState(
         (state) => ({
           displayAll: state.lastResult === "" ? state.displayAll.concat(" log base 10") : "".concat(state.lastResult).concat(" log base 10"),
-          displayCur: "",
           lastInput: "10",
           lastInputType: "digit",
           twoConsecutiveOperators: false,
@@ -383,6 +375,9 @@ export default class Calculator extends React.Component {
           lastOperator: " log base ",
         }),
         () => {
+          this.setState((state) => ({
+            displayCur: calculate(state, state.displayAll),
+          }));
           console.log("inside handle log10 after setState:  displayAll", this.state.displayAll);
           saveState(this.state);
         }
@@ -396,15 +391,17 @@ export default class Calculator extends React.Component {
       this.setState(
         (state) => ({
           displayAll: state.lastResult === "" ? state.displayAll.concat(` log base ${Math.E}`) : "".concat(state.lastResult).concat(` log base ${Math.E}`),
-          displayCur: "",
           lastInput: `${Math.E}`,
           lastInputType: "digit",
           twoConsecutiveOperators: false,
-          decimalAlreadyUsed: false,
+          decimalAlreadyUsed: true,
           lastResult: "",
           lastOperator: " log base ",
         }),
         () => {
+          this.setState((state) => ({
+            displayCur: calculate(state, state.displayAll),
+          }));
           console.log("inside handle log10 after setState:  displayAll", this.state.displayAll);
           saveState(this.state);
         }
@@ -420,7 +417,6 @@ export default class Calculator extends React.Component {
       this.setState(
         (state) => ({
           displayAll: factor === "invalid input" ? "invalid input" : state.lastResult === "" ? state.displayAll.concat("!") : "".concat(state.lastResult).concat("!"),
-          displayCur: factor,
           lastInput: "!",
           lastInputType: "!",
           twoConsecutiveOperators: false,
@@ -428,6 +424,9 @@ export default class Calculator extends React.Component {
           lastOperator: " ! ",
         }),
         () => {
+          this.setState((state) => ({
+            displayCur: calculate(state, state.displayAll),
+          }));
           console.log("inside handle factorial after setState:  displayAll", this.state.displayAll);
           saveState(this.state);
         }
@@ -444,7 +443,6 @@ export default class Calculator extends React.Component {
         (state) => ({
           displayAll: state.lastResult === "" ? finalDisplayAll : "".concat(result),
           displayAll: finalDisplayAll,
-          displayCur: result,
           lastInput: ")",
           lastInputType: "parenthesis",
           twoConsecutiveOperators: false,
@@ -452,6 +450,9 @@ export default class Calculator extends React.Component {
           lastResult: "",
         }),
         () => {
+          this.setState((state) => ({
+            displayCur: calculate(state, state.displayAll),
+          }));
           console.log("inside trigonometry after setState:  displayAll", this.state.displayAll);
           saveState(this.state);
         }
@@ -464,7 +465,6 @@ export default class Calculator extends React.Component {
       this.setState(
         (state) => ({
           displayAll: state.lastResult === "" ? state.displayAll.concat("%") : "".concat(state.lastResult).concat("%"),
-          displayCur: state.lastInputType === "digit" ? state.displayCur / 100 : "%",
           lastInput: "%",
           lastInputType: "%",
           twoConsecutiveOperators: false,
@@ -472,6 +472,9 @@ export default class Calculator extends React.Component {
           lastOperator: " % ",
         }),
         () => {
+          this.setState((state) => ({
+            displayCur: calculate(state, state.displayAll),
+          }));
           console.log("inside handle log10 after setState:  displayAll", this.state.displayAll);
           saveState(this.state);
         }
@@ -557,7 +560,7 @@ export default class Calculator extends React.Component {
       this.setState(
         (state) => ({
           displayAll: state.lastResult === "" ? state.displayAll.concat(e.target.value) : "".concat(e.target.value),
-          displayCur: e.target.value,
+          displayCur: calculate(state, state.displayAll),
           lastInput: "(",
           lastInputType: "parenthesis",
           parenthesesDelta: state.parenthesesDelta + 1,
@@ -635,8 +638,8 @@ export default class Calculator extends React.Component {
           digit={this.handleDigit}
           equals={this.handleEquals}
           decimal={this.handleDecimal}
-          exponentiation={this.handleExponentiation}
-          root={this.handleRoot}
+          // exponentiation={this.handleExponentiation}
+          // root={this.handleRoot}
           square={this.handleSquare}
           squareRoot={this.handleSquareRoot}
           previousState={this.handlePreviousState}

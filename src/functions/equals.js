@@ -1,13 +1,16 @@
 // next steps:
-// continue changSign from 86 row "displayCurAfterChangeSign", finish FixIncompleteInputs for both handleEqual and changeSign
+
 // continue filling pivot table for all handlers (consider inserting it as a comment to the project)
 
 // show in displayCur result for current trigonometry, factorial, etc
 // - consider using paste into displayCur (restrictions to what should be pasted) -> otherwise change "copy" to "copy result"
+// clicking trigonometry after decimal
 // - consider adding multiple displays for results with possibility to insert them into displayCur later on
 // consider adding math.round (2-0.56) will provide with non accurate result --> round to the number of digits --> consider adding rounding button
 // consider adding event listeners
 // - check every input mixing with others
+// check the following input 8 + ( - =
+// check the following input 8 + ( =
 
 // - when invalid input appers or any other error, block all keys except for AC and del
 import { factorial } from "./factorial";
