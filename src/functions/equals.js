@@ -1,5 +1,14 @@
 // next steps:
 
+// continue coding alerts for factorials:
+// the logic is the following:
+// - validInput determines the expression
+// - expression is evaluated whether an alert is required
+// - if required, it shows the relevant alert (one for negative, another for nonIntegers) and return the value of the state to app.js
+// - in app.js, this value is used to update state in re "factorialAlert"
+// - while alert is set to true in the state, it is never shown again
+// - consider how to reset this alert (e.g. everytime handleFactorial is executed --> or, which is likely better, resetting is not required until handleEqual)
+
 // continue filling pivot table for all handlers (consider inserting it as a comment to the project)
 
 // show in displayCur result for current trigonometry, factorial, etc
@@ -14,7 +23,7 @@
 
 // - when invalid input appers or any other error, block all keys except for AC and del
 import { factorial } from "./factorial";
-import { FixIncompleteInputs, displayAllExpression } from "./FixIncompleteInputs";
+import { FixIncompleteInputs, displayAllExpression, addMissingParenthesis } from "./FixIncompleteInputs";
 
 export default function calculate(state, expression) {
   console.log("you are in equals => calculate");

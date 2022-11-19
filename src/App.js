@@ -3,7 +3,7 @@ import "./styles/styles.css";
 import $ from "jquery";
 import { abs } from "./functions/abs";
 import { saveState, stateStorage } from "./functions/previousState";
-import { factorial } from "./functions/factorial";
+import { validInput } from "./functions/factorial";
 import { trigonometryInDegrees, finalDisplayAll } from "./functions/trigonometry";
 import { changeSign, finalDisplayAllChangeSign } from "./functions/changeSign";
 import { switchToDenominator } from "./functions/switchToDenominator";
@@ -23,6 +23,10 @@ export default class Calculator extends React.Component {
       lastResult: "",
       parenthesesDelta: 0,
       lastOperator: "",
+      factorialAlert: {
+        negative: false,
+        nonInteger: false,
+      },
     };
     this.handleClear = this.handleClear.bind(this);
     this.handleOperator = this.handleOperator.bind(this);
@@ -413,16 +417,16 @@ export default class Calculator extends React.Component {
     if (this.state.lastInputType === "digit" || this.state.lastInput === ")" || (this.state.lastInput === "%" && !this.state.displayAll.match(/!%/))) {
       // let factor = factorial(this.state.displayCur).toString();
       // console.log("factorial", factor);
-      let factor = factorial(this.state);
+      let factorialInput = validInput(this.state);
 
       this.setState(
         (state) => ({
-          displayAll: factor === "invalid input" ? "invalid input" : state.lastResult === "" ? state.displayAll.concat("!") : "".concat(state.lastResult).concat("!"),
+          displayAll: factorialInput === "invalid input" ? "invalid input" : state.lastResult === "" ? state.displayAll.concat("!") : "".concat(state.lastResult).concat("!"),
           lastInput: "!",
           lastInputType: "!",
           decimalAlreadyUsed: false,
           twoConsecutiveOperators: false,
-          lastResult: factor === "invalid input" ? "invalid input" : "",
+          lastResult: factorialInput === "invalid input" ? "invalid input" : "",
           lastOperator: " ! ",
         }),
         () => {
