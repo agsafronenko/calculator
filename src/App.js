@@ -369,8 +369,8 @@ export default class Calculator extends React.Component {
           displayAll: state.lastResult === "" ? state.displayAll.concat(" log base 10") : "".concat(state.lastResult).concat(" log base 10"),
           lastInput: "10",
           lastInputType: "digit",
-          twoConsecutiveOperators: false,
           decimalAlreadyUsed: false,
+          twoConsecutiveOperators: false,
           lastResult: "",
           lastOperator: " log base ",
         }),
@@ -387,14 +387,14 @@ export default class Calculator extends React.Component {
 
   handleLogE() {
     if (this.state.lastInputType === "digit" || this.state.lastInput === ")") {
-      console.log("inside handle log10: displayAll", this.state.displayAll);
+      console.log("inside handle logE: displayAll", this.state.displayAll);
       this.setState(
         (state) => ({
           displayAll: state.lastResult === "" ? state.displayAll.concat(` log base ${Math.E}`) : "".concat(state.lastResult).concat(` log base ${Math.E}`),
           lastInput: `${Math.E}`,
           lastInputType: "digit",
-          twoConsecutiveOperators: false,
           decimalAlreadyUsed: true,
+          twoConsecutiveOperators: false,
           lastResult: "",
           lastOperator: " log base ",
         }),
@@ -402,7 +402,7 @@ export default class Calculator extends React.Component {
           this.setState((state) => ({
             displayCur: calculate(state, state.displayAll),
           }));
-          console.log("inside handle log10 after setState:  displayAll", this.state.displayAll);
+          console.log("inside handle logE after setState:  displayAll", this.state.displayAll);
           saveState(this.state);
         }
       );
@@ -411,14 +411,16 @@ export default class Calculator extends React.Component {
 
   handleFactorial() {
     if (this.state.lastInputType === "digit" || this.state.lastInput === ")" || (this.state.lastInput === "%" && !this.state.displayAll.match(/!%/))) {
-      let factor = factorial(this.state.displayCur).toString();
-      console.log("factorial", factor);
+      // let factor = factorial(this.state.displayCur).toString();
+      // console.log("factorial", factor);
+      let factor = factorial(this.state);
 
       this.setState(
         (state) => ({
           displayAll: factor === "invalid input" ? "invalid input" : state.lastResult === "" ? state.displayAll.concat("!") : "".concat(state.lastResult).concat("!"),
           lastInput: "!",
           lastInputType: "!",
+          decimalAlreadyUsed: false,
           twoConsecutiveOperators: false,
           lastResult: factor === "invalid input" ? "invalid input" : "",
           lastOperator: " ! ",
