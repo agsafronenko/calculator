@@ -9,6 +9,7 @@ import { changeSign, finalDisplayAllChangeSign } from "./functions/changeSign";
 import { switchToDenominator } from "./functions/switchToDenominator";
 import calculate, { FixIncompleteInputs, lastLegitSymbol } from "./functions/equals";
 import { displayAllExpression } from "./functions/FixIncompleteInputs";
+import { factorial, factorialState, alertStatus } from "./functions/factorial";
 
 export default class Calculator extends React.Component {
   constructor(props) {
@@ -23,10 +24,6 @@ export default class Calculator extends React.Component {
       lastResult: "",
       parenthesesDelta: 0,
       lastOperator: "",
-      factorialAlert: {
-        negative: false,
-        nonInteger: false,
-      },
     };
     this.handleClear = this.handleClear.bind(this);
     this.handleOperator = this.handleOperator.bind(this);
@@ -415,24 +412,23 @@ export default class Calculator extends React.Component {
 
   handleFactorial() {
     if (this.state.lastInputType === "digit" || this.state.lastInput === ")" || (this.state.lastInput === "%" && !this.state.displayAll.match(/!%/))) {
-      // let factor = factorial(this.state.displayCur).toString();
-      // console.log("factorial", factor);
-      let factorialInput = validInput(this.state);
+      // factorialState(this.state);
 
       this.setState(
         (state) => ({
-          displayAll: factorialInput === "invalid input" ? "invalid input" : state.lastResult === "" ? state.displayAll.concat("!") : "".concat(state.lastResult).concat("!"),
+          displayAll: state.lastResult === "" ? state.displayAll.concat("!") : "".concat(state.lastResult).concat("!"),
           lastInput: "!",
           lastInputType: "!",
           decimalAlreadyUsed: false,
           twoConsecutiveOperators: false,
-          lastResult: factorialInput === "invalid input" ? "invalid input" : "",
+          // lastResult: factorialInput === "invalid input" ? "invalid input" : "",
           lastOperator: " ! ",
         }),
         () => {
-          this.setState((state) => ({
-            displayCur: calculate(state, state.displayAll),
-          }));
+          let result = calculate(this.state, this.state.displayAll);
+          this.setState({
+            displayCur: result,
+          });
           console.log("inside handle factorial after setState:  displayAll", this.state.displayAll);
           saveState(this.state);
         }
@@ -623,6 +619,8 @@ export default class Calculator extends React.Component {
         },
         () => {
           saveState(this.state);
+          alertStatus.negative = false; // is it required to have it here?
+          alertStatus.nonInteger = false;
           console.log("Inside handleEquals: final result", result);
         }
       );

@@ -1,13 +1,8 @@
 // next steps:
 
-// continue coding alerts for factorials:
-// the logic is the following:
-// - validInput determines the expression
-// - expression is evaluated whether an alert is required
-// - if required, it shows the relevant alert (one for negative, another for nonIntegers) and return the value of the state to app.js
-// - in app.js, this value is used to update state in re "factorialAlert"
-// - while alert is set to true in the state, it is never shown again
-// - consider how to reset this alert (e.g. everytime handleFactorial is executed --> or, which is likely better, resetting is not required until handleEqual)
+// check what happens when 4! - 4! why second factorial is considered as negative
+
+// make a rule to what happens when final result in handleEquals equals "invalid input" => every next input should execute handleClear
 
 // continue filling pivot table for all handlers (consider inserting it as a comment to the project)
 
@@ -20,6 +15,7 @@
 // - check every input mixing with others
 // check the following input 8 + ( - =
 // check the following input 8 + ( =
+// check the following input - ( 8  => NaN
 
 // - when invalid input appers or any other error, block all keys except for AC and del
 import { factorial } from "./factorial";
@@ -34,12 +30,12 @@ export default function calculate(state, expression) {
 }
 
 function convertDisplayAllIntoArray(string) {
-  console.log("string inside convertDisplayIntoArr", string);
+  // console.log("string inside convertDisplayIntoArr", string);
   let parseRegex = new RegExp(/-\d+\.\d+|\d+\.\d+|sin|cos|tan|cot|sec|csc|abs| yroot | log base | mod |invalid input| \+ | - | \* | \^ | \/ |-\d+|\d+|\D/, "g");
   let displayAllArray = string.match(parseRegex).map((elem) => (isFinite(elem) ? Number(elem) : elem));
   displayAllArray.unshift("(");
   displayAllArray.push(")");
-  console.log("convertDisplayIntoArr", displayAllArray);
+  // console.log("convertDisplayIntoArr", displayAllArray);
   return displayAllArray;
 }
 
@@ -56,6 +52,7 @@ function findParenthesis(expr) {
       .concat(expr.slice(firstClosingIndex + 1));
     return findParenthesis(expr);
   }
+  console.log("you are in findParenthesis", expr[0]);
   return expr[0];
 }
 

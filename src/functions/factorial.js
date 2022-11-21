@@ -1,36 +1,27 @@
-import { expression, expressionNegative, findExpression } from "./findExpression";
+import { expression, findExpression } from "./findExpression";
 import calculate from "./equals";
 
-export function validInput(state) {
-  findExpression(state);
-  let result = calculate(state, expression);
-  console.log("you are in factorial: RESULT", result);
-  if (result < 0) {
-    // if (state.factorialAlert.negative === false) {
-    //   alert("invalid input: factorials are only defined for positive numbers");
-    // }
-    //     return "invalid input";
-    //   } else {
-    //     return result;
-  }
-}
+export let alertStatus = {
+  negative: false,
+  nonInteger: false,
+};
 
-export function factorial(num, alertActive) {
-  let result = "";
-
+export function factorial(num) {
   if (num < 0) {
-    if (alertActive.negative) {
+    if (alertStatus.negative === false) {
       alert("invalid input: factorials are only defined for positive numbers");
+      alertStatus.negative = true;
     }
     return "invalid input";
-  } else if (num % 1 !== 0 && num !== ")") {
-    alert(`factorials for nonintegers are defined based on simplified Gamma function:
+  } else if (num % 1 !== 0) {
+    if (alertStatus.nonInteger === false) {
+      alert(`factorials for nonintegers are defined based on simplified Gamma function:
       ~~ level of accuracy: low ~~`);
+      alertStatus.nonInteger = true;
+    }
     return Math.pow(2 * num * Math.PI, 1 / 2) * Math.pow(num / Math.E, num);
-  } else if (num === ")") {
-    return "!";
   } else {
-    result = Number(num);
+    let result = Number(num);
     if (Number.isInteger(result)) {
       for (let i = result - 1; i > 0; i--) {
         result *= i;
