@@ -1,25 +1,23 @@
 // next steps:
 
-// check what happens when 4! - 4! why second factorial is considered as negative
-
-// make a rule to what happens when final result in handleEquals equals "invalid input" => every next input should execute handleClear
-
 // continue filling pivot table for all handlers (consider inserting it as a comment to the project)
 
-// show in displayCur result for current trigonometry, factorial, etc
 // - consider using paste into displayCur (restrictions to what should be pasted) -> otherwise change "copy" to "copy result"
 // clicking trigonometry after decimal
 // - consider adding multiple displays for results with possibility to insert them into displayCur later on
-// consider adding math.round (2-0.56) will provide with non accurate result --> round to the number of digits --> consider adding rounding button
+
 // consider adding event listeners
 // - check every input mixing with others
 // check the following input 8 + ( - =
 // check the following input 8 + ( =
 // check the following input - ( 8  => NaN
+// check the the wrong operator cut at the end : 7 + 4! - 4! +    =
+// denominator doesn't work with log (it should put log in lower part)
 
 // - when invalid input appers or any other error, block all keys except for AC and del
 import { factorial } from "./factorial";
 import { FixIncompleteInputs, displayAllExpression, addMissingParenthesis } from "./FixIncompleteInputs";
+import $ from "jquery";
 
 export default function calculate(state, expression) {
   console.log("you are in equals => calculate");
@@ -71,8 +69,9 @@ function calculateInsideParentheses(expr) {
   return expr[0];
 }
 
-function findNegativeValues(arr) {
-  let negativeIndex = arr.findIndex((elem, ind) => (elem === " - " && ind === 0) || (elem === " - " && typeof arr[ind - 1] === "string" && typeof arr[ind + 1] === "number"));
+export function findNegativeValues(arr) {
+  console.log("findNegativeValues arr", arr);
+  let negativeIndex = arr.findIndex((elem, ind) => (elem === " - " && ind === 0) || (elem === " - " && typeof arr[ind - 1] === "string" && arr[ind - 1] !== "!" && arr[ind - 1] !== "%" && typeof arr[ind + 1] === "number"));
   if (negativeIndex !== -1) {
     let newArr = arr
       .slice(0, negativeIndex)

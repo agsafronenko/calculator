@@ -9,7 +9,7 @@ import { changeSign, finalDisplayAllChangeSign } from "./functions/changeSign";
 import { switchToDenominator } from "./functions/switchToDenominator";
 import calculate, { FixIncompleteInputs, lastLegitSymbol } from "./functions/equals";
 import { displayAllExpression } from "./functions/FixIncompleteInputs";
-import { factorial, factorialState, alertStatus } from "./functions/factorial";
+import { alertStatus } from "./functions/factorial";
 
 export default class Calculator extends React.Component {
   constructor(props) {
@@ -50,6 +50,8 @@ export default class Calculator extends React.Component {
   }
 
   handleClear(clearStorage) {
+    $("button").css("pointerEvents", "auto");
+    $("button").css("opacity", "1");
     if (clearStorage === true) stateStorage.prevState = [];
     this.setState({
       displayAll: "",
@@ -65,6 +67,8 @@ export default class Calculator extends React.Component {
   }
 
   handlePreviousState() {
+    $("button").css("pointerEvents", "auto");
+    $("button").css("opacity", "1");
     if (stateStorage.prevState.length <= 1) {
       this.handleClear(true);
     } else {
@@ -251,7 +255,6 @@ export default class Calculator extends React.Component {
   }
 
   handleDecimal() {
-    // if (this.state.lastInput !== ")" && this.state.lastInput !== "!" && this.state.lastInput !== "%" && this.state.decimalAlreadyUsed !== true) {
     if ((this.state.lastInputType === "digit" || this.state.lastInputType === "operator" || this.state.lastInput === "" || this.state.lastInput === "(") && this.state.decimalAlreadyUsed === false) {
       this.setState(
         (state) => ({
@@ -412,16 +415,13 @@ export default class Calculator extends React.Component {
 
   handleFactorial() {
     if (this.state.lastInputType === "digit" || this.state.lastInput === ")" || (this.state.lastInput === "%" && !this.state.displayAll.match(/!%/))) {
-      // factorialState(this.state);
-
       this.setState(
         (state) => ({
           displayAll: state.lastResult === "" ? state.displayAll.concat("!") : "".concat(state.lastResult).concat("!"),
           lastInput: "!",
           lastInputType: "!",
           decimalAlreadyUsed: false,
-          twoConsecutiveOperators: false,
-          // lastResult: factorialInput === "invalid input" ? "invalid input" : "",
+          lastResult: "",
           lastOperator: " ! ",
         }),
         () => {
@@ -438,7 +438,8 @@ export default class Calculator extends React.Component {
 
   handleTrigonometry(e) {
     console.log("inside trigonometry", isFinite(this.state.displayCur));
-    if ((this.state.displayAll !== "" && isFinite(this.state.displayCur)) || this.state.lastInput === ")") {
+    // if ((this.state.displayAll !== "" && isFinite(this.state.displayCur)) || this.state.lastInput === ")") {
+    if (this.state.displayAll !== "" || this.state.lastInput === ")") {
       let result = trigonometryInDegrees(this.state.displayCur, e.target.value, this.state);
       console.log("trigonometry", result);
       this.setState(
@@ -583,7 +584,7 @@ export default class Calculator extends React.Component {
         this.setState(
           (state) => ({
             displayAll: state.lastInput === ")" ? state.displayAll.concat(e.target.value) : state.lastResult === "" ? state.displayAll.concat(e.target.value) : "".concat(e.target.value),
-            displayCur: e.target.value,
+            displayCur: calculate(state, state.displayAll),
             lastInput: ")",
             lastInputType: "parenthesis",
             parenthesesDelta: state.parenthesesDelta - 1,

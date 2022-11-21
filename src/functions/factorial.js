@@ -1,5 +1,6 @@
 import { expression, findExpression } from "./findExpression";
 import calculate from "./equals";
+import $ from "jquery";
 
 export let alertStatus = {
   negative: false,
@@ -12,6 +13,13 @@ export function factorial(num) {
       alert("invalid input: factorials are only defined for positive numbers");
       alertStatus.negative = true;
     }
+    $("button").css("pointerEvents", "none");
+    $("button").css("opacity", "0.8");
+    $("#clear").css("pointerEvents", "auto");
+    $("#clear").css("opacity", "1");
+    $("#delete").css("pointerEvents", "auto");
+    $("#delete").css("opacity", "1");
+
     return "invalid input";
   } else if (num % 1 !== 0) {
     if (alertStatus.nonInteger === false) {
