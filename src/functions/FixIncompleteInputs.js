@@ -1,47 +1,35 @@
 export let displayAllExpression = "";
 
 export function FixIncompleteInputs(state, expr) {
-  if (state.lastInputType === "operator") {
-    let lastDigitIndex = expr
-      .split("")
-      .reverse()
-      .findIndex((elem) => /\d|\)/.test(elem));
-    displayAllExpression = expr.slice(0, expr.length - lastDigitIndex);
+  console.log("ggggg", /\d/.test(expr) === false);
+  if (/\d/.test(expr) === false) {
+    displayAllExpression = "0";
   } else {
-    displayAllExpression = expr;
+    let openingParanthesesAfterTheLastDigit = 0;
+    if (state.lastInputType !== "digit" || state.lastInput !== ")") {
+      let lastDigitIndex = expr
+        .split("")
+        .reverse()
+        .findIndex((elem) => /\d|\)/.test(elem));
+      displayAllExpression = expr.slice(0, expr.length - lastDigitIndex);
+      let afterTheLastDigit = expr.slice(expr.length - lastDigitIndex);
+
+      for (let i = 0; i < afterTheLastDigit.length; i++) {
+        console.log("expr[i", afterTheLastDigit[i]);
+        if (afterTheLastDigit[i] === "(") openingParanthesesAfterTheLastDigit++;
+      }
+    } else {
+      displayAllExpression = expr;
+    }
+    addMissingParenthesis(state.parenthesesDelta - openingParanthesesAfterTheLastDigit);
+    console.log("deleteRedundant after", displayAllExpression);
   }
-  addMissingParenthesis(state.parenthesesDelta);
-  console.log("deleteRedundant after", displayAllExpression);
 }
 
-export function addMissingParenthesis(delta) {
+function addMissingParenthesis(delta) {
   if (delta > 0) {
     displayAllExpression += ")";
     delta -= 1;
     addMissingParenthesis(delta);
   }
 }
-
-// export function deleteRedundantOperators(state) {
-//   console.log("deleteRedundant", state.displayAll);
-//   console.log("state.displayCur", state.displayCur);
-//   if (state.lastOperator === "trigonometry" || state.displayCur === "" || /\)|!|%|\d/.test(state.displayCur)) {
-//     displayAllExpression = state.displayAll;
-//   } else {
-//     let lastDigitIndex = state.displayAll
-//       .split("")
-//       .reverse()
-//       .findIndex((elem) => /\d/.test(elem));
-//     displayAllExpression = state.displayAll.slice(0, state.displayAll.length - lastDigitIndex);
-//   }
-//   addMissingParenthesis(state.parenthesesDelta);
-//   console.log("deleteRedundant after", displayAllExpression);
-// }
-
-// export function addMissingParenthesis(delta) {
-//   if (delta > 0) {
-//     displayAllExpression += ")";
-//     delta -= 1;
-//     addMissingParenthesis(delta);
-//   }
-// }

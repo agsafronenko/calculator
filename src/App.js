@@ -576,17 +576,18 @@ export default class Calculator extends React.Component {
   }
 
   handleLeftParenthesis(e) {
-    // if (this.state.lastOperator !== " log base " && (this.state.lastInputType === "operator" || this.state.lastInput === "(" || this.state.displayAll === "")) {
-    if (this.state.lastInputType === "operator" || this.state.lastInput === "(" || this.state.displayAll === "") {
+    if (this.state.lastInputType === "operator" || this.state.lastInput === "(" || this.state.displayAll === "" || this.state.lastResult !== "") {
       this.setState(
         (state) => ({
           displayAll: state.lastResult === "" ? state.displayAll.concat(e.target.value) : "".concat(e.target.value),
-          displayCur: calculate(state, state.displayAll),
+          displayCur: state.lastResult === "" ? state.displayCur : "",
           lastInput: "(",
           lastInputType: "parenthesis",
-          parenthesesDelta: state.parenthesesDelta + 1,
+          decimalAlreadyUsed: false,
           twoConsecutiveOperators: false,
-          lastOperator: "(",
+          lastResult: "",
+          parenthesesDelta: state.parenthesesDelta + 1,
+          lastOperator: e.target.value,
         }),
         () => {
           console.log("inside leftParenthesis after setState:  displayAll", this.state.displayAll);
@@ -598,16 +599,16 @@ export default class Calculator extends React.Component {
   handleRightParenthesis(e) {
     console.log("this.state.parthersesDelta", this.state.parenthesesDelta);
     if (this.state.parenthesesDelta > 0) {
-      if (this.state.lastInputType === "digit" || this.state.lastInput === "!" || this.state.lastInput === "%" || this.state.lastInput === ")") {
+      if (this.state.lastInputType === "digit" || this.state.lastInput === "!" || this.state.lastInput === "%" || this.state.lastInput === ")" || this.state.lastInput === ".") {
         this.setState(
           (state) => ({
-            displayAll: state.lastInput === ")" ? state.displayAll.concat(e.target.value) : state.lastResult === "" ? state.displayAll.concat(e.target.value) : "".concat(e.target.value),
+            displayAll: state.lastResult === "" ? state.displayAll.concat(e.target.value) : "".concat(e.target.value),
             displayCur: calculate(state, state.displayAll),
             lastInput: ")",
             lastInputType: "parenthesis",
+            decimalAlreadyUsed: false,
             parenthesesDelta: state.parenthesesDelta - 1,
-            twoConsecutiveOperators: false,
-            lastOperator: ")",
+            lastOperator: e.target.value,
           }),
           () => {
             console.log("inside rightParenthesis after setState:  displayAll", this.state.displayAll);
@@ -622,8 +623,7 @@ export default class Calculator extends React.Component {
     if (this.state.lastResult === "") {
       console.log("check parenthesis after adding missing", this.state.displayAll);
 
-      let result = calculate(this.state, this.state.displayAll); // change it to one arg
-      // let result = calculate("3 * (25 - 21) + 8");
+      let result = calculate(this.state, this.state.displayAll);
       this.setState(
         {
           displayAll: displayAllExpression.concat(" = ").concat(result < 0 ? ` - ${Math.abs(result)}` : `${result}`),

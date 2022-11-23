@@ -7,22 +7,17 @@
 // consider adding event listeners
 
 // - check every input mixing with others
-// check the following input 8 + ( - =
-// check the following input 8 + ( =
-// check the following input - ( 8  => NaN
 // check the the wrong operator cut at the end : 7 + 4! - 4! +    =
-// denominator doesn't work with log (it should put log in lower part)
 // 45 log base (-45) = NaN
 // expressionNegative in findExpression - is it even required with current code logic
-// create a function which will remove exessive paretheses
-// check whether NaN appeared indisplayCur after 4 + ((
+// create a function which will remove exessive paretheses - but before emulate situatin when it is required
 // check why (2 - 1) + changes to (2 - 1 ^ after pressing ^
 
 // - when invalid input appers or any other error, block all keys except for AC and del
 
 // unite changeOneIntoAnother in various functions
 import { factorial } from "./factorial";
-import { FixIncompleteInputs, displayAllExpression, addMissingParenthesis } from "./FixIncompleteInputs";
+import { FixIncompleteInputs, displayAllExpression } from "./FixIncompleteInputs";
 import $ from "jquery";
 import { validInputLog, invalidInputLog } from "./logarithm";
 
@@ -36,7 +31,7 @@ export default function calculate(state, expression) {
 
 function convertDisplayAllIntoArray(string) {
   // console.log("string inside convertDisplayIntoArr", string);
-  let parseRegex = new RegExp(/-\d+\.\d+|\d+\.\d+|sin|cos|tan|cot|sec|csc|abs| yroot | log base | mod |invalid input| \+ | - | \* | \^ | \/ |-\d+|\d+|\D/, "g");
+  let parseRegex = new RegExp(/-\d+\.\d+|\d+\.\d+|-\d+\.|\d+\.|sin|cos|tan|cot|sec|csc|abs| yroot | log base | mod |invalid input| \+ | - | \* | \^ | \/ |-\d+|\d+|\D/, "g");
   let displayAllArray = string.match(parseRegex).map((elem) => (isFinite(elem) ? Number(elem) : elem));
   displayAllArray.unshift("(");
   displayAllArray.push(")");
