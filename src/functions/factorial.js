@@ -1,11 +1,7 @@
 import { expression, findExpression } from "./findExpression";
 import calculate from "./equals";
+import { alertStatus } from "./alertStatus";
 import $ from "jquery";
-
-export let alertStatus = {
-  negative: false,
-  nonInteger: false,
-};
 
 export function factorial(num) {
   if (num < 0) {

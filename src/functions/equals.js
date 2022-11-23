@@ -3,21 +3,28 @@
 // continue filling pivot table for all handlers (consider inserting it as a comment to the project)
 
 // - consider using paste into displayCur (restrictions to what should be pasted) -> otherwise change "copy" to "copy result"
-// clicking trigonometry after decimal
 // - consider adding multiple displays for results with possibility to insert them into displayCur later on
-
 // consider adding event listeners
+
 // - check every input mixing with others
 // check the following input 8 + ( - =
 // check the following input 8 + ( =
 // check the following input - ( 8  => NaN
 // check the the wrong operator cut at the end : 7 + 4! - 4! +    =
 // denominator doesn't work with log (it should put log in lower part)
+// 45 log base (-45) = NaN
+// expressionNegative in findExpression - is it even required with current code logic
+// create a function which will remove exessive paretheses
+// check whether NaN appeared indisplayCur after 4 + ((
+// check why (2 - 1) + changes to (2 - 1 ^ after pressing ^
 
 // - when invalid input appers or any other error, block all keys except for AC and del
+
+// unite changeOneIntoAnother in various functions
 import { factorial } from "./factorial";
 import { FixIncompleteInputs, displayAllExpression, addMissingParenthesis } from "./FixIncompleteInputs";
 import $ from "jquery";
+import { validInputLog, invalidInputLog } from "./logarithm";
 
 export default function calculate(state, expression) {
   console.log("you are in equals => calculate");
@@ -56,28 +63,39 @@ function findParenthesis(expr) {
 
 function calculateInsideParentheses(expr) {
   expr = findNegativeValues(expr);
-  expr = calculateInOrder(expr, ["abs", " log base "]);
+  // expr = calculateInOrder(expr, ["abs", " log base "]);
+  expr = calculateInOrder(expr, ["abs", "abs"]);
   expr = calculateInOrder(expr, ["sin", "cos"]);
   expr = calculateInOrder(expr, ["tan", "cot"]);
   expr = calculateInOrder(expr, ["sec", "csc"]);
   expr = calculateInOrder(expr, ["!", "%"]);
   expr = calculateInOrder(expr, [" ^ ", " yroot "]);
   expr = calculateInOrder(expr, [" * ", " / "]);
-  expr = calculateInOrder(expr, [" mod ", " mod "]);
+  // expr = calculateInOrder(expr, [" mod ", " mod "]);
+  expr = calculateInOrder(expr, [" mod ", " log base "]);
+  // expr = calculateInOrder(expr, ["  log base ", " log base "]);
   expr = calculateInOrder(expr, [" + ", " - "]);
 
   return expr[0];
 }
 
+let count = 0;
 export function findNegativeValues(arr) {
   console.log("findNegativeValues arr", arr);
-  let negativeIndex = arr.findIndex((elem, ind) => (elem === " - " && ind === 0) || (elem === " - " && typeof arr[ind - 1] === "string" && arr[ind - 1] !== "!" && arr[ind - 1] !== "%" && typeof arr[ind + 1] === "number"));
-  if (negativeIndex !== -1) {
-    let newArr = arr
-      .slice(0, negativeIndex)
-      .concat(arr[negativeIndex + 1] * -1)
-      .concat(arr.slice(negativeIndex + 2));
+  let negativeIndex = "";
+  if (arr[0] === " - ") {
+    let newArr = [-1, " * "].concat(arr.slice(1));
     return findNegativeValues(newArr);
+  } else {
+    negativeIndex = arr.findIndex((elem, ind) => elem === " - " && typeof arr[ind - 1] === "string" && arr[ind - 1] !== "!" && arr[ind - 1] !== "%" && typeof arr[ind + 1] === "number");
+    console.log("negativeIndex", negativeIndex);
+    if (negativeIndex !== -1) {
+      let newArr = arr
+        .slice(0, negativeIndex)
+        .concat(arr[negativeIndex + 1] * -1)
+        .concat(arr.slice(negativeIndex + 2));
+      return findNegativeValues(newArr);
+    }
   }
   return arr;
 }
@@ -106,15 +124,17 @@ function calculateInOrder(arr, operators) {
         : currentOperator === "cot"
         ? 1 / Math.tan(currentOperation[currentOperation.length - 1] * (Math.PI / 180))
         : currentOperator === "sec"
-        ? 1 / Math.tan(currentOperation[currentOperation.length - 1] * (Math.PI / 180))
+        ? 1 / Math.cos(currentOperation[currentOperation.length - 1] * (Math.PI / 180))
         : currentOperator === "csc"
-        ? 1 / Math.tan(currentOperation[currentOperation.length - 1] * (Math.PI / 180))
+        ? 1 / Math.sin(currentOperation[currentOperation.length - 1] * (Math.PI / 180))
         : currentOperator === "!"
         ? factorial(currentOperation[0])
         : currentOperator === "%"
         ? currentOperation[0] / 100
         : currentOperator === " log base "
-        ? Math.log(currentOperation[0]) / Math.log(currentOperation[2])
+        ? isFinite(Math.log(currentOperation[0]) / Math.log(currentOperation[2]))
+          ? validInputLog(currentOperation)
+          : invalidInputLog()
         : currentOperator === " mod "
         ? currentOperation[0] % currentOperation[2]
         : currentOperator === " yroot "

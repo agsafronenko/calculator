@@ -80,7 +80,6 @@ export function changeSign(state) {
   ];
 
   findExpression(state); // determines the expression for which changeSign(state) function will be applied to
-  let displayCurAfterChangeSign = expressionNegative ? calculate(state, expression) : ` - ${calculate(state, expression)}`; // determines the mathematical result for the expression to display it in "#Display" html object
 
   let arr = [];
   for (let i = 0; i < changeOneIntoAnother.length; i++) {
@@ -97,5 +96,5 @@ export function changeSign(state) {
       break;
     }
   }
-  return [displayAllAfterChangeSign, displayCurAfterChangeSign];
+  return displayAllAfterChangeSign;
 }
