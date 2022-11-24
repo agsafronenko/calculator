@@ -52,6 +52,10 @@ export function changeSign(state) {
       before: " yroot  - ",
       after: " yroot ",
     },
+    {
+      before: " mod  - ",
+      after: " mod ",
+    },
     // 3) the expression preceded by only one operator:
     {
       before: " - ",
@@ -76,6 +80,10 @@ export function changeSign(state) {
     {
       before: " yroot ",
       after: " yroot  - ",
+    },
+    {
+      before: " mod ",
+      after: " mod ",
     },
   ];
 

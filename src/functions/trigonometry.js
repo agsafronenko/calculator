@@ -51,7 +51,10 @@ export function trigonometryInDegrees(trigFunc, state) {
       before: " yroot  - ",
       after: ` yroot ${trigFunc}( - `,
     },
-
+    {
+      before: " mod  - ",
+      after: ` mod ${trigFunc}( - `,
+    },
     // 3) the expression preceded by only one operator:
     {
       before: " - ",
@@ -80,6 +83,10 @@ export function trigonometryInDegrees(trigFunc, state) {
     {
       before: " log base ",
       after: ` log base ${trigFunc}(`,
+    },
+    {
+      before: " mod ",
+      after: ` mod ${trigFunc}(`,
     },
   ];
 

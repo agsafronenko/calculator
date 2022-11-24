@@ -52,6 +52,10 @@ export function switchToDenominator(state) {
       before: " yroot  - ",
       after: " yroot (1 / ( - ",
     },
+    {
+      before: " mod  - ",
+      after: " mod (1 / ( - ",
+    },
     // 3) the expression preceded by only one operator:
     {
       before: " - ",
@@ -79,7 +83,11 @@ export function switchToDenominator(state) {
     },
     {
       before: " log base ",
-      after: " log base 1 / (",
+      after: " log base (1 / (",
+    },
+    {
+      before: " mod ",
+      after: " mod (1 / (",
     },
   ];
 
@@ -96,7 +104,7 @@ export function switchToDenominator(state) {
 
   for (let i = 0; i < arr.length; i++) {
     if (arr[i] !== null) {
-      displayAllAfterDenomination = displayAll.slice(0, arr[i].index).concat(changeOneIntoAnother[i]["after"]).concat(expression).concat(")");
+      displayAllAfterDenomination = displayAll.slice(0, arr[i].index).concat(changeOneIntoAnother[i]["after"]).concat(expression).concat("))");
       break;
     }
   }

@@ -52,6 +52,10 @@ export function abs(state) {
       before: " yroot  - ",
       after: " yroot abs( - ",
     },
+    {
+      before: " mod  - ",
+      after: " mod abs( - ",
+    },
     // 3) the expression preceded by only one operator:
     {
       before: " - ",
@@ -80,6 +84,10 @@ export function abs(state) {
     {
       before: " log base ",
       after: " log base abs(",
+    },
+    {
+      before: " mod ",
+      after: " mod abs(",
     },
   ];
 

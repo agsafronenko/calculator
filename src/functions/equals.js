@@ -8,7 +8,7 @@
 
 // create a function which will remove exessive paretheses - but before emulate situatin when it is required
 
-// - when invalid input appers or any other error, block all keys except for AC and del
+// - when invalid input appears or any other error, block all keys except for AC and del
 
 // unite changeOneIntoAnother in various functions
 
