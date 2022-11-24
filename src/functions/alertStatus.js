@@ -1,5 +1,5 @@
 export let alertStatus = {
-    negative: false,
-    nonInteger: false,
-    negativeLog: false,
-  };
+  negativeFactor: false,
+  nonIntegerFactor: false,
+  negativeLog: false,
+};

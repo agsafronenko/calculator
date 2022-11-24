@@ -1,5 +1,5 @@
 import calculate, { findNegativeValues } from "./equals";
-import { findExpression, expression, regex, expressionNegative } from "./findExpression";
+import { findExpression, expression, regex } from "./findExpression";
 export let finalDisplayAll = "";
 let displayAll = "";
 export let displayAllAfterTrigonometry = "";
@@ -84,7 +84,7 @@ export function trigonometryInDegrees(trigFunc, state) {
   ];
 
   findExpression(state);
-  console.log("expression in trigonometry", expression, expressionNegative, "regex", regex);
+  console.log("expression in trigonometry", expression, "regex", regex);
 
   let arr = [];
   for (let i = 0; i < changeOneIntoAnother.length; i++) {

@@ -1,5 +1,5 @@
 export let expression = "";
-export let expressionNegative = "";
+// export let expressionNegative = "";
 export let regex = "";
 
 export function findExpression(state) {
@@ -87,5 +87,5 @@ export function findExpression(state) {
     regex = displayAll.match(/\d+(?:\.\d*)?(!%|%!|!|%)$/)[0];
     expression = regex;
   }
-  expressionNegative = displayAll.endsWith(` - ${expression}`);
+  // expressionNegative = displayAll.endsWith(` - ${expression}`);
 }

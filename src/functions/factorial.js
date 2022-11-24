@@ -5,9 +5,9 @@ import $ from "jquery";
 
 export function factorial(num) {
   if (num < 0) {
-    if (alertStatus.negative === false) {
+    if (alertStatus.negativeFactor === false) {
       alert("invalid input: factorials are only defined for positive numbers");
-      alertStatus.negative = true;
+      alertStatus.negativeFactor = true;
     }
     $("button").css("pointerEvents", "none");
     $("button").css("opacity", "0.8");
@@ -18,10 +18,10 @@ export function factorial(num) {
 
     return "invalid input";
   } else if (num % 1 !== 0) {
-    if (alertStatus.nonInteger === false) {
+    if (alertStatus.nonIntegerFactor === false) {
       alert(`factorials for nonintegers are defined based on simplified Gamma function:
       ~~ level of accuracy: low ~~`);
-      alertStatus.nonInteger = true;
+      alertStatus.nonIntegerFactor = true;
     }
     return Math.pow(2 * num * Math.PI, 1 / 2) * Math.pow(num / Math.E, num);
   } else {

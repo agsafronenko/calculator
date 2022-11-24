@@ -1,5 +1,5 @@
 import calculate from "./equals";
-import { expression, expressionNegative, regex, findExpression } from "./findExpression";
+import { expression, regex, findExpression } from "./findExpression";
 
 export let displayAllAfterDenomination = "";
 let displayAll = "";

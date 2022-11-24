@@ -64,6 +64,9 @@ export default class Calculator extends React.Component {
       parenthesesDelta: 0,
       lastOperator: "",
     });
+    alertStatus.negativeFactor = false;
+    alertStatus.nonIntegerFactor = false;
+    alertStatus.negativeLog = false;
   }
 
   handlePreviousState() {
@@ -73,18 +76,28 @@ export default class Calculator extends React.Component {
       this.handleClear(true);
     } else {
       stateStorage.prevState.shift();
-      this.setState({
-        displayAll: stateStorage.prevState[0].displayAll,
-        displayCur: stateStorage.prevState[0].displayCur,
-        lastInput: stateStorage.prevState[0].lastInput,
-        lastInputType: stateStorage.prevState[0].lastInputType,
-        decimalAlreadyUsed: stateStorage.prevState[0].decimalAlreadyUsed,
-        twoConsecutiveOperators: stateStorage.prevState[0].twoConsecutiveOperators,
-        lastResult: stateStorage.prevState[0].lastResult,
-        parenthesesDelta: stateStorage.prevState[0].parenthesesDelta,
-        lastOperator: stateStorage.prevState[0].lastOperator,
-      });
+      this.setState(
+        {
+          displayAll: stateStorage.prevState[0].displayAll,
+          displayCur: stateStorage.prevState[0].displayCur,
+          lastInput: stateStorage.prevState[0].lastInput,
+          lastInputType: stateStorage.prevState[0].lastInputType,
+          decimalAlreadyUsed: stateStorage.prevState[0].decimalAlreadyUsed,
+          twoConsecutiveOperators: stateStorage.prevState[0].twoConsecutiveOperators,
+          lastResult: stateStorage.prevState[0].lastResult,
+          parenthesesDelta: stateStorage.prevState[0].parenthesesDelta,
+          lastOperator: stateStorage.prevState[0].lastOperator,
+        },
+        () => {
+          alertStatus.negativeFactor = false;
+          if (/\d+\.\d+!/.test(this.state.displayAll) === false) {
+            alertStatus.nonIntegerFactor = false;
+          }
+        }
+      );
     }
+
+    // alertStatus.negativeLog = false;
   }
 
   handleOperator(e) {
@@ -99,7 +112,6 @@ export default class Calculator extends React.Component {
           this.setState(
             (state) => ({
               displayAll: state.displayAll.slice(0, state.displayAll.length - lastLegitSymbol(state.displayAll)).concat(e.target.value),
-              displayCur: calculate(state, state.displayAll),
               lastInput: e.target.value,
               lastInputType: "operator",
               twoConsecutiveOperators: false,
@@ -112,10 +124,10 @@ export default class Calculator extends React.Component {
           );
         } else if (this.state.twoConsecutiveOperators === false && this.state.lastInputType === "operator" && e.target.value !== " - ") {
           if (this.state.displayAll.slice(this.state.displayAll.length - 4) !== "( - ") {
+            console.log("finding Nemo");
             this.setState(
               (state) => ({
                 displayAll: state.displayAll.slice(0, state.displayAll.length - lastLegitSymbol(state.displayAll)).concat(e.target.value),
-                displayCur: calculate(state, state.displayAll),
                 lastInput: e.target.value,
                 lastInputType: "operator",
                 twoConsecutiveOperators: false,
@@ -144,7 +156,6 @@ export default class Calculator extends React.Component {
             this.setState(
               (state) => ({
                 displayAll: state.displayAll.concat(e.target.value),
-                displayCur: calculate(state, state.displayAll),
                 lastInput: e.target.value,
                 lastInputType: "operator",
                 twoConsecutiveOperators: true,
@@ -259,8 +270,9 @@ export default class Calculator extends React.Component {
     if ((this.state.lastInputType === "digit" || this.state.lastInputType === "operator" || this.state.lastInput === "" || this.state.lastInput === "(") && this.state.decimalAlreadyUsed === false) {
       this.setState(
         (state) => ({
-          displayAll: state.lastResult === "" ? state.displayAll.concat(isFinite(state.lastInput) && this.state.displayAll !== "" ? "." : "0.") : /\./.test(state.lastResult) ? "".concat("0.") : "".state.lastResult.concat("."),
-          displayCur: state.lastResult === "" ? (isFinite(state.lastInput) ? state.displayCur.concat(".") : "0.") : /\./.test(state.lastResult) ? "".concat("0.") : "".state.lastResult.concat("."),
+          displayAll: state.lastResult === "" ? state.displayAll.concat(isFinite(state.lastInput) && this.state.displayAll !== "" ? "." : "0.") : /\./.test(state.lastResult) ? "".concat("0.") : "".concat(state.lastResult).concat("."),
+
+          displayCur: state.lastResult === "" ? (isFinite(state.lastInput) ? state.displayCur.concat(".") : "0.") : /\./.test(state.lastResult) ? "".concat("0.") : "".concat(state.lastResult).concat("."),
           lastInput: ".",
           lastInputType: "decimal",
           decimalAlreadyUsed: true,
@@ -630,16 +642,16 @@ export default class Calculator extends React.Component {
           displayCur: result,
           lastInput: "",
           lastInputType: "digit",
-          twoConsecutiveOperators: false,
           decimalAlreadyUsed: false,
+          twoConsecutiveOperators: false,
           lastResult: result < 0 ? ` - ${Math.abs(result)}` : `${result}`,
           parenthesesDelta: 0,
           lastOperator: "equal",
         },
         () => {
           saveState(this.state);
-          alertStatus.negative = false; // is it required to have it here?
-          alertStatus.nonInteger = false;
+          alertStatus.negativeFactor = false;
+          alertStatus.nonIntegerFactor = false;
           alertStatus.negativeLog = false;
           console.log("Inside handleEquals: final result", result);
         }

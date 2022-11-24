@@ -1,21 +1,17 @@
 // next steps:
 
-// continue filling pivot table for all handlers (consider inserting it as a comment to the project)
-
 // - consider using paste into displayCur (restrictions to what should be pasted) -> otherwise change "copy" to "copy result"
 // - consider adding multiple displays for results with possibility to insert them into displayCur later on
 // consider adding event listeners
 
 // - check every input mixing with others
-// check the the wrong operator cut at the end : 7 + 4! - 4! +    =
-// 45 log base (-45) = NaN
-// expressionNegative in findExpression - is it even required with current code logic
+
 // create a function which will remove exessive paretheses - but before emulate situatin when it is required
-// check why (2 - 1) + changes to (2 - 1 ^ after pressing ^
 
 // - when invalid input appers or any other error, block all keys except for AC and del
 
 // unite changeOneIntoAnother in various functions
+
 import { factorial } from "./factorial";
 import { FixIncompleteInputs, displayAllExpression } from "./FixIncompleteInputs";
 import $ from "jquery";
@@ -58,17 +54,14 @@ function findParenthesis(expr) {
 
 function calculateInsideParentheses(expr) {
   expr = findNegativeValues(expr);
-  // expr = calculateInOrder(expr, ["abs", " log base "]);
   expr = calculateInOrder(expr, ["abs", "abs"]);
   expr = calculateInOrder(expr, ["sin", "cos"]);
   expr = calculateInOrder(expr, ["tan", "cot"]);
   expr = calculateInOrder(expr, ["sec", "csc"]);
   expr = calculateInOrder(expr, ["!", "%"]);
+  expr = calculateInOrder(expr, [" mod ", " log base "]);
   expr = calculateInOrder(expr, [" ^ ", " yroot "]);
   expr = calculateInOrder(expr, [" * ", " / "]);
-  // expr = calculateInOrder(expr, [" mod ", " mod "]);
-  expr = calculateInOrder(expr, [" mod ", " log base "]);
-  // expr = calculateInOrder(expr, ["  log base ", " log base "]);
   expr = calculateInOrder(expr, [" + ", " - "]);
 
   return expr[0];
@@ -171,6 +164,7 @@ export function lastLegitSymbol(displayAll) {
   let lastLegitSymbol = displayAll
     .split("")
     .reverse()
-    .findIndex((elem) => /\d|\(|!/.test(elem));
+    .findIndex((elem) => /\d|\(|\)|!|%/.test(elem));
+  console.log(lastLegitSymbol);
   return (lastLegitSymbol = lastLegitSymbol !== -1 ? lastLegitSymbol : displayAll.length);
 }
