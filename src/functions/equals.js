@@ -1,15 +1,10 @@
 // next steps:
 
-// unite changeOneIntoAnother in various functions
 // - consider using paste into displayCur (restrictions to what should be pasted) -> otherwise change "copy" to "copy result"
 // - consider adding multiple displays for results with possibility to insert them into displayCur later on
 // consider adding event listeners
 
 // - check every input mixing with others
-
-// create a function which will remove exessive paretheses - but before emulate situatin when it is required
-
-// - when invalid input appears or any other error, block all keys except for AC and del - but before emulate situatin when it is required - JUST CHEcK ALL INVALID INPUT
 
 import { factorial } from "./factorial";
 import { FixIncompleteInputs, displayAllExpression } from "./FixIncompleteInputs";

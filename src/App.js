@@ -24,6 +24,9 @@ export default class Calculator extends React.Component {
       lastResult: "",
       parenthesesDelta: 0,
       lastOperator: "",
+      memorySlot1: "Memory Slot 1",
+      memorySlot2: "Memory Slot 2",
+      memorySlot3: "Memory Slot 3",
     };
     this.handleClear = this.handleClear.bind(this);
     this.handleOperator = this.handleOperator.bind(this);
@@ -47,6 +50,9 @@ export default class Calculator extends React.Component {
     this.handleModulo = this.handleModulo.bind(this);
     this.handleLeftParenthesis = this.handleLeftParenthesis.bind(this);
     this.handleRightParenthesis = this.handleRightParenthesis.bind(this);
+    this.handleCopyToMS = this.handleCopyToMS.bind(this);
+    // this.handleCopyToMS2 = this.handleCopyToMS2.bind(this);
+    // this.handleCopyToMS3 = this.handleCopyToMS3.bind(this);
   }
 
   handleClear(clearStorage) {
@@ -96,8 +102,6 @@ export default class Calculator extends React.Component {
         }
       );
     }
-
-    // alertStatus.negativeLog = false;
   }
 
   handleOperator(e) {
@@ -317,44 +321,6 @@ export default class Calculator extends React.Component {
       }
     }, 0);
   }
-
-  // handleExponentiation(e) {
-  //   this.setState(
-  //     (state) => ({
-  //       displayAll: state.lastResult === "" ? state.displayAll.concat(e.target.value) : "".concat(state.lastResult).concat(e.target.value),
-  //       displayCur: e.target.value,
-  //       lastInput: e.target.value,
-  //       lastInputType: "operator",
-  //       twoConsecutiveOperators: false,
-  //       decimalAlreadyUsed: false,
-  //       lastResult: "",
-  //       lastOperator: " ^ ",
-  //     }),
-  //     () => {
-  //       console.log("inside handle ^ after setState:  displayAll", this.state.displayAll);
-  //       saveState(this.state);
-  //     }
-  //   );
-  // }
-
-  // handleRoot(e) {
-  //   this.setState(
-  //     (state) => ({
-  //       displayAll: state.lastResult === "" ? state.displayAll.concat(e.target.value) : "".concat(state.lastResult).concat(e.target.value),
-  //       displayCur: e.target.value,
-  //       lastInput: e.target.value,
-  //       lastInputType: "operator",
-  //       twoConsecutiveOperators: false,
-  //       decimalAlreadyUsed: false,
-  //       lastResult: "",
-  //       lastOperator: " yroot ",
-  //     }),
-  //     () => {
-  //       console.log("after displayAll", this.state.displayAll);
-  //       saveState(this.state);
-  //     }
-  //   );
-  // }
 
   handleLog(e) {
     if (this.state.lastInputType === "digit" || this.state.lastInput === ")") {
@@ -659,23 +625,27 @@ export default class Calculator extends React.Component {
     }
   }
 
-  handleCopyToClipboard() {
-    let copyResult = document.getElementById("display").innerText;
+  handleCopyToClipboard(e) {
+    let copyResult = document.getElementById(e.target.value).innerText;
     navigator.clipboard.writeText(copyResult);
+  }
+
+  handleCopyToMS(e) {
+    this.setState((state) => ({
+      [e.target.value]: state.displayCur,
+    }));
   }
 
   render() {
     return (
       <>
-        <Display ops={this.state.displayAll} cur={this.state.displayCur} />
+        <Display ops={this.state.displayAll} cur={this.state.displayCur} memorySlot1={this.state.memorySlot1} memorySlot2={this.state.memorySlot2} memorySlot3={this.state.memorySlot3} />
         <Buttons
           clear={this.handleClear}
           operator={this.handleOperator}
           digit={this.handleDigit}
           equals={this.handleEquals}
           decimal={this.handleDecimal}
-          // exponentiation={this.handleExponentiation}
-          // root={this.handleRoot}
           square={this.handleSquare}
           squareRoot={this.handleSquareRoot}
           previousState={this.handlePreviousState}
@@ -693,6 +663,7 @@ export default class Calculator extends React.Component {
           modulo={this.handleModulo}
           leftParenthesis={this.handleLeftParenthesis}
           rightParenthesis={this.handleRightParenthesis}
+          CopyToMS={this.handleCopyToMS}
         />
         <Footer />
       </>
@@ -710,6 +681,9 @@ class Display extends React.Component {
         <div id="displayBox">
           <div id="displayAll">{this.props.ops}</div>
           <div id="display">{this.props.cur}</div>
+          <div id="memorySlot1">{this.props.memorySlot1}</div>
+          <div id="memorySlot2">{this.props.memorySlot2}</div>
+          <div id="memorySlot3">{this.props.memorySlot3}</div>
         </div>
       </>
     );
@@ -831,9 +805,7 @@ class Buttons extends React.Component {
         <button id="percentage" onClick={this.props.percentage}>
           %
         </button>
-        <button id="copy" onClick={this.props.copyToClipboard}>
-          Copy
-        </button>
+
         <button id="sign" onClick={this.props.changeSign}>
           +/-
         </button>
@@ -851,6 +823,24 @@ class Buttons extends React.Component {
         </button>
         <button id="rightParenthesis" value=")" onClick={this.props.rightParenthesis}>
           )
+        </button>
+        <button id="CopyToMS1" value="memorySlot1" onClick={this.props.CopyToMS}>
+          Copy to MS1
+        </button>
+        <button id="copyFromMS1" value="memorySlot1" onClick={this.props.copyToClipboard}>
+          Copy from MS1
+        </button>
+        <button id="CopyToMS2" value="memorySlot2" onClick={this.props.CopyToMS}>
+          Copy to MS2
+        </button>
+        <button id="copyFromMS2" value="memorySlot2" onClick={this.props.copyToClipboard}>
+          Copy from MS2
+        </button>
+        <button id="CopyToMS3" value="memorySlot3" onClick={this.props.CopyToMS}>
+          Copy to MS3
+        </button>
+        <button id="copyFromMS3" value="memorySlot3" onClick={this.props.copyToClipboard}>
+          Copy from MS3
         </button>
       </>
     );
