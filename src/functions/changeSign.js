@@ -1,91 +1,12 @@
 import calculate from "./equals";
 import { expression, regex, findExpression } from "./findExpression";
+import { changeOneIntoAnother } from "./changeOneIntoAnother";
 
-export let displayAllAfterChangeSign = "";
+export let displayAllafterChangeSign = "";
 let displayAll = "";
 
 export function changeSign(state) {
   displayAll = state.lastResult !== "" ? state.lastResult : state.displayAll;
-
-  let changeOneIntoAnother = [
-    // the sign will be changed from positive to negative or vice versa for:
-    // 1) the expression not preceded by operators (minus here indicates negative value of the following number rather than an operator sign)
-    {
-      before: "\\(",
-      after: "( - ",
-    },
-    {
-      before: "\\( - ",
-      after: "(",
-    },
-    {
-      before: "^",
-      after: " - ",
-    },
-    {
-      before: "^ - ",
-      after: "",
-    },
-
-    // 2) the expression preceded by two consecutive operators:
-    {
-      before: " -  - ",
-      after: " - ",
-    },
-    {
-      before: " \\+  - ",
-      after: " + ",
-    },
-    {
-      before: " \\*  - ",
-      after: " * ",
-    },
-    {
-      before: " \\/  - ",
-      after: " / ",
-    },
-    {
-      before: " \\^  - ",
-      after: " ^ ",
-    },
-    {
-      before: " yroot  - ",
-      after: " yroot ",
-    },
-    {
-      before: " mod  - ",
-      after: " mod ",
-    },
-    // 3) the expression preceded by only one operator:
-    {
-      before: " - ",
-      after: " + ",
-    },
-    {
-      before: " \\+ ",
-      after: " - ",
-    },
-    {
-      before: " \\* ",
-      after: " *  - ",
-    },
-    {
-      before: " \\/ ",
-      after: " /  - ",
-    },
-    {
-      before: " \\^ ",
-      after: " ^  - ",
-    },
-    {
-      before: " yroot ",
-      after: " yroot  - ",
-    },
-    {
-      before: " mod ",
-      after: " mod ",
-    },
-  ];
 
   findExpression(state); // determines the expression for which changeSign(state) function will be applied to
 
@@ -100,9 +21,9 @@ export function changeSign(state) {
 
   for (let i = 0; i < arr.length; i++) {
     if (arr[i] !== null) {
-      displayAllAfterChangeSign = displayAll.slice(0, arr[i].index).concat(changeOneIntoAnother[i]["after"]).concat(expression);
+      displayAllafterChangeSign = displayAll.slice(0, arr[i].index).concat(changeOneIntoAnother[i]["afterChangeSign"]).concat(expression);
       break;
     }
   }
-  return displayAllAfterChangeSign;
+  return displayAllafterChangeSign;
 }

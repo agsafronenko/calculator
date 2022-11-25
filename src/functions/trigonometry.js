@@ -1,94 +1,13 @@
 import calculate, { findNegativeValues } from "./equals";
 import { findExpression, expression, regex } from "./findExpression";
+import { changeOneIntoAnother } from "./changeOneIntoAnother";
+
 export let finalDisplayAll = "";
 let displayAll = "";
 export let displayAllAfterTrigonometry = "";
 
-export function trigonometryInDegrees(trigFunc, state) {
+export function trigonometryInDegrees(trigFunction, state) {
   displayAll = state.lastResult !== "" ? state.lastResult : state.displayAll;
-  let changeOneIntoAnother = [
-    // trigonometry function will be applied for:
-    // 1) the expression not preceded by operators (minus here indicates negative value of the following number rather than an operator sign)
-    {
-      before: "\\(",
-      after: `(${trigFunc}(`,
-    },
-    {
-      before: "\\( - ",
-      after: `(${trigFunc}( - `,
-    },
-    {
-      before: "^",
-      after: `${trigFunc}(`,
-    },
-    {
-      before: "^ - ",
-      after: `${trigFunc}( - `,
-    },
-
-    // 2) the expression preceded by two consecutive operators:
-    {
-      before: " -  - ",
-      after: ` - ${trigFunc}( - `,
-    },
-    {
-      before: " \\+  - ",
-      after: ` + ${trigFunc}( - `,
-    },
-    {
-      before: " \\*  - ",
-      after: ` * ${trigFunc}( - `,
-    },
-    {
-      before: " \\/  - ",
-      after: ` / ${trigFunc}( - `,
-    },
-    {
-      before: " \\^  - ",
-      after: ` ^ ${trigFunc}( - `,
-    },
-    {
-      before: " yroot  - ",
-      after: ` yroot ${trigFunc}( - `,
-    },
-    {
-      before: " mod  - ",
-      after: ` mod ${trigFunc}( - `,
-    },
-    // 3) the expression preceded by only one operator:
-    {
-      before: " - ",
-      after: ` - ${trigFunc}(`,
-    },
-    {
-      before: " \\+ ",
-      after: ` + ${trigFunc}(`,
-    },
-    {
-      before: " \\* ",
-      after: ` * ${trigFunc}(`,
-    },
-    {
-      before: " \\/ ",
-      after: ` / ${trigFunc}(`,
-    },
-    {
-      before: " \\^ ",
-      after: ` ^ ${trigFunc}(`,
-    },
-    {
-      before: " yroot ",
-      after: ` yroot ${trigFunc}(`,
-    },
-    {
-      before: " log base ",
-      after: ` log base ${trigFunc}(`,
-    },
-    {
-      before: " mod ",
-      after: ` mod ${trigFunc}(`,
-    },
-  ];
 
   findExpression(state);
   console.log("expression in trigonometry", expression, "regex", regex);
@@ -100,7 +19,7 @@ export function trigonometryInDegrees(trigFunc, state) {
 
   for (let i = 0; i < arr.length; i++) {
     if (arr[i] !== null) {
-      displayAllAfterTrigonometry = displayAll.slice(0, arr[i].index).concat(changeOneIntoAnother[i]["after"]).concat(expression).concat(")");
+      displayAllAfterTrigonometry = displayAll.slice(0, arr[i].index).concat(changeOneIntoAnother[i]["afterTrigonometry"]).replace("trigFunc", trigFunction).concat(expression).concat(")");
 
       break;
     }
