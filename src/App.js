@@ -252,15 +252,16 @@ export default class Calculator extends React.Component {
       this.setState(
         (state) => ({
           displayAll:
-            state.lastInputType === "operator" || state.lastInput === "("
-              ? state.displayAll.concat(e.target.value)
-              : (Number(state.displayCur) === 0 && state.displayCur.length === 1) || (!isFinite(state.lastInput) && state.lastInput !== ".")
-              ? state.displayAll.slice(0, state.displayAll.length - 1).concat(e.target.value)
-              : state.displayAll.concat(e.target.value),
+            // state.lastInputType === "operator" || state.lastInput === "("
+            //   ? state.displayAll.concat(e.target.value)
+            //   : (Number(state.displayCur) === 0 && state.displayCur.length === 1) || (!isFinite(state.lastInput) && state.lastInput !== ".")
+            //   ? state.displayAll.slice(0, state.displayAll.length - 1).concat(e.target.value)
+            //   : state.displayAll.concat(e.target.value),
+            Number(state.displayAll) === 0 ? e.target.value : state.displayAll.concat(e.target.value),
           displayCur: e.target.value,
           lastInput: e.target.value[e.target.value.length - 1],
           lastInputType: "digit",
-          decimalAlreadyUsed: true,
+          decimalAlreadyUsed: /\./.test(e.target.value),
           twoConsecutiveOperators: false,
         }),
         () => {
@@ -639,7 +640,7 @@ export default class Calculator extends React.Component {
   render() {
     return (
       <>
-        <Display ops={this.state.displayAll} cur={this.state.displayCur} memorySlot1={this.state.memorySlot1} memorySlot2={this.state.memorySlot2} memorySlot3={this.state.memorySlot3} />
+        <Display ops={this.state.displayAll} cur={this.state.displayCur} />
         <Buttons
           clear={this.handleClear}
           operator={this.handleOperator}
@@ -663,8 +664,8 @@ export default class Calculator extends React.Component {
           modulo={this.handleModulo}
           leftParenthesis={this.handleLeftParenthesis}
           rightParenthesis={this.handleRightParenthesis}
-          CopyToMS={this.handleCopyToMS}
         />
+        <MemorySlots CopyToMS={this.handleCopyToMS} copyToClipboard={this.handleCopyToClipboard} memorySlot1={this.state.memorySlot1} memorySlot2={this.state.memorySlot2} memorySlot3={this.state.memorySlot3} />
         <Footer />
       </>
     );
@@ -681,9 +682,6 @@ class Display extends React.Component {
         <div id="displayBox">
           <div id="displayAll">{this.props.ops}</div>
           <div id="display">{this.props.cur}</div>
-          <div id="memorySlot1">{this.props.memorySlot1}</div>
-          <div id="memorySlot2">{this.props.memorySlot2}</div>
-          <div id="memorySlot3">{this.props.memorySlot3}</div>
         </div>
       </>
     );
@@ -824,22 +822,39 @@ class Buttons extends React.Component {
         <button id="rightParenthesis" value=")" onClick={this.props.rightParenthesis}>
           )
         </button>
+      </>
+    );
+  }
+}
+
+class MemorySlots extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <>
+        <hr />
+
         <button id="CopyToMS1" value="memorySlot1" onClick={this.props.CopyToMS}>
           Copy to MS1
         </button>
-        <button id="copyFromMS1" value="memorySlot1" onClick={this.props.copyToClipboard}>
+        <div id="memorySlot1">{this.props.memorySlot1}</div>
+        <button id="copyFromMS1" value={this.props.memorySlot1} onClick={this.props.specialDigit}>
           Copy from MS1
         </button>
         <button id="CopyToMS2" value="memorySlot2" onClick={this.props.CopyToMS}>
           Copy to MS2
         </button>
-        <button id="copyFromMS2" value="memorySlot2" onClick={this.props.copyToClipboard}>
+        <div id="memorySlot2">{this.props.memorySlot2}</div>
+        <button id="copyFromMS2" value={this.props.memorySlot2} onClick={this.props.specialDigit}>
           Copy from MS2
         </button>
         <button id="CopyToMS3" value="memorySlot3" onClick={this.props.CopyToMS}>
           Copy to MS3
         </button>
-        <button id="copyFromMS3" value="memorySlot3" onClick={this.props.copyToClipboard}>
+        <div id="memorySlot3">{this.props.memorySlot3}</div>
+        <button id="copyFromMS3" value={this.props.memorySlot3} onClick={this.props.specialDigit}>
           Copy from MS3
         </button>
       </>

@@ -1,7 +1,5 @@
 // next steps:
 
-// - consider using paste into displayCur (restrictions to what should be pasted) -> otherwise change "copy" to "copy result"
-// - consider adding multiple displays for results with possibility to insert them into displayCur later on
 // consider adding event listeners
 
 // - check every input mixing with others
