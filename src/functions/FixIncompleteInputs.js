@@ -1,7 +1,6 @@
 export let displayAllExpression = "";
 
 export function FixIncompleteInputs(state, expr) {
-  console.log("ggggg", /\d/.test(expr));
   if (/\d/.test(expr) === false) {
     displayAllExpression = "0";
   } else {
@@ -15,14 +14,12 @@ export function FixIncompleteInputs(state, expr) {
       let afterTheLastDigit = expr.slice(expr.length - lastDigitIndex);
 
       for (let i = 0; i < afterTheLastDigit.length; i++) {
-        console.log("expr[i", afterTheLastDigit[i]);
         if (afterTheLastDigit[i] === "(") openingParanthesesAfterTheLastDigit++;
       }
     } else {
       displayAllExpression = expr;
     }
     addMissingParenthesis(state.parenthesesDelta - openingParanthesesAfterTheLastDigit);
-    console.log("deleteRedundant after", displayAllExpression);
   }
 }
 

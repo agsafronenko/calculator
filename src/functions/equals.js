@@ -7,10 +7,9 @@
 import { factorial } from "./factorial";
 import { FixIncompleteInputs, displayAllExpression } from "./FixIncompleteInputs";
 import $ from "jquery";
-import { validInputLog, invalidInputLog } from "./logarithm";
+import { validInputLog, invalidInputLog, validInputDenominator, invalidInputDenominator } from "./alertStatus";
 
 export default function calculate(state, expression) {
-  console.log("you are in equals => calculate");
   FixIncompleteInputs(state, expression);
   let expr = displayAllExpression;
   expr = expr === "" ? convertDisplayAllIntoArray("0") : convertDisplayAllIntoArray(expr);
@@ -18,12 +17,10 @@ export default function calculate(state, expression) {
 }
 
 function convertDisplayAllIntoArray(string) {
-  // console.log("string inside convertDisplayIntoArr", string);
   let parseRegex = new RegExp(/-\d+\.\d+|\d+\.\d+|-\d+\.|\d+\.|sin|cos|tan|cot|sec|csc|abs| yroot | log base | mod |invalid input| \+ | - | \* | \^ | \/ |-\d+|\d+|\D/, "g");
   let displayAllArray = string.match(parseRegex).map((elem) => (isFinite(elem) ? Number(elem) : elem));
   displayAllArray.unshift("(");
   displayAllArray.push(")");
-  // console.log("convertDisplayIntoArr", displayAllArray);
   return displayAllArray;
 }
 
@@ -40,7 +37,6 @@ function findParenthesis(expr) {
       .concat(expr.slice(firstClosingIndex + 1));
     return findParenthesis(expr);
   }
-  console.log("you are in findParenthesis", expr[0]);
   return expr[0];
 }
 
@@ -61,14 +57,12 @@ function calculateInsideParentheses(expr) {
 
 let count = 0;
 export function findNegativeValues(arr) {
-  console.log("findNegativeValues arr", arr);
   let negativeIndex = "";
   if (arr[0] === " - ") {
     let newArr = [-1, " * "].concat(arr.slice(1));
     return findNegativeValues(newArr);
   } else {
     negativeIndex = arr.findIndex((elem, ind) => elem === " - " && typeof arr[ind - 1] === "string" && arr[ind - 1] !== "!" && arr[ind - 1] !== "%" && typeof arr[ind + 1] === "number");
-    console.log("negativeIndex", negativeIndex);
     if (negativeIndex !== -1) {
       let newArr = arr
         .slice(0, negativeIndex)
@@ -124,7 +118,9 @@ function calculateInOrder(arr, operators) {
         : currentOperator === " * "
         ? currentOperation[0] * currentOperation[2]
         : currentOperator === " / "
-        ? currentOperation[0] / currentOperation[2]
+        ? currentOperation[2] === 0
+          ? invalidInputDenominator()
+          : validInputDenominator(currentOperation)
         : currentOperator === " + "
         ? currentOperation[0] + currentOperation[2]
         : currentOperation[0] - currentOperation[2];
@@ -152,11 +148,9 @@ function calculateInOrder(arr, operators) {
 }
 
 export function lastLegitSymbol(displayAll) {
-  console.log("you actually here", displayAll);
   let lastLegitSymbol = displayAll
     .split("")
     .reverse()
     .findIndex((elem) => /\d|\(|\)|!|%/.test(elem));
-  console.log(lastLegitSymbol);
   return (lastLegitSymbol = lastLegitSymbol !== -1 ? lastLegitSymbol : displayAll.length);
 }

@@ -1,6 +1,6 @@
 export let changeOneIntoAnother = [
   // change for:
-  // 1) the expression not preceded by operators (minus here indicates negative value of the following number rather than an operator sign)
+  // 1) the expression not preceded by operators
   {
     before: "\\(",
     afterChangeSign: "( - ",

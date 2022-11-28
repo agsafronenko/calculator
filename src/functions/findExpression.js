@@ -1,5 +1,4 @@
 export let expression = "";
-// export let expressionNegative = "";
 export let regex = "";
 
 export function findExpression(state) {
@@ -61,21 +60,36 @@ export function findExpression(state) {
     }
     regex = displayAll.slice(firstOpeningIndex).replace(/[|\\{}()[\]^$+*?.]/g, "\\$&");
     expression = displayAll.slice(firstOpeningIndex);
-    console.log("you are in stage 4, regex, expression", regex, expression);
   } else if (state.lastInputType === "digit" || state.lastInputType === "decimal") {
     console.log("stage 5 start");
     regex = displayAll.match(/\d+(?:\.\d*)?$/)[0];
     expression = regex;
-  } else if (displayAll.match(/\)(!%|%!|!|%)$/)) {
-    console.log("stage 6 start");
+  } else if (displayAll.match(/\(.*\)(!%|%!|!|%)$/)) {
+    console.log("stage 6.0 start");
     let displayAllLength = displayAll.length;
-    let closingNum = 1;
+    let closingNum = 0;
     let openingNum = 0;
     let firstOpeningIndex = 0;
-    for (let i = displayAllLength - 3; i >= 0; i--) {
+    for (let i = displayAllLength - 1; i >= 0; i--) {
       if (displayAll[i] === ")") closingNum++;
       if (displayAll[i] === "(") openingNum++;
-      if (closingNum === openingNum) {
+      if (closingNum > 0 && closingNum === openingNum) {
+        firstOpeningIndex = i - 3;
+        break;
+      }
+    }
+    regex = displayAll.slice(firstOpeningIndex).replace(/[|\\{}()[\]^$+*?.]/g, "\\$&");
+    expression = displayAll.slice(firstOpeningIndex);
+  } else if (displayAll.match(/\)(!%|%!|!|%)$/)) {
+    console.log("stage 7 start");
+    let displayAllLength = displayAll.length;
+    let closingNum = 0;
+    let openingNum = 0;
+    let firstOpeningIndex = 0;
+    for (let i = displayAllLength - 1; i >= 0; i--) {
+      if (displayAll[i] === ")") closingNum++;
+      if (displayAll[i] === "(") openingNum++;
+      if (closingNum > 0 && closingNum === openingNum) {
         firstOpeningIndex = i;
         break;
       }
@@ -83,7 +97,7 @@ export function findExpression(state) {
     regex = displayAll.slice(firstOpeningIndex).replace(/[|\\{}()[\]^$+*?.]/g, "\\$&");
     expression = displayAll.slice(firstOpeningIndex);
   } else if (state.lastInputType === "!" || state.lastInputType === "%") {
-    console.log("stage 7 start");
+    console.log("stage 8 start");
     regex = displayAll.match(/\d+(?:\.\d*)?(!%|%!|!|%)$/)[0];
     expression = regex;
   }

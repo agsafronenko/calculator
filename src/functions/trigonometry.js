@@ -1,4 +1,3 @@
-import calculate, { findNegativeValues } from "./equals";
 import { findExpression, expression, regex } from "./findExpression";
 import { changeOneIntoAnother } from "./changeOneIntoAnother";
 
@@ -10,7 +9,6 @@ export function trigonometryInDegrees(trigFunction, state) {
   displayAll = state.lastResult !== "" ? state.lastResult : state.displayAll;
 
   findExpression(state);
-  console.log("expression in trigonometry", expression, "regex", regex);
 
   let arr = [];
   for (let i = 0; i < changeOneIntoAnother.length; i++) {
@@ -24,16 +22,5 @@ export function trigonometryInDegrees(trigFunction, state) {
       break;
     }
   }
-  console.log("displayAllAfterTrigonometry", displayAllAfterTrigonometry);
   return displayAllAfterTrigonometry;
 }
-
-// function trigonometryCalculate(curDegree, trigFunc, state) {
-//   let reciprocal = {
-//     cot: "tan",
-//     sec: "cos",
-//     csc: "sin",
-//   };
-//   let calculateResult = Function(`return ${trigFunc} === cot || ${trigFunc} === sec || ${trigFunc} === csc ? 1/ Math.${reciprocal[trigFunc]}(${curDegree} * (Math.PI / 180)) : Math.${trigFunc}(${curDegree} * (Math.PI / 180))`);
-//   return calculateResult().toString();
-// }
