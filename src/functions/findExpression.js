@@ -2,6 +2,7 @@ export let expression = "";
 export let regex = "";
 
 export function findExpression(state) {
+  console.log("state", state);
   let displayAll = state.displayAll;
   if (state.lastResult !== "") displayAll = state.lastResult;
 

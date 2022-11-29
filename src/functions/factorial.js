@@ -22,6 +22,8 @@ export function factorial(num) {
       alertStatus.nonIntegerFactor = true;
     }
     return Math.pow(2 * num * Math.PI, 1 / 2) * Math.pow(num / Math.E, num);
+  } else if (num === 0) {
+    return 1;
   } else {
     let result = Number(num);
     if (Number.isInteger(result)) {

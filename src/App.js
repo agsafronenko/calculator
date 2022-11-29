@@ -27,6 +27,8 @@ export default class Calculator extends React.Component {
       memorySlot2: "Memory Slot 2",
       memorySlot3: "Memory Slot 3",
     };
+
+    //
     this.handleClear = this.handleClear.bind(this);
     this.handleOperator = this.handleOperator.bind(this);
     this.handleDigit = this.handleDigit.bind(this);
@@ -192,6 +194,7 @@ export default class Calculator extends React.Component {
               lastOperator: e.target.value,
             }),
             () => {
+              console.log("sasa");
               saveState(this.state);
             }
           );
@@ -211,7 +214,7 @@ export default class Calculator extends React.Component {
               : (Number(state.displayCur) === 0 && state.displayCur.length === 1) || (!isFinite(state.lastInput) && state.lastInput !== ".")
               ? state.displayAll.slice(0, state.displayAll.length - 1).concat(e.target.value)
               : state.displayAll.concat(e.target.value),
-          displayCur: (Number(state.displayCur) === 0 && state.displayCur.length === 1) || (!isFinite(state.lastInput) && state.lastInput !== ".") ? e.target.value : state.displayCur.concat(e.target.value),
+          displayCur: (Number(state.displayCur) === 0 && state.displayCur.toString().length === 1) || (!isFinite(state.lastInput) && state.lastInput !== ".") ? e.target.value : state.displayCur.concat(e.target.value),
           lastInput: e.target.value,
           lastInputType: "digit",
           twoConsecutiveOperators: false,
@@ -224,21 +227,36 @@ export default class Calculator extends React.Component {
   }
 
   handleSpecialDigit(e) {
-    if (this.state.lastResult !== "") this.handleClear(false);
-    if (this.state.lastInput !== ")" && this.state.lastInput !== "!" && this.state.lastInput !== "%" && this.state.decimalAlreadyUsed !== true) {
-      this.setState(
-        (state) => ({
-          displayAll: Number(state.displayAll) === 0 ? e.target.value : state.displayAll.concat(e.target.value),
-          displayCur: e.target.value,
-          lastInput: e.target.value[e.target.value.length - 1],
-          lastInputType: "digit",
-          decimalAlreadyUsed: /\./.test(e.target.value),
-          twoConsecutiveOperators: false,
-        }),
-        () => {
-          saveState(this.state);
+    if (isFinite(e.target.value)) {
+      if (this.state.lastResult !== "") this.handleClear(false);
+      if (this.state.lastInput !== ")" && this.state.lastInput !== "!" && this.state.lastInput !== "%" && this.state.displayCur !== "0" && this.state.decimalAlreadyUsed !== true) {
+        if (Number(e.target.value) < 0) {
+          document.getElementById("subtract").click();
+          let val = {
+            target: {
+              value: Math.abs(Number(e.target.value)),
+            },
+          };
+          setTimeout(() => {
+            this.handleSpecialDigit(val);
+          }, 0);
+        } else {
+          this.setState(
+            (state) => ({
+              displayAll: Number(state.displayAll) === 0 ? e.target.value : state.displayAll.concat(e.target.value),
+              displayCur: state.lastInput === " - " ? -e.target.value : e.target.value,
+              lastInput: e.target.value[e.target.value.length - 1],
+              lastInputType: "digit",
+              decimalAlreadyUsed: /\./.test(e.target.value),
+              twoConsecutiveOperators: false,
+            }),
+            () => {
+              console.log("sasasa");
+              saveState(this.state);
+            }
+          );
         }
-      );
+      }
     }
   }
 
@@ -298,7 +316,6 @@ export default class Calculator extends React.Component {
       this.setState(
         (state) => ({
           displayAll: state.lastResult === "" ? state.displayAll.concat(e.target.value) : "".concat(state.lastResult).concat(e.target.value),
-          displayCur: "",
           lastInput: e.target.value,
           lastInputType: "operator",
           decimalAlreadyUsed: false,
@@ -307,6 +324,9 @@ export default class Calculator extends React.Component {
           lastOperator: e.target.value,
         }),
         () => {
+          this.setState((state) => ({
+            displayCur: calculate(state, state.displayAll),
+          }));
           saveState(this.state);
         }
       );
@@ -506,7 +526,9 @@ export default class Calculator extends React.Component {
   }
 
   handleLeftParenthesis(e) {
-    if (this.state.lastInputType === "operator" || this.state.lastInput === "(" || this.state.displayAll === "" || this.state.lastResult !== "") {
+    console.log(this.state.displayAll);
+    if (this.state.lastInputType === "operator" || this.state.lastInput === "(" || this.state.displayAll === "" || this.state.displayAll === " - " || this.state.lastResult !== "") {
+      console.log("here");
       this.setState(
         (state) => ({
           displayAll: state.lastResult === "" ? state.displayAll.concat(e.target.value) : "".concat(e.target.value),
