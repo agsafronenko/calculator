@@ -1,25 +1,54 @@
-$primero: rgb(234, 54, 54);
-$segundo: rgb(248, 178, 50);
-$tercero: rgb(246, 217, 121);
+$primero: rgb(2, 169, 208);
+$segundo: rgb(81, 192, 218);
+$tercero: rgb(139, 213, 230);
+$cuarto: rgb(226, 244, 248);
+$quinto: rgb(207, 226, 243);
 $thumbColor: rgb(234, 14, 14);
 
 body {
-  background-color: $tercero;
+  background-color: $quinto;
   box-sizing: border-box;
 }
 
-#displayAll {
-  background-color: gray;
-  height: 40px;
-  width: 50vw;
+#display {
+  background-color: $primero;
+  height: 2rem;
+  width: 80vw;
   margin: auto;
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: white;
 }
 
-#display {
-  background-color: white;
-  height: 40px;
-  width: 50vw;
+#displayAll {
+  background-color: $segundo;
+  height: 4rem;
+  width: 80vw;
   margin: auto;
+  font-weight: 600;
+  font-size: 1rem;
+  color: rgb(34, 34, 37);
+}
+
+[parentheses-delta] {
+  position: relative;
+}
+[parentheses-delta]::before {
+  content: attr(parentheses-delta);
+  position: absolute;
+  top: -0.01em;
+  right: -0.01em;
+  width: 1em;
+  height: 1em;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // background-color: red;
+  // border-radius: 50%;
+  // background-color: red;
+  // color: white;
 }
 
 footer {

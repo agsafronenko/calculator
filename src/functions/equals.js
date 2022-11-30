@@ -1,9 +1,3 @@
-// next steps:
-
-// consider adding event listeners
-
-// - check every input mixing with others
-
 import { factorial } from "./factorial";
 import { FixIncompleteInputs, displayAllExpression } from "./FixIncompleteInputs";
 import $ from "jquery";
@@ -106,11 +100,13 @@ function calculateInOrder(arr, operators) {
         : currentOperator === "%"
         ? currentOperation[0] / 100
         : currentOperator === " log base "
-        ? isFinite(Math.log(currentOperation[0]) / Math.log(currentOperation[2]))
+        ? isFinite(Math.log(currentOperation[0]) / Math.log(currentOperation[2])) && currentOperation[2] !== 0
           ? validInputLog(currentOperation)
           : invalidInputLog()
         : currentOperator === " mod "
-        ? currentOperation[0] % currentOperation[2]
+        ? currentOperation[2] === 0
+          ? currentOperation[0]
+          : currentOperation[0] % currentOperation[2]
         : currentOperator === " yroot "
         ? Math.pow(currentOperation[0], 1 / currentOperation[2])
         : currentOperator === " ^ "

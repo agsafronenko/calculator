@@ -1,27 +1,51 @@
 body {
-  background-color: rgb(246, 217, 121);
+  background-color: rgb(207, 226, 243);
   box-sizing: border-box;
 }
 
-#displayAll {
-  background-color: gray;
-  height: 40px;
-  width: 50vw;
+#display {
+  background-color: rgb(2, 169, 208);
+  height: 2rem;
+  width: 80vw;
   margin: auto;
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: white;
 }
 
-#display {
-  background-color: white;
-  height: 40px;
-  width: 50vw;
+#displayAll {
+  background-color: rgb(81, 192, 218);
+  height: 4rem;
+  width: 80vw;
   margin: auto;
+  font-weight: 600;
+  font-size: 1rem;
+  color: rgb(34, 34, 37);
+}
+
+[parentheses-delta] {
+  position: relative;
+}
+
+[parentheses-delta]::before {
+  content: attr(parentheses-delta);
+  position: absolute;
+  top: -0.01em;
+  right: -0.01em;
+  width: 1em;
+  height: 1em;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 footer {
   position: absolute;
   font-size: xx-small;
   font-style: italic;
-  color: rgb(234, 54, 54);
+  color: rgb(2, 169, 208);
   width: 100%;
   font-weight: 800;
   margin-top: 25px;
