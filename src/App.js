@@ -671,7 +671,7 @@ class Buttons extends React.Component {
           AC
         </button>
         <button id="pi" value={Math.PI} className="col-2" onClick={this.props.specialDigit}>
-          Pi
+          π
         </button>
         <button id="e" value={Math.E} className="col-2" onClick={this.props.specialDigit}>
           e
@@ -680,7 +680,7 @@ class Buttons extends React.Component {
           rand
         </button>
         <button id="denominator" className="col-2" onClick={this.props.switchToDenominator}>
-          1/x
+          <sup>1</sup>/<sub>x</sub>
         </button>
         <button id="factorial" className="col-2" onClick={this.props.factorial}>
           n!
@@ -689,16 +689,16 @@ class Buttons extends React.Component {
           sin
         </button>
         <button id="log10" className="col-2" onClick={this.props.log10}>
-          log10
+          log<sub>10</sub>
         </button>
         <button id="log" value=" log base " className="col-2" onClick={this.props.log}>
-          log
+          log<sub>x</sub>
         </button>
         <button id="logE" className="col-2" onClick={this.props.logE}>
-          logE
+          log<sub>e</sub>
         </button>
         <button id="abs" className="col-2" onClick={this.props.abs}>
-          abs
+          | x |
         </button>
         <button id="modulo" value=" mod " className="col-2" onClick={this.props.modulo}>
           mod
@@ -716,10 +716,10 @@ class Buttons extends React.Component {
           %
         </button>
         <button id="square" value="S" className="col-2" onClick={this.props.square}>
-          S
+          x<sup>2</sup>
         </button>
         <button id="squareRoot" value="R" className="col-2" onClick={this.props.squareRoot}>
-          R
+          <sup>2</sup>√
         </button>
         <button id="tan" value="tan" className="col-2" onClick={this.props.trigonometry}>
           tan
@@ -734,10 +734,10 @@ class Buttons extends React.Component {
           9
         </button>
         <button id="exponentiation" value=" ^ " className="col-2" onClick={this.props.operator}>
-          ^
+          x<sup>y</sup>
         </button>
         <button id="anyRoot" value=" yroot " className="col-2" onClick={this.props.operator}>
-          root
+          <sup>y</sup>√
         </button>
         <button id="cot" value="cot" className="col-2" onClick={this.props.trigonometry}>
           cot
@@ -752,10 +752,10 @@ class Buttons extends React.Component {
           6
         </button>
         <button id="multiply" value=" * " className="col-2" onClick={this.props.operator}>
-          x
+          ×
         </button>
         <button id="divide" value=" / " className="col-2" onClick={this.props.operator}>
-          /
+          ÷
         </button>
         <button id="sec" value="sec" className="col-2" onClick={this.props.trigonometry}>
           sec
@@ -773,13 +773,13 @@ class Buttons extends React.Component {
           +
         </button>
         <button id="subtract" value=" - " className="col-2" onClick={this.props.operator}>
-          -
+          −
         </button>
         <button id="csc" value="csc" className="col-2" onClick={this.props.trigonometry}>
           csc
         </button>
         <button id="sign" className="col-2" onClick={this.props.changeSign}>
-          +/-
+          <sup>+</sup>/<sub>−</sub>
         </button>
         <button id="zero" value="0" className="col-2" onClick={this.props.digit}>
           0
@@ -791,7 +791,7 @@ class Buttons extends React.Component {
           =
         </button>
         <button id="delete" className="col-2" onClick={this.props.previousState}>
-          DEL
+          ⌫
         </button>
       </div>
     );
@@ -810,24 +810,32 @@ class MemorySlots extends React.Component {
         <button id="CopyToMS1" value="memorySlot1" onClick={this.props.CopyToMS}>
           Copy to MS1
         </button>
-        <div id="memorySlot1">{this.props.memorySlot1}</div>
         <button id="copyFromMS1" value={this.props.memorySlot1} onClick={this.props.specialDigit}>
           Copy from MS1
         </button>
+        <div id="memorySlot1" className="memorySlot">
+          {this.props.memorySlot1}
+        </div>
+
         <button id="CopyToMS2" value="memorySlot2" onClick={this.props.CopyToMS}>
           Copy to MS2
         </button>
-        <div id="memorySlot2">{this.props.memorySlot2}</div>
         <button id="copyFromMS2" value={this.props.memorySlot2} onClick={this.props.specialDigit}>
           Copy from MS2
         </button>
+        <div id="memorySlot2" className="memorySlot">
+          {this.props.memorySlot2}
+        </div>
+
         <button id="CopyToMS3" value="memorySlot3" onClick={this.props.CopyToMS}>
           Copy to MS3
         </button>
-        <div id="memorySlot3">{this.props.memorySlot3}</div>
         <button id="copyFromMS3" value={this.props.memorySlot3} onClick={this.props.specialDigit}>
           Copy from MS3
         </button>
+        <div id="memorySlot3" className="memorySlot">
+          {this.props.memorySlot3}
+        </div>
       </>
     );
   }

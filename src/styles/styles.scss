@@ -1,9 +1,16 @@
-$primero: rgb(2, 169, 208);
-$segundo: rgb(81, 192, 218);
-$tercero: rgb(139, 213, 230);
-$cuarto: rgb(226, 244, 248);
-$quinto: rgb(207, 226, 243);
+// $primero: rgb(2, 169, 208);
+// $segundo: rgb(81, 192, 218);
+// $tercero: rgb(139, 213, 230);
+// $cuarto: rgb(226, 244, 248);
+// $quinto: rgb(207, 226, 243);
+$primero: rgb(236, 180, 59);
+$segundo: rgb(236, 180, 59);
+$tercero: rgb(236, 180, 59);
+$cuarto: white;
+$quinto: rgb(206, 71, 33);
 $thumbColor: rgb(234, 14, 14);
+$displayWidth: 80vw;
+$displayMargin: auto;
 
 body {
   background-color: $quinto;
@@ -13,8 +20,8 @@ body {
 #display {
   background-color: $primero;
   height: 2rem;
-  width: 80vw;
-  margin: auto;
+  width: $displayWidth;
+  margin: $displayMargin;
   font-weight: 800;
   font-size: 1.5rem;
   color: white;
@@ -23,11 +30,29 @@ body {
 #displayAll {
   background-color: $segundo;
   height: 4rem;
-  width: 80vw;
-  margin: auto;
+  width: $displayWidth;
+  margin: $displayMargin;
   font-weight: 600;
   font-size: 1rem;
-  color: rgb(34, 34, 37);
+  color: white;
+}
+
+#button-pad {
+  background-color: white;
+}
+
+button {
+  border: none;
+  padding: 1px;
+  margin: 1px;
+
+  background-color: $primero;
+  border-radius: 5px;
+}
+.memorySlot {
+  background-color: $tercero;
+  width: $displayWidth;
+  margin: $displayMargin;
 }
 
 [parentheses-delta] {
