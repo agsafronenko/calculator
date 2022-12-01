@@ -11,11 +11,12 @@ body {
 
 #displayBox {
   background-image: linear-gradient(358deg, hsl(0deg, 0%, 100%) 0%, hsl(0deg, 0%, 100%) 10%, hsl(41deg, 83%, 86%) 15%, hsl(41deg, 83%, 79%) 20%, hsl(41deg, 82%, 60%) 30%, hsl(41deg, 82%, 55%) 70%, hsl(41deg, 82%, 50%) 100%);
+  border-radius: 5px 5px 0 0;
 }
 
 #display {
   text-decoration: none;
-  height: 2rem;
+  height: 3rem;
   width: 100vw;
   margin: auto;
   font-weight: 800;
@@ -24,7 +25,7 @@ body {
 }
 
 #displayAll {
-  height: 4rem;
+  height: 9rem;
   width: 100vw;
   margin: auto;
   font-weight: 600;
