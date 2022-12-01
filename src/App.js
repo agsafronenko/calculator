@@ -667,132 +667,146 @@ class Buttons extends React.Component {
   render() {
     return (
       <div id="button-pad" className="row">
-        <button id="clear" className="col-2" onClick={() => this.props.clear(true)}>
-          AC
-        </button>
-        <button id="pi" value={Math.PI} className="col-2" onClick={this.props.specialDigit}>
-          π
-        </button>
-        <button id="e" value={Math.E} className="col-2" onClick={this.props.specialDigit}>
-          e
-        </button>
-        <button id="random" value={Math.random()} className="col-2" onClick={this.props.specialDigit}>
-          rand
-        </button>
-        <button id="denominator" className="col-2" onClick={this.props.switchToDenominator}>
-          <sup>1</sup>/<sub>x</sub>
-        </button>
-        <button id="factorial" className="col-2" onClick={this.props.factorial}>
-          n!
-        </button>
-        <button id="sin" value="sin" className="col-2" onClick={this.props.trigonometry}>
-          sin
-        </button>
-        <button id="log10" className="col-2" onClick={this.props.log10}>
-          log<sub>10</sub>
-        </button>
-        <button id="log" value=" log base " className="col-2" onClick={this.props.log}>
-          log<sub>x</sub>
-        </button>
-        <button id="logE" className="col-2" onClick={this.props.logE}>
-          log<sub>e</sub>
-        </button>
-        <button id="abs" className="col-2" onClick={this.props.abs}>
-          | x |
-        </button>
-        <button id="modulo" value=" mod " className="col-2" onClick={this.props.modulo}>
-          mod
-        </button>
-        <button id="cos" value="cos" className="col-2" onClick={this.props.trigonometry}>
-          cos
-        </button>
-        <button id="leftParenthesis" value="(" className="col-2" parentheses-delta={this.props.parenthesesDelta === 0 ? "" : this.props.parenthesesDelta} onClick={this.props.leftParenthesis}>
-          (
-        </button>
-        <button id="rightParenthesis" value=")" className="col-2" onClick={this.props.rightParenthesis}>
-          )
-        </button>
-        <button id="percentage" className="col-2" onClick={this.props.percentage}>
-          %
-        </button>
-        <button id="square" value="S" className="col-2" onClick={this.props.square}>
-          x<sup>2</sup>
-        </button>
-        <button id="squareRoot" value="R" className="col-2" onClick={this.props.squareRoot}>
-          <sup>2</sup>√
-        </button>
-        <button id="tan" value="tan" className="col-2" onClick={this.props.trigonometry}>
-          tan
-        </button>
-        <button id="seven" value="7" className="col-2" onClick={this.props.digit}>
-          7
-        </button>
-        <button id="eight" value="8" className="col-2" onClick={this.props.digit}>
-          8
-        </button>
-        <button id="nine" value="9" className="col-2" onClick={this.props.digit}>
-          9
-        </button>
-        <button id="exponentiation" value=" ^ " className="col-2" onClick={this.props.operator}>
-          x<sup>y</sup>
-        </button>
-        <button id="anyRoot" value=" yroot " className="col-2" onClick={this.props.operator}>
-          <sup>y</sup>√
-        </button>
-        <button id="cot" value="cot" className="col-2" onClick={this.props.trigonometry}>
-          cot
-        </button>
-        <button id="four" value="4" className="col-2" onClick={this.props.digit}>
-          4
-        </button>
-        <button id="five" value="5" className="col-2" onClick={this.props.digit}>
-          5
-        </button>
-        <button id="six" value="6" className="col-2" onClick={this.props.digit}>
-          6
-        </button>
-        <button id="multiply" value=" * " className="col-2" onClick={this.props.operator}>
-          ×
-        </button>
-        <button id="divide" value=" / " className="col-2" onClick={this.props.operator}>
-          ÷
-        </button>
-        <button id="sec" value="sec" className="col-2" onClick={this.props.trigonometry}>
-          sec
-        </button>
-        <button id="one" value="1" className="col-2" onClick={this.props.digit}>
-          1
-        </button>
-        <button id="two" value="2" className="col-2" onClick={this.props.digit}>
-          2
-        </button>
-        <button id="three" value="3" className="col-2" onClick={this.props.digit}>
-          3
-        </button>
-        <button id="add" value=" + " className="col-2" onClick={this.props.operator}>
-          +
-        </button>
-        <button id="subtract" value=" - " className="col-2" onClick={this.props.operator}>
-          −
-        </button>
-        <button id="csc" value="csc" className="col-2" onClick={this.props.trigonometry}>
-          csc
-        </button>
-        <button id="sign" className="col-2" onClick={this.props.changeSign}>
-          <sup>+</sup>/<sub>−</sub>
-        </button>
-        <button id="zero" value="0" className="col-2" onClick={this.props.digit}>
-          0
-        </button>
-        <button id="decimal" className="col-2" onClick={this.props.decimal}>
-          .
-        </button>
-        <button id="equals" className="col-2" onClick={this.props.equals}>
-          =
-        </button>
-        <button id="delete" className="col-2" onClick={this.props.previousState}>
-          ⌫
-        </button>
+        <div className="col-12">
+          <button id="clear" className="main-btn" onClick={() => this.props.clear(true)}>
+            AC
+          </button>
+          <button id="pi" value={Math.PI} onClick={this.props.specialDigit}>
+            π
+          </button>
+          <button id="e" value={Math.E} onClick={this.props.specialDigit}>
+            e
+          </button>
+          <button id="random" value={Math.random()} onClick={this.props.specialDigit}>
+            rand
+          </button>
+          <button id="denominator" onClick={this.props.switchToDenominator}>
+            <sup>1</sup>/<sub>x</sub>
+          </button>
+          <button id="factorial" onClick={this.props.factorial}>
+            n!
+          </button>
+        </div>
+        <div className="col-12">
+          <button id="sin" value="sin" className="trigonometry-btn" onClick={this.props.trigonometry}>
+            sin
+          </button>
+          <button id="log10" onClick={this.props.log10}>
+            log<sub>10</sub>
+          </button>
+          <button id="log" value=" log base " onClick={this.props.log}>
+            log<sub>x</sub>
+          </button>
+          <button id="logE" onClick={this.props.logE}>
+            log<sub>e</sub>
+          </button>
+          <button id="abs" onClick={this.props.abs}>
+            | x |
+          </button>
+          <button id="modulo" value=" mod " onClick={this.props.modulo}>
+            mod
+          </button>
+        </div>
+        <div className="col-12">
+          <button id="cos" value="cos" className="trigonometry-btn" onClick={this.props.trigonometry}>
+            cos
+          </button>
+          <button id="leftParenthesis" value="(" className="secondary-btn" parentheses-delta={this.props.parenthesesDelta === 0 ? "" : this.props.parenthesesDelta} onClick={this.props.leftParenthesis}>
+            (
+          </button>
+          <button id="rightParenthesis" value=")" className="secondary-btn" onClick={this.props.rightParenthesis}>
+            )
+          </button>
+          <button id="percentage" onClick={this.props.percentage}>
+            %
+          </button>
+          <button id="square" value="S" onClick={this.props.square}>
+            x<sup>2</sup>
+          </button>
+          <button id="squareRoot" value="R" onClick={this.props.squareRoot}>
+            <sup>2</sup>√
+          </button>
+        </div>
+        <div className="col-12">
+          <button id="tan" value="tan" className="trigonometry-btn" onClick={this.props.trigonometry}>
+            tan
+          </button>
+          <button id="seven" value="7" onClick={this.props.digit}>
+            7
+          </button>
+          <button id="eight" value="8" onClick={this.props.digit}>
+            8
+          </button>
+          <button id="nine" value="9" onClick={this.props.digit}>
+            9
+          </button>
+          <button id="exponentiation" value=" ^ " onClick={this.props.operator}>
+            x<sup>y</sup>
+          </button>
+          <button id="anyRoot" value=" yroot " onClick={this.props.operator}>
+            <sup>y</sup>√
+          </button>
+        </div>
+        <div className="col-12">
+          <button id="cot" value="cot" className="trigonometry-btn" onClick={this.props.trigonometry}>
+            cot
+          </button>
+          <button id="four" value="4" onClick={this.props.digit}>
+            4
+          </button>
+          <button id="five" value="5" onClick={this.props.digit}>
+            5
+          </button>
+          <button id="six" value="6" onClick={this.props.digit}>
+            6
+          </button>
+          <button id="multiply" value=" * " onClick={this.props.operator}>
+            ×
+          </button>
+          <button id="divide" value=" / " onClick={this.props.operator}>
+            ÷
+          </button>
+        </div>
+        <div className="col-12">
+          <button id="sec" value="sec" className="trigonometry-btn" onClick={this.props.trigonometry}>
+            sec
+          </button>
+          <button id="one" value="1" onClick={this.props.digit}>
+            1
+          </button>
+          <button id="two" value="2" onClick={this.props.digit}>
+            2
+          </button>
+          <button id="three" value="3" onClick={this.props.digit}>
+            3
+          </button>
+          <button id="add" value=" + " onClick={this.props.operator}>
+            +
+          </button>
+          <button id="subtract" value=" - " onClick={this.props.operator}>
+            −
+          </button>
+        </div>
+        <div className="col-12">
+          <button id="csc" value="csc" className="trigonometry-btn" onClick={this.props.trigonometry}>
+            csc
+          </button>
+          <button id="sign" onClick={this.props.changeSign}>
+            <sup>+</sup>/<sub>−</sub>
+          </button>
+          <button id="zero" value="0" onClick={this.props.digit}>
+            0
+          </button>
+          <button id="decimal" onClick={this.props.decimal}>
+            .
+          </button>
+          <button id="equals" className="main-btn" onClick={this.props.equals}>
+            =
+          </button>
+          <button id="delete" className="main-btn" onClick={this.props.previousState}>
+            ⌫
+          </button>
+        </div>
       </div>
     );
   }
@@ -804,7 +818,7 @@ class MemorySlots extends React.Component {
   }
   render() {
     return (
-      <>
+      <div id="memorySlot">
         <hr />
 
         <button id="CopyToMS1" value="memorySlot1" onClick={this.props.CopyToMS}>
@@ -836,7 +850,7 @@ class MemorySlots extends React.Component {
         <div id="memorySlot3" className="memorySlot">
           {this.props.memorySlot3}
         </div>
-      </>
+      </div>
     );
   }
 }

@@ -4,21 +4,19 @@ body {
 }
 
 #calculator {
-  margin-top: 3rem;
-  border-radius: 3%;
+  margin: 0.5rem auto;
   background-color: green;
 }
 
 #displayBox {
   background-image: linear-gradient(358deg, hsl(0deg, 0%, 100%) 0%, hsl(0deg, 0%, 100%) 10%, hsl(41deg, 83%, 86%) 15%, hsl(41deg, 83%, 79%) 20%, hsl(41deg, 82%, 60%) 30%, hsl(41deg, 82%, 55%) 70%, hsl(41deg, 82%, 50%) 100%);
-  border-radius: 5px 5px 0 0;
+  border-radius: 25px 25px 0 0;
 }
 
 #display {
-  text-decoration: none;
   height: 3rem;
-  width: 100vw;
-  margin: auto;
+  padding-top: 1rem;
+  text-align: center;
   font-weight: 800;
   font-size: 1.5rem;
   color: white;
@@ -26,8 +24,7 @@ body {
 
 #displayAll {
   height: 9rem;
-  width: 100vw;
-  margin: auto;
+  padding-top: 1rem;
   font-weight: 600;
   font-size: 1rem;
   color: white;
@@ -35,19 +32,38 @@ body {
 
 #button-pad {
   background-color: white;
-  width: 100%;
 }
 
 button {
   background: none;
   border: none;
-  padding: 10px;
-  margin: 0px;
+  margin: 0.5vw;
+  width: 13vw;
+  height: 13vw;
+  box-shadow: 2px 2px rgba(110, 86, 38, 0.438);
+  border-radius: 15px;
+  font-weight: 800;
+  font-size: 1.5rem;
 }
 
-.memorySlot {
-  width: 100vw;
-  margin: auto;
+.main-btn {
+  background-image: linear-gradient(225deg, hsl(41deg, 83%, 79%) 0%, hsl(41deg, 82%, 60%) 20%, hsl(41deg, 82%, 55%) 35%, hsl(41deg, 82%, 50%) 100%);
+  color: white;
+}
+
+.trigonometry-btn {
+  background-image: linear-gradient(225deg, hsl(41deg, 83%, 79%) 0%, hsl(41deg, 82%, 60%) 80%, hsl(41deg, 82%, 65%) 95%, hsl(41deg, 82%, 50%) 100%);
+  color: white;
+}
+
+.secondary-btn {
+  background-image: linear-gradient(225deg, hsl(41deg, 83%, 79%) 0%, hsl(41deg, 82%, 60%) 30%, hsl(41deg, 82%, 65%) 60%, hsl(41deg, 82%, 50%) 100%);
+  color: white;
+}
+
+#memorySlot {
+  background-image: linear-gradient(358deg, hsl(41deg, 82%, 50%) 0%, hsl(41deg, 82%, 55%) 30%, hsl(41deg, 82%, 60%) 70%, hsl(41deg, 83%, 79%) 80%, hsl(41deg, 83%, 86%) 85%, hsl(0deg, 0%, 100%) 90%, hsl(0deg, 0%, 100%) 0%);
+  border-radius: 0 0 25px 25px;
 }
 
 [parentheses-delta] {
@@ -66,24 +82,4 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-footer {
-  position: absolute;
-  font-size: xx-small;
-  font-style: italic;
-  color: rgb(236, 180, 59);
-  width: 100%;
-  font-weight: 800;
-  margin-top: 25px;
-  top: calc(300px + 15vh);
-  bottom: 0;
-  left: 0;
-}
-
-#footer {
-  position: absolute;
-  bottom: 10px;
-  width: 99vw;
-  text-align: center;
 }/*# sourceMappingURL=styles.css.map */
