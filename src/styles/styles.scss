@@ -6,10 +6,10 @@
 $primero: rgb(236, 180, 59);
 $segundo: rgb(236, 180, 59);
 $tercero: rgb(236, 180, 59);
-$cuarto: white;
+// $cuarto: white;
 $quinto: rgb(206, 71, 33);
 $thumbColor: rgb(234, 14, 14);
-$displayWidth: 80vw;
+$displayWidth: 100vw;
 $displayMargin: auto;
 
 body {
@@ -17,8 +17,46 @@ body {
   box-sizing: border-box;
 }
 
+#calculator {
+  background-image: linear-gradient(
+    355deg,
+    hsl(41deg 82% 58%) 3%,
+    hsl(41deg 82% 65%) 14%,
+    hsl(41deg 82% 72%) 20%,
+    hsl(41deg 83% 79%) 24%,
+    hsl(41deg 83% 86%) 28%,
+    hsl(42deg 83% 93%) 31%,
+    hsl(0deg 0% 100%) 34%,
+    hsl(0deg 0% 100%) 37%,
+    hsl(0deg 0% 100%) 40%,
+    hsl(0deg 0% 100%) 43%,
+    hsl(0deg 0% 100%) 46%,
+    hsl(0deg 0% 100%) 49%,
+    hsl(0deg 0% 100%) 51%,
+    hsl(0deg 0% 100%) 54%,
+    hsl(0deg 0% 100%) 57%,
+    hsl(0deg 0% 100%) 59%,
+    hsl(0deg 0% 100%) 62%,
+    hsl(0deg 0% 100%) 65%,
+    hsl(0deg 0% 100%) 68%,
+    hsl(42deg 83% 93%) 71%,
+    hsl(41deg 83% 86%) 75%,
+    hsl(41deg 83% 79%) 78%,
+    hsl(41deg 82% 60%) 83%,
+    hsl(41deg 82% 55%) 88%,
+    hsl(41deg 82% 50%) 100%
+  );
+  margin-top: 3rem;
+  border-radius: 3%;
+}
+
+#displayBox {
+  // background-color: green;
+}
+
 #display {
-  background-color: $primero;
+  // background-color: $primero;
+  text-decoration: none;
   height: 2rem;
   width: $displayWidth;
   margin: $displayMargin;
@@ -28,7 +66,6 @@ body {
 }
 
 #displayAll {
-  background-color: $segundo;
   height: 4rem;
   width: $displayWidth;
   margin: $displayMargin;
@@ -38,19 +75,21 @@ body {
 }
 
 #button-pad {
-  background-color: white;
+  // background-color: white;
+  margin: auto;
 }
 
 button {
+  background: none;
   border: none;
-  padding: 1px;
-  margin: 1px;
+  padding: 10px;
+  margin: 0px;
 
-  background-color: $primero;
-  border-radius: 5px;
+  // background-color: $primero;
+  // border-radius: 5px;
 }
 .memorySlot {
-  background-color: $tercero;
+  // background-color: $tercero;
   width: $displayWidth;
   margin: $displayMargin;
 }

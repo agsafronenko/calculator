@@ -607,7 +607,7 @@ export default class Calculator extends React.Component {
 
   render() {
     return (
-      <>
+      <div id="calculator" className="container-fluid">
         <Display ops={this.state.displayAll} cur={this.state.displayCur} />
         <Buttons
           clear={this.handleClear}
@@ -635,7 +635,7 @@ export default class Calculator extends React.Component {
         />
         <MemorySlots CopyToMS={this.handleCopyToMS} specialDigit={this.handleSpecialDigit} memorySlot1={this.state.memorySlot1} memorySlot2={this.state.memorySlot2} memorySlot3={this.state.memorySlot3} />
         <Footer />
-      </>
+      </div>
     );
   }
 }
@@ -646,7 +646,7 @@ class Display extends React.Component {
   }
   render() {
     return (
-      <div className="container-fluid">
+      <>
         <div id="displayBox" className="row">
           <div id="display" className="col-12">
             {this.props.cur}
@@ -655,7 +655,7 @@ class Display extends React.Component {
             {this.props.ops}
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }

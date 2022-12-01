@@ -3,10 +3,16 @@ body {
   box-sizing: border-box;
 }
 
+#calculator {
+  background-image: linear-gradient(355deg, hsl(41deg, 82%, 58%) 3%, hsl(41deg, 82%, 65%) 14%, hsl(41deg, 82%, 72%) 20%, hsl(41deg, 83%, 79%) 24%, hsl(41deg, 83%, 86%) 28%, hsl(42deg, 83%, 93%) 31%, hsl(0deg, 0%, 100%) 34%, hsl(0deg, 0%, 100%) 37%, hsl(0deg, 0%, 100%) 40%, hsl(0deg, 0%, 100%) 43%, hsl(0deg, 0%, 100%) 46%, hsl(0deg, 0%, 100%) 49%, hsl(0deg, 0%, 100%) 51%, hsl(0deg, 0%, 100%) 54%, hsl(0deg, 0%, 100%) 57%, hsl(0deg, 0%, 100%) 59%, hsl(0deg, 0%, 100%) 62%, hsl(0deg, 0%, 100%) 65%, hsl(0deg, 0%, 100%) 68%, hsl(42deg, 83%, 93%) 71%, hsl(41deg, 83%, 86%) 75%, hsl(41deg, 83%, 79%) 78%, hsl(41deg, 82%, 60%) 83%, hsl(41deg, 82%, 55%) 88%, hsl(41deg, 82%, 50%) 100%);
+  margin-top: 3rem;
+  border-radius: 3%;
+}
+
 #display {
-  background-color: rgb(236, 180, 59);
+  text-decoration: none;
   height: 2rem;
-  width: 80vw;
+  width: 100vw;
   margin: auto;
   font-weight: 800;
   font-size: 1.5rem;
@@ -14,9 +20,8 @@ body {
 }
 
 #displayAll {
-  background-color: rgb(236, 180, 59);
   height: 4rem;
-  width: 80vw;
+  width: 100vw;
   margin: auto;
   font-weight: 600;
   font-size: 1rem;
@@ -24,20 +29,18 @@ body {
 }
 
 #button-pad {
-  background-color: white;
+  margin: auto;
 }
 
 button {
+  background: none;
   border: none;
-  padding: 1px;
-  margin: 1px;
-  background-color: rgb(236, 180, 59);
-  border-radius: 5px;
+  padding: 10px;
+  margin: 0px;
 }
 
 .memorySlot {
-  background-color: rgb(236, 180, 59);
-  width: 80vw;
+  width: 100vw;
   margin: auto;
 }
 
