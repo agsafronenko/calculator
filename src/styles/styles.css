@@ -1,3 +1,8 @@
+root {
+  background-image: linear-gradient(358deg, hsl(41deg, 82%, 50%) 0%, hsl(41deg, 82%, 55%) 30%, hsl(41deg, 82%, 60%) 50%, hsl(41deg, 83%, 79%) 65%, hsl(41deg, 83%, 86%) 70%, hsl(0deg, 0%, 100%) 75%, hsl(0deg, 0%, 100%) 100%);
+  margin: 0;
+}
+
 body {
   background-image: linear-gradient(358deg, hsl(41deg, 82%, 50%) 0%, hsl(41deg, 82%, 55%) 30%, hsl(41deg, 82%, 60%) 50%, hsl(41deg, 83%, 79%) 65%, hsl(41deg, 83%, 86%) 70%, hsl(0deg, 0%, 100%) 75%, hsl(0deg, 0%, 100%) 100%);
   box-sizing: border-box;
