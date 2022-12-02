@@ -1,6 +1,5 @@
 root {
   background-image: linear-gradient(358deg, hsl(41deg, 82%, 50%) 0%, hsl(41deg, 82%, 55%) 30%, hsl(41deg, 82%, 60%) 50%, hsl(41deg, 83%, 79%) 65%, hsl(41deg, 83%, 86%) 70%, hsl(0deg, 0%, 100%) 75%, hsl(0deg, 0%, 100%) 100%);
-  margin: 0;
 }
 
 body {
@@ -57,12 +56,14 @@ button {
 .main-btn {
   background-image: linear-gradient(225deg, hsl(41deg, 83%, 79%) 0%, hsl(41deg, 82%, 60%) 20%, hsl(41deg, 82%, 55%) 35%, hsl(41deg, 82%, 50%) 100%);
   color: white;
+  font-size: 7vw;
 }
 
 .secondary-btn {
   color: rgb(236, 180, 59);
   font-weight: 600;
   text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
+  font-size: 7vw;
 }
 
 .tertiary-btn {
@@ -74,15 +75,13 @@ button {
 .digits-btn {
   background-image: linear-gradient(225deg, hsl(41deg, 83%, 79%) 0%, hsl(41deg, 82%, 60%) 30%, hsl(41deg, 82%, 65%) 60%, hsl(41deg, 82%, 50%) 100%);
   color: white;
+  font-size: 7vw;
 }
 
 #memorySlot {
   border-radius: 0 0 25px 25px;
   padding-top: 10vw;
   padding-bottom: 10vw;
-  justify-content: center;
-  justify-items: auto;
-  margin: auto;
 }
 
 .ms-btn {

@@ -673,64 +673,64 @@ class Buttons extends React.Component {
           <button id="clear" className="main-btn" onClick={() => this.props.clear(true)}>
             AC
           </button>
-          <button id="pi" value={Math.PI} className="secondary-btn" onClick={this.props.specialDigit}>
+          <button id="pi" value={Math.PI} className="tertiary-btn" onClick={this.props.specialDigit}>
             π
           </button>
-          <button id="e" value={Math.E} className="secondary-btn" onClick={this.props.specialDigit}>
+          <button id="e" value={Math.E} className="tertiary-btn" onClick={this.props.specialDigit}>
             e
           </button>
-          <button id="random" value={Math.random()} className="secondary-btn" onClick={this.props.specialDigit}>
+          <button id="random" value={Math.random()} className="tertiary-btn" onClick={this.props.specialDigit}>
             rand
           </button>
-          <button id="denominator" className="secondary-btn" onClick={this.props.switchToDenominator}>
+          <button id="denominator" className="tertiary-btn" onClick={this.props.switchToDenominator}>
             <sup>1</sup>/<sub>x</sub>
           </button>
-          <button id="factorial" className="secondary-btn" onClick={this.props.factorial}>
+          <button id="factorial" className="tertiary-btn" onClick={this.props.factorial}>
             n!
           </button>
         </div>
         <div className="col-12 d-flex justify-content-center">
-          <button id="sin" value="sin" className="secondary-btn" onClick={this.props.trigonometry}>
+          <button id="sin" value="sin" className="tertiary-btn" onClick={this.props.trigonometry}>
             sin
           </button>
-          <button id="log10" className="tertiary-btn" onClick={this.props.log10}>
+          <button id="log10" className="secondary-btn" onClick={this.props.log10}>
             log<sub>10</sub>
           </button>
-          <button id="log" value=" log base " className="tertiary-btn" onClick={this.props.log}>
+          <button id="log" value=" log base " className="secondary-btn" onClick={this.props.log}>
             log<sub>x</sub>
           </button>
-          <button id="logE" className="tertiary-btn" onClick={this.props.logE}>
+          <button id="logE" className="secondary-btn" onClick={this.props.logE}>
             log<sub>e</sub>
           </button>
-          <button id="abs" className="tertiary-btn" onClick={this.props.abs}>
+          <button id="abs" className="secondary-btn" onClick={this.props.abs}>
             | x |
           </button>
-          <button id="modulo" value=" mod " className="secondary-btn" onClick={this.props.modulo}>
+          <button id="modulo" value=" mod " className="tertiary-btn" onClick={this.props.modulo}>
             mod
           </button>
         </div>
         <div className="col-12 d-flex justify-content-center">
-          <button id="cos" value="cos" className="secondary-btn" onClick={this.props.trigonometry}>
+          <button id="cos" value="cos" className="tertiary-btn" onClick={this.props.trigonometry}>
             cos
           </button>
-          <button id="leftParenthesis" value="(" className="tertiary-btn" parentheses-delta={this.props.parenthesesDelta === 0 ? "" : this.props.parenthesesDelta} onClick={this.props.leftParenthesis}>
+          <button id="leftParenthesis" value="(" className="secondary-btn" parentheses-delta={this.props.parenthesesDelta === 0 ? "" : this.props.parenthesesDelta} onClick={this.props.leftParenthesis}>
             (
           </button>
-          <button id="rightParenthesis" value=")" className="tertiary-btn" onClick={this.props.rightParenthesis}>
+          <button id="rightParenthesis" value=")" className="secondary-btn" onClick={this.props.rightParenthesis}>
             )
           </button>
-          <button id="percentage" className="tertiary-btn" onClick={this.props.percentage}>
+          <button id="percentage" className="secondary-btn" onClick={this.props.percentage}>
             %
           </button>
-          <button id="square" value="S" className="tertiary-btn" onClick={this.props.square}>
+          <button id="square" value="S" className="secondary-btn" onClick={this.props.square}>
             x<sup>2</sup>
           </button>
-          <button id="squareRoot" value="R" className="secondary-btn" onClick={this.props.squareRoot}>
+          <button id="squareRoot" value="R" className="tertiary-btn" onClick={this.props.squareRoot}>
             <sup>2</sup>√
           </button>
         </div>
         <div className="col-12 d-flex justify-content-center">
-          <button id="tan" value="tan" className="secondary-btn" onClick={this.props.trigonometry}>
+          <button id="tan" value="tan" className="tertiary-btn" onClick={this.props.trigonometry}>
             tan
           </button>
           <button id="seven" value="7" className="digits-btn" onClick={this.props.digit}>
@@ -742,15 +742,15 @@ class Buttons extends React.Component {
           <button id="nine" value="9" className="digits-btn" onClick={this.props.digit}>
             9
           </button>
-          <button id="exponentiation" value=" ^ " className="tertiary-btn" onClick={this.props.operator}>
+          <button id="exponentiation" value=" ^ " className="secondary-btn" onClick={this.props.operator}>
             x<sup>y</sup>
           </button>
-          <button id="anyRoot" value=" yroot " className="secondary-btn" onClick={this.props.operator}>
+          <button id="anyRoot" value=" yroot " className="tertiary-btn" onClick={this.props.operator}>
             <sup>y</sup>√
           </button>
         </div>
         <div className="col-12 d-flex justify-content-center">
-          <button id="cot" value="cot" className="secondary-btn" onClick={this.props.trigonometry}>
+          <button id="cot" value="cot" className="tertiary-btn" onClick={this.props.trigonometry}>
             cot
           </button>
           <button id="four" value="4" className="digits-btn" onClick={this.props.digit}>
@@ -762,15 +762,15 @@ class Buttons extends React.Component {
           <button id="six" value="6" className="digits-btn" onClick={this.props.digit}>
             6
           </button>
-          <button id="multiply" value=" * " className="tertiary-btn" onClick={this.props.operator}>
+          <button id="multiply" value=" * " className="secondary-btn" onClick={this.props.operator}>
             ×
           </button>
-          <button id="divide" value=" / " className="secondary-btn" onClick={this.props.operator}>
+          <button id="divide" value=" / " className="tertiary-btn" onClick={this.props.operator}>
             ÷
           </button>
         </div>
         <div className="col-12 d-flex justify-content-center">
-          <button id="sec" value="sec" className="secondary-btn" onClick={this.props.trigonometry}>
+          <button id="sec" value="sec" className="tertiary-btn" onClick={this.props.trigonometry}>
             sec
           </button>
           <button id="one" value="1" className="digits-btn" onClick={this.props.digit}>
@@ -782,24 +782,24 @@ class Buttons extends React.Component {
           <button id="three" value="3" className="digits-btn" onClick={this.props.digit}>
             3
           </button>
-          <button id="add" value=" + " className="tertiary-btn" onClick={this.props.operator}>
+          <button id="add" value=" + " className="secondary-btn" onClick={this.props.operator}>
             +
           </button>
-          <button id="subtract" value=" - " className="secondary-btn" onClick={this.props.operator}>
+          <button id="subtract" value=" - " className="tertiary-btn" onClick={this.props.operator}>
             −
           </button>
         </div>
         <div className="col-12 d-flex justify-content-center">
-          <button id="csc" value="csc" className="secondary-btn" onClick={this.props.trigonometry}>
+          <button id="csc" value="csc" className="tertiary-btn" onClick={this.props.trigonometry}>
             csc
           </button>
-          <button id="sign" className="secondary-btn" onClick={this.props.changeSign}>
+          <button id="sign" className="tertiary-btn" onClick={this.props.changeSign}>
             <sup>+</sup>/<sub>−</sub>
           </button>
           <button id="zero" value="0" className="digits-btn" onClick={this.props.digit}>
             0
           </button>
-          <button id="decimal" className="secondary-btn" onClick={this.props.decimal}>
+          <button id="decimal" className="tertiary-btn" onClick={this.props.decimal}>
             .
           </button>
           <button id="equals" className="main-btn" onClick={this.props.equals}>
