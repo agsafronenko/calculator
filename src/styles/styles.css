@@ -1,11 +1,13 @@
 body {
-  background-color: rgb(206, 71, 33);
+  background-image: linear-gradient(358deg, hsl(41deg, 82%, 50%) 0%, hsl(41deg, 82%, 55%) 30%, hsl(41deg, 82%, 60%) 50%, hsl(41deg, 83%, 79%) 65%, hsl(41deg, 83%, 86%) 70%, hsl(0deg, 0%, 100%) 75%, hsl(0deg, 0%, 100%) 100%);
   box-sizing: border-box;
 }
 
 #calculator {
-  margin: 0.5rem auto;
-  background-color: green;
+  margin: 3vw auto;
+  background-color: white;
+  border-radius: 25px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
 #displayBox {
@@ -14,19 +16,19 @@ body {
 }
 
 #display {
-  height: 3rem;
-  padding-top: 1rem;
+  height: 13vw;
+  padding-top: 4.3vw;
   text-align: center;
   font-weight: 800;
-  font-size: 1.5rem;
+  font-size: 6.4vw;
   color: white;
 }
 
 #displayAll {
   height: 9rem;
-  padding-top: 1rem;
+  padding-top: 4.3vw;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 4.3vw;
   color: white;
 }
 
@@ -43,7 +45,8 @@ button {
   box-shadow: 2px 2px rgba(110, 86, 38, 0.438);
   border-radius: 15px;
   font-weight: 800;
-  font-size: 1.5rem;
+  font-size: 4.5vw;
+  overflow: hidden;
 }
 
 .main-btn {
@@ -51,19 +54,53 @@ button {
   color: white;
 }
 
-.trigonometry-btn {
-  background-image: linear-gradient(225deg, hsl(41deg, 83%, 79%) 0%, hsl(41deg, 82%, 60%) 80%, hsl(41deg, 82%, 65%) 95%, hsl(41deg, 82%, 50%) 100%);
-  color: white;
+.secondary-btn {
+  color: rgb(236, 180, 59);
+  font-weight: 600;
+  text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
 }
 
-.secondary-btn {
+.tertiary-btn {
+  color: rgb(236, 180, 59);
+  font-weight: 600;
+  text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
+}
+
+.digits-btn {
   background-image: linear-gradient(225deg, hsl(41deg, 83%, 79%) 0%, hsl(41deg, 82%, 60%) 30%, hsl(41deg, 82%, 65%) 60%, hsl(41deg, 82%, 50%) 100%);
   color: white;
 }
 
 #memorySlot {
-  background-image: linear-gradient(358deg, hsl(41deg, 82%, 50%) 0%, hsl(41deg, 82%, 55%) 30%, hsl(41deg, 82%, 60%) 70%, hsl(41deg, 83%, 79%) 80%, hsl(41deg, 83%, 86%) 85%, hsl(0deg, 0%, 100%) 90%, hsl(0deg, 0%, 100%) 0%);
   border-radius: 0 0 25px 25px;
+  padding-top: 10vw;
+  padding-bottom: 10vw;
+  justify-content: center;
+  justify-items: auto;
+  margin: auto;
+}
+
+.ms-btn {
+  margin-top: 2vw;
+  background-image: linear-gradient(225deg, hsl(41deg, 83%, 79%) 0%, hsl(41deg, 82%, 60%) 20%, hsl(41deg, 82%, 55%) 35%, hsl(41deg, 82%, 50%) 100%);
+  width: 6vw;
+  height: 6vw;
+  display: inline;
+  color: white;
+  font-size: 4vw;
+}
+
+.ms-text {
+  width: 52vw;
+  height: 8vw;
+  display: inline-block;
+  border: 1px solid rgb(236, 180, 59);
+  border-radius: 5px;
+  font-size: 1rem;
+  color: rgb(236, 180, 59);
+  font-weight: 600;
+  text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
+  text-align: center;
 }
 
 [parentheses-delta] {
@@ -73,13 +110,23 @@ button {
 [parentheses-delta]::before {
   content: attr(parentheses-delta);
   position: absolute;
-  top: -0.01em;
-  right: -0.01em;
-  width: 1em;
-  height: 1em;
-  font-size: 0.8rem;
+  top: 1.2vw;
+  right: 1.2vw;
+  width: 5vw;
+  height: 5vw;
+  font-size: 4.5vw;
   font-weight: 700;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: red;
+}
+
+footer {
+  margin-top: 5vw;
+  font-size: 3vw;
+  font-style: italic;
+  color: white;
+  font-weight: 600;
+  text-align: center;
 }/*# sourceMappingURL=styles.css.map */
