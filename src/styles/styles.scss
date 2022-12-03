@@ -8,12 +8,9 @@ $quinto: rgb(236, 180, 59);
 $sexto: linear-gradient(225deg, hsl(41deg 83% 79%) 0%, hsl(41deg 82% 60%) 80%, hsl(41deg 82% 65%) 95%, hsl(41deg 82% 50%) 100%);
 $thumbColor: rgb(234, 14, 14);
 $colorText: rgb(81, 79, 79);
-// $displayWidth: 100vw;
-// $displayMargin: auto;
 
 root {
   background-image: linear-gradient(358deg, hsl(41deg 82% 50%) 0%, hsl(41deg 82% 55%) 30%, hsl(41deg 82% 60%) 50%, hsl(41deg 83% 79%) 65%, hsl(41deg 83% 86%) 70%, hsl(0deg 0% 100%) 75%, hsl(0deg 0% 100%) 100%);
-  // margin: 0;
 }
 
 body {
@@ -23,7 +20,7 @@ body {
 }
 
 #calculator {
-  margin: 3vw auto; // indent from window borders
+  margin: 2vw auto; // indent from window borders
   background-color: white;
   border-radius: 25px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
@@ -44,7 +41,7 @@ body {
 }
 
 #displayAll {
-  height: 38vw; // height of the displayOps
+  height: 35vw; // height of the displayOps
   padding-top: 4.3vw; // indent from top border of parent container
   font-weight: 600; // styling displayOps
   font-size: 4.3vw; // styling displayOps
