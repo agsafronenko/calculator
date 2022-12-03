@@ -29,7 +29,6 @@ body {
 }
 
 #displayAll {
-  background-color: blue;
   height: 38vw;
   padding-top: 4.3vw;
   font-weight: 600;
@@ -93,8 +92,8 @@ button {
 
 #memorySlot {
   border-radius: 0 0 25px 25px;
-  padding-top: 10vw;
-  padding-bottom: 10vw;
+  padding-top: 7vw;
+  padding-bottom: 3vw;
 }
 
 .singleMemorySlot {
