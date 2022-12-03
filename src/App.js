@@ -679,7 +679,7 @@ class Buttons extends React.Component {
           <button id="e" value={Math.E} className="tertiary-btn" onClick={this.props.specialDigit}>
             e
           </button>
-          <button id="random" value={Math.random()} className="tertiary-btn" onClick={this.props.specialDigit}>
+          <button id="random" value={Math.random()} className="tertiary-btn long-text-btn" onClick={this.props.specialDigit}>
             rand
           </button>
           <button id="denominator" className="tertiary-btn" onClick={this.props.switchToDenominator}>
@@ -690,27 +690,27 @@ class Buttons extends React.Component {
           </button>
         </div>
         <div className="col-12 d-flex justify-content-center">
-          <button id="sin" value="sin" className="tertiary-btn" onClick={this.props.trigonometry}>
+          <button id="sin" value="sin" className="tertiary-btn long-text-btn" onClick={this.props.trigonometry}>
             sin
           </button>
-          <button id="log10" className="secondary-btn" onClick={this.props.log10}>
+          <button id="log10" className="secondary-btn long-text-btn" onClick={this.props.log10}>
             log<sub>10</sub>
           </button>
-          <button id="log" value=" log base " className="secondary-btn" onClick={this.props.log}>
+          <button id="log" value=" log base " className="secondary-btn long-text-btn" onClick={this.props.log}>
             log<sub>x</sub>
           </button>
-          <button id="logE" className="secondary-btn" onClick={this.props.logE}>
+          <button id="logE" className="secondary-btn long-text-btn" onClick={this.props.logE}>
             log<sub>e</sub>
           </button>
-          <button id="abs" className="secondary-btn" onClick={this.props.abs}>
+          <button id="abs" className="secondary-btn long-text-btn" onClick={this.props.abs}>
             | x |
           </button>
-          <button id="modulo" value=" mod " className="tertiary-btn" onClick={this.props.modulo}>
+          <button id="modulo" value=" mod " className="tertiary-btn long-text-btn" onClick={this.props.modulo}>
             mod
           </button>
         </div>
         <div className="col-12 d-flex justify-content-center">
-          <button id="cos" value="cos" className="tertiary-btn" onClick={this.props.trigonometry}>
+          <button id="cos" value="cos" className="tertiary-btn long-text-btn" onClick={this.props.trigonometry}>
             cos
           </button>
           <button id="leftParenthesis" value="(" className="secondary-btn" parentheses-delta={this.props.parenthesesDelta === 0 ? "" : this.props.parenthesesDelta} onClick={this.props.leftParenthesis}>
@@ -730,7 +730,7 @@ class Buttons extends React.Component {
           </button>
         </div>
         <div className="col-12 d-flex justify-content-center">
-          <button id="tan" value="tan" className="tertiary-btn" onClick={this.props.trigonometry}>
+          <button id="tan" value="tan" className="tertiary-btn long-text-btn" onClick={this.props.trigonometry}>
             tan
           </button>
           <button id="seven" value="7" className="digits-btn" onClick={this.props.digit}>
@@ -750,7 +750,7 @@ class Buttons extends React.Component {
           </button>
         </div>
         <div className="col-12 d-flex justify-content-center">
-          <button id="cot" value="cot" className="tertiary-btn" onClick={this.props.trigonometry}>
+          <button id="cot" value="cot" className="tertiary-btn long-text-btn" onClick={this.props.trigonometry}>
             cot
           </button>
           <button id="four" value="4" className="digits-btn" onClick={this.props.digit}>
@@ -762,15 +762,15 @@ class Buttons extends React.Component {
           <button id="six" value="6" className="digits-btn" onClick={this.props.digit}>
             6
           </button>
-          <button id="multiply" value=" * " className="secondary-btn" onClick={this.props.operator}>
+          <button id="multiply" value=" * " className="secondary-btn main-operators" onClick={this.props.operator}>
             ×
           </button>
-          <button id="divide" value=" / " className="tertiary-btn" onClick={this.props.operator}>
+          <button id="divide" value=" / " className="tertiary-btn main-operators" onClick={this.props.operator}>
             ÷
           </button>
         </div>
         <div className="col-12 d-flex justify-content-center">
-          <button id="sec" value="sec" className="tertiary-btn" onClick={this.props.trigonometry}>
+          <button id="sec" value="sec" className="tertiary-btn long-text-btn" onClick={this.props.trigonometry}>
             sec
           </button>
           <button id="one" value="1" className="digits-btn" onClick={this.props.digit}>
@@ -782,15 +782,15 @@ class Buttons extends React.Component {
           <button id="three" value="3" className="digits-btn" onClick={this.props.digit}>
             3
           </button>
-          <button id="add" value=" + " className="secondary-btn" onClick={this.props.operator}>
+          <button id="add" value=" + " className="secondary-btn main-operators" onClick={this.props.operator}>
             +
           </button>
-          <button id="subtract" value=" - " className="tertiary-btn" onClick={this.props.operator}>
+          <button id="subtract" value=" - " className="tertiary-btn main-operators" onClick={this.props.operator}>
             −
           </button>
         </div>
         <div className="col-12 d-flex justify-content-center">
-          <button id="csc" value="csc" className="tertiary-btn" onClick={this.props.trigonometry}>
+          <button id="csc" value="csc" className="tertiary-btn long-text-btn" onClick={this.props.trigonometry}>
             csc
           </button>
           <button id="sign" className="tertiary-btn" onClick={this.props.changeSign}>
@@ -799,10 +799,10 @@ class Buttons extends React.Component {
           <button id="zero" value="0" className="digits-btn" onClick={this.props.digit}>
             0
           </button>
-          <button id="decimal" className="tertiary-btn" onClick={this.props.decimal}>
+          <button id="decimal" className="tertiary-btn main-operators" onClick={this.props.decimal}>
             .
           </button>
-          <button id="equals" className="main-btn" onClick={this.props.equals}>
+          <button id="equals" className="main-btn main-operators" onClick={this.props.equals}>
             =
           </button>
           <button id="delete" className="main-btn" onClick={this.props.previousState}>
@@ -821,7 +821,7 @@ class MemorySlots extends React.Component {
   render() {
     return (
       <div id="memorySlot" className="row">
-        <div className="col-12 d-flex justify-content-center">
+        <div className="singleMemorySlot col-12 d-flex justify-content-center">
           <button id="CopyToMS1" value="memorySlot1" className="ms-btn" onClick={this.props.CopyToMS}>
             ↧
           </button>
@@ -832,7 +832,7 @@ class MemorySlots extends React.Component {
             ↥
           </button>
         </div>
-        <div className="col-12 d-flex justify-content-center">
+        <div className="singleMemorySlot col-12 d-flex justify-content-center">
           <button id="CopyToMS2" value="memorySlot2" className="ms-btn" onClick={this.props.CopyToMS}>
             ↧
           </button>
@@ -843,7 +843,7 @@ class MemorySlots extends React.Component {
             ↥
           </button>
         </div>
-        <div className="col-12 d-flex justify-content-center">
+        <div className="singleMemorySlot col-12 d-flex justify-content-center">
           <button id="CopyToMS3" value="memorySlot3" className="ms-btn" onClick={this.props.CopyToMS}>
             ↧
           </button>

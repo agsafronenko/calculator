@@ -29,7 +29,8 @@ body {
 }
 
 #displayAll {
-  height: 9rem;
+  background-color: blue;
+  height: 38vw;
   padding-top: 4.3vw;
   font-weight: 600;
   font-size: 4.3vw;
@@ -44,9 +45,9 @@ button {
   background: none;
   border: none;
   margin: 0.5vw;
-  width: 13vw;
-  height: 13vw;
-  box-shadow: 2px 2px rgba(110, 86, 38, 0.438);
+  width: 14vw;
+  height: 14vw;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
   border-radius: 15px;
   font-weight: 800;
   font-size: 4.5vw;
@@ -63,13 +64,14 @@ button {
   color: rgb(236, 180, 59);
   font-weight: 600;
   text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
-  font-size: 7vw;
+  font-size: 6vw;
 }
 
 .tertiary-btn {
   color: rgb(236, 180, 59);
   font-weight: 600;
   text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
+  font-size: 6vw;
 }
 
 .digits-btn {
@@ -78,17 +80,32 @@ button {
   font-size: 7vw;
 }
 
+.long-text-btn {
+  font-size: 5vw;
+}
+
+.main-operators {
+  font-size: 10vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 #memorySlot {
   border-radius: 0 0 25px 25px;
   padding-top: 10vw;
   padding-bottom: 10vw;
 }
 
+.singleMemorySlot {
+  margin: 1vw 0;
+}
+
 .ms-btn {
-  margin-top: 2vw;
   background-image: linear-gradient(225deg, hsl(41deg, 83%, 79%) 0%, hsl(41deg, 82%, 60%) 20%, hsl(41deg, 82%, 55%) 35%, hsl(41deg, 82%, 50%) 100%);
   width: 6vw;
   height: 6vw;
+  margin: auto 2vw;
   display: inline;
   color: white;
   font-size: 4vw;
@@ -123,7 +140,7 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: red;
+  color: rgb(236, 180, 59);
 }
 
 footer {
