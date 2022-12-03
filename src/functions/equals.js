@@ -1,3 +1,8 @@
+// next steps:
+// - add press animation
+// - whenever memorySlot equals 0 or nothing show text "memory slot in primary color on white background, otherwise the number in white color on primary background"
+// - check how it looks on other phone
+
 import { factorial } from "./factorial";
 import { FixIncompleteInputs, displayAllExpression } from "./FixIncompleteInputs";
 import $ from "jquery";
