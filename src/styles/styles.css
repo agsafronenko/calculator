@@ -90,6 +90,34 @@ button {
   justify-content: center;
 }
 
+button:hover {
+  border: 1px solid rgb(236, 180, 59);
+  border-color: rgb(236, 180, 59);
+  box-shadow: 0 0 7px 2px rgb(236, 180, 59);
+}
+
+button:active {
+  color: white;
+  background-image: linear-gradient(225deg, hsl(41deg, 83%, 79%) 0%, hsl(41deg, 82%, 60%) 30%, hsl(41deg, 82%, 65%) 60%, hsl(41deg, 82%, 50%) 100%);
+  box-shadow: 0 2px 7px 2px white;
+  transform: translateY(-2px);
+}
+
+.digits-btn:hover,
+.main-btn:hover {
+  border: 1px solid white;
+  border-color: white;
+  box-shadow: 0 0 7px 4px white;
+}
+
+.digits-btn:active,
+.main-btn:active {
+  color: rgb(236, 180, 59);
+  background: white;
+  box-shadow: 0 2px 7px 2px rgb(236, 180, 59);
+  transform: translateY(-2px);
+}
+
 #memorySlot {
   border-radius: 0 0 25px 25px;
   padding-top: 7vw;
@@ -140,6 +168,10 @@ button {
   justify-content: center;
   align-items: center;
   color: rgb(236, 180, 59);
+}
+
+[parentheses-delta]:active:before {
+  color: white;
 }
 
 footer {
