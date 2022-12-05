@@ -128,30 +128,43 @@ button:active {
 }
 
 .singleMemorySlot {
-  margin: 1vw 0;
+  margin: 1vw 0 1vw 4vw;
+  margin: 1vw 0 1vw 0;
 }
 
 .ms-btn {
   background-image: linear-gradient(225deg, hsl(41deg, 83%, 79%) 0%, hsl(41deg, 82%, 60%) 20%, hsl(41deg, 82%, 55%) 35%, hsl(41deg, 82%, 50%) 100%);
   width: 6vw;
   height: 6vw;
-  margin: auto 2vw;
+  margin: auto 1vw;
   display: inline;
   color: white;
   font-size: 4vw;
 }
 
-.ms-text {
+.ms-text, .saved-result {
   width: 52vw;
   height: 8vw;
-  display: inline-block;
   border: 1px solid rgb(236, 180, 59);
   border-radius: 5px;
-  font-size: 1rem;
+  font-size: 4vw;
   color: rgb(236, 180, 59);
   font-weight: 600;
   text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
   text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.saved-result {
+  color: white;
+  background-color: rgb(236, 180, 59);
+  font-size: 4.1vw;
+}
+
+button > i {
+  pointer-events: none;
 }
 
 [parentheses-delta] {

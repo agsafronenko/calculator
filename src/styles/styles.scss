@@ -142,14 +142,15 @@ button:active {
 }
 
 .singleMemorySlot {
-  margin: 1vw 0;
+  margin: 1vw 0 1vw 4vw;
+  margin: 1vw 0 1vw 0;
 }
 
 .ms-btn {
   background-image: $segundo;
   width: 6vw;
   height: 6vw;
-  margin: auto 2vw;
+  margin: auto 1vw;
   display: inline;
   color: white;
   font-size: 4vw;
@@ -158,14 +159,27 @@ button:active {
 .ms-text {
   width: 52vw;
   height: 8vw;
-  display: inline-block;
   border: 1px solid $primero;
   border-radius: 5px;
-  font-size: 1rem;
+  font-size: 4vw;
   color: $primero;
   font-weight: 600;
   text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
   text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.saved-result {
+  @extend .ms-text;
+  color: white;
+  background-color: $primero;
+  font-size: 4.1vw;
+}
+
+button > i {
+  pointer-events: none;
 }
 
 [parentheses-delta] {

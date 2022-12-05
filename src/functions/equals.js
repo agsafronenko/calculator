@@ -1,5 +1,4 @@
 // next steps:
-// - add press animation
 // - whenever memorySlot equals 0 or nothing show text "memory slot in primary color on white background, otherwise the number in white color on primary background"
 // - check how it looks on other phone
 // - update google table handlers on github

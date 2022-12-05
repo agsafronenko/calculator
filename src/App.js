@@ -52,6 +52,7 @@ export default class Calculator extends React.Component {
     this.handleLeftParenthesis = this.handleLeftParenthesis.bind(this);
     this.handleRightParenthesis = this.handleRightParenthesis.bind(this);
     this.handleCopyToMS = this.handleCopyToMS.bind(this);
+    this.handleResetMS = this.handleResetMS.bind(this);
   }
 
   handleClear(clearStorage) {
@@ -605,6 +606,12 @@ export default class Calculator extends React.Component {
     }));
   }
 
+  handleResetMS(e) {
+    this.setState({
+      [e.target.value]: "Memory Slot ".concat(e.target.value[10]),
+    });
+  }
+
   render() {
     return (
       <>
@@ -634,7 +641,7 @@ export default class Calculator extends React.Component {
             rightParenthesis={this.handleRightParenthesis}
             parenthesesDelta={this.state.parenthesesDelta}
           />
-          <MemorySlots CopyToMS={this.handleCopyToMS} specialDigit={this.handleSpecialDigit} memorySlot1={this.state.memorySlot1} memorySlot2={this.state.memorySlot2} memorySlot3={this.state.memorySlot3} />
+          <MemorySlots CopyToMS={this.handleCopyToMS} specialDigit={this.handleSpecialDigit} memorySlot1={this.state.memorySlot1} memorySlot2={this.state.memorySlot2} memorySlot3={this.state.memorySlot3} resetMS={this.handleResetMS} />
         </div>
         <Footer />
       </>
@@ -825,33 +832,42 @@ class MemorySlots extends React.Component {
           <button id="CopyToMS1" value="memorySlot1" className="ms-btn" onClick={this.props.CopyToMS}>
             ↧
           </button>
-          <div id="memorySlot1" className="ms-text">
+          <div id="memorySlot1" className={this.props.memorySlot1 === "Memory Slot 1" ? "ms-text" : "saved-result"}>
             {this.props.memorySlot1}
           </div>
           <button id="copyFromMS1" value={this.props.memorySlot1} className="ms-btn" onClick={this.props.specialDigit}>
             ↥
+          </button>
+          <button id="resetMS1" value="memorySlot1" className="ms-btn" onClick={this.props.resetMS}>
+            <i className="fa fa-trash" aria-hidden="true"></i>
           </button>
         </div>
         <div className="singleMemorySlot col-12 d-flex justify-content-center">
           <button id="CopyToMS2" value="memorySlot2" className="ms-btn" onClick={this.props.CopyToMS}>
             ↧
           </button>
-          <div id="memorySlot2" className="ms-text">
+          <div id="memorySlot2" className={this.props.memorySlot2 === "Memory Slot 2" ? "ms-text" : "saved-result"}>
             {this.props.memorySlot2}
           </div>
           <button id="copyFromMS2" value={this.props.memorySlot2} className="ms-btn" onClick={this.props.specialDigit}>
             ↥
+          </button>
+          <button id="resetMS2" value="memorySlot2" className="ms-btn" onClick={this.props.resetMS}>
+            <i className="fa fa-trash" aria-hidden="true"></i>
           </button>
         </div>
         <div className="singleMemorySlot col-12 d-flex justify-content-center">
           <button id="CopyToMS3" value="memorySlot3" className="ms-btn" onClick={this.props.CopyToMS}>
             ↧
           </button>
-          <div id="memorySlot3" className="ms-text">
+          <div id="memorySlot3" className={this.props.memorySlot3 === "Memory Slot 3" ? "ms-text" : "saved-result"}>
             {this.props.memorySlot3}
           </div>
           <button id="copyFromMS3" value={this.props.memorySlot3} className="ms-btn" onClick={this.props.specialDigit}>
             ↥
+          </button>
+          <button id="resetMS3" value="memorySlot3" className="ms-btn" onClick={this.props.resetMS}>
+            <i className="fa fa-trash" aria-hidden="true"></i>
           </button>
         </div>
       </div>
