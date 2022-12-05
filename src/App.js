@@ -862,7 +862,7 @@ class MemorySlots extends React.Component {
 function Footer() {
   return (
     <footer>
-      <div id="footer">This project was created using: HTML, CSS, JavaScript, React, jQuery, Bootstrap and SASS without using eval() function</div>
+      <div id="footer">This project was built using: HTML, CSS, JavaScript, React, jQuery, Bootstrap and SASS without using eval() function</div>
     </footer>
   );
 }
