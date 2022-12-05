@@ -1,33 +1,24 @@
-$primero: rgb(236, 180, 59);
-$segundo: linear-gradient(225deg, hsl(41deg 83% 79%) 0%, hsl(41deg 82% 60%) 20%, hsl(41deg 82% 55%) 35%, hsl(41deg 82% 50%) 100%);
-$tercero: linear-gradient(225deg, hsl(41deg 83% 79%) 0%, hsl(41deg 82% 60%) 30%, hsl(41deg 82% 65%) 60%, hsl(41deg 82% 50%) 100%);
-
-$cuarto: linear-gradient(225deg, rgb(255, 255, 255) 0%, rgb(255, 254, 251) 20%, hsl(41deg 82% 55%) 35%, hsl(41deg 82% 50%) 100%);
-
-$quinto: rgb(236, 180, 59);
-$sexto: linear-gradient(225deg, hsl(41deg 83% 79%) 0%, hsl(41deg 82% 60%) 80%, hsl(41deg 82% 65%) 95%, hsl(41deg 82% 50%) 100%);
-$thumbColor: rgb(234, 14, 14);
-$colorText: rgb(81, 79, 79);
-
-root {
-  background-image: linear-gradient(358deg, hsl(41deg 82% 50%) 0%, hsl(41deg 82% 55%) 30%, hsl(41deg 82% 60%) 50%, hsl(41deg 83% 79%) 65%, hsl(41deg 83% 86%) 70%, hsl(0deg 0% 100%) 75%, hsl(0deg 0% 100%) 100%);
-}
+$main: rgb(236, 180, 59);
+$main1: rgb(246, 218, 157);
+$main2: rgb(237, 184, 69);
+$main3: rgb(239, 193, 93);
+$main4: rgb(232, 166, 23);
+$mainGradient: linear-gradient(225deg, $main1 0%, $main2 30%, $main3 60%, $main4 100%);
+$second: white;
 
 body {
-  background-image: linear-gradient(358deg, hsl(41deg 82% 50%) 0%, hsl(41deg 82% 55%) 30%, hsl(41deg 82% 60%) 50%, hsl(41deg 83% 79%) 65%, hsl(41deg 83% 86%) 70%, hsl(0deg 0% 100%) 75%, hsl(0deg 0% 100%) 100%);
-
+  background-image: linear-gradient(358deg, $main4 0%, $main3 30%, $main2 50%, $main1 65%, $second 75%, $second 100%);
   box-sizing: border-box;
 }
 
 #calculator {
   margin: 2vw auto; // indent from window borders
-  background-color: white;
+  background-color: $second;
   border-radius: 25px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
 #displayBox {
-  background-image: linear-gradient(358deg, hsl(0deg 0% 100%) 0%, hsl(0deg 0% 100%) 10%, hsl(41deg 83% 86%) 15%, hsl(41deg 83% 79%) 20%, hsl(41deg 82% 60%) 30%, hsl(41deg 82% 55%) 70%, hsl(41deg 82% 50%) 100%);
+  background-image: linear-gradient(358deg, $second 0%, $second 10%, $main1 20%, $main2 30%, $main4 100%);
   border-radius: 25px 25px 0 0;
 }
 
@@ -37,7 +28,7 @@ body {
   text-align: center; // styling result
   font-weight: 800; // styling result
   font-size: 6.4vw; // styling result
-  color: white; // styling result
+  color: $second; // styling result
 }
 
 #displayAll {
@@ -45,11 +36,11 @@ body {
   padding-top: 4.3vw; // indent from top border of parent container
   font-weight: 600; // styling displayOps
   font-size: 4.3vw; // styling displayOps
-  color: white; // styling displayOps
+  color: $second; // styling displayOps
 }
 
 #button-pad {
-  background-color: white;
+  background-color: $second;
 }
 
 button {
@@ -66,8 +57,9 @@ button {
 }
 
 .main-btn {
-  background-image: $segundo;
-  color: white;
+  background-image: $mainGradient;
+  filter: hue-rotate(-5deg);
+  color: $second;
   font-size: 7vw;
   display: flex;
   align-items: center;
@@ -75,22 +67,22 @@ button {
 }
 
 .secondary-btn {
-  color: $primero;
+  color: $main;
   font-weight: 600;
   text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
   font-size: 6vw;
 }
 
 .tertiary-btn {
-  color: $primero;
+  color: $main;
   font-weight: 600;
   text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
   font-size: 6vw;
 }
 
 .digits-btn {
-  background-image: $tercero;
-  color: white;
+  background-image: $mainGradient;
+  color: $second;
   font-size: 7vw;
 }
 
@@ -106,63 +98,95 @@ button {
 }
 
 button:hover {
-  border: 1px solid $primero;
-  border-color: $primero;
-  box-shadow: 0 0 7px 2px $primero;
+  border: 1px solid $main;
+  border-color: $main;
+  box-shadow: 0 0 7px 2px $main;
 }
 
 button:active {
-  color: white;
-  background-image: $tercero;
-  box-shadow: 0 2px 7px 2px white;
+  color: $second;
+  background-image: $mainGradient;
+  box-shadow: 0 2px 7px 2px $second;
   transform: translateY(-2px);
 }
 
 .digits-btn:hover,
 .main-btn:hover {
-  border: 1px solid white;
-  border-color: white;
-  box-shadow: 0 0 7px 4px white;
+  border: 1px solid $second;
+  border-color: $second;
+  box-shadow: 0 0 7px 4px $second;
 }
 
 .digits-btn:active,
 .main-btn:active {
-  color: $primero;
-  background: white;
-  box-shadow: 0 2px 7px 2px $primero;
+  color: $main;
+  background: $second;
+  box-shadow: 0 2px 7px 2px $main;
+  transform: translateY(-2px);
+}
+
+#copy {
+  position: absolute;
+  margin: 1vw 3vw 0 0;
+  right: 0;
+  position: absolute;
+  font-size: 6vw;
+  width: 7vw;
+  height: 7vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $second;
+  box-shadow: none;
+}
+
+#changeStyle {
+  @extend #copy;
+  left: 0;
+  margin: 1vw 0 0 3vw;
+}
+
+#copy:hover {
+  border: 1px solid $second;
+  border-color: $second;
+  box-shadow: 0 0 7px 4px $second;
+}
+
+#copy:active {
+  color: $main;
+  background: $second;
+  box-shadow: 0 2px 7px 2px $main;
   transform: translateY(-2px);
 }
 
 #memorySlot {
-  // background-image: linear-gradient(358deg, hsl(41deg 82% 50%) 0%, hsl(41deg 82% 55%) 30%, hsl(41deg 82% 60%) 70%, hsl(41deg 83% 79%) 80%, hsl(41deg 83% 86%) 85%, hsl(0deg 0% 100%) 90%, hsl(0deg 0% 100%) 0%);
-  // background-color: white;
   border-radius: 0 0 25px 25px;
   padding-top: 7vw;
   padding-bottom: 3vw;
 }
 
 .singleMemorySlot {
-  margin: 1vw 0 1vw 4vw;
-  margin: 1vw 0 1vw 0;
+  margin: 1vw 0;
 }
 
 .ms-btn {
-  background-image: $segundo;
+  background-image: $mainGradient;
+  filter: hue-rotate(-5deg);
   width: 12vw;
   height: 6vw;
   margin: auto 1vw;
   display: inline;
-  color: white;
+  color: $second;
   font-size: 4vw;
 }
 
 .ms-text {
   width: 52vw;
   height: 8vw;
-  border: 1px solid $primero;
+  border: 1px solid $main;
   border-radius: 5px;
   font-size: 4vw;
-  color: $primero;
+  color: $main;
   font-weight: 600;
   text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
   text-align: center;
@@ -173,8 +197,8 @@ button:active {
 
 .saved-result {
   @extend .ms-text;
-  color: white;
-  background-color: $primero;
+  color: $second;
+  background-color: $main;
   font-size: 4.1vw;
 }
 
@@ -197,17 +221,17 @@ button > i {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: $primero;
+  color: $main;
 }
 [parentheses-delta]:active:before {
-  color: white;
+  color: $second;
 }
 
 footer {
   margin-top: 5vw;
   font-size: 3vw;
   font-style: italic;
-  color: white;
+  color: $second;
   font-weight: 600;
   text-align: center;
 }

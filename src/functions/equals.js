@@ -1,5 +1,6 @@
 // next steps:
-// - whenever memorySlot equals 0 or nothing show text "memory slot in primary color on white background, otherwise the number in white color on primary background"
+// - changeStyle button
+// - what happens when the input is larger than the displayOps
 // - check how it looks on other phone
 // - update google table handlers on github
 

@@ -26,6 +26,7 @@ export default class Calculator extends React.Component {
       memorySlot1: "Memory Slot 1",
       memorySlot2: "Memory Slot 2",
       memorySlot3: "Memory Slot 3",
+      colorDegree: 0,
     };
 
     //
@@ -53,6 +54,7 @@ export default class Calculator extends React.Component {
     this.handleRightParenthesis = this.handleRightParenthesis.bind(this);
     this.handleCopyToMS = this.handleCopyToMS.bind(this);
     this.handleResetMS = this.handleResetMS.bind(this);
+    this.handleColorDegree = this.handleColorDegree.bind(this);
   }
 
   handleClear(clearStorage) {
@@ -595,8 +597,8 @@ export default class Calculator extends React.Component {
     }
   }
 
-  handleCopyToClipboard(e) {
-    let copyResult = document.getElementById(e.target.value).innerText;
+  handleCopyToClipboard() {
+    let copyResult = document.getElementById("display").innerText;
     navigator.clipboard.writeText(copyResult);
   }
 
@@ -612,11 +614,20 @@ export default class Calculator extends React.Component {
     });
   }
 
+  handleColorDegree() {
+    this.setState(
+      (state) => ({
+        colorDegree: state.colorDegree + 45,
+      }),
+      () => console.log("colorDegree", this.state.colorDegree)
+    );
+  }
+
   render() {
     return (
       <>
         <div id="calculator" className="container-fluid">
-          <Display ops={this.state.displayAll} cur={this.state.displayCur} />
+          <Display ops={this.state.displayAll} cur={this.state.displayCur} copy={this.handleCopyToClipboard} colorDegree={this.state.colorDegree} changeColorDegree={this.handleColorDegree} />
           <Buttons
             clear={this.handleClear}
             operator={this.handleOperator}
@@ -660,6 +671,12 @@ class Display extends React.Component {
           <div id="display" className="col-12">
             {this.props.cur}
           </div>
+          <button id="changeStyle" color-degree={this.props.colorDegree} onClick={this.props.changeColorDegree}>
+            <i className="fa-solid fa-calculator"></i>
+          </button>
+          <button id="copy" onClick={this.props.copy}>
+            <i className="fa-solid fa-copy"></i>
+          </button>
           <div id="displayAll" className="col-12">
             {this.props.ops}
           </div>
@@ -809,8 +826,8 @@ class Buttons extends React.Component {
           <button id="decimal" className="tertiary-btn main-operators" onClick={this.props.decimal}>
             .
           </button>
-          <button id="equals" className="main-btn main-operators" onClick={this.props.equals}>
-            <i className="fa-solid fa-equals"></i>
+          <button id="equals" className="main-btn main-operators" style={{ fontSize: "9vw" }} onClick={this.props.equals}>
+            =
           </button>
           <button id="delete" className="main-btn" onClick={this.props.previousState}>
             <i className="fa-solid fa-delete-left"></i>
