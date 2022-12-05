@@ -770,10 +770,10 @@ class Buttons extends React.Component {
             6
           </button>
           <button id="multiply" value=" * " className="secondary-btn main-operators" onClick={this.props.operator}>
-            ×
+            <i className="fa-solid fa-xmark"></i>
           </button>
           <button id="divide" value=" / " className="tertiary-btn main-operators" onClick={this.props.operator}>
-            ÷
+            <i className="fa-solid fa-divide"></i>
           </button>
         </div>
         <div className="col-12 d-flex justify-content-center">
@@ -790,10 +790,10 @@ class Buttons extends React.Component {
             3
           </button>
           <button id="add" value=" + " className="secondary-btn main-operators" onClick={this.props.operator}>
-            +
+            <i className="fa-solid fa-plus"></i>
           </button>
           <button id="subtract" value=" - " className="tertiary-btn main-operators" onClick={this.props.operator}>
-            −
+            <i className="fa-solid fa-minus"></i>
           </button>
         </div>
         <div className="col-12 d-flex justify-content-center">
@@ -810,10 +810,10 @@ class Buttons extends React.Component {
             .
           </button>
           <button id="equals" className="main-btn main-operators" onClick={this.props.equals}>
-            =
+            <i className="fa-solid fa-equals"></i>
           </button>
           <button id="delete" className="main-btn" onClick={this.props.previousState}>
-            ⌫
+            <i className="fa-solid fa-delete-left"></i>
           </button>
         </div>
       </div>
@@ -830,44 +830,44 @@ class MemorySlots extends React.Component {
       <div id="memorySlot" className="row">
         <div className="singleMemorySlot col-12 d-flex justify-content-center">
           <button id="CopyToMS1" value="memorySlot1" className="ms-btn" onClick={this.props.CopyToMS}>
-            ↧
+            <i className="fa-solid fa-file-export"></i>
           </button>
           <div id="memorySlot1" className={this.props.memorySlot1 === "Memory Slot 1" ? "ms-text" : "saved-result"}>
             {this.props.memorySlot1}
           </div>
           <button id="copyFromMS1" value={this.props.memorySlot1} className="ms-btn" onClick={this.props.specialDigit}>
-            ↥
+            <i className="fa-solid fa-file-arrow-up"></i>
           </button>
           <button id="resetMS1" value="memorySlot1" className="ms-btn" onClick={this.props.resetMS}>
-            <i className="fa fa-trash" aria-hidden="true"></i>
+            <i className="fa-solid fa-trash-can"></i>
           </button>
         </div>
         <div className="singleMemorySlot col-12 d-flex justify-content-center">
           <button id="CopyToMS2" value="memorySlot2" className="ms-btn" onClick={this.props.CopyToMS}>
-            ↧
+            <i className="fa-solid fa-file-export"></i>
           </button>
           <div id="memorySlot2" className={this.props.memorySlot2 === "Memory Slot 2" ? "ms-text" : "saved-result"}>
             {this.props.memorySlot2}
           </div>
           <button id="copyFromMS2" value={this.props.memorySlot2} className="ms-btn" onClick={this.props.specialDigit}>
-            ↥
+            <i className="fa-solid fa-file-arrow-up"></i>
           </button>
           <button id="resetMS2" value="memorySlot2" className="ms-btn" onClick={this.props.resetMS}>
-            <i className="fa fa-trash" aria-hidden="true"></i>
+            <i className="fa-solid fa-trash-can"></i>
           </button>
         </div>
         <div className="singleMemorySlot col-12 d-flex justify-content-center">
           <button id="CopyToMS3" value="memorySlot3" className="ms-btn" onClick={this.props.CopyToMS}>
-            ↧
+            <i className="fa-solid fa-file-export"></i>
           </button>
           <div id="memorySlot3" className={this.props.memorySlot3 === "Memory Slot 3" ? "ms-text" : "saved-result"}>
             {this.props.memorySlot3}
           </div>
           <button id="copyFromMS3" value={this.props.memorySlot3} className="ms-btn" onClick={this.props.specialDigit}>
-            ↥
+            <i className="fa-solid fa-file-arrow-up"></i>
           </button>
           <button id="resetMS3" value="memorySlot3" className="ms-btn" onClick={this.props.resetMS}>
-            <i className="fa fa-trash" aria-hidden="true"></i>
+            <i className="fa-solid fa-trash-can"></i>
           </button>
         </div>
       </div>
