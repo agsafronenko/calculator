@@ -134,7 +134,7 @@ button:active {
 
 .ms-btn {
   background-image: linear-gradient(225deg, hsl(41deg, 83%, 79%) 0%, hsl(41deg, 82%, 60%) 20%, hsl(41deg, 82%, 55%) 35%, hsl(41deg, 82%, 50%) 100%);
-  width: 6vw;
+  width: 12vw;
   height: 6vw;
   margin: auto 1vw;
   display: inline;
