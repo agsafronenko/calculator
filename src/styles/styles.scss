@@ -1,10 +1,33 @@
-$main: rgb(236, 180, 59);
+// :root {
+//   --main0: rgb(236, 180, 59);
+//   --main1: rgb(246, 218, 157);
+//   --main2: rgb(237, 184, 69);
+//   --main3: rgb(239, 193, 93);
+//   --main4: rgb(232, 166, 23);
+//   --second: white;
+// }
+
+// $main0: var(--main0);
+// $main1: var(--main1);
+// $main2: var(--main2);
+// $main3: var(--main3);
+// $main4: var(--main4);
+// $mainGradient: linear-gradient(225deg, $main1 0%, $main2 30%, $main3 60%, $main4 100%);
+// $second: var(--second);
+
+:root {
+  --hue-rotate: hue-rotate(0deg);
+  filter: var(--hue-rotate);
+  --degree: 0;
+}
+
+$main0: rgb(236, 180, 59);
 $main1: rgb(246, 218, 157);
 $main2: rgb(237, 184, 69);
 $main3: rgb(239, 193, 93);
 $main4: rgb(232, 166, 23);
 $mainGradient: linear-gradient(225deg, $main1 0%, $main2 30%, $main3 60%, $main4 100%);
-$second: white;
+$second: rgb(59, 68, 75);
 
 body {
   background-image: linear-gradient(358deg, $main4 0%, $main3 30%, $main2 50%, $main1 65%, $second 75%, $second 100%);
@@ -58,7 +81,7 @@ button {
 
 .main-btn {
   background-image: $mainGradient;
-  filter: hue-rotate(-5deg);
+  filter: hue-rotate(-5deg); // make another way to signle out main buttons
   color: $second;
   font-size: 7vw;
   display: flex;
@@ -67,14 +90,14 @@ button {
 }
 
 .secondary-btn {
-  color: $main;
+  color: $main0;
   font-weight: 600;
   text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
   font-size: 6vw;
 }
 
 .tertiary-btn {
-  color: $main;
+  color: $main0;
   font-weight: 600;
   text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
   font-size: 6vw;
@@ -98,9 +121,9 @@ button {
 }
 
 button:hover {
-  border: 1px solid $main;
-  border-color: $main;
-  box-shadow: 0 0 7px 2px $main;
+  border: 1px solid $main0;
+  border-color: $main0;
+  box-shadow: 0 0 7px 2px $main0;
 }
 
 button:active {
@@ -119,14 +142,15 @@ button:active {
 
 .digits-btn:active,
 .main-btn:active {
-  color: $main;
+  color: $main0;
   background: $second;
-  box-shadow: 0 2px 7px 2px $main;
+  box-shadow: 0 2px 7px 2px $main0;
   transform: translateY(-2px);
 }
 
 #copy {
   position: absolute;
+  z-index: 1;
   margin: 1vw 3vw 0 0;
   right: 0;
   position: absolute;
@@ -140,11 +164,86 @@ button:active {
   box-shadow: none;
 }
 
-#changeStyle {
+#colorTheme {
   @extend #copy;
   left: 0;
   margin: 1vw 0 0 3vw;
+  background-color: gray;
 }
+
+// $degree: 0;
+
+// @while $degree <= 360 {
+//   #style#{$degree} {
+//     @extend #colorTheme;
+//     margin: (9 + $degree / 5.6) + vw 0 0 3vw;
+//     color: $main0 !important;
+//     filter: hue-rotate(#{$degree} + deg);
+//   }
+//   $degree: $degree + 45;
+// }
+
+#style0 {
+  @extend #colorTheme;
+  margin: 9vw 0 0 3vw;
+  color: rgb(236, 180, 59);
+}
+
+#style45 {
+  @extend #colorTheme;
+  margin: 17vw 0 0 3vw;
+  color: rgb(236, 180, 59);
+  filter: hue-rotate((45 - var(--degree)) + deg);
+}
+
+#style90 {
+  @extend #colorTheme;
+  margin: 25vw 0 0 3vw;
+  color: rgb(236, 180, 59);
+  filter: hue-rotate((90 - var(--degree)) + deg);
+}
+
+// #style135 {
+//   @extend #colorTheme;
+//   margin: 33vw 0 0 3vw;
+//   color: $main0;
+//   filter: hue-rotate(90deg);
+// }
+
+// #style180 {
+//   @extend #colorTheme;
+//   margin: 25vw 0 0 3vw;
+//   color: $main0;
+//   filter: hue-rotate(90deg);
+// }
+
+// #style225 {
+//   @extend #colorTheme;
+//   margin: 25vw 0 0 3vw;
+//   color: $main0;
+//   filter: hue-rotate(90deg);
+// }
+
+// #style270 {
+//   @extend #colorTheme;
+//   margin: 25vw 0 0 3vw;
+//   color: $main0;
+//   filter: hue-rotate(90deg);
+// }
+
+// #style315 {
+//   @extend #colorTheme;
+//   margin: 25vw 0 0 3vw;
+//   color: $main0;
+//   filter: hue-rotate(90deg);
+// }
+
+// #style360 {
+//   @extend #colorTheme;
+//   margin: 25vw 0 0 3vw;
+//   color: $main0;
+//   filter: hue-rotate(90deg);
+// }
 
 #copy:hover {
   border: 1px solid $second;
@@ -153,9 +252,9 @@ button:active {
 }
 
 #copy:active {
-  color: $main;
+  color: $main0;
   background: $second;
-  box-shadow: 0 2px 7px 2px $main;
+  box-shadow: 0 2px 7px 2px $main0;
   transform: translateY(-2px);
 }
 
@@ -183,10 +282,10 @@ button:active {
 .ms-text {
   width: 52vw;
   height: 8vw;
-  border: 1px solid $main;
+  border: 1px solid $main0;
   border-radius: 5px;
   font-size: 4vw;
-  color: $main;
+  color: $main0;
   font-weight: 600;
   text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
   text-align: center;
@@ -198,7 +297,7 @@ button:active {
 .saved-result {
   @extend .ms-text;
   color: $second;
-  background-color: $main;
+  background-color: $main0;
   font-size: 4.1vw;
 }
 
@@ -221,7 +320,7 @@ button > i {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: $main;
+  color: $main0;
 }
 [parentheses-delta]:active:before {
   color: $second;

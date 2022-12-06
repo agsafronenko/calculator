@@ -26,7 +26,6 @@ export default class Calculator extends React.Component {
       memorySlot1: "Memory Slot 1",
       memorySlot2: "Memory Slot 2",
       memorySlot3: "Memory Slot 3",
-      colorDegree: 0,
     };
 
     //
@@ -54,7 +53,7 @@ export default class Calculator extends React.Component {
     this.handleRightParenthesis = this.handleRightParenthesis.bind(this);
     this.handleCopyToMS = this.handleCopyToMS.bind(this);
     this.handleResetMS = this.handleResetMS.bind(this);
-    this.handleColorDegree = this.handleColorDegree.bind(this);
+    this.handleColorTheme = this.handleColorTheme.bind(this);
   }
 
   handleClear(clearStorage) {
@@ -614,20 +613,19 @@ export default class Calculator extends React.Component {
     });
   }
 
-  handleColorDegree() {
-    this.setState(
-      (state) => ({
-        colorDegree: state.colorDegree + 45,
-      }),
-      () => console.log("colorDegree", this.state.colorDegree)
-    );
+  handleColorTheme(e) {
+    const root = document.documentElement;
+    root.style.setProperty("--hue-rotate", `hue-rotate(${e.target.value}deg)`);
+    root.style.setProperty("--degree", `${e.target.value}`);
   }
 
   render() {
     return (
       <>
+        <ColorThemes changeColorTheme={this.handleColorTheme} />
+
         <div id="calculator" className="container-fluid">
-          <Display ops={this.state.displayAll} cur={this.state.displayCur} copy={this.handleCopyToClipboard} colorDegree={this.state.colorDegree} changeColorDegree={this.handleColorDegree} />
+          <Display ops={this.state.displayAll} cur={this.state.displayCur} copy={this.handleCopyToClipboard} />
           <Buttons
             clear={this.handleClear}
             operator={this.handleOperator}
@@ -660,6 +658,32 @@ export default class Calculator extends React.Component {
   }
 }
 
+class ColorThemes extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    let colorThemes = [];
+    for (let i = 0; i <= 90; i += 45) {
+      colorThemes.push(
+        <div>
+          <button id={`style${i}`} value={i} onClick={this.props.changeColorTheme}>
+            <i className="fa-solid fa-calculator"></i>
+          </button>
+        </div>
+      );
+    }
+    return (
+      <>
+        <button id="colorTheme">
+          <i className="fa-solid fa-calculator"></i>
+        </button>
+        {colorThemes}
+      </>
+    );
+  }
+}
+
 class Display extends React.Component {
   constructor(props) {
     super(props);
@@ -671,12 +695,21 @@ class Display extends React.Component {
           <div id="display" className="col-12">
             {this.props.cur}
           </div>
-          <button id="changeStyle" color-degree={this.props.colorDegree} onClick={this.props.changeColorDegree}>
+          {/* <button id="colorTheme">
+            <i className="fa-solid fa-calculator"></i>
+          </button>
+          <button id="style1" value="45" onClick={this.props.changeColorTheme}>
+            <i className="fa-solid fa-calculator"></i>
+          </button>
+          <button id="style2" value="90" onClick={this.props.changeColorTheme}>
+            <i className="fa-solid fa-calculator"></i>
+          </button>
+          <button id="style0" value="0" onClick={this.props.changeColorTheme}>
             <i className="fa-solid fa-calculator"></i>
           </button>
           <button id="copy" onClick={this.props.copy}>
             <i className="fa-solid fa-copy"></i>
-          </button>
+          </button> */}
           <div id="displayAll" className="col-12">
             {this.props.ops}
           </div>

@@ -1,16 +1,22 @@
+:root {
+  --hue-rotate: hue-rotate(0deg);
+  filter: var(--hue-rotate);
+  --degree: 0;
+}
+
 body {
-  background-image: linear-gradient(358deg, rgb(232, 166, 23) 0%, rgb(239, 193, 93) 30%, rgb(237, 184, 69) 50%, rgb(246, 218, 157) 65%, white 75%, white 100%);
+  background-image: linear-gradient(358deg, rgb(232, 166, 23) 0%, rgb(239, 193, 93) 30%, rgb(237, 184, 69) 50%, rgb(246, 218, 157) 65%, rgb(59, 68, 75) 75%, rgb(59, 68, 75) 100%);
   box-sizing: border-box;
 }
 
 #calculator {
   margin: 2vw auto;
-  background-color: white;
+  background-color: rgb(59, 68, 75);
   border-radius: 25px;
 }
 
 #displayBox {
-  background-image: linear-gradient(358deg, white 0%, white 10%, rgb(246, 218, 157) 20%, rgb(237, 184, 69) 30%, rgb(232, 166, 23) 100%);
+  background-image: linear-gradient(358deg, rgb(59, 68, 75) 0%, rgb(59, 68, 75) 10%, rgb(246, 218, 157) 20%, rgb(237, 184, 69) 30%, rgb(232, 166, 23) 100%);
   border-radius: 25px 25px 0 0;
 }
 
@@ -20,7 +26,7 @@ body {
   text-align: center;
   font-weight: 800;
   font-size: 6.4vw;
-  color: white;
+  color: rgb(59, 68, 75);
 }
 
 #displayAll {
@@ -28,11 +34,11 @@ body {
   padding-top: 4.3vw;
   font-weight: 600;
   font-size: 4.3vw;
-  color: white;
+  color: rgb(59, 68, 75);
 }
 
 #button-pad {
-  background-color: white;
+  background-color: rgb(59, 68, 75);
 }
 
 button {
@@ -51,7 +57,7 @@ button {
 .main-btn {
   background-image: linear-gradient(225deg, rgb(246, 218, 157) 0%, rgb(237, 184, 69) 30%, rgb(239, 193, 93) 60%, rgb(232, 166, 23) 100%);
   filter: hue-rotate(-5deg);
-  color: white;
+  color: rgb(59, 68, 75);
   font-size: 7vw;
   display: flex;
   align-items: center;
@@ -74,7 +80,7 @@ button {
 
 .digits-btn {
   background-image: linear-gradient(225deg, rgb(246, 218, 157) 0%, rgb(237, 184, 69) 30%, rgb(239, 193, 93) 60%, rgb(232, 166, 23) 100%);
-  color: white;
+  color: rgb(59, 68, 75);
   font-size: 7vw;
 }
 
@@ -96,29 +102,30 @@ button:hover {
 }
 
 button:active {
-  color: white;
+  color: rgb(59, 68, 75);
   background-image: linear-gradient(225deg, rgb(246, 218, 157) 0%, rgb(237, 184, 69) 30%, rgb(239, 193, 93) 60%, rgb(232, 166, 23) 100%);
-  box-shadow: 0 2px 7px 2px white;
+  box-shadow: 0 2px 7px 2px rgb(59, 68, 75);
   transform: translateY(-2px);
 }
 
 .digits-btn:hover,
 .main-btn:hover {
-  border: 1px solid white;
-  border-color: white;
-  box-shadow: 0 0 7px 4px white;
+  border: 1px solid rgb(59, 68, 75);
+  border-color: rgb(59, 68, 75);
+  box-shadow: 0 0 7px 4px rgb(59, 68, 75);
 }
 
 .digits-btn:active,
 .main-btn:active {
   color: rgb(236, 180, 59);
-  background: white;
+  background: rgb(59, 68, 75);
   box-shadow: 0 2px 7px 2px rgb(236, 180, 59);
   transform: translateY(-2px);
 }
 
-#copy, #changeStyle {
+#copy, #colorTheme, #style90, #style45, #style0 {
   position: absolute;
+  z-index: 1;
   margin: 1vw 3vw 0 0;
   right: 0;
   position: absolute;
@@ -128,24 +135,42 @@ button:active {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: rgb(59, 68, 75);
   box-shadow: none;
 }
 
-#changeStyle {
+#colorTheme, #style90, #style45, #style0 {
   left: 0;
   margin: 1vw 0 0 3vw;
+  background-color: gray;
 }
 
-#copy:hover, #changeStyle:hover {
-  border: 1px solid white;
-  border-color: white;
-  box-shadow: 0 0 7px 4px white;
-}
-
-#copy:active, #changeStyle:active {
+#style0 {
+  margin: 9vw 0 0 3vw;
   color: rgb(236, 180, 59);
-  background: white;
+}
+
+#style45 {
+  margin: 17vw 0 0 3vw;
+  color: rgb(236, 180, 59);
+  filter: hue-rotate(45-var(--degree)deg);
+}
+
+#style90 {
+  margin: 25vw 0 0 3vw;
+  color: rgb(236, 180, 59);
+  filter: hue-rotate(90-var(--degree)deg);
+}
+
+#copy:hover, #colorTheme:hover, #style0:hover, #style45:hover, #style90:hover {
+  border: 1px solid rgb(59, 68, 75);
+  border-color: rgb(59, 68, 75);
+  box-shadow: 0 0 7px 4px rgb(59, 68, 75);
+}
+
+#copy:active, #colorTheme:active, #style0:active, #style45:active, #style90:active {
+  color: rgb(236, 180, 59);
+  background: rgb(59, 68, 75);
   box-shadow: 0 2px 7px 2px rgb(236, 180, 59);
   transform: translateY(-2px);
 }
@@ -167,7 +192,7 @@ button:active {
   height: 6vw;
   margin: auto 1vw;
   display: inline;
-  color: white;
+  color: rgb(59, 68, 75);
   font-size: 4vw;
 }
 
@@ -187,7 +212,7 @@ button:active {
 }
 
 .saved-result {
-  color: white;
+  color: rgb(59, 68, 75);
   background-color: rgb(236, 180, 59);
   font-size: 4.1vw;
 }
@@ -216,14 +241,14 @@ button > i {
 }
 
 [parentheses-delta]:active:before {
-  color: white;
+  color: rgb(59, 68, 75);
 }
 
 footer {
   margin-top: 5vw;
   font-size: 3vw;
   font-style: italic;
-  color: white;
+  color: rgb(59, 68, 75);
   font-weight: 600;
   text-align: center;
 }/*# sourceMappingURL=styles.css.map */
