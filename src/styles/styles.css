@@ -130,7 +130,7 @@ button:active {
   transform: translateY(-2px);
 }
 
-#copy, #colorTheme, #style700, #style665, #style630, #style595, #style560, #style525, #style490, #style455, #style420, #style385, #style350, #style315, #style280, #style245, #style210, #style175, #style140, #style105, #style70, #style35, #style0 {
+#copy, #colorTheme, #style720, #style680, #style640, #style600, #style560, #style520, #style480, #style440, #style400, #style360, #style320, #style280, #style240, #style200, #style160, #style120, #style80, #style40, #style0 {
   position: absolute;
   z-index: 1;
   margin: 1vw 3vw 0 0;
@@ -146,232 +146,174 @@ button:active {
   box-shadow: none;
 }
 
-#colorTheme, #style700, #style665, #style630, #style595, #style560, #style525, #style490, #style455, #style420, #style385, #style350, #style315, #style280, #style245, #style210, #style175, #style140, #style105, #style70, #style35, #style0 {
+#colorTheme, #style720, #style680, #style640, #style600, #style560, #style520, #style480, #style440, #style400, #style360, #style320, #style280, #style240, #style200, #style160, #style120, #style80, #style40, #style0 {
   left: 0;
-  margin: 3vw 0 0 3vw;
+  margin: 3.5vw 0 0 3.5vw;
   background-color: white;
-  width: 12vw;
-  height: 12vw;
-  font-size: 10vw;
+  width: 9vw;
+  height: 11vw;
+  font-size: 12vw;
 }
 
 #style0 {
-  margin-top: 3vw;
-  margin-left: 3vw;
-  margin-right: 0;
-  margin-bottom: 0;
-  color: rgb(236, 180, 59);
-  background-color: white;
+  margin-top: 3.5vw;
+  margin-left: 3.5vw;
+  background-color: rgb(236, 180, 59);
+  color: white;
   filter: hue-rotate(0deg);
 }
 
-#style35 {
-  margin-top: 3vw;
-  margin-left: 16.5922330097vw;
-  margin-right: 0;
-  margin-bottom: 0;
-  color: rgb(236, 180, 59);
-  background-color: white;
-  filter: hue-rotate(35deg);
+#style40 {
+  margin-top: 3.5vw;
+  margin-left: 14.0263157895vw;
+  background-color: rgb(236, 180, 59);
+  color: white;
+  filter: hue-rotate(40deg);
 }
 
-#style70 {
-  margin-top: 3vw;
-  margin-left: 30.1844660194vw;
-  margin-right: 0;
-  margin-bottom: 0;
-  color: rgb(236, 180, 59);
-  background-color: white;
-  filter: hue-rotate(70deg);
+#style80 {
+  margin-top: 3.5vw;
+  margin-left: 24.5526315789vw;
+  background-color: rgb(236, 180, 59);
+  color: white;
+  filter: hue-rotate(80deg);
 }
 
-#style105 {
-  margin-top: 3vw;
-  margin-left: 43.7766990291vw;
-  margin-right: 0;
-  margin-bottom: 0;
-  color: rgb(236, 180, 59);
-  background-color: white;
-  filter: hue-rotate(105deg);
+#style120 {
+  margin-top: 3.5vw;
+  margin-left: 35.0789473684vw;
+  background-color: rgb(236, 180, 59);
+  color: white;
+  filter: hue-rotate(120deg);
 }
 
-#style140 {
-  margin-top: 3vw;
-  margin-left: 57.3689320388vw;
-  margin-right: 0;
-  margin-bottom: 0;
-  color: rgb(236, 180, 59);
-  background-color: white;
-  filter: hue-rotate(140deg);
+#style160 {
+  margin-top: 3.5vw;
+  margin-left: 45.6052631579vw;
+  background-color: rgb(236, 180, 59);
+  color: white;
+  filter: hue-rotate(160deg);
 }
 
-#style175 {
-  margin-top: 3vw;
-  margin-left: 70.9611650485vw;
-  margin-right: 0;
-  margin-bottom: 0;
-  color: rgb(236, 180, 59);
-  background-color: white;
-  filter: hue-rotate(175deg);
+#style200 {
+  margin-top: 3.5vw;
+  margin-left: 56.1315789474vw;
+  background-color: rgb(236, 180, 59);
+  color: white;
+  filter: hue-rotate(200deg);
 }
 
-#style210 {
-  margin-top: 3vw;
-  margin-left: 84.5533980583vw;
-  margin-right: 0;
-  margin-bottom: 0;
-  color: rgb(236, 180, 59);
-  background-color: white;
-  filter: hue-rotate(210deg);
-}
-
-#style245 {
-  margin-top: 17vw;
-  margin-left: 3vw;
-  margin-right: 0;
-  margin-bottom: 0;
-  color: rgb(236, 180, 59);
-  background-color: white;
-  filter: hue-rotate(245deg);
+#style240 {
+  margin-top: 3.5vw;
+  margin-left: 66.6578947368vw;
+  background-color: rgb(236, 180, 59);
+  color: white;
+  filter: hue-rotate(240deg);
 }
 
 #style280 {
-  margin-top: 17vw;
-  margin-left: 16.5922330097vw;
-  margin-right: 0;
-  margin-bottom: 0;
-  color: rgb(236, 180, 59);
-  background-color: white;
+  margin-top: 3.5vw;
+  margin-left: 77.1842105263vw;
+  background-color: rgb(236, 180, 59);
+  color: white;
   filter: hue-rotate(280deg);
 }
 
-#style315 {
-  margin-top: 17vw;
-  margin-left: 30.1844660194vw;
-  margin-right: 0;
-  margin-bottom: 0;
-  color: rgb(236, 180, 59);
-  background-color: white;
-  filter: hue-rotate(315deg);
+#style320 {
+  margin-top: 3.5vw;
+  margin-left: 87.7105263158vw;
+  background-color: rgb(236, 180, 59);
+  color: white;
+  filter: hue-rotate(320deg);
 }
 
-#style350 {
-  margin-top: 17vw;
-  margin-left: 43.7766990291vw;
-  margin-right: 0;
-  margin-bottom: 0;
-  color: rgb(236, 180, 59);
-  background-color: white;
-  filter: hue-rotate(350deg);
+#style360 {
+  margin-top: 16vw;
+  margin-left: 3.5vw;
+  background-color: rgb(236, 180, 59);
+  color: rgb(59, 68, 75);
+  filter: hue-rotate(360deg);
 }
 
-#style385 {
-  margin-top: 17vw;
-  margin-left: 57.3689320388vw;
-  margin-right: 0;
-  margin-bottom: 0;
-  color: rgb(236, 180, 59);
-  background-color: rgb(59, 68, 75);
-  filter: hue-rotate(385deg);
+#style400 {
+  margin-top: 16vw;
+  margin-left: 14.0263157895vw;
+  background-color: rgb(236, 180, 59);
+  color: rgb(59, 68, 75);
+  filter: hue-rotate(400deg);
 }
 
-#style420 {
-  margin-top: 17vw;
-  margin-left: 70.9611650485vw;
-  margin-right: 0;
-  margin-bottom: 0;
-  color: rgb(236, 180, 59);
-  background-color: rgb(59, 68, 75);
-  filter: hue-rotate(420deg);
+#style440 {
+  margin-top: 16vw;
+  margin-left: 24.5526315789vw;
+  background-color: rgb(236, 180, 59);
+  color: rgb(59, 68, 75);
+  filter: hue-rotate(440deg);
 }
 
-#style455 {
-  margin-top: 17vw;
-  margin-left: 84.5533980583vw;
-  margin-right: 0;
-  margin-bottom: 0;
-  color: rgb(236, 180, 59);
-  background-color: rgb(59, 68, 75);
-  filter: hue-rotate(455deg);
+#style480 {
+  margin-top: 16vw;
+  margin-left: 35.0789473684vw;
+  background-color: rgb(236, 180, 59);
+  color: rgb(59, 68, 75);
+  filter: hue-rotate(480deg);
 }
 
-#style490 {
-  margin-top: 31vw;
-  margin-left: 3vw;
-  margin-right: 0;
-  margin-bottom: 0;
-  color: rgb(236, 180, 59);
-  background-color: rgb(59, 68, 75);
-  filter: hue-rotate(490deg);
-}
-
-#style525 {
-  margin-top: 31vw;
-  margin-left: 16.5922330097vw;
-  margin-right: 0;
-  margin-bottom: 0;
-  color: rgb(236, 180, 59);
-  background-color: rgb(59, 68, 75);
-  filter: hue-rotate(525deg);
+#style520 {
+  margin-top: 16vw;
+  margin-left: 45.6052631579vw;
+  background-color: rgb(236, 180, 59);
+  color: rgb(59, 68, 75);
+  filter: hue-rotate(520deg);
 }
 
 #style560 {
-  margin-top: 31vw;
-  margin-left: 30.1844660194vw;
-  margin-right: 0;
-  margin-bottom: 0;
-  color: rgb(236, 180, 59);
-  background-color: rgb(59, 68, 75);
+  margin-top: 16vw;
+  margin-left: 56.1315789474vw;
+  background-color: rgb(236, 180, 59);
+  color: rgb(59, 68, 75);
   filter: hue-rotate(560deg);
 }
 
-#style595 {
-  margin-top: 31vw;
-  margin-left: 43.7766990291vw;
-  margin-right: 0;
-  margin-bottom: 0;
-  color: rgb(236, 180, 59);
-  background-color: rgb(59, 68, 75);
-  filter: hue-rotate(595deg);
+#style600 {
+  margin-top: 16vw;
+  margin-left: 66.6578947368vw;
+  background-color: rgb(236, 180, 59);
+  color: rgb(59, 68, 75);
+  filter: hue-rotate(600deg);
 }
 
-#style630 {
-  margin-top: 31vw;
-  margin-left: 57.3689320388vw;
-  margin-right: 0;
-  margin-bottom: 0;
-  color: rgb(236, 180, 59);
-  background-color: rgb(59, 68, 75);
-  filter: hue-rotate(630deg);
+#style640 {
+  margin-top: 16vw;
+  margin-left: 77.1842105263vw;
+  background-color: rgb(236, 180, 59);
+  color: rgb(59, 68, 75);
+  filter: hue-rotate(640deg);
 }
 
-#style665 {
-  margin-top: 31vw;
-  margin-left: 70.9611650485vw;
-  margin-right: 0;
-  margin-bottom: 0;
-  color: rgb(236, 180, 59);
-  background-color: rgb(59, 68, 75);
-  filter: hue-rotate(665deg);
+#style680 {
+  margin-top: 16vw;
+  margin-left: 87.7105263158vw;
+  background-color: rgb(236, 180, 59);
+  color: rgb(59, 68, 75);
+  filter: hue-rotate(680deg);
 }
 
-#style700 {
-  margin-top: 31vw;
-  margin-left: 84.5533980583vw;
-  margin-right: 0;
-  margin-bottom: 0;
-  color: rgb(236, 180, 59);
-  background-color: rgb(59, 68, 75);
-  filter: hue-rotate(700deg);
+#style720 {
+  margin-top: 32.5vw;
+  margin-left: 95.5vw;
+  background-color: rgb(236, 180, 59);
+  color: rgb(59, 68, 75);
+  filter: hue-rotate(720deg);
 }
 
-#copy:hover, #colorTheme:hover, #style0:hover, #style35:hover, #style70:hover, #style105:hover, #style140:hover, #style175:hover, #style210:hover, #style245:hover, #style280:hover, #style315:hover, #style350:hover, #style385:hover, #style420:hover, #style455:hover, #style490:hover, #style525:hover, #style560:hover, #style595:hover, #style630:hover, #style665:hover, #style700:hover {
+#copy:hover, #colorTheme:hover, #style0:hover, #style40:hover, #style80:hover, #style120:hover, #style160:hover, #style200:hover, #style240:hover, #style280:hover, #style320:hover, #style360:hover, #style400:hover, #style440:hover, #style480:hover, #style520:hover, #style560:hover, #style600:hover, #style640:hover, #style680:hover, #style720:hover {
   border: 1px solid var(--second-color);
   border-color: var(--second-color);
   box-shadow: 0 0 7px 4px var(--second-color);
 }
 
-#copy:active, #colorTheme:active, #style0:active, #style35:active, #style70:active, #style105:active, #style140:active, #style175:active, #style210:active, #style245:active, #style280:active, #style315:active, #style350:active, #style385:active, #style420:active, #style455:active, #style490:active, #style525:active, #style560:active, #style595:active, #style630:active, #style665:active, #style700:active {
+#copy:active, #colorTheme:active, #style0:active, #style40:active, #style80:active, #style120:active, #style160:active, #style200:active, #style240:active, #style280:active, #style320:active, #style360:active, #style400:active, #style440:active, #style480:active, #style520:active, #style560:active, #style600:active, #style640:active, #style680:active, #style720:active {
   color: rgb(236, 180, 59);
   background: var(--second-color);
   box-shadow: 0 2px 7px 2px rgb(236, 180, 59);
