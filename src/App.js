@@ -616,43 +616,45 @@ export default class Calculator extends React.Component {
   handleColorTheme(e) {
     const root = document.documentElement;
     root.style.setProperty("--hue-rotate", `hue-rotate(${e.target.value}deg)`);
-    root.style.setProperty("--degree", `${e.target.value}`);
+    root.style.setProperty("--second-color", `${e.target.value < 360 ? "white" : "rgb(59, 68, 75)"}`);
   }
 
   render() {
     return (
       <>
         <ColorThemes changeColorTheme={this.handleColorTheme} />
+        <div id="background">
+          <div id="calculator" className="container-fluid">
+            <Display ops={this.state.displayAll} cur={this.state.displayCur} copy={this.handleCopyToClipboard} />
+            <Buttons
+              clear={this.handleClear}
+              operator={this.handleOperator}
+              digit={this.handleDigit}
+              equals={this.handleEquals}
+              decimal={this.handleDecimal}
+              square={this.handleSquare}
+              squareRoot={this.handleSquareRoot}
+              previousState={this.handlePreviousState}
+              specialDigit={this.handleSpecialDigit}
+              log10={this.handleLog10}
+              log={this.handleLog}
+              logE={this.handleLogE}
+              factorial={this.handleFactorial}
+              trigonometry={this.handleTrigonometry}
+              percentage={this.handlePercentage}
+              changeSign={this.handleChangeSign}
+              abs={this.handleAbs}
+              switchToDenominator={this.handleSwitchToDenominator}
+              modulo={this.handleModulo}
+              leftParenthesis={this.handleLeftParenthesis}
+              rightParenthesis={this.handleRightParenthesis}
+              parenthesesDelta={this.state.parenthesesDelta}
+            />
+            <MemorySlots CopyToMS={this.handleCopyToMS} specialDigit={this.handleSpecialDigit} memorySlot1={this.state.memorySlot1} memorySlot2={this.state.memorySlot2} memorySlot3={this.state.memorySlot3} resetMS={this.handleResetMS} />
+          </div>
 
-        <div id="calculator" className="container-fluid">
-          <Display ops={this.state.displayAll} cur={this.state.displayCur} copy={this.handleCopyToClipboard} />
-          <Buttons
-            clear={this.handleClear}
-            operator={this.handleOperator}
-            digit={this.handleDigit}
-            equals={this.handleEquals}
-            decimal={this.handleDecimal}
-            square={this.handleSquare}
-            squareRoot={this.handleSquareRoot}
-            previousState={this.handlePreviousState}
-            specialDigit={this.handleSpecialDigit}
-            log10={this.handleLog10}
-            log={this.handleLog}
-            logE={this.handleLogE}
-            factorial={this.handleFactorial}
-            trigonometry={this.handleTrigonometry}
-            percentage={this.handlePercentage}
-            changeSign={this.handleChangeSign}
-            abs={this.handleAbs}
-            switchToDenominator={this.handleSwitchToDenominator}
-            modulo={this.handleModulo}
-            leftParenthesis={this.handleLeftParenthesis}
-            rightParenthesis={this.handleRightParenthesis}
-            parenthesesDelta={this.state.parenthesesDelta}
-          />
-          <MemorySlots CopyToMS={this.handleCopyToMS} specialDigit={this.handleSpecialDigit} memorySlot1={this.state.memorySlot1} memorySlot2={this.state.memorySlot2} memorySlot3={this.state.memorySlot3} resetMS={this.handleResetMS} />
+          <Footer />
         </div>
-        <Footer />
       </>
     );
   }
@@ -664,9 +666,9 @@ class ColorThemes extends React.Component {
   }
   render() {
     let colorThemes = [];
-    for (let i = 0; i <= 90; i += 45) {
+    for (let i = 0; i <= 720; i += 45) {
       colorThemes.push(
-        <div>
+        <div key={`div-${i}`}>
           <button id={`style${i}`} value={i} onClick={this.props.changeColorTheme}>
             <i className="fa-solid fa-calculator"></i>
           </button>

@@ -1,24 +1,6 @@
-// :root {
-//   --main0: rgb(236, 180, 59);
-//   --main1: rgb(246, 218, 157);
-//   --main2: rgb(237, 184, 69);
-//   --main3: rgb(239, 193, 93);
-//   --main4: rgb(232, 166, 23);
-//   --second: white;
-// }
-
-// $main0: var(--main0);
-// $main1: var(--main1);
-// $main2: var(--main2);
-// $main3: var(--main3);
-// $main4: var(--main4);
-// $mainGradient: linear-gradient(225deg, $main1 0%, $main2 30%, $main3 60%, $main4 100%);
-// $second: var(--second);
-
 :root {
   --hue-rotate: hue-rotate(0deg);
-  filter: var(--hue-rotate);
-  --degree: 0;
+  --second-color: rgb(59, 68, 75);
 }
 
 $main0: rgb(236, 180, 59);
@@ -27,15 +9,24 @@ $main2: rgb(237, 184, 69);
 $main3: rgb(239, 193, 93);
 $main4: rgb(232, 166, 23);
 $mainGradient: linear-gradient(225deg, $main1 0%, $main2 30%, $main3 60%, $main4 100%);
-$second: rgb(59, 68, 75);
+// $second: rgb(59, 68, 75);
+$second: var(--second-color);
 
 body {
-  background-image: linear-gradient(358deg, $main4 0%, $main3 30%, $main2 50%, $main1 65%, $second 75%, $second 100%);
   box-sizing: border-box;
 }
 
+#background {
+  background-image: linear-gradient(358deg, $main4 0%, $main3 30%, $main2 50%, $main1 65%, $second 75%, $second 100%);
+  filter: var(--hue-rotate);
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
 #calculator {
-  margin: 2vw auto; // indent from window borders
+  margin: 2vw; // indent from window borders
+  width: 96vw;
   background-color: $second;
   border-radius: 25px;
 }
@@ -168,40 +159,49 @@ button:active {
   @extend #copy;
   left: 0;
   margin: 1vw 0 0 3vw;
-  background-color: gray;
+  background-color: white;
+  width: 10vw;
+  height: 10vw;
+  font-size: 8vw;
 }
 
-// $degree: 0;
+$degree: 0;
 
-// @while $degree <= 360 {
-//   #style#{$degree} {
-//     @extend #colorTheme;
-//     margin: (9 + $degree / 5.6) + vw 0 0 3vw;
-//     color: $main0 !important;
-//     filter: hue-rotate(#{$degree} + deg);
-//   }
-//   $degree: $degree + 45;
+@while $degree <= 720 {
+  #style#{$degree} {
+    @extend #colorTheme;
+    margin: (9 + $degree / 5.6) + vw 0 0 3vw;
+    color: $main0;
+    @if $degree <360 {
+      background-color: white;
+    } @else {
+      background-color: rgb(59, 68, 75);
+    }
+    filter: hue-rotate($degree + deg);
+  }
+  $degree: $degree + 45;
+}
+
+// #style0 {
+//   @extend #colorTheme;
+//   margin: 9vw 0 0 3vw;
+//   color: rgb(236, 180, 59);
+//   filter: hue-rotate(0deg);
 // }
 
-#style0 {
-  @extend #colorTheme;
-  margin: 9vw 0 0 3vw;
-  color: rgb(236, 180, 59);
-}
+// #style45 {
+//   @extend #colorTheme;
+//   margin: 17vw 0 0 3vw;
+//   color: rgb(236, 180, 59);
+//   filter: hue-rotate(45deg);
+// }
 
-#style45 {
-  @extend #colorTheme;
-  margin: 17vw 0 0 3vw;
-  color: rgb(236, 180, 59);
-  filter: hue-rotate((45 - var(--degree)) + deg);
-}
-
-#style90 {
-  @extend #colorTheme;
-  margin: 25vw 0 0 3vw;
-  color: rgb(236, 180, 59);
-  filter: hue-rotate((90 - var(--degree)) + deg);
-}
+// #style90 {
+//   @extend #colorTheme;
+//   margin: 25vw 0 0 3vw;
+//   color: rgb(236, 180, 59);
+//   filter: hue-rotate(90deg);
+// }
 
 // #style135 {
 //   @extend #colorTheme;
