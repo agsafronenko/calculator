@@ -148,7 +148,7 @@ button:active {
 
 #colorTheme, #style720, #style675, #style630, #style585, #style540, #style495, #style450, #style405, #style360, #style315, #style270, #style225, #style180, #style135, #style90, #style45, #style0 {
   left: 0;
-  margin: 1vw 0 0 3vw;
+  margin: 3vw 0 0 3vw;
   background-color: white;
   width: 10vw;
   height: 10vw;
@@ -156,119 +156,170 @@ button:active {
 }
 
 #style0 {
-  margin: 9vw 0 0 3vw;
+  margin-top: 3vw;
+  margin-left: 3vw;
+  margin-right: 0;
+  margin-bottom: 0;
   color: rgb(236, 180, 59);
   background-color: white;
   filter: hue-rotate(0deg);
 }
 
 #style45 {
-  margin: 17.0357142857vw 0 0 3vw;
+  margin-top: 14.25vw;
+  margin-left: 3vw;
+  margin-right: 0;
+  margin-bottom: 0;
   color: rgb(236, 180, 59);
   background-color: white;
   filter: hue-rotate(45deg);
 }
 
 #style90 {
-  margin: 25.0714285714vw 0 0 3vw;
+  margin-top: 25.5vw;
+  margin-left: 3vw;
+  margin-right: 0;
+  margin-bottom: 0;
   color: rgb(236, 180, 59);
   background-color: white;
   filter: hue-rotate(90deg);
 }
 
 #style135 {
-  margin: 33.1071428571vw 0 0 3vw;
+  margin-top: 36.75vw;
+  margin-left: 3vw;
+  margin-right: 0;
+  margin-bottom: 0;
   color: rgb(236, 180, 59);
   background-color: white;
   filter: hue-rotate(135deg);
 }
 
 #style180 {
-  margin: 41.1428571429vw 0 0 3vw;
+  margin-top: 3vw;
+  margin-left: 14vw;
+  margin-right: 0;
+  margin-bottom: 0;
   color: rgb(236, 180, 59);
   background-color: white;
   filter: hue-rotate(180deg);
 }
 
 #style225 {
-  margin: 49.1785714286vw 0 0 3vw;
+  margin-top: 14.25vw;
+  margin-left: 14vw;
+  margin-right: 0;
+  margin-bottom: 0;
   color: rgb(236, 180, 59);
   background-color: white;
   filter: hue-rotate(225deg);
 }
 
 #style270 {
-  margin: 57.2142857143vw 0 0 3vw;
+  margin-top: 25.5vw;
+  margin-left: 14vw;
+  margin-right: 0;
+  margin-bottom: 0;
   color: rgb(236, 180, 59);
   background-color: white;
   filter: hue-rotate(270deg);
 }
 
 #style315 {
-  margin: 65.25vw 0 0 3vw;
+  margin-top: 36.75vw;
+  margin-left: 14vw;
+  margin-right: 0;
+  margin-bottom: 0;
   color: rgb(236, 180, 59);
   background-color: white;
   filter: hue-rotate(315deg);
 }
 
 #style360 {
-  margin: 73.2857142857vw 0 0 3vw;
+  margin-top: 3vw;
+  margin-left: 25vw;
+  margin-right: 0;
+  margin-bottom: 0;
   color: rgb(236, 180, 59);
   background-color: rgb(59, 68, 75);
   filter: hue-rotate(360deg);
 }
 
 #style405 {
-  margin: 81.3214285714vw 0 0 3vw;
+  margin-top: 14.25vw;
+  margin-left: 25vw;
+  margin-right: 0;
+  margin-bottom: 0;
   color: rgb(236, 180, 59);
   background-color: rgb(59, 68, 75);
   filter: hue-rotate(405deg);
 }
 
 #style450 {
-  margin: 89.3571428571vw 0 0 3vw;
+  margin-top: 25.5vw;
+  margin-left: 25vw;
+  margin-right: 0;
+  margin-bottom: 0;
   color: rgb(236, 180, 59);
   background-color: rgb(59, 68, 75);
   filter: hue-rotate(450deg);
 }
 
 #style495 {
-  margin: 97.3928571429vw 0 0 3vw;
+  margin-top: 36.75vw;
+  margin-left: 25vw;
+  margin-right: 0;
+  margin-bottom: 0;
   color: rgb(236, 180, 59);
   background-color: rgb(59, 68, 75);
   filter: hue-rotate(495deg);
 }
 
 #style540 {
-  margin: 105.4285714286vw 0 0 3vw;
+  margin-top: 3vw;
+  margin-left: 36vw;
+  margin-right: 0;
+  margin-bottom: 0;
   color: rgb(236, 180, 59);
   background-color: rgb(59, 68, 75);
   filter: hue-rotate(540deg);
 }
 
 #style585 {
-  margin: 113.4642857143vw 0 0 3vw;
+  margin-top: 14.25vw;
+  margin-left: 36vw;
+  margin-right: 0;
+  margin-bottom: 0;
   color: rgb(236, 180, 59);
   background-color: rgb(59, 68, 75);
   filter: hue-rotate(585deg);
 }
 
 #style630 {
-  margin: 121.5vw 0 0 3vw;
+  margin-top: 25.5vw;
+  margin-left: 36vw;
+  margin-right: 0;
+  margin-bottom: 0;
   color: rgb(236, 180, 59);
   background-color: rgb(59, 68, 75);
   filter: hue-rotate(630deg);
 }
 
 #style675 {
-  margin: 129.5357142857vw 0 0 3vw;
+  margin-top: 36.75vw;
+  margin-left: 36vw;
+  margin-right: 0;
+  margin-bottom: 0;
   color: rgb(236, 180, 59);
   background-color: rgb(59, 68, 75);
   filter: hue-rotate(675deg);
 }
 
 #style720 {
-  margin: 137.5714285714vw 0 0 3vw;
+  margin-top: 48vw;
+  margin-left: 36vw;
+  margin-right: 0;
+  margin-bottom: 0;
   color: rgb(236, 180, 59);
   background-color: rgb(59, 68, 75);
   filter: hue-rotate(720deg);
