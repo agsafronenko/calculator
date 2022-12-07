@@ -666,7 +666,7 @@ class ColorThemes extends React.Component {
   }
   render() {
     let colorThemes = [];
-    for (let i = 0; i < 720; i += 45) {
+    for (let i = 0; i < 720; i += 35) {
       colorThemes.push(
         <div key={`div-${i}`}>
           <button id={`style${i}`} value={i} onClick={this.props.changeColorTheme}>

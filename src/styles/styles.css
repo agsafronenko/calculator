@@ -130,7 +130,7 @@ button:active {
   transform: translateY(-2px);
 }
 
-#copy, #colorTheme, #style720, #style675, #style630, #style585, #style540, #style495, #style450, #style405, #style360, #style315, #style270, #style225, #style180, #style135, #style90, #style45, #style0 {
+#copy, #colorTheme, #style700, #style665, #style630, #style595, #style560, #style525, #style490, #style455, #style420, #style385, #style350, #style315, #style280, #style245, #style210, #style175, #style140, #style105, #style70, #style35, #style0 {
   position: absolute;
   z-index: 1;
   margin: 1vw 3vw 0 0;
@@ -146,13 +146,13 @@ button:active {
   box-shadow: none;
 }
 
-#colorTheme, #style720, #style675, #style630, #style585, #style540, #style495, #style450, #style405, #style360, #style315, #style270, #style225, #style180, #style135, #style90, #style45, #style0 {
+#colorTheme, #style700, #style665, #style630, #style595, #style560, #style525, #style490, #style455, #style420, #style385, #style350, #style315, #style280, #style245, #style210, #style175, #style140, #style105, #style70, #style35, #style0 {
   left: 0;
   margin: 3vw 0 0 3vw;
   background-color: white;
-  width: 10vw;
-  height: 10vw;
-  font-size: 8vw;
+  width: 12vw;
+  height: 12vw;
+  font-size: 10vw;
 }
 
 #style0 {
@@ -165,69 +165,89 @@ button:active {
   filter: hue-rotate(0deg);
 }
 
-#style45 {
-  margin-top: 14.25vw;
-  margin-left: 3vw;
-  margin-right: 0;
-  margin-bottom: 0;
-  color: rgb(236, 180, 59);
-  background-color: white;
-  filter: hue-rotate(45deg);
-}
-
-#style90 {
-  margin-top: 25.5vw;
-  margin-left: 3vw;
-  margin-right: 0;
-  margin-bottom: 0;
-  color: rgb(236, 180, 59);
-  background-color: white;
-  filter: hue-rotate(90deg);
-}
-
-#style135 {
-  margin-top: 36.75vw;
-  margin-left: 3vw;
-  margin-right: 0;
-  margin-bottom: 0;
-  color: rgb(236, 180, 59);
-  background-color: white;
-  filter: hue-rotate(135deg);
-}
-
-#style180 {
+#style35 {
   margin-top: 3vw;
-  margin-left: 14vw;
+  margin-left: 16.5922330097vw;
   margin-right: 0;
   margin-bottom: 0;
   color: rgb(236, 180, 59);
   background-color: white;
-  filter: hue-rotate(180deg);
+  filter: hue-rotate(35deg);
 }
 
-#style225 {
-  margin-top: 14.25vw;
-  margin-left: 14vw;
+#style70 {
+  margin-top: 3vw;
+  margin-left: 30.1844660194vw;
   margin-right: 0;
   margin-bottom: 0;
   color: rgb(236, 180, 59);
   background-color: white;
-  filter: hue-rotate(225deg);
+  filter: hue-rotate(70deg);
 }
 
-#style270 {
-  margin-top: 25.5vw;
-  margin-left: 14vw;
+#style105 {
+  margin-top: 3vw;
+  margin-left: 43.7766990291vw;
   margin-right: 0;
   margin-bottom: 0;
   color: rgb(236, 180, 59);
   background-color: white;
-  filter: hue-rotate(270deg);
+  filter: hue-rotate(105deg);
+}
+
+#style140 {
+  margin-top: 3vw;
+  margin-left: 57.3689320388vw;
+  margin-right: 0;
+  margin-bottom: 0;
+  color: rgb(236, 180, 59);
+  background-color: white;
+  filter: hue-rotate(140deg);
+}
+
+#style175 {
+  margin-top: 3vw;
+  margin-left: 70.9611650485vw;
+  margin-right: 0;
+  margin-bottom: 0;
+  color: rgb(236, 180, 59);
+  background-color: white;
+  filter: hue-rotate(175deg);
+}
+
+#style210 {
+  margin-top: 3vw;
+  margin-left: 84.5533980583vw;
+  margin-right: 0;
+  margin-bottom: 0;
+  color: rgb(236, 180, 59);
+  background-color: white;
+  filter: hue-rotate(210deg);
+}
+
+#style245 {
+  margin-top: 17vw;
+  margin-left: 3vw;
+  margin-right: 0;
+  margin-bottom: 0;
+  color: rgb(236, 180, 59);
+  background-color: white;
+  filter: hue-rotate(245deg);
+}
+
+#style280 {
+  margin-top: 17vw;
+  margin-left: 16.5922330097vw;
+  margin-right: 0;
+  margin-bottom: 0;
+  color: rgb(236, 180, 59);
+  background-color: white;
+  filter: hue-rotate(280deg);
 }
 
 #style315 {
-  margin-top: 36.75vw;
-  margin-left: 14vw;
+  margin-top: 17vw;
+  margin-left: 30.1844660194vw;
   margin-right: 0;
   margin-bottom: 0;
   color: rgb(236, 180, 59);
@@ -235,69 +255,89 @@ button:active {
   filter: hue-rotate(315deg);
 }
 
-#style360 {
-  margin-top: 3vw;
-  margin-left: 25vw;
+#style350 {
+  margin-top: 17vw;
+  margin-left: 43.7766990291vw;
   margin-right: 0;
   margin-bottom: 0;
   color: rgb(236, 180, 59);
-  background-color: rgb(59, 68, 75);
-  filter: hue-rotate(360deg);
+  background-color: white;
+  filter: hue-rotate(350deg);
 }
 
-#style405 {
-  margin-top: 14.25vw;
-  margin-left: 25vw;
+#style385 {
+  margin-top: 17vw;
+  margin-left: 57.3689320388vw;
   margin-right: 0;
   margin-bottom: 0;
   color: rgb(236, 180, 59);
   background-color: rgb(59, 68, 75);
-  filter: hue-rotate(405deg);
+  filter: hue-rotate(385deg);
 }
 
-#style450 {
-  margin-top: 25.5vw;
-  margin-left: 25vw;
+#style420 {
+  margin-top: 17vw;
+  margin-left: 70.9611650485vw;
   margin-right: 0;
   margin-bottom: 0;
   color: rgb(236, 180, 59);
   background-color: rgb(59, 68, 75);
-  filter: hue-rotate(450deg);
+  filter: hue-rotate(420deg);
 }
 
-#style495 {
-  margin-top: 36.75vw;
-  margin-left: 25vw;
+#style455 {
+  margin-top: 17vw;
+  margin-left: 84.5533980583vw;
   margin-right: 0;
   margin-bottom: 0;
   color: rgb(236, 180, 59);
   background-color: rgb(59, 68, 75);
-  filter: hue-rotate(495deg);
+  filter: hue-rotate(455deg);
 }
 
-#style540 {
-  margin-top: 3vw;
-  margin-left: 36vw;
+#style490 {
+  margin-top: 31vw;
+  margin-left: 3vw;
   margin-right: 0;
   margin-bottom: 0;
   color: rgb(236, 180, 59);
   background-color: rgb(59, 68, 75);
-  filter: hue-rotate(540deg);
+  filter: hue-rotate(490deg);
 }
 
-#style585 {
-  margin-top: 14.25vw;
-  margin-left: 36vw;
+#style525 {
+  margin-top: 31vw;
+  margin-left: 16.5922330097vw;
   margin-right: 0;
   margin-bottom: 0;
   color: rgb(236, 180, 59);
   background-color: rgb(59, 68, 75);
-  filter: hue-rotate(585deg);
+  filter: hue-rotate(525deg);
+}
+
+#style560 {
+  margin-top: 31vw;
+  margin-left: 30.1844660194vw;
+  margin-right: 0;
+  margin-bottom: 0;
+  color: rgb(236, 180, 59);
+  background-color: rgb(59, 68, 75);
+  filter: hue-rotate(560deg);
+}
+
+#style595 {
+  margin-top: 31vw;
+  margin-left: 43.7766990291vw;
+  margin-right: 0;
+  margin-bottom: 0;
+  color: rgb(236, 180, 59);
+  background-color: rgb(59, 68, 75);
+  filter: hue-rotate(595deg);
 }
 
 #style630 {
-  margin-top: 25.5vw;
-  margin-left: 36vw;
+  margin-top: 31vw;
+  margin-left: 57.3689320388vw;
   margin-right: 0;
   margin-bottom: 0;
   color: rgb(236, 180, 59);
@@ -305,33 +345,33 @@ button:active {
   filter: hue-rotate(630deg);
 }
 
-#style675 {
-  margin-top: 36.75vw;
-  margin-left: 36vw;
+#style665 {
+  margin-top: 31vw;
+  margin-left: 70.9611650485vw;
   margin-right: 0;
   margin-bottom: 0;
   color: rgb(236, 180, 59);
   background-color: rgb(59, 68, 75);
-  filter: hue-rotate(675deg);
+  filter: hue-rotate(665deg);
 }
 
-#style720 {
-  margin-top: 48vw;
-  margin-left: 36vw;
+#style700 {
+  margin-top: 31vw;
+  margin-left: 84.5533980583vw;
   margin-right: 0;
   margin-bottom: 0;
   color: rgb(236, 180, 59);
   background-color: rgb(59, 68, 75);
-  filter: hue-rotate(720deg);
+  filter: hue-rotate(700deg);
 }
 
-#copy:hover, #colorTheme:hover, #style0:hover, #style45:hover, #style90:hover, #style135:hover, #style180:hover, #style225:hover, #style270:hover, #style315:hover, #style360:hover, #style405:hover, #style450:hover, #style495:hover, #style540:hover, #style585:hover, #style630:hover, #style675:hover, #style720:hover {
+#copy:hover, #colorTheme:hover, #style0:hover, #style35:hover, #style70:hover, #style105:hover, #style140:hover, #style175:hover, #style210:hover, #style245:hover, #style280:hover, #style315:hover, #style350:hover, #style385:hover, #style420:hover, #style455:hover, #style490:hover, #style525:hover, #style560:hover, #style595:hover, #style630:hover, #style665:hover, #style700:hover {
   border: 1px solid var(--second-color);
   border-color: var(--second-color);
   box-shadow: 0 0 7px 4px var(--second-color);
 }
 
-#copy:active, #colorTheme:active, #style0:active, #style45:active, #style90:active, #style135:active, #style180:active, #style225:active, #style270:active, #style315:active, #style360:active, #style405:active, #style450:active, #style495:active, #style540:active, #style585:active, #style630:active, #style675:active, #style720:active {
+#copy:active, #colorTheme:active, #style0:active, #style35:active, #style70:active, #style105:active, #style140:active, #style175:active, #style210:active, #style245:active, #style280:active, #style315:active, #style350:active, #style385:active, #style420:active, #style455:active, #style490:active, #style525:active, #style560:active, #style595:active, #style630:active, #style665:active, #style700:active {
   color: rgb(236, 180, 59);
   background: var(--second-color);
   box-shadow: 0 2px 7px 2px rgb(236, 180, 59);

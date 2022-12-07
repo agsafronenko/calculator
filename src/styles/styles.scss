@@ -160,9 +160,9 @@ button:active {
   left: 0;
   margin: 3vw 0 0 3vw;
   background-color: white;
-  width: 10vw;
-  height: 10vw;
-  font-size: 8vw;
+  width: 12vw;
+  height: 12vw;
+  font-size: 10vw;
 }
 
 $degree: 0;
@@ -170,18 +170,15 @@ $degree: 0;
 @while $degree <= 720 {
   #style#{$degree} {
     @extend #colorTheme;
-    @if $degree < 180 {
-      margin-top: (3 + $degree / 4) + vw;
-      margin-left: 3vw;
-    } @else if $degree < 360 {
-      margin-top: (3 + ($degree - 180) / 4) + vw;
-      margin-left: 14vw;
-    } @else if $degree < 540 {
-      margin-top: (3 + ($degree - 360) / 4) + vw;
-      margin-left: 25vw;
+    @if $degree < 240 {
+      margin-top: 3vw;
+      margin-left: (3 + $degree / 2.575) + vw;
+    } @else if $degree < 480 {
+      margin-top: 17vw;
+      margin-left: (3 + ($degree - 35 * 7) / 2.575) + vw;
     } @else {
-      margin-top: (3 + ($degree - 540) / 4) + vw;
-      margin-left: 36vw;
+      margin-top: 31vw;
+      margin-left: (3 + ($degree - 35 * 14) / 2.575) + vw;
     }
 
     margin-right: 0;
@@ -194,7 +191,7 @@ $degree: 0;
     }
     filter: hue-rotate($degree + deg);
   }
-  $degree: $degree + 45;
+  $degree: $degree + 35;
 }
 
 // #style0 {
