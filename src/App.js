@@ -53,6 +53,7 @@ export default class Calculator extends React.Component {
     this.handleRightParenthesis = this.handleRightParenthesis.bind(this);
     this.handleCopyToMS = this.handleCopyToMS.bind(this);
     this.handleResetMS = this.handleResetMS.bind(this);
+    this.handleChangeColor = this.handleChangeColor.bind(this);
     this.handleColorTheme = this.handleColorTheme.bind(this);
   }
 
@@ -613,16 +614,20 @@ export default class Calculator extends React.Component {
     });
   }
 
-  handleColorTheme(e) {
+  handleColorTheme() {
+    document.getElementsByClassName("colorThemes").setAttribute("z-index", "3");
+  }
+
+  handleChangeColor(e) {
     const root = document.documentElement;
     root.style.setProperty("--hue-rotate", `hue-rotate(${e.target.value}deg)`);
-    root.style.setProperty("--second-color", `${e.target.value < 360 ? "white" : "rgb(59, 68, 75)"}`);
+    root.style.setProperty("--second-color", `${e.target.value < 340 ? "white" : "rgb(59, 68, 75)"}`);
   }
 
   render() {
     return (
       <>
-        <ColorThemes changeColorTheme={this.handleColorTheme} />
+        <ColorThemes changeColorTheme={this.handleChangeColor} chooseColorTheme={this.handleColorTheme} />
         <div id="background">
           <div id="calculator" className="container-fluid">
             <Display ops={this.state.displayAll} cur={this.state.displayCur} copy={this.handleCopyToClipboard} />
@@ -669,7 +674,7 @@ class ColorThemes extends React.Component {
     for (let i = 0; i < 720; i += 40) {
       colorThemes.push(
         <div key={`div-${i}`}>
-          <button id={`style${i}`} value={i} onClick={this.props.changeColorTheme}>
+          <button id={`style${i}`} value={i} className="colorThemes" onClick={this.props.changeColorTheme}>
             <i className="fa-solid fa-calculator"></i>
           </button>
         </div>
@@ -677,7 +682,7 @@ class ColorThemes extends React.Component {
     }
     return (
       <>
-        <button id="colorTheme">
+        <button id="colorTheme" onClick={this.props.chooseColorTheme}>
           <i className="fa-solid fa-calculator"></i>
         </button>
         {colorThemes}

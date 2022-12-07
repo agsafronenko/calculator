@@ -130,7 +130,7 @@ button:active {
   transform: translateY(-2px);
 }
 
-#copy, #colorTheme, #style720, #style680, #style640, #style600, #style560, #style520, #style480, #style440, #style400, #style360, #style320, #style280, #style240, #style200, #style160, #style120, #style80, #style40, #style0 {
+#copy, #colorTheme, #style680, #style640, #style600, #style560, #style520, #style480, #style440, #style400, #style360, #style320, #style280, #style240, #style200, #style160, #style120, #style80, #style40, #style0 {
   position: absolute;
   z-index: 1;
   margin: 1vw 3vw 0 0;
@@ -146,19 +146,19 @@ button:active {
   box-shadow: none;
 }
 
-#colorTheme, #style720, #style680, #style640, #style600, #style560, #style520, #style480, #style440, #style400, #style360, #style320, #style280, #style240, #style200, #style160, #style120, #style80, #style40, #style0 {
+#colorTheme, #style680, #style640, #style600, #style560, #style520, #style480, #style440, #style400, #style360, #style320, #style280, #style240, #style200, #style160, #style120, #style80, #style40, #style0 {
   left: 0;
   margin: 3.5vw 0 0 3.5vw;
   background-color: white;
-  width: 9vw;
-  height: 11vw;
-  font-size: 12vw;
+  width: 10vw;
+  height: 13vw;
+  font-size: 14vw;
 }
 
 #style0 {
   margin-top: 3.5vw;
   margin-left: 3.5vw;
-  border-radius: 7px;
+  border-radius: 1.1vw;
   background-color: rgb(236, 180, 59);
   color: white;
   filter: hue-rotate(0deg);
@@ -166,8 +166,8 @@ button:active {
 
 #style40 {
   margin-top: 3.5vw;
-  margin-left: 14.0263157895vw;
-  border-radius: 7px;
+  margin-left: 20.0425971878vw;
+  border-radius: 1.1vw;
   background-color: rgb(236, 180, 59);
   color: white;
   filter: hue-rotate(40deg);
@@ -175,8 +175,8 @@ button:active {
 
 #style80 {
   margin-top: 3.5vw;
-  margin-left: 24.5526315789vw;
-  border-radius: 7px;
+  margin-left: 36.5851943755vw;
+  border-radius: 1.1vw;
   background-color: rgb(236, 180, 59);
   color: white;
   filter: hue-rotate(80deg);
@@ -184,8 +184,8 @@ button:active {
 
 #style120 {
   margin-top: 3.5vw;
-  margin-left: 35.0789473684vw;
-  border-radius: 7px;
+  margin-left: 53.1277915633vw;
+  border-radius: 1.1vw;
   background-color: rgb(236, 180, 59);
   color: white;
   filter: hue-rotate(120deg);
@@ -193,8 +193,8 @@ button:active {
 
 #style160 {
   margin-top: 3.5vw;
-  margin-left: 45.6052631579vw;
-  border-radius: 7px;
+  margin-left: 69.670388751vw;
+  border-radius: 1.1vw;
   background-color: rgb(236, 180, 59);
   color: white;
   filter: hue-rotate(160deg);
@@ -202,137 +202,128 @@ button:active {
 
 #style200 {
   margin-top: 3.5vw;
-  margin-left: 56.1315789474vw;
-  border-radius: 7px;
+  margin-left: 86.2129859388vw;
+  border-radius: 1.1vw;
   background-color: rgb(236, 180, 59);
   color: white;
   filter: hue-rotate(200deg);
 }
 
 #style240 {
-  margin-top: 3.5vw;
-  margin-left: 66.6578947368vw;
-  border-radius: 7px;
+  margin-top: 18vw;
+  margin-left: 3.5vw;
+  border-radius: 1.1vw;
   background-color: rgb(236, 180, 59);
   color: white;
   filter: hue-rotate(240deg);
 }
 
 #style280 {
-  margin-top: 3.5vw;
-  margin-left: 77.1842105263vw;
-  border-radius: 7px;
+  margin-top: 18vw;
+  margin-left: 20.0425971878vw;
+  border-radius: 1.1vw;
   background-color: rgb(236, 180, 59);
   color: white;
   filter: hue-rotate(280deg);
 }
 
 #style320 {
-  margin-top: 3.5vw;
-  margin-left: 87.7105263158vw;
-  border-radius: 7px;
+  margin-top: 18vw;
+  margin-left: 36.5851943755vw;
+  border-radius: 1.1vw;
   background-color: rgb(236, 180, 59);
   color: white;
   filter: hue-rotate(320deg);
 }
 
 #style360 {
-  margin-top: 16vw;
-  margin-left: 3.5vw;
-  border-radius: 7px;
+  margin-top: 18vw;
+  margin-left: 53.1277915633vw;
+  border-radius: 1.1vw;
   background-color: rgb(236, 180, 59);
   color: rgb(59, 68, 75);
   filter: hue-rotate(360deg);
 }
 
 #style400 {
-  margin-top: 16vw;
-  margin-left: 14.0263157895vw;
-  border-radius: 7px;
+  margin-top: 18vw;
+  margin-left: 69.670388751vw;
+  border-radius: 1.1vw;
   background-color: rgb(236, 180, 59);
   color: rgb(59, 68, 75);
   filter: hue-rotate(400deg);
 }
 
 #style440 {
-  margin-top: 16vw;
-  margin-left: 24.5526315789vw;
-  border-radius: 7px;
+  margin-top: 18vw;
+  margin-left: 86.2129859388vw;
+  border-radius: 1.1vw;
   background-color: rgb(236, 180, 59);
   color: rgb(59, 68, 75);
   filter: hue-rotate(440deg);
 }
 
 #style480 {
-  margin-top: 16vw;
-  margin-left: 35.0789473684vw;
-  border-radius: 7px;
+  margin-top: 32.5vw;
+  margin-left: 3.5vw;
+  border-radius: 1.1vw;
   background-color: rgb(236, 180, 59);
   color: rgb(59, 68, 75);
   filter: hue-rotate(480deg);
 }
 
 #style520 {
-  margin-top: 16vw;
-  margin-left: 45.6052631579vw;
-  border-radius: 7px;
+  margin-top: 32.5vw;
+  margin-left: 20.0425971878vw;
+  border-radius: 1.1vw;
   background-color: rgb(236, 180, 59);
   color: rgb(59, 68, 75);
   filter: hue-rotate(520deg);
 }
 
 #style560 {
-  margin-top: 16vw;
-  margin-left: 56.1315789474vw;
-  border-radius: 7px;
+  margin-top: 32.5vw;
+  margin-left: 36.5851943755vw;
+  border-radius: 1.1vw;
   background-color: rgb(236, 180, 59);
   color: rgb(59, 68, 75);
   filter: hue-rotate(560deg);
 }
 
 #style600 {
-  margin-top: 16vw;
-  margin-left: 66.6578947368vw;
-  border-radius: 7px;
+  margin-top: 32.5vw;
+  margin-left: 53.1277915633vw;
+  border-radius: 1.1vw;
   background-color: rgb(236, 180, 59);
   color: rgb(59, 68, 75);
   filter: hue-rotate(600deg);
 }
 
 #style640 {
-  margin-top: 16vw;
-  margin-left: 77.1842105263vw;
-  border-radius: 7px;
+  margin-top: 32.5vw;
+  margin-left: 69.670388751vw;
+  border-radius: 1.1vw;
   background-color: rgb(236, 180, 59);
   color: rgb(59, 68, 75);
   filter: hue-rotate(640deg);
 }
 
 #style680 {
-  margin-top: 16vw;
-  margin-left: 87.7105263158vw;
-  border-radius: 7px;
+  margin-top: 32.5vw;
+  margin-left: 86.2129859388vw;
+  border-radius: 1.1vw;
   background-color: rgb(236, 180, 59);
   color: rgb(59, 68, 75);
   filter: hue-rotate(680deg);
 }
 
-#style720 {
-  margin-top: 32.5vw;
-  margin-left: 95.5vw;
-  border-radius: 7px;
-  background-color: rgb(236, 180, 59);
-  color: rgb(59, 68, 75);
-  filter: hue-rotate(720deg);
-}
-
-#copy:hover, #colorTheme:hover, #style0:hover, #style40:hover, #style80:hover, #style120:hover, #style160:hover, #style200:hover, #style240:hover, #style280:hover, #style320:hover, #style360:hover, #style400:hover, #style440:hover, #style480:hover, #style520:hover, #style560:hover, #style600:hover, #style640:hover, #style680:hover, #style720:hover {
+#copy:hover, #colorTheme:hover, #style0:hover, #style40:hover, #style80:hover, #style120:hover, #style160:hover, #style200:hover, #style240:hover, #style280:hover, #style320:hover, #style360:hover, #style400:hover, #style440:hover, #style480:hover, #style520:hover, #style560:hover, #style600:hover, #style640:hover, #style680:hover {
   border: 1px solid var(--second-color);
   border-color: var(--second-color);
   box-shadow: 0 0 7px 4px var(--second-color);
 }
 
-#copy:active, #colorTheme:active, #style0:active, #style40:active, #style80:active, #style120:active, #style160:active, #style200:active, #style240:active, #style280:active, #style320:active, #style360:active, #style400:active, #style440:active, #style480:active, #style520:active, #style560:active, #style600:active, #style640:active, #style680:active, #style720:active {
+#copy:active, #colorTheme:active, #style0:active, #style40:active, #style80:active, #style120:active, #style160:active, #style200:active, #style240:active, #style280:active, #style320:active, #style360:active, #style400:active, #style440:active, #style480:active, #style520:active, #style560:active, #style600:active, #style640:active, #style680:active {
   color: rgb(236, 180, 59);
   background: var(--second-color);
   box-shadow: 0 2px 7px 2px rgb(236, 180, 59);
