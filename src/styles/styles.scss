@@ -1,6 +1,7 @@
 :root {
   --hue-rotate: hue-rotate(0deg);
   --second-color: rgb(59, 68, 75);
+  --second-color: white;
 }
 
 $main0: rgb(236, 180, 59);
@@ -142,7 +143,7 @@ button:active {
 #copy {
   position: absolute;
   z-index: 1;
-  margin: 1vw 3vw 0 0;
+  margin: 3.5vw 1vw 0 0;
   right: 0;
   position: absolute;
   font-size: 6vw;
@@ -159,30 +160,37 @@ button:active {
   @extend #copy;
   left: 0;
   margin: 3.5vw 0 0 3.5vw;
-  background-color: white;
-  width: 10vw;
-  height: 13vw;
-  font-size: 14vw;
+  color: $second;
+  width: 7vw;
+  height: 7vw;
+  font-size: 7vw;
+  z-index: 1;
+  border-radius: 1.1vw;
 }
 
 $degree: 0;
+$degreeStep: 40;
+$cols: 6;
 
 @while $degree < 720 {
   #style#{$degree} {
     @extend #colorTheme;
-    @if $degree < 240 {
+    @if $degree < $degreeStep * $cols {
       margin-top: 3.5vw;
-      margin-left: (3.5 + $degree / 2.418) + vw;
-    } @else if $degree < 480 {
+      margin-left: (11.5 + ($degree - $degreeStep * $cols * 0) / 3) + vw;
+    } @else if $degree < $degreeStep * $cols * 2 {
       margin-top: 18vw;
-      margin-left: (3.5 + ($degree - 40 * 6) / 2.418) + vw;
+      margin-left: (11.5 + ($degree - $degreeStep * $cols) / 3) + vw;
     } @else {
       margin-top: 32.5vw;
-      margin-left: (3.5 + ($degree - 40 * 12) / 2.418) + vw;
+      margin-left: (11.5 + ($degree - $degreeStep * $cols * 2) / 3) + vw;
     }
-    border-radius: 1.1vw;
-    background-color: $main0;
 
+    background-color: $main0;
+    width: 10vw;
+    height: 13vw;
+    font-size: 14.5vw;
+    z-index: 1;
     @if $degree < 360 {
       color: white;
     } @else {
@@ -191,71 +199,8 @@ $degree: 0;
 
     filter: hue-rotate($degree + deg);
   }
-  $degree: $degree + 40;
+  $degree: $degree + $degreeStep;
 }
-
-// #style0 {
-//   @extend #colorTheme;
-//   margin: 9vw 0 0 3vw;
-//   color: rgb(236, 180, 59);
-//   filter: hue-rotate(0deg);
-// }
-
-// #style45 {
-//   @extend #colorTheme;
-//   margin: 17vw 0 0 3vw;
-//   color: rgb(236, 180, 59);
-//   filter: hue-rotate(45deg);
-// }
-
-// #style90 {
-//   @extend #colorTheme;
-//   margin: 25vw 0 0 3vw;
-//   color: rgb(236, 180, 59);
-//   filter: hue-rotate(90deg);
-// }
-
-// #style135 {
-//   @extend #colorTheme;
-//   margin: 33vw 0 0 3vw;
-//   color: $main0;
-//   filter: hue-rotate(90deg);
-// }
-
-// #style180 {
-//   @extend #colorTheme;
-//   margin: 25vw 0 0 3vw;
-//   color: $main0;
-//   filter: hue-rotate(90deg);
-// }
-
-// #style225 {
-//   @extend #colorTheme;
-//   margin: 25vw 0 0 3vw;
-//   color: $main0;
-//   filter: hue-rotate(90deg);
-// }
-
-// #style270 {
-//   @extend #colorTheme;
-//   margin: 25vw 0 0 3vw;
-//   color: $main0;
-//   filter: hue-rotate(90deg);
-// }
-
-// #style315 {
-//   @extend #colorTheme;
-//   margin: 25vw 0 0 3vw;
-//   color: $main0;
-//   filter: hue-rotate(90deg);
-// }
-
-// #style360 {
-//   @extend #colorTheme;
-//   margin: 25vw 0 0 3vw;
-//   color: $main0;
-//   filter: hue-rotate(90deg);
-// }
 
 #copy:hover {
   border: 1px solid $second;

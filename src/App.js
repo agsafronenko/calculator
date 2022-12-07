@@ -55,6 +55,7 @@ export default class Calculator extends React.Component {
     this.handleResetMS = this.handleResetMS.bind(this);
     this.handleChangeColor = this.handleChangeColor.bind(this);
     this.handleColorTheme = this.handleColorTheme.bind(this);
+    this.handlePreviewColorTheme = this.handlePreviewColorTheme.bind(this);
   }
 
   handleClear(clearStorage) {
@@ -615,22 +616,42 @@ export default class Calculator extends React.Component {
   }
 
   handleColorTheme() {
-    document.getElementsByClassName("colorThemes").setAttribute("z-index", "3");
+    $("#display").animate({ opacity: 0 }, 1000);
+    $("#displayAll").animate({ opacity: 0 }, 1000);
+    $("#copy").fadeOut(1000);
+    $("#colorTheme").fadeOut(1000);
+    $(".colorThemes").fadeIn(1500);
   }
 
   handleChangeColor(e) {
     const root = document.documentElement;
     root.style.setProperty("--hue-rotate", `hue-rotate(${e.target.value}deg)`);
     root.style.setProperty("--second-color", `${e.target.value < 340 ? "white" : "rgb(59, 68, 75)"}`);
+    $(".colorThemes").fadeOut(1000);
+    $("#colorTheme").fadeIn(3000);
+    $("#copy").fadeIn(3000);
+    $("#display").animate({ opacity: 1 }, 3000);
+    $("#displayAll").animate({ opacity: 1 }, 3000);
+  }
+
+  handlePreviewColorTheme(e) {
+    console.log("you are here");
+    const root = document.documentElement;
+    root.style.setProperty("--hue-rotate", `hue-rotate(${e.target.value}deg)`);
+    root.style.setProperty("--second-color", `${e.target.value < 340 ? "white" : "rgb(59, 68, 75)"}`);
+  }
+
+  componentDidMount() {
+    $(".colorThemes").hide();
   }
 
   render() {
     return (
       <>
-        <ColorThemes changeColorTheme={this.handleChangeColor} chooseColorTheme={this.handleColorTheme} />
+        <TopButtons changeColorTheme={this.handleChangeColor} chooseColorTheme={this.handleColorTheme} copy={this.handleCopyToClipboard} previewColorTheme={this.handlePreviewColorTheme} />
         <div id="background">
           <div id="calculator" className="container-fluid">
-            <Display ops={this.state.displayAll} cur={this.state.displayCur} copy={this.handleCopyToClipboard} />
+            <Display ops={this.state.displayAll} cur={this.state.displayCur} />
             <Buttons
               clear={this.handleClear}
               operator={this.handleOperator}
@@ -665,7 +686,7 @@ export default class Calculator extends React.Component {
   }
 }
 
-class ColorThemes extends React.Component {
+class TopButtons extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -674,7 +695,7 @@ class ColorThemes extends React.Component {
     for (let i = 0; i < 720; i += 40) {
       colorThemes.push(
         <div key={`div-${i}`}>
-          <button id={`style${i}`} value={i} className="colorThemes" onClick={this.props.changeColorTheme}>
+          <button id={`style${i}`} value={i} className="colorThemes" onClick={this.props.changeColorTheme} onMouseOver={this.props.previewColorTheme}>
             <i className="fa-solid fa-calculator"></i>
           </button>
         </div>
@@ -686,6 +707,9 @@ class ColorThemes extends React.Component {
           <i className="fa-solid fa-calculator"></i>
         </button>
         {colorThemes}
+        <button id="copy" onClick={this.props.copy}>
+          <i className="fa-solid fa-copy"></i>
+        </button>
       </>
     );
   }
@@ -702,21 +726,6 @@ class Display extends React.Component {
           <div id="display" className="col-12">
             {this.props.cur}
           </div>
-          {/* <button id="colorTheme">
-            <i className="fa-solid fa-calculator"></i>
-          </button>
-          <button id="style1" value="45" onClick={this.props.changeColorTheme}>
-            <i className="fa-solid fa-calculator"></i>
-          </button>
-          <button id="style2" value="90" onClick={this.props.changeColorTheme}>
-            <i className="fa-solid fa-calculator"></i>
-          </button>
-          <button id="style0" value="0" onClick={this.props.changeColorTheme}>
-            <i className="fa-solid fa-calculator"></i>
-          </button>
-          <button id="copy" onClick={this.props.copy}>
-            <i className="fa-solid fa-copy"></i>
-          </button> */}
           <div id="displayAll" className="col-12">
             {this.props.ops}
           </div>

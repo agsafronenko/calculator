@@ -1,5 +1,6 @@
 // next steps:
-// - changeStyle button
+// --use another effect (smth like slide) for appearance of color themes
+// - use jQuery to animate css changes
 // - what happens when the input is larger than the displayOps
 // - check how it looks on other phone
 // - update google table handlers on github

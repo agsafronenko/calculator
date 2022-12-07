@@ -1,6 +1,7 @@
 :root {
   --hue-rotate: hue-rotate(0deg);
   --second-color: rgb(59, 68, 75);
+  --second-color: white;
 }
 
 body {
@@ -133,7 +134,7 @@ button:active {
 #copy, #colorTheme, #style680, #style640, #style600, #style560, #style520, #style480, #style440, #style400, #style360, #style320, #style280, #style240, #style200, #style160, #style120, #style80, #style40, #style0 {
   position: absolute;
   z-index: 1;
-  margin: 1vw 3vw 0 0;
+  margin: 3.5vw 1vw 0 0;
   right: 0;
   position: absolute;
   font-size: 6vw;
@@ -149,170 +150,226 @@ button:active {
 #colorTheme, #style680, #style640, #style600, #style560, #style520, #style480, #style440, #style400, #style360, #style320, #style280, #style240, #style200, #style160, #style120, #style80, #style40, #style0 {
   left: 0;
   margin: 3.5vw 0 0 3.5vw;
-  background-color: white;
-  width: 10vw;
-  height: 13vw;
-  font-size: 14vw;
+  color: var(--second-color);
+  width: 7vw;
+  height: 7vw;
+  font-size: 7vw;
+  z-index: 1;
+  border-radius: 1.1vw;
 }
 
 #style0 {
   margin-top: 3.5vw;
-  margin-left: 3.5vw;
-  border-radius: 1.1vw;
+  margin-left: 11.5vw;
   background-color: rgb(236, 180, 59);
+  width: 10vw;
+  height: 13vw;
+  font-size: 14.5vw;
+  z-index: 1;
   color: white;
   filter: hue-rotate(0deg);
 }
 
 #style40 {
   margin-top: 3.5vw;
-  margin-left: 20.0425971878vw;
-  border-radius: 1.1vw;
+  margin-left: 24.8333333333vw;
   background-color: rgb(236, 180, 59);
+  width: 10vw;
+  height: 13vw;
+  font-size: 14.5vw;
+  z-index: 1;
   color: white;
   filter: hue-rotate(40deg);
 }
 
 #style80 {
   margin-top: 3.5vw;
-  margin-left: 36.5851943755vw;
-  border-radius: 1.1vw;
+  margin-left: 38.1666666667vw;
   background-color: rgb(236, 180, 59);
+  width: 10vw;
+  height: 13vw;
+  font-size: 14.5vw;
+  z-index: 1;
   color: white;
   filter: hue-rotate(80deg);
 }
 
 #style120 {
   margin-top: 3.5vw;
-  margin-left: 53.1277915633vw;
-  border-radius: 1.1vw;
+  margin-left: 51.5vw;
   background-color: rgb(236, 180, 59);
+  width: 10vw;
+  height: 13vw;
+  font-size: 14.5vw;
+  z-index: 1;
   color: white;
   filter: hue-rotate(120deg);
 }
 
 #style160 {
   margin-top: 3.5vw;
-  margin-left: 69.670388751vw;
-  border-radius: 1.1vw;
+  margin-left: 64.8333333333vw;
   background-color: rgb(236, 180, 59);
+  width: 10vw;
+  height: 13vw;
+  font-size: 14.5vw;
+  z-index: 1;
   color: white;
   filter: hue-rotate(160deg);
 }
 
 #style200 {
   margin-top: 3.5vw;
-  margin-left: 86.2129859388vw;
-  border-radius: 1.1vw;
+  margin-left: 78.1666666667vw;
   background-color: rgb(236, 180, 59);
+  width: 10vw;
+  height: 13vw;
+  font-size: 14.5vw;
+  z-index: 1;
   color: white;
   filter: hue-rotate(200deg);
 }
 
 #style240 {
   margin-top: 18vw;
-  margin-left: 3.5vw;
-  border-radius: 1.1vw;
+  margin-left: 11.5vw;
   background-color: rgb(236, 180, 59);
+  width: 10vw;
+  height: 13vw;
+  font-size: 14.5vw;
+  z-index: 1;
   color: white;
   filter: hue-rotate(240deg);
 }
 
 #style280 {
   margin-top: 18vw;
-  margin-left: 20.0425971878vw;
-  border-radius: 1.1vw;
+  margin-left: 24.8333333333vw;
   background-color: rgb(236, 180, 59);
+  width: 10vw;
+  height: 13vw;
+  font-size: 14.5vw;
+  z-index: 1;
   color: white;
   filter: hue-rotate(280deg);
 }
 
 #style320 {
   margin-top: 18vw;
-  margin-left: 36.5851943755vw;
-  border-radius: 1.1vw;
+  margin-left: 38.1666666667vw;
   background-color: rgb(236, 180, 59);
+  width: 10vw;
+  height: 13vw;
+  font-size: 14.5vw;
+  z-index: 1;
   color: white;
   filter: hue-rotate(320deg);
 }
 
 #style360 {
   margin-top: 18vw;
-  margin-left: 53.1277915633vw;
-  border-radius: 1.1vw;
+  margin-left: 51.5vw;
   background-color: rgb(236, 180, 59);
+  width: 10vw;
+  height: 13vw;
+  font-size: 14.5vw;
+  z-index: 1;
   color: rgb(59, 68, 75);
   filter: hue-rotate(360deg);
 }
 
 #style400 {
   margin-top: 18vw;
-  margin-left: 69.670388751vw;
-  border-radius: 1.1vw;
+  margin-left: 64.8333333333vw;
   background-color: rgb(236, 180, 59);
+  width: 10vw;
+  height: 13vw;
+  font-size: 14.5vw;
+  z-index: 1;
   color: rgb(59, 68, 75);
   filter: hue-rotate(400deg);
 }
 
 #style440 {
   margin-top: 18vw;
-  margin-left: 86.2129859388vw;
-  border-radius: 1.1vw;
+  margin-left: 78.1666666667vw;
   background-color: rgb(236, 180, 59);
+  width: 10vw;
+  height: 13vw;
+  font-size: 14.5vw;
+  z-index: 1;
   color: rgb(59, 68, 75);
   filter: hue-rotate(440deg);
 }
 
 #style480 {
   margin-top: 32.5vw;
-  margin-left: 3.5vw;
-  border-radius: 1.1vw;
+  margin-left: 11.5vw;
   background-color: rgb(236, 180, 59);
+  width: 10vw;
+  height: 13vw;
+  font-size: 14.5vw;
+  z-index: 1;
   color: rgb(59, 68, 75);
   filter: hue-rotate(480deg);
 }
 
 #style520 {
   margin-top: 32.5vw;
-  margin-left: 20.0425971878vw;
-  border-radius: 1.1vw;
+  margin-left: 24.8333333333vw;
   background-color: rgb(236, 180, 59);
+  width: 10vw;
+  height: 13vw;
+  font-size: 14.5vw;
+  z-index: 1;
   color: rgb(59, 68, 75);
   filter: hue-rotate(520deg);
 }
 
 #style560 {
   margin-top: 32.5vw;
-  margin-left: 36.5851943755vw;
-  border-radius: 1.1vw;
+  margin-left: 38.1666666667vw;
   background-color: rgb(236, 180, 59);
+  width: 10vw;
+  height: 13vw;
+  font-size: 14.5vw;
+  z-index: 1;
   color: rgb(59, 68, 75);
   filter: hue-rotate(560deg);
 }
 
 #style600 {
   margin-top: 32.5vw;
-  margin-left: 53.1277915633vw;
-  border-radius: 1.1vw;
+  margin-left: 51.5vw;
   background-color: rgb(236, 180, 59);
+  width: 10vw;
+  height: 13vw;
+  font-size: 14.5vw;
+  z-index: 1;
   color: rgb(59, 68, 75);
   filter: hue-rotate(600deg);
 }
 
 #style640 {
   margin-top: 32.5vw;
-  margin-left: 69.670388751vw;
-  border-radius: 1.1vw;
+  margin-left: 64.8333333333vw;
   background-color: rgb(236, 180, 59);
+  width: 10vw;
+  height: 13vw;
+  font-size: 14.5vw;
+  z-index: 1;
   color: rgb(59, 68, 75);
   filter: hue-rotate(640deg);
 }
 
 #style680 {
   margin-top: 32.5vw;
-  margin-left: 86.2129859388vw;
-  border-radius: 1.1vw;
+  margin-left: 78.1666666667vw;
   background-color: rgb(236, 180, 59);
+  width: 10vw;
+  height: 13vw;
+  font-size: 14.5vw;
+  z-index: 1;
   color: rgb(59, 68, 75);
   filter: hue-rotate(680deg);
 }
