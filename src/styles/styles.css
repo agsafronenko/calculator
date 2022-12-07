@@ -158,6 +158,7 @@ button:active {
 #style0 {
   margin-top: 3.5vw;
   margin-left: 3.5vw;
+  border-radius: 7px;
   background-color: rgb(236, 180, 59);
   color: white;
   filter: hue-rotate(0deg);
@@ -166,6 +167,7 @@ button:active {
 #style40 {
   margin-top: 3.5vw;
   margin-left: 14.0263157895vw;
+  border-radius: 7px;
   background-color: rgb(236, 180, 59);
   color: white;
   filter: hue-rotate(40deg);
@@ -174,6 +176,7 @@ button:active {
 #style80 {
   margin-top: 3.5vw;
   margin-left: 24.5526315789vw;
+  border-radius: 7px;
   background-color: rgb(236, 180, 59);
   color: white;
   filter: hue-rotate(80deg);
@@ -182,6 +185,7 @@ button:active {
 #style120 {
   margin-top: 3.5vw;
   margin-left: 35.0789473684vw;
+  border-radius: 7px;
   background-color: rgb(236, 180, 59);
   color: white;
   filter: hue-rotate(120deg);
@@ -190,6 +194,7 @@ button:active {
 #style160 {
   margin-top: 3.5vw;
   margin-left: 45.6052631579vw;
+  border-radius: 7px;
   background-color: rgb(236, 180, 59);
   color: white;
   filter: hue-rotate(160deg);
@@ -198,6 +203,7 @@ button:active {
 #style200 {
   margin-top: 3.5vw;
   margin-left: 56.1315789474vw;
+  border-radius: 7px;
   background-color: rgb(236, 180, 59);
   color: white;
   filter: hue-rotate(200deg);
@@ -206,6 +212,7 @@ button:active {
 #style240 {
   margin-top: 3.5vw;
   margin-left: 66.6578947368vw;
+  border-radius: 7px;
   background-color: rgb(236, 180, 59);
   color: white;
   filter: hue-rotate(240deg);
@@ -214,6 +221,7 @@ button:active {
 #style280 {
   margin-top: 3.5vw;
   margin-left: 77.1842105263vw;
+  border-radius: 7px;
   background-color: rgb(236, 180, 59);
   color: white;
   filter: hue-rotate(280deg);
@@ -222,6 +230,7 @@ button:active {
 #style320 {
   margin-top: 3.5vw;
   margin-left: 87.7105263158vw;
+  border-radius: 7px;
   background-color: rgb(236, 180, 59);
   color: white;
   filter: hue-rotate(320deg);
@@ -230,6 +239,7 @@ button:active {
 #style360 {
   margin-top: 16vw;
   margin-left: 3.5vw;
+  border-radius: 7px;
   background-color: rgb(236, 180, 59);
   color: rgb(59, 68, 75);
   filter: hue-rotate(360deg);
@@ -238,6 +248,7 @@ button:active {
 #style400 {
   margin-top: 16vw;
   margin-left: 14.0263157895vw;
+  border-radius: 7px;
   background-color: rgb(236, 180, 59);
   color: rgb(59, 68, 75);
   filter: hue-rotate(400deg);
@@ -246,6 +257,7 @@ button:active {
 #style440 {
   margin-top: 16vw;
   margin-left: 24.5526315789vw;
+  border-radius: 7px;
   background-color: rgb(236, 180, 59);
   color: rgb(59, 68, 75);
   filter: hue-rotate(440deg);
@@ -254,6 +266,7 @@ button:active {
 #style480 {
   margin-top: 16vw;
   margin-left: 35.0789473684vw;
+  border-radius: 7px;
   background-color: rgb(236, 180, 59);
   color: rgb(59, 68, 75);
   filter: hue-rotate(480deg);
@@ -262,6 +275,7 @@ button:active {
 #style520 {
   margin-top: 16vw;
   margin-left: 45.6052631579vw;
+  border-radius: 7px;
   background-color: rgb(236, 180, 59);
   color: rgb(59, 68, 75);
   filter: hue-rotate(520deg);
@@ -270,6 +284,7 @@ button:active {
 #style560 {
   margin-top: 16vw;
   margin-left: 56.1315789474vw;
+  border-radius: 7px;
   background-color: rgb(236, 180, 59);
   color: rgb(59, 68, 75);
   filter: hue-rotate(560deg);
@@ -278,6 +293,7 @@ button:active {
 #style600 {
   margin-top: 16vw;
   margin-left: 66.6578947368vw;
+  border-radius: 7px;
   background-color: rgb(236, 180, 59);
   color: rgb(59, 68, 75);
   filter: hue-rotate(600deg);
@@ -286,6 +302,7 @@ button:active {
 #style640 {
   margin-top: 16vw;
   margin-left: 77.1842105263vw;
+  border-radius: 7px;
   background-color: rgb(236, 180, 59);
   color: rgb(59, 68, 75);
   filter: hue-rotate(640deg);
@@ -294,6 +311,7 @@ button:active {
 #style680 {
   margin-top: 16vw;
   margin-left: 87.7105263158vw;
+  border-radius: 7px;
   background-color: rgb(236, 180, 59);
   color: rgb(59, 68, 75);
   filter: hue-rotate(680deg);
@@ -302,6 +320,7 @@ button:active {
 #style720 {
   margin-top: 32.5vw;
   margin-left: 95.5vw;
+  border-radius: 7px;
   background-color: rgb(236, 180, 59);
   color: rgb(59, 68, 75);
   filter: hue-rotate(720deg);

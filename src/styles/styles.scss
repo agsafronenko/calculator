@@ -180,7 +180,7 @@ $degree: 0;
       margin-top: 32.5vw;
       margin-left: (3.5 + ($degree - 35 * 14) / 2.5) + vw;
     }
-
+    border-radius: 7px;
     background-color: $main0;
     @if $degree < 360 {
       color: white;
