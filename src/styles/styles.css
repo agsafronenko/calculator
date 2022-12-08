@@ -1,13 +1,10 @@
 :root {
   --hue-rotate: hue-rotate(0deg);
   --second-color: white;
-  transition: background-image 1s ease;
-  transition: var(--second-color) 1s ease;
 }
 
 body {
   box-sizing: border-box;
-  transition: color 3s ease;
 }
 
 #background {
@@ -37,14 +34,17 @@ body {
   font-weight: 800;
   font-size: 6.4vw;
   color: var(--second-color);
+  overflow: auto;
 }
 
 #displayAll {
   height: 37vw;
   padding-top: 4.3vw;
+  padding-bottom: 5vw;
   font-weight: 600;
   font-size: 4.3vw;
   color: var(--second-color);
+  overflow: auto;
 }
 
 #button-pad {

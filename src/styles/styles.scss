@@ -1,8 +1,6 @@
 :root {
   --hue-rotate: hue-rotate(0deg);
   --second-color: white;
-  transition: background-image 1s ease;
-  transition: var(--second-color) 1s ease;
 }
 
 $main0: rgb(236, 180, 59);
@@ -16,13 +14,10 @@ $second: var(--second-color);
 
 body {
   box-sizing: border-box;
-  // transition: background-image 1s ease;
-  transition: color 3s ease;
 }
 
 #background {
   background-image: linear-gradient(358deg, $main4 0%, $main3 30%, $main2 50%, $main1 65%, $second 75%, $second 100%);
-  // transition: background-image 1s ease;
   filter: var(--hue-rotate);
   position: absolute;
   top: 0px;
@@ -48,14 +43,17 @@ body {
   font-weight: 800; // styling result
   font-size: 6.4vw; // styling result
   color: $second; // styling result
+  overflow: auto;
 }
 
 #displayAll {
   height: 37vw; // height of the displayOps
   padding-top: 4.3vw; // indent from top border of parent container
+  padding-bottom: 5vw;
   font-weight: 600; // styling displayOps
   font-size: 4.3vw; // styling displayOps
   color: $second; // styling displayOps
+  overflow: auto;
 }
 
 #button-pad {

@@ -663,6 +663,11 @@ export default class Calculator extends React.Component {
     $(".colorThemes").hide();
   }
 
+  componentDidUpdate() {
+    let displayAll = document.getElementById("displayAll");
+    displayAll.scrollTop = displayAll.scrollHeight;
+  }
+
   render() {
     return (
       <>
