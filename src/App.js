@@ -620,22 +620,40 @@ export default class Calculator extends React.Component {
     $("#displayAll").animate({ opacity: 0 }, 1000);
     $("#copy").fadeOut(1000);
     $("#colorTheme").fadeOut(1000);
-    $(".colorThemes").fadeIn(1500);
+
+    $(".colorThemes").delay(500).animate(
+      {
+        width: "toggle",
+        height: "toggle",
+      },
+      500
+    );
+    // $(".colorThemes").fadeToggle(2000);
+    // $(".colorThemes").toggle(1000);
+    // $(".colorThemes").slideDown(500);
+    // $(".colorThemes").fadeIn(1500);
+    // $(".colorThemes").effect("shake");
   }
 
   handleChangeColor(e) {
     const root = document.documentElement;
     root.style.setProperty("--hue-rotate", `hue-rotate(${e.target.value}deg)`);
     root.style.setProperty("--second-color", `${e.target.value < 340 ? "white" : "rgb(59, 68, 75)"}`);
-    $(".colorThemes").fadeOut(1000);
-    $("#colorTheme").fadeIn(3000);
-    $("#copy").fadeIn(3000);
-    $("#display").animate({ opacity: 1 }, 3000);
-    $("#displayAll").animate({ opacity: 1 }, 3000);
+
+    $(".colorThemes").animate(
+      {
+        width: "toggle",
+        height: "toggle",
+      },
+      500
+    );
+    $("#colorTheme").fadeIn(2000);
+    $("#copy").fadeIn(2000);
+    $("#display").animate({ opacity: 1 }, 2000);
+    $("#displayAll").animate({ opacity: 1 }, 2000);
   }
 
   handlePreviewColorTheme(e) {
-    console.log("you are here");
     const root = document.documentElement;
     root.style.setProperty("--hue-rotate", `hue-rotate(${e.target.value}deg)`);
     root.style.setProperty("--second-color", `${e.target.value < 340 ? "white" : "rgb(59, 68, 75)"}`);
