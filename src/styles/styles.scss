@@ -38,12 +38,13 @@ body {
 
 #display {
   height: 13vw; // height of the result display
-  padding-top: 4.3vw; // indent from top border of parent container
+  padding: 4.3vw 13vw 0 13vw; // indent from top border of parent container
   text-align: center; // styling result
   font-weight: 800; // styling result
   font-size: 6.4vw; // styling result
   color: $second; // styling result
-  overflow: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #displayAll {
@@ -54,6 +55,27 @@ body {
   font-size: 4.3vw; // styling displayOps
   color: $second; // styling displayOps
   overflow: auto;
+}
+
+::-webkit-scrollbar {
+  width: 2vw;
+  height: 2vw;
+}
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+  border: solid 1px $main0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $second;
+  border-radius: 10px;
+  border: solid 1px $main0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $main0;
+  border: solid 2px $second;
 }
 
 #button-pad {
@@ -248,9 +270,12 @@ $cols: 6;
   font-weight: 600;
   text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
   text-align: center;
-  display: inline-flex;
+  padding: 0.5vw 3vw;
+  display: inline-block;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .saved-result {

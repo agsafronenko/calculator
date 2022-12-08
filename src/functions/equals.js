@@ -1,6 +1,5 @@
 // next steps:
-// - what happens when the input is larger than the displayOps
-// - check how it looks on other phone
+// - update for larger screens
 // - update google table handlers on github
 
 import { factorial } from "./factorial";
