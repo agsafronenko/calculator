@@ -671,38 +671,44 @@ export default class Calculator extends React.Component {
   render() {
     return (
       <>
-        <TopButtons changeColorTheme={this.handleChangeColor} chooseColorTheme={this.handleColorTheme} copy={this.handleCopyToClipboard} previewColorTheme={this.handlePreviewColorTheme} />
-        <div id="background">
-          <div id="calculator" className="container-fluid">
-            <Display ops={this.state.displayAll} cur={this.state.displayCur} />
-            <Buttons
-              clear={this.handleClear}
-              operator={this.handleOperator}
-              digit={this.handleDigit}
-              equals={this.handleEquals}
-              decimal={this.handleDecimal}
-              square={this.handleSquare}
-              squareRoot={this.handleSquareRoot}
-              previousState={this.handlePreviousState}
-              specialDigit={this.handleSpecialDigit}
-              log10={this.handleLog10}
-              log={this.handleLog}
-              logE={this.handleLogE}
-              factorial={this.handleFactorial}
-              trigonometry={this.handleTrigonometry}
-              percentage={this.handlePercentage}
-              changeSign={this.handleChangeSign}
-              abs={this.handleAbs}
-              switchToDenominator={this.handleSwitchToDenominator}
-              modulo={this.handleModulo}
-              leftParenthesis={this.handleLeftParenthesis}
-              rightParenthesis={this.handleRightParenthesis}
-              parenthesesDelta={this.state.parenthesesDelta}
-            />
-            <MemorySlots CopyToMS={this.handleCopyToMS} specialDigit={this.handleSpecialDigit} memorySlot1={this.state.memorySlot1} memorySlot2={this.state.memorySlot2} memorySlot3={this.state.memorySlot3} resetMS={this.handleResetMS} />
-          </div>
+        <div id="landscape">
+          <div>Please rotate your device or... your head!</div>
+          <img src={require("../src/styles/kitty.png")} />
+        </div>
+        <div id="portrait">
+          <TopButtons changeColorTheme={this.handleChangeColor} chooseColorTheme={this.handleColorTheme} copy={this.handleCopyToClipboard} previewColorTheme={this.handlePreviewColorTheme} />
+          <div id="background">
+            <div id="calculator" className="container-fluid">
+              <Display ops={this.state.displayAll} cur={this.state.displayCur} />
+              <Buttons
+                clear={this.handleClear}
+                operator={this.handleOperator}
+                digit={this.handleDigit}
+                equals={this.handleEquals}
+                decimal={this.handleDecimal}
+                square={this.handleSquare}
+                squareRoot={this.handleSquareRoot}
+                previousState={this.handlePreviousState}
+                specialDigit={this.handleSpecialDigit}
+                log10={this.handleLog10}
+                log={this.handleLog}
+                logE={this.handleLogE}
+                factorial={this.handleFactorial}
+                trigonometry={this.handleTrigonometry}
+                percentage={this.handlePercentage}
+                changeSign={this.handleChangeSign}
+                abs={this.handleAbs}
+                switchToDenominator={this.handleSwitchToDenominator}
+                modulo={this.handleModulo}
+                leftParenthesis={this.handleLeftParenthesis}
+                rightParenthesis={this.handleRightParenthesis}
+                parenthesesDelta={this.state.parenthesesDelta}
+              />
+              <MemorySlots CopyToMS={this.handleCopyToMS} specialDigit={this.handleSpecialDigit} memorySlot1={this.state.memorySlot1} memorySlot2={this.state.memorySlot2} memorySlot3={this.state.memorySlot3} resetMS={this.handleResetMS} />
+            </div>
 
-          <Footer />
+            <Footer />
+          </div>
         </div>
       </>
     );

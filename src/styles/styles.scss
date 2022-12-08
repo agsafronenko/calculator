@@ -318,3 +318,35 @@ footer {
   font-weight: 600;
   text-align: center;
 }
+
+@media only screen and (orientation: portrait) {
+  #portrait {
+    display: block;
+  }
+  #landscape {
+    display: none;
+  }
+}
+
+@media only screen and (orientation: landscape) {
+  #portrait {
+    display: none;
+  }
+  #landscape {
+    display: flex;
+    justify-content: center;
+    background-image: $mainGradient;
+  }
+
+  #landscape div {
+    font-size: 2vw;
+    font-weight: 600;
+    text-align: center;
+    background-color: green;
+  }
+  #landscape img {
+    width: 35vw;
+    transform: rotate(-90deg);
+    background-color: red;
+  }
+}

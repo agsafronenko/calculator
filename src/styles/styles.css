@@ -491,4 +491,34 @@ footer {
   color: var(--second-color);
   font-weight: 600;
   text-align: center;
+}
+
+@media only screen and (orientation: portrait) {
+  #portrait {
+    display: block;
+  }
+  #landscape {
+    display: none;
+  }
+}
+@media only screen and (orientation: landscape) {
+  #portrait {
+    display: none;
+  }
+  #landscape {
+    display: flex;
+    justify-content: center;
+    background-image: linear-gradient(225deg, rgb(246, 218, 157) 0%, rgb(237, 184, 69) 30%, rgb(239, 193, 93) 60%, rgb(232, 166, 23) 100%);
+  }
+  #landscape div {
+    font-size: 2vw;
+    font-weight: 600;
+    text-align: center;
+    background-color: green;
+  }
+  #landscape img {
+    width: 35vw;
+    transform: rotate(-90deg);
+    background-color: red;
+  }
 }/*# sourceMappingURL=styles.css.map */
