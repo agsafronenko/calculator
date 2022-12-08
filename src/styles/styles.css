@@ -506,19 +506,27 @@ footer {
     display: none;
   }
   #landscape {
-    display: flex;
-    justify-content: center;
+    display: block;
     background-image: linear-gradient(225deg, rgb(246, 218, 157) 0%, rgb(237, 184, 69) 30%, rgb(239, 193, 93) 60%, rgb(232, 166, 23) 100%);
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
   }
   #landscape div {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 20vh;
     font-size: 2vw;
-    font-weight: 600;
+    font-weight: 800;
     text-align: center;
-    background-color: green;
+    vertical-align: middle;
+    color: var(--second-color);
   }
   #landscape img {
-    width: 35vw;
+    height: 70vh;
     transform: rotate(-90deg);
-    background-color: red;
+    display: block;
+    margin: auto;
   }
 }/*# sourceMappingURL=styles.css.map */

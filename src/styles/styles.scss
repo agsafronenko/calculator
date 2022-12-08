@@ -333,20 +333,28 @@ footer {
     display: none;
   }
   #landscape {
-    display: flex;
-    justify-content: center;
+    display: block;
     background-image: $mainGradient;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
   }
 
   #landscape div {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 20vh;
     font-size: 2vw;
-    font-weight: 600;
+    font-weight: 800;
     text-align: center;
-    background-color: green;
+    vertical-align: middle;
+    color: $second;
   }
   #landscape img {
-    width: 35vw;
+    height: 70vh;
     transform: rotate(-90deg);
-    background-color: red;
+    display: block;
+    margin: auto;
   }
 }

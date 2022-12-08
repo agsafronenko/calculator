@@ -672,7 +672,7 @@ export default class Calculator extends React.Component {
     return (
       <>
         <div id="landscape">
-          <div>Please rotate your device or... your head!</div>
+          <div>Rotate your device or... your head!</div>
           <img src={require("../src/styles/kitty.png")} />
         </div>
         <div id="portrait">
