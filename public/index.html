@@ -15,6 +15,13 @@
     <div class="container-fluid">
       <div id="root"></div>
       <!-- <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script> -->
+      <script>
+        window.addEventListener("orientationchange", function () {
+          if (window.innerHeight > window.innerWidth) {
+            document.getElementsByTagName("body")[0].style.transform = "rotate(90deg)";
+          }
+        });
+      </script>
     </div>
   </body>
 </html>
