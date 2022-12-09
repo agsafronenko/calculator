@@ -538,4 +538,9 @@ footer {
     margin: auto;
     transform: rotate(-90deg);
   }
+}
+@media only screen and (min-width: 500px) {
+  #displayBox {
+    background-image: linear-gradient(358deg, var(--second-color) 0%, var(--second-color) 10%, blue 20%, blue 30%, blue 100%);
+  }
 }/*# sourceMappingURL=styles.css.map */
