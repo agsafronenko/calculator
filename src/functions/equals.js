@@ -1,5 +1,4 @@
 // next steps:
-// - for landscape screen - change background color
 // - delete left white border in landscape mode
 // - update for larger screens
 // - update google table handlers on github
