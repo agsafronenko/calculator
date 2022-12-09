@@ -515,16 +515,22 @@ footer {
   html {
     filter: var(--hue-rotate);
   }
-  #landscape div {
+  #rotate-msg, #rotate-joking {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    height: 20vh;
+    height: 12vh;
     font-size: 2vw;
     font-weight: 800;
     text-align: center;
     vertical-align: middle;
     color: var(--second-color);
+  }
+  #rotate-joking {
+    align-items: flex-start;
+    font-size: 1.5vw;
+    font-weight: 400;
+    font-style: italic;
   }
   #landscape img {
     height: 70vh;

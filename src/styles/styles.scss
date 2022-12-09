@@ -345,11 +345,11 @@ footer {
     filter: var(--hue-rotate);
   }
 
-  #landscape div {
+  #rotate-msg {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    height: 20vh;
+    height: 12vh;
     font-size: 2vw;
     font-weight: 800;
     text-align: center;
@@ -357,19 +357,17 @@ footer {
     color: $second;
   }
 
+  #rotate-joking {
+    @extend #rotate-msg;
+    align-items: flex-start;
+    font-size: 1.5vw;
+    font-weight: 400;
+    font-style: italic;
+  }
   #landscape img {
     height: 70vh;
     display: block;
     margin: auto;
     transform: rotate(-90deg);
   }
-
-  // .no-flip {
-  //   background-color: green;
-  // }
-
-  // .flip {
-  //   background-color: $main0;
-  //   filter: var(--hue-rotate);
-  // }
 }
