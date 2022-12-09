@@ -671,9 +671,9 @@ export default class Calculator extends React.Component {
   render() {
     return (
       <>
-        <div id="landscape">
+        <div id="landscape" className={window.screen.orientation.angle === 90 ? "no-flip" : "flip"}>
           <div>Rotate your device or... your head!</div>
-          <img className={window.screen.orientation.angle === 90 ? "no-flip" : "flip"} src={require("../src/styles/kitty.png")} />
+          <img src={require("../src/styles/kitty.png")} />
         </div>
         <div id="portrait">
           <TopButtons changeColorTheme={this.handleChangeColor} chooseColorTheme={this.handleColorTheme} copy={this.handleCopyToClipboard} previewColorTheme={this.handlePreviewColorTheme} />

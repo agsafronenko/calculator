@@ -507,10 +507,13 @@ footer {
   }
   #landscape {
     display: block;
-    background-image: linear-gradient(225deg, rgb(246, 218, 157) 0%, rgb(237, 184, 69) 30%, rgb(239, 193, 93) 60%, rgb(232, 166, 23) 100%);
-    width: 100vw;
     height: 100vh;
-    margin: 0;
+  }
+  * {
+    background-color: rgb(236, 180, 59);
+  }
+  html {
+    filter: var(--hue-rotate);
   }
   #landscape div {
     display: flex;

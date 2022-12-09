@@ -1,5 +1,4 @@
 // next steps:
-// -- windows.screen.orientation.angle currently not working (see app.js and sass last lines of code)
 // - for landscape screen - change background color
 // - delete left white border in landscape mode
 // - update for larger screens

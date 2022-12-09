@@ -334,10 +334,15 @@ footer {
   }
   #landscape {
     display: block;
-    background-image: $mainGradient;
-    width: 100vw;
     height: 100vh;
-    margin: 0;
+  }
+
+  * {
+    background-color: $main0;
+  }
+
+  html {
+    filter: var(--hue-rotate);
   }
 
   #landscape div {
@@ -351,10 +356,20 @@ footer {
     vertical-align: middle;
     color: $second;
   }
+
   #landscape img {
     height: 70vh;
     display: block;
     margin: auto;
     transform: rotate(-90deg);
   }
+
+  // .no-flip {
+  //   background-color: green;
+  // }
+
+  // .flip {
+  //   background-color: $main0;
+  //   filter: var(--hue-rotate);
+  // }
 }
