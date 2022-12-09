@@ -355,13 +355,6 @@ footer {
     height: 70vh;
     display: block;
     margin: auto;
-  }
-
-  .no-flip {
     transform: rotate(-90deg);
-  }
-
-  .flip {
-    transform: scaleX(-1) rotate(-90deg);
   }
 }
