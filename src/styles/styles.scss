@@ -328,7 +328,7 @@ footer {
   }
 }
 
-@media only screen and (orientation: landscape) {
+@media only screen and (orientation: landscape) and (hover: none) and (pointer: coarse) {
   #portrait {
     display: none;
   }
