@@ -161,7 +161,6 @@ button:active {
   z-index: 1;
   margin: 4vw 4vw 0 0;
   right: 0;
-  position: absolute;
   font-size: 6vw;
   width: 7vw;
   height: 7vw;
@@ -537,10 +536,5 @@ footer {
     display: block;
     margin: auto;
     transform: rotate(-90deg);
-  }
-}
-@media only screen and (min-width: 397px) {
-  #displayBox {
-    background-image: linear-gradient(358deg, var(--second-color) 0%, var(--second-color) 10%, blue 20%, blue 30%, blue 100%);
   }
 }/*# sourceMappingURL=styles.css.map */
