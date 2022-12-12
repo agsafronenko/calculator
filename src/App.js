@@ -632,21 +632,20 @@ export default class Calculator extends React.Component {
     // $(".colorThemes").toggle(1000);
     // $(".colorThemes").slideDown(500);
     // $(".colorThemes").fadeIn(1500);
-    // $(".colorThemes").effect("shake");
+    // $(".colorThemes").animate(
+    //   {
+    //     width: "toggle",
+    //     height: "toggle",
+    //   },
+    //   500
+    // );
   }
 
   handleChangeColor(e) {
     const root = document.documentElement;
     root.style.setProperty("--hue-rotate", `hue-rotate(${e.target.value}deg)`);
     root.style.setProperty("--second-color", `${e.target.value < 340 ? "white" : "rgb(59, 68, 75)"}`);
-
-    $(".colorThemes").animate(
-      {
-        width: "toggle",
-        height: "toggle",
-      },
-      500
-    );
+    $(".colorThemes").fadeOut(500);
     $("#colorTheme").fadeIn(2000);
     $("#copy").fadeIn(2000);
     $("#display").animate({ opacity: 1 }, 2000);
@@ -729,7 +728,7 @@ class TopButtons extends React.Component {
     let colorThemes = [];
     for (let i = 0; i < 720; i += 40) {
       colorThemes.push(
-        <div key={`div-${i}`} className="col-2">
+        <div key={`div-${i}`}>
           <button id={`style${i}`} value={i} className="colorThemes" onClick={this.props.changeColorTheme} onMouseOver={this.props.previewColorTheme}>
             <i className="fa-solid fa-calculator"></i>
           </button>
@@ -741,9 +740,7 @@ class TopButtons extends React.Component {
         <button id="colorTheme" onClick={this.props.chooseColorTheme}>
           <i className="fa-solid fa-calculator"></i>
         </button>
-        <div id="themes-row" className="row">
-          {colorThemes}
-        </div>
+        <div id="themes-row">{colorThemes}</div>
         <button id="copy" onClick={this.props.copy}>
           <i className="fa-solid fa-copy"></i>
         </button>
