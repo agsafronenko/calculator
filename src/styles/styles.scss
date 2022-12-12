@@ -52,7 +52,7 @@ body {
 
 #display {
   height: 13vw; // height of the result display
-  padding: 4.3vw 13vw 0 13vw; // indent from top border of parent container
+  padding: 1.5vw 13vw 0 13vw; // indent from top border of parent container
   text-align: center; // styling result
   font-weight: 800; // styling result
   font-size: 6.4vw; // styling result
@@ -189,8 +189,8 @@ button:active {
   // position: absolute;
   position: relative;
   z-index: 1;
-  margin: 1vw 1vw 0 0;
-  font-size: 6vw;
+  margin: 2vw 2vw 0 0;
+  font-size: 6.5vw;
   width: 7vw;
   height: 7vw;
   display: flex;
@@ -198,15 +198,16 @@ button:active {
   justify-content: center;
   color: $second;
   box-shadow: none;
+  border-radius: 1.1vw;
 }
 
 #colorTheme {
   @extend #copy;
-  margin: 1vw 0 0 1vw;
+  margin: 2vw 0 0 2vw;
   color: $second;
   font-size: 7vw;
   z-index: 1;
-  border-radius: 1.1vw;
+  // border-radius: 1.1vw;
 }
 
 $degree: 0;
@@ -408,7 +409,7 @@ footer {
 
   #calculatorForTopButtons {
     margin: auto;
-    width: 400px;
+    width: 355px;
     display: flex;
     justify-content: space-between;
   }
@@ -419,7 +420,7 @@ footer {
     // background-color: $second;
     // border-radius: 25px;
     margin: auto; // indent from window borders
-    width: 400px;
+    width: 355px;
   }
 
   // #displayBox {
@@ -437,7 +438,7 @@ footer {
     // overflow: hidden;
     // text-overflow: ellipsis;
     height: 50px; // height of the result display
-    padding: 22px 50px 0 50px; // indent from top border of parent container
+    padding: 12px 50px 0 50px; // indent from top border of parent container
     font-size: 20px; // styling result
   }
 
@@ -449,7 +450,7 @@ footer {
     // font-size: 4.3vw; // styling displayOps
     // color: $second; // styling displayOps
     // overflow: auto;
-    height: 150px;
+    height: 120px;
     padding-top: 10px;
     padding-bottom: 22px;
     font-size: 16px;
@@ -499,8 +500,8 @@ footer {
     // background: none;
     // border: none;
     margin: 3px;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border-radius: 10px;
     font-weight: 800;
     font-size: 10px;
@@ -665,63 +666,67 @@ footer {
     $degree: $degree + $degreeStep;
   }
 
-  #copy:hover {
-    border: 1px solid $second;
-    border-color: $second;
-    box-shadow: 0 0 7px 4px $second;
-  }
+  // #copy:hover {
+  //   border: 1px solid $second;
+  //   border-color: $second;
+  //   box-shadow: 0 0 7px 4px $second;
+  // }
 
-  #copy:active {
-    color: $main0;
-    background: $second;
-    box-shadow: 0 2px 7px 2px $main0;
-    transform: translateY(-2px);
-  }
+  // #copy:active {
+  //   color: $main0;
+  //   background: $second;
+  //   box-shadow: 0 2px 7px 2px $main0;
+  //   transform: translateY(-2px);
+  // }
 
   #memorySlot {
-    border-radius: 0 0 25px 25px;
-    padding-top: 7vw;
-    padding-bottom: 3vw;
+    // border-radius: 0 0 5px 5px;
+    padding-top: 15px;
+    padding-bottom: 5px;
   }
 
   .singleMemorySlot {
-    margin: 1vw 0;
+    margin: 2px 0;
   }
 
   .ms-btn {
-    background-image: $mainGradient;
-    filter: hue-rotate(-5deg);
-    width: 12vw;
-    height: 6vw;
-    margin: auto 1vw;
-    display: inline;
-    color: $second;
-    font-size: 4vw;
+    // background-image: $mainGradient;
+    // filter: hue-rotate(-5deg);
+    width: 20px;
+    height: 20px;
+    margin: auto 2px;
+    // display: inline;
+    // color: $second;
+    padding: 0;
+    font-size: 14px;
+    border-radius: 7px;
   }
 
   .ms-text {
-    width: 52vw;
-    height: 8vw;
-    border: 1px solid $main0;
-    border-radius: 5px;
-    font-size: 4vw;
-    color: $main0;
-    font-weight: 600;
+    width: 255px;
+    height: 25px;
+    // border: 1px solid $main0;
+    border-radius: 7px;
+    font-size: 14px;
+    // color: $main0;
+    font-weight: 400;
     text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
-    text-align: center;
-    padding: 0.5vw 3vw;
-    display: inline-block;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    // text-align: center;
+    // padding: 0.5vw 3vw;
+    padding: 0 10px;
+    margin: auto 2px;
+    // display: inline-block;
+    // align-items: center;
+    // justify-content: center;
+    // overflow: hidden;
+    // text-overflow: ellipsis;
   }
 
   .saved-result {
     @extend .ms-text;
     color: $second;
     background-color: $main0;
-    font-size: 4.1vw;
+    font-size: 14px;
   }
 
   button > i {
@@ -732,26 +737,27 @@ footer {
     position: relative;
   }
   [parentheses-delta]::before {
-    content: attr(parentheses-delta);
-    position: absolute;
-    top: 1.2vw;
-    right: 1.2vw;
-    width: 5vw;
-    height: 5vw;
-    font-size: 4.5vw;
-    font-weight: 700;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: $main0;
+    // content: attr(parentheses-delta);
+    // position: absolute;
+    top: 0px;
+    right: -1px;
+    // width: 15px;
+    // height: 15px;
+    font-size: 15px;
+    // font-weight: 700;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    // color: $main0;
   }
-  [parentheses-delta]:active:before {
-    color: $second;
-  }
+  // [parentheses-delta]:active:before {
+  //   color: $second;
+  // }
 
   footer {
-    margin-top: 5vw;
-    font-size: 3vw;
+    margin-top: 20px;
+    font-size: 10px;
+    width: 300px;
     font-style: italic;
     color: $second;
     font-weight: 600;

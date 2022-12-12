@@ -42,7 +42,7 @@ body {
 
 #display {
   height: 13vw;
-  padding: 4.3vw 13vw 0 13vw;
+  padding: 1.5vw 13vw 0 13vw;
   text-align: center;
   font-weight: 800;
   font-size: 6.4vw;
@@ -179,8 +179,8 @@ button:active {
 #copy, #colorTheme, #style680, #style640, #style600, #style560, #style520, #style480, #style440, #style400, #style360, #style320, #style280, #style240, #style200, #style160, #style120, #style80, #style40, #style0 {
   position: relative;
   z-index: 1;
-  margin: 1vw 1vw 0 0;
-  font-size: 6vw;
+  margin: 2vw 2vw 0 0;
+  font-size: 6.5vw;
   width: 7vw;
   height: 7vw;
   display: flex;
@@ -188,14 +188,14 @@ button:active {
   justify-content: center;
   color: var(--second-color);
   box-shadow: none;
+  border-radius: 1.1vw;
 }
 
 #colorTheme, #style680, #style640, #style600, #style560, #style520, #style480, #style440, #style400, #style360, #style320, #style280, #style240, #style200, #style160, #style120, #style80, #style40, #style0 {
-  margin: 1vw 0 0 1vw;
+  margin: 2vw 0 0 2vw;
   color: var(--second-color);
   font-size: 7vw;
   z-index: 1;
-  border-radius: 1.1vw;
 }
 
 #style0 {
@@ -570,21 +570,21 @@ footer {
   }
   #calculatorForTopButtons {
     margin: auto;
-    width: 400px;
+    width: 355px;
     display: flex;
     justify-content: space-between;
   }
   #calculator {
     margin: auto;
-    width: 400px;
+    width: 355px;
   }
   #display {
     height: 50px;
-    padding: 22px 50px 0 50px;
+    padding: 12px 50px 0 50px;
     font-size: 20px;
   }
   #displayAll {
-    height: 150px;
+    height: 120px;
     padding-top: 10px;
     padding-bottom: 22px;
     font-size: 16px;
@@ -595,8 +595,8 @@ footer {
   }
   button {
     margin: 3px;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border-radius: 10px;
     font-weight: 800;
     font-size: 10px;
@@ -741,56 +741,35 @@ footer {
     height: 44px;
     font-size: 47px;
   }
-  #copy:hover, #colorTheme:hover, #style0:hover, #style40:hover, #style80:hover, #style120:hover, #style160:hover, #style200:hover, #style240:hover, #style280:hover, #style320:hover, #style360:hover, #style400:hover, #style440:hover, #style480:hover, #style520:hover, #style560:hover, #style600:hover, #style640:hover, #style680:hover {
-    border: 1px solid var(--second-color);
-    border-color: var(--second-color);
-    box-shadow: 0 0 7px 4px var(--second-color);
-  }
-  #copy:active, #colorTheme:active, #style0:active, #style40:active, #style80:active, #style120:active, #style160:active, #style200:active, #style240:active, #style280:active, #style320:active, #style360:active, #style400:active, #style440:active, #style480:active, #style520:active, #style560:active, #style600:active, #style640:active, #style680:active {
-    color: rgb(236, 180, 59);
-    background: var(--second-color);
-    box-shadow: 0 2px 7px 2px rgb(236, 180, 59);
-    transform: translateY(-2px);
-  }
   #memorySlot {
-    border-radius: 0 0 25px 25px;
-    padding-top: 7vw;
-    padding-bottom: 3vw;
+    padding-top: 15px;
+    padding-bottom: 5px;
   }
   .singleMemorySlot {
-    margin: 1vw 0;
+    margin: 2px 0;
   }
   .ms-btn {
-    background-image: linear-gradient(225deg, rgb(246, 218, 157) 0%, rgb(237, 184, 69) 30%, rgb(239, 193, 93) 60%, rgb(232, 166, 23) 100%);
-    filter: hue-rotate(-5deg);
-    width: 12vw;
-    height: 6vw;
-    margin: auto 1vw;
-    display: inline;
-    color: var(--second-color);
-    font-size: 4vw;
+    width: 20px;
+    height: 20px;
+    margin: auto 2px;
+    padding: 0;
+    font-size: 14px;
+    border-radius: 7px;
   }
   .ms-text, .saved-result {
-    width: 52vw;
-    height: 8vw;
-    border: 1px solid rgb(236, 180, 59);
-    border-radius: 5px;
-    font-size: 4vw;
-    color: rgb(236, 180, 59);
-    font-weight: 600;
+    width: 255px;
+    height: 25px;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: 400;
     text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
-    text-align: center;
-    padding: 0.5vw 3vw;
-    display: inline-block;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    padding: 0 10px;
+    margin: auto 2px;
   }
   .saved-result {
     color: var(--second-color);
     background-color: rgb(236, 180, 59);
-    font-size: 4.1vw;
+    font-size: 14px;
   }
   button > i {
     pointer-events: none;
@@ -799,25 +778,14 @@ footer {
     position: relative;
   }
   [parentheses-delta]::before {
-    content: attr(parentheses-delta);
-    position: absolute;
-    top: 1.2vw;
-    right: 1.2vw;
-    width: 5vw;
-    height: 5vw;
-    font-size: 4.5vw;
-    font-weight: 700;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: rgb(236, 180, 59);
-  }
-  [parentheses-delta]:active:before {
-    color: var(--second-color);
+    top: 0px;
+    right: -1px;
+    font-size: 15px;
   }
   footer {
-    margin-top: 5vw;
-    font-size: 3vw;
+    margin-top: 20px;
+    font-size: 10px;
+    width: 300px;
     font-style: italic;
     color: var(--second-color);
     font-weight: 600;

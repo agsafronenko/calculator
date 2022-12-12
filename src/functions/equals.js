@@ -1,4 +1,5 @@
 // next steps:
+// -- continue designing from footer for desktop
 // - update for larger screens
 // - update google table handlers on github
 
