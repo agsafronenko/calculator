@@ -678,7 +678,11 @@ export default class Calculator extends React.Component {
           <div id="rotate-joking">*to use landscape mode - rotate both your device and your head!</div>
         </div>
         <div id="portrait">
-          <TopButtons changeColorTheme={this.handleChangeColor} chooseColorTheme={this.handleColorTheme} copy={this.handleCopyToClipboard} previewColorTheme={this.handlePreviewColorTheme} />
+          <div id="backgroundForTopButtons">
+            <div id="calculatorForTopButtons">
+              <TopButtons changeColorTheme={this.handleChangeColor} chooseColorTheme={this.handleColorTheme} copy={this.handleCopyToClipboard} previewColorTheme={this.handlePreviewColorTheme} />
+            </div>
+          </div>
           <div id="background">
             <div id="calculator" className="container-fluid">
               <Display ops={this.state.displayAll} cur={this.state.displayCur} />
@@ -725,7 +729,7 @@ class TopButtons extends React.Component {
     let colorThemes = [];
     for (let i = 0; i < 720; i += 40) {
       colorThemes.push(
-        <div key={`div-${i}`}>
+        <div key={`div-${i}`} className="col-2">
           <button id={`style${i}`} value={i} className="colorThemes" onClick={this.props.changeColorTheme} onMouseOver={this.props.previewColorTheme}>
             <i className="fa-solid fa-calculator"></i>
           </button>
@@ -737,7 +741,9 @@ class TopButtons extends React.Component {
         <button id="colorTheme" onClick={this.props.chooseColorTheme}>
           <i className="fa-solid fa-calculator"></i>
         </button>
-        {colorThemes}
+        <div id="themes-row" className="row">
+          {colorThemes}
+        </div>
         <button id="copy" onClick={this.props.copy}>
           <i className="fa-solid fa-copy"></i>
         </button>
