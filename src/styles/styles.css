@@ -782,13 +782,4 @@ footer {
     right: -1px;
     font-size: 15px;
   }
-  footer {
-    margin-top: 20px;
-    font-size: 10px;
-    width: 300px;
-    font-style: italic;
-    color: var(--second-color);
-    font-weight: 600;
-    text-align: center;
-  }
 }/*# sourceMappingURL=styles.css.map */
