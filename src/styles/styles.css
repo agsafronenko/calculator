@@ -112,16 +112,14 @@ button {
 }
 
 .secondary-btn {
-  color: rgb(236, 180, 59);
-  font-weight: 600;
-  text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
+  color: rgb(232, 166, 23);
+  font-weight: 800;
   font-size: 6vw;
 }
 
 .tertiary-btn {
   color: rgb(236, 180, 59);
-  font-weight: 600;
-  text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
+  font-weight: 800;
   font-size: 6vw;
 }
 
@@ -661,7 +659,7 @@ footer {
     border-radius: 5px;
   }
   #colorTheme, #style0, #style40, #style80, #style120, #style160, #style200, #style240, #style280, #style320, #style360, #style400, #style440, #style480, #style520, #style560, #style600, #style640, #style680 {
-    margin: 7px 0 0 11px;
+    margin: 7px 0 0 7px;
     font-size: 30px;
   }
   #style0 {
