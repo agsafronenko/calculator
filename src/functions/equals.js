@@ -1,11 +1,5 @@
-// next steps:
-// -- continue designing from footer for desktop
-// - update for larger screens
-// - update google table handlers on github
-
 import { factorial } from "./factorial";
 import { FixIncompleteInputs, displayAllExpression } from "./FixIncompleteInputs";
-import $ from "jquery";
 import { validInputLog, invalidInputLog, validInputDenominator, invalidInputDenominator } from "./alertStatus";
 
 export default function calculate(state, expression) {
@@ -83,7 +77,6 @@ function calculateInOrder(arr, operators) {
 
   if (operatorIndex !== -1) {
     let currentOperation = operatorIndex === 0 ? arr.slice(0, operatorIndex + 2) : arr.slice(operatorIndex - 1, operatorIndex + 2);
-    console.log("currentOpertation", currentOperation, "operatorIndex", operatorIndex, "arr", arr);
 
     let currentResult =
       currentOperator === "abs"
@@ -125,7 +118,6 @@ function calculateInOrder(arr, operators) {
         : currentOperator === " + "
         ? currentOperation[0] + currentOperation[2]
         : currentOperation[0] - currentOperation[2];
-    console.log("im here", arr, "currentOperator", currentOperator, "currentOperation", currentOperation, "currentResult", currentResult);
 
     let result =
       currentOperator === "abs" || currentOperator === "sin" || currentOperator === "cos" || currentOperator === "tan" || currentOperator === "cot" || currentOperator === "sec" || currentOperator === "csc"
@@ -142,7 +134,6 @@ function calculateInOrder(arr, operators) {
             .slice(0, operatorIndex - 1)
             .concat(currentResult)
             .concat(arr.slice(operatorIndex + 2));
-    console.log("result", result);
     return calculateInOrder(result, operators);
   }
   return arr;

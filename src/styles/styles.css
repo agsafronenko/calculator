@@ -657,7 +657,7 @@ footer {
     border-radius: 5px;
   }
   #colorTheme, #style0, #style40, #style80, #style120, #style160, #style200, #style240, #style280, #style320, #style360, #style400, #style440, #style480, #style520, #style560, #style600, #style640, #style680 {
-    margin: 7px 0 0 7px;
+    margin: 7px 0 0 11px;
     font-size: 30px;
   }
   #style0 {

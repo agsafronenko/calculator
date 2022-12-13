@@ -109,13 +109,10 @@ export default class Calculator extends React.Component {
   }
 
   handleOperator(e) {
-    // only solo " - " is allowed as the first input among all operators
     if (this.state.displayAll !== "" || e.target.value === " - ") {
       if (this.state.displayAll !== " - ") {
-        // used to compare last two states and, in case of their equality, the stateStorage will not be updated
         let penultimateInput = this.state.lastInput;
 
-        // handle consecutive input of multiple operators
         if (this.state.twoConsecutiveOperators === true) {
           this.setState(
             (state) => ({
@@ -159,7 +156,6 @@ export default class Calculator extends React.Component {
             }
           );
         }
-        // handle input of the first operator
         if (this.state.lastInput === "(") {
           this.setState(
             (state) => ({
@@ -628,17 +624,6 @@ export default class Calculator extends React.Component {
       },
       500
     );
-    // $(".colorThemes").fadeToggle(2000);
-    // $(".colorThemes").toggle(1000);
-    // $(".colorThemes").slideDown(500);
-    // $(".colorThemes").fadeIn(1500);
-    // $(".colorThemes").animate(
-    //   {
-    //     width: "toggle",
-    //     height: "toggle",
-    //   },
-    //   500
-    // );
   }
 
   handleChangeColor(e) {
