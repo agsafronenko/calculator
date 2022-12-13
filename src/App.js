@@ -670,12 +670,12 @@ export default class Calculator extends React.Component {
   render() {
     return (
       <>
-        {/* <div id="landscape">
+        <div id="landscape">
           <div id="rotate-msg">Rotate your device!*</div>
 
           <img src={require("../src/styles/kitty.png")} />
           <div id="rotate-joking">*to use landscape mode - rotate both your device and your head!</div>
-        </div> */}
+        </div>
         <div id="portrait">
           <div id="backgroundForTopButtons">
             <div id="calculatorForTopButtons">
