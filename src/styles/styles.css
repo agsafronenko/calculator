@@ -5,7 +5,6 @@
 body {
   box-sizing: border-box;
   overflow-x: hidden;
-  height: 100%;
 }
 
 #background {
@@ -63,24 +62,24 @@ body {
   overflow: auto;
 }
 
-::-webkit-scrollbar {
+#displayAll::-webkit-scrollbar {
   width: 2vw;
   height: 2vw;
 }
 
-::-webkit-scrollbar-track {
+#displayAll::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px grey;
   border-radius: 10px;
   border: solid 1px rgb(236, 180, 59);
 }
 
-::-webkit-scrollbar-thumb {
+#displayAll::-webkit-scrollbar-thumb {
   background: var(--second-color);
   border-radius: 10px;
   border: solid 1px rgb(236, 180, 59);
 }
 
-::-webkit-scrollbar-thumb:hover {
+#displayAll::-webkit-scrollbar-thumb:hover {
   background: rgb(236, 180, 59);
   border: solid 2px var(--second-color);
 }
@@ -434,6 +433,7 @@ button:active {
 }
 
 #copy:active, #colorTheme:active, #style0:active, #style40:active, #style80:active, #style120:active, #style160:active, #style200:active, #style240:active, #style280:active, #style320:active, #style360:active, #style400:active, #style440:active, #style480:active, #style520:active, #style560:active, #style600:active, #style640:active, #style680:active {
+  filter: var(--hue-rotate);
   color: rgb(236, 180, 59);
   background: var(--second-color);
   box-shadow: 0 2px 7px 2px rgb(236, 180, 59);
@@ -612,9 +612,13 @@ footer {
     padding-bottom: 22px;
     font-size: 16px;
   }
-  ::-webkit-scrollbar {
+  #displayAll::-webkit-scrollbar {
     width: 10px;
     height: 10px;
+  }
+  body::-webkit-scrollbar {
+    width: 0;
+    height: 0;
   }
   button {
     margin: 3px;
