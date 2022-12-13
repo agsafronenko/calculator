@@ -154,7 +154,7 @@ button {
 
 .equal-font-size {
   font-size: 9vw;
-  padding: 0 0 1.5vw 0;
+  padding: 0 0 1.1vw 0;
 }
 
 button:hover {
@@ -364,6 +364,7 @@ footer {
   #portrait {
     display: none;
   }
+
   #landscape {
     display: block;
     height: 100vh;
@@ -404,7 +405,16 @@ footer {
   }
 }
 
+#fcc-test {
+  z-index: -10;
+  background-color: blue;
+}
+
 @media only screen and (min-width: 500px) {
+  #fcc-test {
+    z-index: 10;
+    background-color: blue;
+  }
   // #background {
   //   background-image: linear-gradient(358deg, $main4 0%, $main3 30%, $main2 50%, $main1 65%, $second 75%, $second 100%);
   //   filter: var(--hue-rotate);

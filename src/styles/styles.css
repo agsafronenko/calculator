@@ -145,7 +145,7 @@ button {
 
 .equal-font-size {
   font-size: 9vw;
-  padding: 0 0 1.5vw 0;
+  padding: 0 0 1.1vw 0;
 }
 
 button:hover {
@@ -572,7 +572,16 @@ footer {
     transform: rotate(-90deg);
   }
 }
+#fcc-test {
+  z-index: -10;
+  background-color: blue;
+}
+
 @media only screen and (min-width: 500px) {
+  #fcc-test {
+    z-index: 10;
+    background-color: blue;
+  }
   #backgroundForTopButtons {
     position: absolute;
     left: 0;
