@@ -4,6 +4,8 @@
 
 body {
   box-sizing: border-box;
+  overflow-x: hidden;
+  height: 100%;
 }
 
 #background {
@@ -139,6 +141,11 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.equal-font-size {
+  font-size: 9vw;
+  padding: 0 0 1.5vw 0;
 }
 
 button:hover {
@@ -506,6 +513,11 @@ button > i {
 }
 
 footer {
+  width: 100vw;
+  position: relative;
+}
+
+#footer {
   margin-top: 5vw;
   font-size: 3vw;
   font-style: italic;
@@ -571,11 +583,13 @@ footer {
   #calculatorForTopButtons {
     margin: auto;
     width: 355px;
+    padding-top: 10px;
     display: flex;
     justify-content: space-between;
   }
   #calculator {
     margin: auto;
+    padding-top: 10px;
     width: 355px;
   }
   #display {
@@ -618,6 +632,10 @@ footer {
   }
   .main-operators {
     font-size: 20px;
+  }
+  .equal-font-size {
+    font-size: 35px;
+    padding: 0 0 6px 0;
   }
   #themes-row {
     width: 258px;
@@ -781,5 +799,9 @@ footer {
     top: 0px;
     right: -1px;
     font-size: 15px;
+  }
+  #footer {
+    font-size: 12px;
+    margin-top: 1vh;
   }
 }/*# sourceMappingURL=styles.css.map */

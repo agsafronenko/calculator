@@ -909,7 +909,7 @@ class Buttons extends React.Component {
           <button id="decimal" className="tertiary-btn main-operators" onClick={this.props.decimal}>
             .
           </button>
-          <button id="equals" className="main-btn main-operators" style={{ fontSize: "9vw" }} onClick={this.props.equals}>
+          <button id="equals" className="main-btn main-operators equal-font-size" onClick={this.props.equals}>
             =
           </button>
           <button id="delete" className="main-btn" onClick={this.props.previousState}>
@@ -978,7 +978,10 @@ class MemorySlots extends React.Component {
 function Footer() {
   return (
     <footer>
-      <div id="footer">This project was built using: HTML, CSS, JavaScript, React, jQuery, Bootstrap and SASS without using eval() function</div>
+      <div id="footer">
+        ~ eval () function wasn't used in the scope of this project
+        <br />~ coded in: HTML, CSS, JavaScript, React, jQuery, Bootstrap and SASS
+      </div>
     </footer>
   );
 }
