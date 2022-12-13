@@ -5,6 +5,8 @@
 body {
   box-sizing: border-box;
   overflow-x: hidden;
+  font-family: "Changa One", cursive;
+  font-family: "Copse", serif;
 }
 
 #background {
@@ -646,7 +648,7 @@ footer {
   }
   .equal-font-size {
     font-size: 35px;
-    padding: 0 0 6px 0;
+    padding: 0 0 3px 0;
   }
   #themes-row {
     width: 258px;
