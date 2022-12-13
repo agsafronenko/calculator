@@ -514,7 +514,7 @@ footer {
   text-align: center;
 }
 
-@media only screen and (orientation: portrait) {
+@media only screen {
   #portrait {
     display: block;
   }

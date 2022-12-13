@@ -337,7 +337,8 @@ footer {
   text-align: center;
 }
 
-@media only screen and (orientation: portrait) {
+// @media only screen and (orientation: portrait) {
+@media only screen {
   #portrait {
     display: block;
   }
@@ -391,13 +392,15 @@ footer {
 }
 
 @media only screen and (min-width: 500px) {
-  // #background {
-  //   background-image: linear-gradient(358deg, $main4 0%, $main3 30%, $main2 50%, $main1 65%, $second 75%, $second 100%);
-  //   filter: var(--hue-rotate);
-  //   position: absolute;
-  //   top: 0px;
-  //   left: 0px;
-  // }
+  #background {
+    //   background-image: linear-gradient(358deg, $main4 0%, $main3 30%, $main2 50%, $main1 65%, $second 75%, $second 100%);
+    //   filter: var(--hue-rotate);
+    //   position: absolute;
+    //   top: 0px;
+    //   left: 0px;
+    // height: 100%;
+    // width: 100%;
+  }
 
   #backgroundForTopButtons {
     position: absolute;
@@ -755,12 +758,14 @@ footer {
   // }
 
   // footer {
-  //   margin-top: 20px;
+  //   //   //   margin-top: 20px;
   //   font-size: 10px;
   //   width: 300px;
-  //   font-style: italic;
+  //   // width: 100%;
+  //   height: 100%;
+  //   //   //   font-style: italic;
   //   color: $second;
-  //   font-weight: 600;
-  //   text-align: center;
+  //   //   //   font-weight: 600;
+  //   //   //   text-align: center;
   // }
 }
