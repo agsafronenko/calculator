@@ -614,6 +614,7 @@ export default class Calculator extends React.Component {
   }
 
   handleColorTheme() {
+    $("#colorTheme").prop("disabled", true);
     $("#display").animate({ opacity: 0 }, 1000);
     $("#displayAll").animate({ opacity: 0 }, 1000);
     $("#copy").fadeOut(1000);
@@ -637,6 +638,7 @@ export default class Calculator extends React.Component {
     $("#copy").fadeIn(2000);
     $("#display").animate({ opacity: 1 }, 2000);
     $("#displayAll").animate({ opacity: 1 }, 2000);
+    $("#colorTheme").prop("disabled", false);
   }
 
   handlePreviewColorTheme(e) {
