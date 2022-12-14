@@ -114,13 +114,11 @@ button {
 
 .secondary-btn {
   color: rgb(232, 166, 23);
-  font-weight: 800;
   font-size: 6vw;
 }
 
 .tertiary-btn {
   color: rgb(236, 180, 59);
-  font-weight: 800;
   font-size: 6vw;
 }
 
@@ -426,9 +424,9 @@ button:active {
 }
 
 #copy:hover, #colorTheme:hover, #style0:hover, #style40:hover, #style80:hover, #style120:hover, #style160:hover, #style200:hover, #style240:hover, #style280:hover, #style320:hover, #style360:hover, #style400:hover, #style440:hover, #style480:hover, #style520:hover, #style560:hover, #style600:hover, #style640:hover, #style680:hover {
-  border: 1px solid var(--second-color);
-  border-color: var(--second-color);
+  border: 0 dotted rgb(236, 180, 59);
   box-shadow: 0 0 7px 4px var(--second-color);
+  box-shadow: 0 5px 5px 0.5px var(--second-color);
 }
 
 #copy:active, #colorTheme:active, #style0:active, #style40:active, #style80:active, #style120:active, #style160:active, #style200:active, #style240:active, #style280:active, #style320:active, #style360:active, #style400:active, #style440:active, #style480:active, #style520:active, #style560:active, #style600:active, #style640:active, #style680:active {
@@ -640,7 +638,7 @@ footer {
     font-size: 20px;
   }
   .long-text-btn {
-    font-size: 16px;
+    font-size: 17px;
   }
   .main-operators {
     font-size: 20px;

@@ -121,13 +121,11 @@ button {
 
 .secondary-btn {
   color: $main4;
-  font-weight: 800;
   font-size: 6vw;
 }
 
 .tertiary-btn {
   color: $main0;
-  font-weight: 800;
   font-size: 6vw;
 }
 
@@ -246,9 +244,9 @@ $cols: 6;
 }
 
 #copy:hover {
-  border: 1px solid $second;
-  border-color: $second;
+  border: 0 dotted $main0;
   box-shadow: 0 0 7px 4px $second;
+  box-shadow: 0 5px 5px 0.5px $second;
 }
 
 #copy:active {
@@ -480,7 +478,7 @@ footer {
   }
 
   .long-text-btn {
-    font-size: 16px;
+    font-size: 17px;
   }
 
   .main-operators {

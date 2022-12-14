@@ -597,6 +597,8 @@ export default class Calculator extends React.Component {
   handleCopyToClipboard() {
     let copyResult = document.getElementById("display").innerText;
     navigator.clipboard.writeText(copyResult);
+    alert(`copied to clipboard: ${this.state.displayCur} 
+    `);
   }
 
   handleCopyToMS(e) {
