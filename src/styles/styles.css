@@ -14,6 +14,7 @@ body {
   position: absolute;
   top: 0px;
   left: 0px;
+  min-height: 100%;
 }
 
 #backgroundForTopButtons {
@@ -466,7 +467,6 @@ button:active {
   font-size: 4vw;
   color: rgb(236, 180, 59);
   font-weight: 600;
-  text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
   text-align: center;
   padding: 0.5vw 3vw;
   display: inline-block;
@@ -588,6 +588,7 @@ footer {
   }
   #calculatorForTopButtons {
     margin: auto;
+    margin-top: clamp(1px, (100vh - 771px) / 2, 15vw);
     width: 355px;
     padding-top: 10px;
     display: flex;
@@ -595,6 +596,7 @@ footer {
   }
   #calculator {
     margin: auto;
+    margin-top: clamp(1px, (100vh - 771px) / 2, 15vw);
     padding-top: 10px;
     width: 355px;
   }
@@ -789,8 +791,7 @@ footer {
     height: 25px;
     border-radius: 7px;
     font-size: 14px;
-    font-weight: 400;
-    text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
+    font-weight: 500;
     padding: 0 10px;
     margin: auto 2px;
   }
@@ -812,6 +813,6 @@ footer {
   }
   #footer {
     font-size: 12px;
-    margin-top: 1vh;
+    margin-top: 4px;
   }
 }/*# sourceMappingURL=styles.css.map */

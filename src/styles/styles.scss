@@ -22,6 +22,7 @@ body {
   position: absolute;
   top: 0px;
   left: 0px;
+  min-height: 100%;
 }
 
 #backgroundForTopButtons {
@@ -39,7 +40,7 @@ body {
 
 #calculator {
   --hue-rotate: hue-rotate(0deg);
-  margin: 2vw;
+  margin: min(2vw);
   width: 96vw;
   background-color: $second;
   border-radius: 25px;
@@ -286,7 +287,6 @@ $cols: 6;
   font-size: 4vw;
   color: $main0;
   font-weight: 600;
-  text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
   text-align: center;
   padding: 0.5vw 3vw;
   display: inline-block;
@@ -417,6 +417,7 @@ footer {
 
   #calculatorForTopButtons {
     margin: auto;
+    margin-top: clamp(1px, calc((100vh - 771px) / 2), 15vw);
     width: 355px;
     padding-top: 10px;
     display: flex;
@@ -425,6 +426,7 @@ footer {
 
   #calculator {
     margin: auto;
+    margin-top: clamp(1px, calc((100vh - 771px) / 2), 15vw);
     padding-top: 10px;
     width: 355px;
   }
@@ -546,8 +548,7 @@ footer {
     height: 25px;
     border-radius: 7px;
     font-size: 14px;
-    font-weight: 400;
-    text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
+    font-weight: 500;
     padding: 0 10px;
     margin: auto 2px;
   }
@@ -574,6 +575,6 @@ footer {
 
   #footer {
     font-size: 12px;
-    margin-top: 1vh;
+    margin-top: 4px;
   }
 }
